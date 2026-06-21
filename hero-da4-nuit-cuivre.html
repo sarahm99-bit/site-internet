@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DA 4 — Nuit & Cuivre</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0f0f14;
+            color: #e8dfd0;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 40px;
+            overflow: hidden;
+        }
+
+        canvas#bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .grain {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .header {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 60px;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c9956b;
+        }
+
+        .nav { display: flex; gap: 25px; }
+        .nav a {
+            font-size: 0.75rem;
+            color: #e8dfd0;
+            text-decoration: none;
+            font-weight: 400;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+        }
+        .nav a:hover { opacity: 1; }
+
+        .hero-content { position: relative; z-index: 5; }
+
+        .hero-eyebrow {
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c9956b;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 5.5rem;
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 25px;
+            color: #f0e8dc;
+        }
+
+        .hero-title .italic { font-style: italic; }
+
+        .hero-divider {
+            width: 50px;
+            height: 1px;
+            background: #c9956b;
+            margin: 30px auto;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(232, 223, 208, 0.6);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .hero-description strong {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+            font-style: italic;
+            color: #c9956b;
+            font-size: 1.3rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .scroll-text {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c9956b88;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: rgba(201, 149, 107, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #c9956b;
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { top: -100%; }
+            50% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .next-section {
+            min-height: 50vh;
+            background: #1a1a22;
+            padding: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .next-section p {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: #444;
+        }
+
+        .da-label {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(201, 149, 107, 0.15);
+            backdrop-filter: blur(10px);
+            color: #c9956b;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            z-index: 100;
+            border: 1px solid rgba(201, 149, 107, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="da-label">DA 4 — NUIT & CUIVRE</div>
+
+    <section class="hero">
+        <canvas id="bg"></canvas>
+        <div class="grain"></div>
+
+        <header class="header">
+            <div class="logo">S. Mostfa</div>
+            <nav class="nav">
+                <a href="#">Domaines</a>
+                <a href="#">Cabinet</a>
+                <a href="#">Honoraires</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <div class="hero-content">
+            <p class="hero-eyebrow">Avocate au Barreau de Lyon</p>
+            <h1 class="hero-title">
+                Sarah <span class="italic">Mostfa.</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Assure la défense de vos intérêts devant les juridictions <strong>civiles</strong> et <strong>commerciales</strong>.
+            </p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Défiler</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <section class="next-section">
+        <p>— Section suivante : Domaines d'intervention —</p>
+    </section>
+
+    <script>
+    (function() {
+        const canvas = document.getElementById('bg');
+        const ctx = canvas.getContext('2d');
+        let w, h, mouse = { x: 0, y: 0 }, particles = [], connections = [];
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            mouse.x = w / 2;
+            mouse.y = h / 2;
+        }
+
+        function Particle() {
+            this.x = Math.random() * w;
+            this.y = Math.random() * h;
+            this.baseX = this.x;
+            this.baseY = this.y;
+            this.size = 1 + Math.random() * 2;
+            this.angle = Math.random() * Math.PI * 2;
+            this.speed = 0.002 + Math.random() * 0.004;
+            this.orbitRadius = 20 + Math.random() * 80;
+            this.alpha = 0.2 + Math.random() * 0.4;
+        }
+
+        Particle.prototype.update = function() {
+            this.angle += this.speed;
+            const orbX = this.baseX + Math.cos(this.angle) * this.orbitRadius;
+            const orbY = this.baseY + Math.sin(this.angle * 0.8) * this.orbitRadius;
+
+            const dx = mouse.x - orbX;
+            const dy = mouse.y - orbY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const maxDist = 300;
+
+            let ax = 0, ay = 0;
+            if (dist < maxDist) {
+                const force = (maxDist - dist) / maxDist;
+                ax = dx * force * 0.06;
+                ay = dy * force * 0.06;
+            }
+
+            this.x += (orbX + ax - this.x) * 0.08;
+            this.y += (orbY + ay - this.y) * 0.08;
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(201, 149, 107, ${this.alpha})`;
+            ctx.fill();
+        };
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        const alpha = (1 - dist / 120) * 0.08;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(201, 149, 107, ${alpha})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function init() {
+            resize();
+            particles = [];
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            ctx.fillStyle = '#0f0f14';
+            ctx.fillRect(0, 0, w, h);
+
+            particles.forEach(p => { p.update(); });
+            drawConnections();
+            particles.forEach(p => { p.draw(); });
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('resize', init);
+        init();
+        animate();
+    })();
+    </script>
+</body>
+</html>
