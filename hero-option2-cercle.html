@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero - Option 2 (Cercle rotatif)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: #f3ede4;
+            color: #1a1a2e;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 70% 60%, rgba(196, 163, 90, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 20% 30%, rgba(60, 40, 20, 0.04) 0%, transparent 40%);
+        }
+
+        /* Decorative line */
+        .hero-deco-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(196, 163, 90, 0.3), transparent);
+        }
+
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 80px;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .nav { display: flex; gap: 30px; }
+
+        .nav a {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #1a1a2e;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .nav a:hover { opacity: 1; }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 700px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #8b6914;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: #8b6914;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 30px;
+        }
+
+        .hero-title .bold {
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: #444;
+        }
+
+        .hero-description .accent {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            color: #1a1a2e;
+            font-size: 1.2rem;
+        }
+
+        /* ===== SCROLL INDICATOR - Option 2: Cercle rotatif avec texte ===== */
+        .scroll-circle {
+            position: absolute;
+            bottom: 50px;
+            right: 80px;
+            width: 90px;
+            height: 90px;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .scroll-circle svg {
+            width: 100%;
+            height: 100%;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .scroll-circle-text {
+            font-size: 7.5px;
+            fill: #666;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .scroll-circle-arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: #8b6914;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, -50%); }
+            50% { transform: translate(-50%, -40%); }
+        }
+
+        .next-section {
+            min-height: 50vh;
+            background: #fdfcfa;
+            padding: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .next-section p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-deco-line"></div>
+
+        <header class="header">
+            <div class="logo">Sarah Mostfa</div>
+            <nav class="nav">
+                <a href="#">Expertise</a>
+                <a href="#">Approche</a>
+                <a href="#">Honoraires</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <div class="hero-content">
+            <p class="hero-eyebrow">Barreau de Lyon</p>
+            <h1 class="hero-title">
+                <span class="bold">Sarah Mostfa,</span><br>
+                Avocate.
+            </h1>
+            <p class="hero-description">
+                Assure la défense de vos intérêts devant les juridictions <span class="accent">civiles</span> et <span class="accent">commerciales</span>.
+            </p>
+        </div>
+
+        <!-- Scroll indicator: cercle rotatif avec texte circulaire -->
+        <div class="scroll-circle">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <path id="circlePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+                </defs>
+                <text class="scroll-circle-text">
+                    <textPath href="#circlePath">
+                        Découvrir · Découvrir · Découvrir · Découvrir ·
+                    </textPath>
+                </text>
+            </svg>
+            <span class="scroll-circle-arrow">↓</span>
+        </div>
+    </section>
+
+    <section class="next-section">
+        <p>— Section suivante : Domaines d'intervention —</p>
+    </section>
+</body>
+</html>

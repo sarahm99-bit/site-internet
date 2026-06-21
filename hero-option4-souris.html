@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero - Option 4 (Souris animée)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: #f0ebe2;
+            color: #1a1a2e;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            padding: 30px 60px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, #f0ebe2 0%, #e8e0d4 100%);
+        }
+
+        /* Decorative circles */
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            border: 1px solid rgba(196, 163, 90, 0.15);
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(196, 163, 90, 0.1);
+            bottom: 50px;
+            right: 100px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .nav { display: flex; gap: 30px; }
+        .nav a {
+            font-size: 0.75rem;
+            color: #1a1a2e;
+            text-decoration: none;
+            font-weight: 400;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav a:hover { opacity: 1; }
+
+        .hero-main {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #c4a35a;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hero-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(196, 163, 90, 0.4);
+            max-width: 80px;
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .hero-title .serif {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 400;
+            text-transform: none;
+            font-style: italic;
+            letter-spacing: 0;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.9;
+            color: #555;
+            max-width: 500px;
+        }
+
+        .hero-description .highlight {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-weight: 700;
+            color: #2c2c2c;
+        }
+
+        /* ===== SCROLL INDICATOR - Option 4: Souris avec point animé ===== */
+        .scroll-mouse {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 20px;
+        }
+
+        .mouse-icon {
+            width: 22px;
+            height: 36px;
+            border: 1.5px solid #999;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .mouse-dot {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 3px;
+            background: #8b6914;
+            border-radius: 50%;
+            animation: mouseDot 2s ease-in-out infinite;
+        }
+
+        @keyframes mouseDot {
+            0% { top: 8px; opacity: 1; }
+            50% { top: 20px; opacity: 0.3; }
+            100% { top: 8px; opacity: 1; }
+        }
+
+        .mouse-label {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .next-section {
+            min-height: 50vh;
+            background: #fdfcfa;
+            padding: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .next-section p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-bg"></div>
+
+        <header class="header">
+            <div class="logo">Sarah Mostfa</div>
+            <nav class="nav">
+                <a href="#">Expertise</a>
+                <a href="#">Cabinet</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <div class="hero-main">
+            <div class="hero-content">
+                <p class="hero-label">Avocate · Lyon</p>
+                <h1 class="hero-title">
+                    SARAH<br>
+                    <span class="serif">Mostfa.</span>
+                </h1>
+                <p class="hero-description">
+                    Assure la défense de vos intérêts devant les juridictions <span class="highlight">civiles</span> et <span class="highlight">commerciales</span>.
+                </p>
+            </div>
+        </div>
+
+        <!-- Scroll indicator: souris avec point qui descend -->
+        <div class="scroll-mouse">
+            <div class="mouse-icon">
+                <div class="mouse-dot"></div>
+            </div>
+            <span class="mouse-label">Scroll</span>
+        </div>
+    </section>
+
+    <section class="next-section">
+        <p>— Section suivante : Domaines d'intervention —</p>
+    </section>
+</body>
+</html>
