@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah Mostfa — Avocate au Barreau de Lyon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           RESET & BASE
+        ═══════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f1eb;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ═══════════════════════════════════════
+           CSS VARIABLES
+        ═══════════════════════════════════════ */
+        :root {
+            --vert: #72785f;
+            --vert-dark: #5a6049;
+            --beige: #d6cdb8;
+            --beige-light: #e8e2d6;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 25px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.5s;
+        }
+
+        .nav.scrolled {
+            background: rgba(245, 241, 235, 0.92);
+            backdrop-filter: blur(15px);
+            padding: 15px 60px;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-logo {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--noir);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--noir);
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--vert);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            font-size: 0.75rem !important;
+            padding: 10px 25px;
+            border: 1px solid var(--noir);
+            border-radius: 0;
+            transition: all 0.3s !important;
+            opacity: 1 !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--noir);
+            color: var(--blanc) !important;
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 101;
+        }
+        .nav-toggle span {
+            width: 25px;
+            height: 1.5px;
+            background: var(--noir);
+            transition: all 0.3s;
+        }
+
+        /* ═══════════════════════════════════════
+           HERO SECTION
+        ═══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 40px;
+            overflow: hidden;
+        }
+
+        canvas#meshBg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-grain {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-eyebrow {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 25px;
+            color: var(--noir);
+        }
+
+        .hero-title .italic {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .hero-divider {
+            width: 50px;
+            height: 1px;
+            background: var(--vert);
+            margin: 30px auto;
+            opacity: 0;
+            animation: fadeInUp 1s 0.8s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #5a5a5a;
+            max-width: 580px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1s 1s forwards;
+        }
+
+        .hero-description strong {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-style: italic;
+            color: var(--noir);
+            font-size: 1.35rem;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+            opacity: 0;
+            animation: fadeInUp 1s 1.5s forwards;
+        }
+
+        .scroll-text {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vert);
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: rgba(114, 120, 95, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--vert);
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { top: -100%; }
+            50% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* ═══════════════════════════════════════
+           REVEAL ANIMATIONS
+        ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ═══════════════════════════════════════
+           PRESENTATION SECTION
+        ═══════════════════════════════════════ */
+        .presentation {
+            background: var(--beige);
+            padding: 120px 60px 0;
+            position: relative;
+        }
+
+        .pres-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .pres-photo {
+            position: relative;
+        }
+
+        .pres-photo img {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            object-fit: cover;
+            filter: grayscale(10%);
+        }
+
+        .pres-photo::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 1px solid var(--vert);
+            z-index: -1;
+        }
+
+        .pres-text { padding-top: 20px; }
+
+        .section-label {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .pres-title {
+            font-family: var(--serif);
+            font-size: 2.8rem;
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 30px;
+            color: var(--noir);
+        }
+
+        .pres-title em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .pres-body {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: #3a3a3a;
+            margin-bottom: 35px;
+        }
+
+        .formation-title {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+            color: var(--noir);
+        }
+
+        .formation-list li {
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #3a3a3a;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            border-bottom: 1px solid rgba(114, 120, 95, 0.15);
+        }
+
+        .formation-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            background: var(--vert);
+            border-radius: 50%;
+        }
+
+        .formation-list li strong {
+            font-weight: 500;
+            color: var(--noir);
+        }
+
+        /* Lyon skyline */
+        .skyline-wrapper {
+            width: 100%;
+            margin-top: 80px;
+            overflow: hidden;
+            position: relative;
+            height: 120px;
+        }
+
+        .skyline-svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--vert);
+            opacity: 0.12;
+        }
+
+        /* ═══════════════════════════════════════
+           DOMAINES SECTION
+        ═══════════════════════════════════════ */
+        .domaines {
+            background: var(--noir);
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        .domaines .section-label {
+            color: var(--beige);
+            text-align: center;
+            opacity: 0.6;
+        }
+
+        .domaines-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            text-align: center;
+            color: var(--blanc);
+            margin-bottom: 70px;
+        }
+
+        .domaines-title em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--beige);
+        }
+
+        .domaines-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .domaine-card {
+            padding: 50px 40px;
+            border-right: 1px solid rgba(214, 205, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+            min-height: 550px;
+        }
+
+        .domaine-card:last-child { border-right: none; }
+
+        .domaine-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(114, 120, 95, 0) 0%, rgba(114, 120, 95, 0.08) 100%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .domaine-card:hover::before { opacity: 1; }
+
+        .domaine-number {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--vert);
+            opacity: 0.3;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .domaine-tag {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 25px;
+        }
+
+        .domaine-name {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--blanc);
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+
+        .domaine-accroche {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .domaine-services {
+            flex: 1;
+        }
+
+        .domaine-services li {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            padding: 7px 0;
+            padding-left: 14px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+
+        .domaine-services li:hover {
+            color: rgba(255,255,255,0.85);
+            padding-left: 20px;
+        }
+
+        .domaine-services li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--vert);
+            font-size: 0.7rem;
+        }
+
+        .domaine-link {
+            margin-top: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--beige);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: gap 0.3s;
+        }
+
+        .domaine-link:hover { gap: 14px; }
+
+        .domaine-link span {
+            transition: transform 0.3s;
+        }
+
+        /* ═══════════════════════════════════════
+           CONTACT / RDV SECTION
+        ═══════════════════════════════════════ */
+        .contact {
+            background: var(--beige-nacre);
+            padding: 120px 60px;
+        }
+
+        .contact-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info { padding-top: 10px; }
+
+        .contact-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--noir);
+            line-height: 1.2;
+        }
+
+        .contact-title em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .contact-detail {
+            margin-bottom: 25px;
+        }
+
+        .contact-detail-label {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .contact-detail p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #3a3a3a;
+        }
+
+        .contact-legal {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(114, 120, 95, 0.2);
+        }
+
+        .contact-legal p {
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Form */
+        .contact-form {
+            background: var(--blanc);
+            padding: 50px;
+            position: relative;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--vert);
+        }
+
+        .form-title {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--noir);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--vert-dark);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(114, 120, 95, 0.2);
+            background: var(--beige-nacre);
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--noir);
+            outline: none;
+            transition: border-color 0.3s;
+            border-radius: 0;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--vert);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--noir);
+            color: var(--blanc);
+            border: none;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 400;
+        }
+
+        .form-submit:hover {
+            background: var(--vert-dark);
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════ */
+        .footer {
+            background: var(--noir);
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--beige);
+            letter-spacing: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--beige); }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.25);
+            font-weight: 300;
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .nav { padding: 20px 30px; }
+            .nav.scrolled { padding: 12px 30px; }
+            .nav-links { display: none; }
+            .nav-toggle { display: flex; }
+            .hero { padding: 40px 25px; }
+            .hero-title { font-size: 3rem; }
+            .presentation { padding: 80px 30px 0; }
+            .pres-inner { grid-template-columns: 1fr; gap: 50px; }
+            .pres-photo { order: -1; }
+            .domaines { padding: 80px 20px; }
+            .domaines-grid { grid-template-columns: 1fr; }
+            .domaine-card { border-right: none; border-bottom: 1px solid rgba(214,205,184,0.1); min-height: auto; }
+            .contact { padding: 80px 30px; }
+            .contact-inner { grid-template-columns: 1fr; }
+            .contact-form { padding: 35px 25px; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer { padding: 40px 30px; flex-direction: column; text-align: center; }
+            .scroll-indicator { right: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════ NAVIGATION ═══════ -->
+    <nav class="nav" id="mainNav">
+        <a href="#hero" class="nav-logo">Sarah Mostfa</a>
+        <div class="nav-links">
+            <a href="#presentation">Présentation</a>
+            <a href="#domaines">Domaines</a>
+            <a href="#contact">Honoraires</a>
+            <a href="#contact" class="nav-cta">Prendre rendez-vous</a>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero" id="hero">
+        <canvas id="meshBg"></canvas>
+        <div class="hero-grain"></div>
+
+        <div class="hero-content">
+            <p class="hero-eyebrow">Avocate au Barreau de Lyon</p>
+            <h1 class="hero-title">
+                Sarah <span class="italic">Mostfa.</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Assure la défense de vos intérêts devant les juridictions <strong>civiles</strong> et <strong>commerciales</strong>.
+            </p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Défiler</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ═══════ PRÉSENTATION ═══════ -->
+    <section class="presentation" id="presentation">
+        <div class="pres-inner">
+            <div class="pres-photo reveal-left">
+                <img src="assets/sarah-mostfa.jpg" alt="Maître Sarah Mostfa, Avocate au Barreau de Lyon"
+                     onerror="this.style.background='var(--vert)';this.style.minHeight='500px';this.style.opacity='0.15';this.alt='Photo à ajouter';">
+            </div>
+            <div class="pres-text reveal-right">
+                <p class="section-label">Présentation</p>
+                <h2 class="pres-title">Maître Sarah <em>Mostfa</em></h2>
+                <p class="pres-body">
+                    Avocate indépendante au Barreau de Lyon, j'interviens principalement en contentieux civil et commercial, auprès des entreprises comme des particuliers. Mon approche allie rigueur juridique et écoute attentive pour construire une stratégie adaptée à chaque situation.
+                </p>
+
+                <h3 class="formation-title">Formation</h3>
+                <ul class="formation-list">
+                    <li><strong>Master I Droit des affaires</strong>, parcours Droit de la propriété littéraire et artistique — Université Lumière Lyon II</li>
+                    <li><strong>Master II Droit des affaires comparé</strong> — Université Lumière Lyon II</li>
+                    <li><strong>LL.M Business Law</strong> — Université de Montréal</li>
+                    <li><strong>Certificat d'Aptitude à la Profession d'Avocat</strong> — Prestation de serment devant la Cour d'appel de Lyon</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Lyon Skyline -->
+        <div class="skyline-wrapper reveal">
+            <svg class="skyline-svg" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,120 L0,95 L30,95 L30,70 L35,70 L35,60 L40,55 L45,60 L45,70 L50,70 L50,95
+                    L80,95 L80,75 L85,75 L85,50 L90,45 L92,30 L94,45 L100,50 L100,75 L105,75 L105,95
+                    L140,95 L140,80 L145,80 L145,55 L150,55 L150,40 L155,35 L160,40 L160,55 L165,55 L165,80 L170,80 L170,95
+                    L210,95 L210,65 L215,65 L215,45 L220,40 L222,20 L224,15 L226,20 L230,40 L235,45 L235,65 L240,65 L240,95
+                    L280,95 L280,78 L285,78 L290,60 L295,55 L298,35 L300,30 L302,35 L305,55 L310,60 L315,78 L320,78 L320,95
+                    L360,95 L360,82 L365,82 L365,65 L370,60 L375,58 L378,45 L380,40 L382,45 L385,58 L390,60 L395,65 L400,65 L400,82 L405,82 L405,95
+                    L440,95 L440,70 L445,70 L450,50 L453,42 L455,25 L457,18 L459,25 L462,42 L465,50 L470,70 L475,70 L475,95
+                    L520,95 L520,85 L525,85 L525,72 L530,68 L535,60 L540,55 L542,48 L545,55 L550,60 L555,68 L560,72 L565,72 L565,85 L570,85 L570,95
+                    L610,95 L610,75 L615,75 L620,55 L625,50 L628,38 L630,42 L632,38 L635,50 L640,55 L645,75 L650,75 L650,95
+                    L690,95 L690,80 L695,80 L700,65 L705,58 L708,45 L710,28 L711,22 L712,28 L715,45 L718,58 L723,65 L728,80 L733,80 L733,95
+                    L780,95 L780,88 L785,88 L785,72 L790,68 L795,62 L800,58 L802,52 L805,58 L810,62 L815,68 L820,72 L825,72 L825,88 L830,88 L830,95
+                    L870,95 L870,78 L875,78 L880,60 L885,52 L888,35 L890,25 L892,35 L895,52 L900,60 L905,78 L910,78 L910,95
+                    L950,95 L950,82 L955,82 L960,68 L965,60 L968,50 L970,38 L972,32 L974,38 L977,50 L982,60 L987,68 L992,82 L997,82 L997,95
+                    L1040,95 L1040,85 L1045,85 L1050,70 L1055,62 L1060,55 L1062,42 L1064,48 L1066,42 L1070,55 L1075,62 L1080,70 L1085,85 L1090,85 L1090,95
+                    L1130,95 L1130,75 L1135,75 L1140,55 L1145,48 L1148,30 L1150,22 L1152,30 L1155,48 L1160,55 L1165,75 L1170,75 L1170,95
+                    L1210,95 L1210,82 L1215,82 L1220,65 L1225,58 L1228,42 L1230,35 L1232,42 L1235,58 L1240,65 L1245,82 L1250,82 L1250,95
+                    L1290,95 L1290,88 L1295,88 L1300,75 L1305,68 L1310,62 L1312,55 L1315,62 L1320,68 L1325,75 L1330,88 L1335,88 L1335,95
+                    L1380,95 L1380,80 L1385,80 L1390,65 L1395,55 L1398,40 L1400,32 L1402,40 L1405,55 L1410,65 L1415,80 L1420,80 L1420,95
+                    L1440,95 L1440,120 Z" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- ═══════ DOMAINES D'INTERVENTION ═══════ -->
+    <section class="domaines" id="domaines">
+        <p class="section-label reveal">Expertise</p>
+        <h2 class="domaines-title reveal">Domaines <em>d'intervention</em></h2>
+
+        <div class="domaines-grid">
+            <div class="domaine-card reveal" style="transition-delay: 0.1s;">
+                <div class="domaine-number">01</div>
+                <div class="domaine-tag">Professionnels</div>
+                <h3 class="domaine-name">Contentieux commercial</h3>
+                <p class="domaine-accroche">« Vous faites face à un différend dans le cadre de vos relations d'affaires. »</p>
+                <ul class="domaine-services">
+                    <li>Inexécution, retard ou mauvaise exécution contractuelle</li>
+                    <li>Responsabilité civile délictuelle</li>
+                    <li>Concurrence déloyale</li>
+                    <li>Rupture brutale de relations commerciales</li>
+                    <li>Conflits entre associés</li>
+                    <li>Recouvrement de créances</li>
+                    <li>Procédures d'exécution</li>
+                </ul>
+                <a href="#" class="domaine-link">En savoir plus <span>→</span></a>
+            </div>
+
+            <div class="domaine-card reveal" style="transition-delay: 0.25s;">
+                <div class="domaine-number">02</div>
+                <div class="domaine-tag">Particuliers</div>
+                <h3 class="domaine-name">Contentieux civil</h3>
+                <p class="domaine-accroche">« Vous êtes un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits. »</p>
+                <ul class="domaine-services">
+                    <li>Actions en responsabilité civile</li>
+                    <li>Cautionnements</li>
+                    <li>Baux d'habitation et loyers impayés</li>
+                    <li>Indemnisation par les assurances</li>
+                </ul>
+                <a href="#" class="domaine-link">En savoir plus <span>→</span></a>
+            </div>
+
+            <div class="domaine-card reveal" style="transition-delay: 0.4s;">
+                <div class="domaine-number">03</div>
+                <div class="domaine-tag">Prévention</div>
+                <h3 class="domaine-name">Rédaction contractuelle</h3>
+                <p class="domaine-accroche">« Un contrat bien rédigé est la meilleure prévention du contentieux. »</p>
+                <ul class="domaine-services">
+                    <li>Conditions générales de vente</li>
+                    <li>Accords de confidentialité</li>
+                    <li>Contrats de licence</li>
+                    <li>Cession de droits d'auteur</li>
+                    <li>Contrats commerciaux</li>
+                    <li>Propriété intellectuelle</li>
+                </ul>
+                <a href="#" class="domaine-link">En savoir plus <span>→</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ CONTACT / RDV ═══════ -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <div class="contact-info reveal-left">
+                <p class="section-label">Contact</p>
+                <h2 class="contact-title">Prendre <em>rendez-vous</em></h2>
+
+                <div class="contact-detail">
+                    <p class="contact-detail-label">Cabinet</p>
+                    <p>Maître Sarah MOSTFA — EI<br>Avocate à la Cour | Barreau de Lyon</p>
+                </div>
+
+                <div class="contact-detail">
+                    <p class="contact-detail-label">Adresse</p>
+                    <p>14, rue de la Charité<br>69002 LYON</p>
+                </div>
+
+                <div class="contact-legal">
+                    <p>N° SIRET : 93876453700016<br>N° TVA : FR85938764537</p>
+                </div>
+            </div>
+
+            <div class="contact-form reveal-right">
+                <h3 class="form-title">Demande de consultation</h3>
+                <form id="contactForm" onsubmit="return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">Téléphone</label>
+                            <input type="tel" id="tel" name="tel" placeholder="06 00 00 00 00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="domaine">Domaine concerné</label>
+                        <select id="domaine" name="domaine">
+                            <option value="">— Sélectionnez —</option>
+                            <option value="commercial">Contentieux commercial</option>
+                            <option value="civil">Contentieux civil</option>
+                            <option value="redaction">Rédaction contractuelle</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre situation</label>
+                        <textarea id="message" name="message" placeholder="Décrivez brièvement votre situation ou votre besoin..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Envoyer ma demande</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="footer">
+        <div class="footer-logo">Sarah Mostfa</div>
+        <div class="footer-links">
+            <a href="#domaines">Contentieux commercial</a>
+            <a href="#domaines">Contentieux civil</a>
+            <a href="#domaines">Rédaction contractuelle</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p class="footer-copy">© 2026 — Maître Sarah Mostfa. Tous droits réservés.</p>
+    </footer>
+
+    <!-- ═══════════════════════════════════════
+         SCRIPTS
+    ═══════════════════════════════════════ -->
+    <script>
+    // ── Nav scroll effect ──
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ── Reveal on scroll (Intersection Observer) ──
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Mesh gradient shader ──
+    (function() {
+        const canvas = document.getElementById('meshBg');
+        const gl = canvas.getContext('webgl', { alpha: false, antialias: true });
+        if (!gl) return;
+
+        const vertSrc = `
+            attribute vec2 a_position;
+            varying vec2 v_uv;
+            void main() {
+                v_uv = a_position * 0.5 + 0.5;
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }
+        `;
+
+        const fragSrc = `
+            precision highp float;
+            varying vec2 v_uv;
+            uniform float u_time;
+            uniform vec2 u_resolution;
+            uniform vec2 u_mouse;
+
+            vec3 mod289(vec3 x) { return x - floor(x * (1.0/289.0)) * 289.0; }
+            vec2 mod289v2(vec2 x) { return x - floor(x * (1.0/289.0)) * 289.0; }
+            vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+
+            float snoise(vec2 v) {
+                const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                                   -0.577350269189626, 0.024390243902439);
+                vec2 i  = floor(v + dot(v, C.yy));
+                vec2 x0 = v - i + dot(i, C.xx);
+                vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                vec4 x12 = x0.xyxy + C.xxzz;
+                x12.xy -= i1;
+                i = mod289v2(i);
+                vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+                vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+                m = m*m; m = m*m;
+                vec3 x_ = 2.0 * fract(p * C.www) - 1.0;
+                vec3 h = abs(x_) - 0.5;
+                vec3 ox = floor(x_ + 0.5);
+                vec3 a0 = x_ - ox;
+                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                vec3 g;
+                g.x = a0.x * x0.x + h.x * x0.y;
+                g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                return 130.0 * dot(m, g);
+            }
+
+            float fbm(vec2 p) {
+                float val = 0.0;
+                float amp = 0.5;
+                float freq = 1.0;
+                for (int i = 0; i < 4; i++) {
+                    val += amp * snoise(p * freq);
+                    freq *= 1.9;
+                    amp *= 0.5;
+                }
+                return val;
+            }
+
+            void main() {
+                vec2 uv = v_uv;
+                float aspect = u_resolution.x / u_resolution.y;
+                vec2 p = vec2(uv.x * aspect, uv.y);
+                float t = u_time * 0.15;
+
+                vec2 mouseNorm = u_mouse;
+                vec2 toMouse = p - vec2(mouseNorm.x * aspect, mouseNorm.y);
+                float mouseDist = length(toMouse);
+                float mouseInfluence = smoothstep(1.0, 0.0, mouseDist) * 0.07;
+                p += toMouse * mouseInfluence;
+
+                float distortion = 0.45;
+                float swirl = 0.3;
+                vec2 q = vec2(
+                    fbm(p * 0.5 + t * 0.7),
+                    fbm(p * 0.5 + vec2(5.2, 1.3) + t * 0.5)
+                );
+                vec2 r = vec2(
+                    fbm(p * 0.5 + distortion * q + vec2(1.7, 9.2) + t * 0.35),
+                    fbm(p * 0.5 + distortion * q + vec2(8.3, 2.8) + t * 0.25)
+                );
+                float f = fbm(p * 0.5 + distortion * r + swirl * q);
+
+                // Palette: beige nacré with olive undertones
+                vec3 cream   = vec3(0.945, 0.925, 0.890);
+                vec3 sand    = vec3(0.895, 0.865, 0.810);
+                vec3 golden  = vec3(0.855, 0.815, 0.730);
+                vec3 olive   = vec3(0.820, 0.790, 0.700);
+
+                float n = f * 0.5 + 0.5;
+                n = smoothstep(0.1, 0.9, n);
+                vec3 color = mix(cream, sand, smoothstep(0.0, 0.5, n));
+                color = mix(color, golden, smoothstep(0.3, 0.75, n));
+                color = mix(color, olive, smoothstep(0.6, 1.0, n) * 0.6);
+
+                float vig = 1.0 - 0.1 * length(uv - 0.5);
+                color *= vig;
+
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `;
+
+        function createShader(type, src) {
+            const s = gl.createShader(type);
+            gl.shaderSource(s, src);
+            gl.compileShader(s);
+            return s;
+        }
+
+        const prog = gl.createProgram();
+        gl.attachShader(prog, createShader(gl.VERTEX_SHADER, vertSrc));
+        gl.attachShader(prog, createShader(gl.FRAGMENT_SHADER, fragSrc));
+        gl.linkProgram(prog);
+        gl.useProgram(prog);
+
+        const buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+        const aPos = gl.getAttribLocation(prog, 'a_position');
+        gl.enableVertexAttribArray(aPos);
+        gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+        const uTime = gl.getUniformLocation(prog, 'u_time');
+        const uRes = gl.getUniformLocation(prog, 'u_resolution');
+        const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+        let mouseX = 0.5, mouseY = 0.5, targetMX = 0.5, targetMY = 0.5;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.uniform2f(uRes, canvas.width, canvas.height);
+        }
+
+        const start = performance.now();
+        function animate() {
+            mouseX += (targetMX - mouseX) * 0.015;
+            mouseY += (targetMY - mouseY) * 0.015;
+            gl.uniform1f(uTime, (performance.now() - start) / 1000);
+            gl.uniform2f(uMouse, mouseX, mouseY);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('mousemove', e => {
+            targetMX = e.clientX / window.innerWidth;
+            targetMY = 1.0 - e.clientY / window.innerHeight;
+        });
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+    })();
+    </script>
+</body>
+</html>
