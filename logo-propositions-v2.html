@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo SM Avocat — Propositions style monogramme serif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ebe2;
+            min-height: 100vh;
+            padding: 60px 40px;
+        }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 60px;
+            letter-spacing: 0.15em;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+        .logo-card {
+            background: #fff;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e8e2d6;
+            position: relative;
+        }
+        .logo-card .logo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-card .monogram {
+            font-weight: 400;
+            color: #1a1a1a;
+            line-height: 1;
+            letter-spacing: -0.06em;
+            position: relative;
+        }
+        .logo-card .avocat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #1a1a1a;
+        }
+        .logo-card .option-label {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #999;
+            letter-spacing: 0.1em;
+        }
+
+        /* Option A — Playfair Display, chevauchement classique */
+        .opt-a .monogram {
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+        }
+        .opt-a .monogram .letter-s {
+            display: inline-block;
+        }
+        .opt-a .monogram .letter-m {
+            display: inline-block;
+            margin-left: -22px;
+        }
+
+        /* Option B — Cormorant Garamond light, large overlap */
+        .opt-b .monogram {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 140px;
+            font-weight: 600;
+        }
+        .opt-b .monogram .letter-s {
+            display: inline-block;
+        }
+        .opt-b .monogram .letter-m {
+            display: inline-block;
+            margin-left: -28px;
+        }
+
+        /* Option C — DM Serif, italique S */
+        .opt-c .monogram {
+            font-family: 'DM Serif Display', serif;
+            font-size: 120px;
+        }
+        .opt-c .monogram .letter-s {
+            display: inline-block;
+            font-style: italic;
+        }
+        .opt-c .monogram .letter-m {
+            display: inline-block;
+            margin-left: -18px;
+        }
+
+        /* Option D — Playfair, S italic large overlap */
+        .opt-d .monogram {
+            font-family: 'Playfair Display', serif;
+            font-size: 130px;
+            font-weight: 400;
+        }
+        .opt-d .monogram .letter-s {
+            display: inline-block;
+            font-style: italic;
+            font-size: 140px;
+        }
+        .opt-d .monogram .letter-m {
+            display: inline-block;
+            margin-left: -30px;
+        }
+
+        /* Option E — Cormorant light, grande taille, minimal overlap */
+        .opt-e .monogram {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 130px;
+            font-weight: 300;
+            letter-spacing: -0.04em;
+        }
+        .opt-e .monogram .letter-s {
+            display: inline-block;
+        }
+        .opt-e .monogram .letter-m {
+            display: inline-block;
+            margin-left: -18px;
+        }
+
+        /* Option F — Playfair bold, deep overlap, S italic */
+        .opt-f .monogram {
+            font-family: 'Playfair Display', serif;
+            font-size: 135px;
+            font-weight: 700;
+        }
+        .opt-f .monogram .letter-s {
+            display: inline-block;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 145px;
+        }
+        .opt-f .monogram .letter-m {
+            display: inline-block;
+            margin-left: -35px;
+        }
+
+        /* Small variants row */
+        .small-variants {
+            margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .small-variants h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+        .small-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .small-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .small-logo .monogram {
+            color: #1a1a1a;
+            line-height: 1;
+            letter-spacing: -0.06em;
+        }
+        .small-logo .avocat-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #1a1a1a;
+        }
+        /* 40px versions */
+        .small-logo .monogram { font-size: 40px; }
+        .small-logo .avocat-label { font-size: 5px; }
+
+        .sm-a .monogram { font-family: 'Playfair Display', serif; }
+        .sm-a .monogram .letter-m { margin-left: -7px; }
+        .sm-b .monogram { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+        .sm-b .monogram .letter-m { margin-left: -9px; }
+        .sm-c .monogram { font-family: 'DM Serif Display', serif; }
+        .sm-c .monogram .letter-s { font-style: italic; }
+        .sm-c .monogram .letter-m { margin-left: -6px; }
+        .sm-d .monogram { font-family: 'Playfair Display', serif; }
+        .sm-d .monogram .letter-s { font-style: italic; font-size: 44px; }
+        .sm-d .monogram .letter-m { margin-left: -10px; }
+        .sm-e .monogram { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+        .sm-e .monogram .letter-m { margin-left: -6px; }
+        .sm-f .monogram { font-family: 'Playfair Display', serif; font-weight: 700; }
+        .sm-f .monogram .letter-s { font-style: italic; font-weight: 400; font-size: 44px; }
+        .sm-f .monogram .letter-m { margin-left: -11px; }
+    </style>
+</head>
+<body>
+    <h1>Monogramme SM</h1>
+    <p class="subtitle">STYLE TYPOGRAPHIQUE SERIF — PROPOSITIONS</p>
+
+    <div class="grid">
+        <div class="logo-card opt-a">
+            <div class="logo-wrap">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="option-label">A — Playfair Display, classique</div>
+        </div>
+
+        <div class="logo-card opt-b">
+            <div class="logo-wrap">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="option-label">B — Cormorant Garamond, semi-bold</div>
+        </div>
+
+        <div class="logo-card opt-c">
+            <div class="logo-wrap">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="option-label">C — DM Serif, S italique</div>
+        </div>
+
+        <div class="logo-card opt-d">
+            <div class="logo-wrap">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="option-label">D — Playfair, S italique large</div>
+        </div>
+
+        <div class="logo-card opt-e">
+            <div class="logo-wrap">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="option-label">E — Cormorant light, aérien</div>
+        </div>
+
+        <div class="logo-card opt-f">
+            <div class="logo-wrap">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="option-label">F — Playfair, contraste italic/bold</div>
+        </div>
+    </div>
+
+    <div class="small-variants">
+        <h2>Rendu en petit format</h2>
+        <div class="small-row">
+            <div class="small-logo sm-a">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="small-logo sm-b">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="small-logo sm-c">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="small-logo sm-d">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="small-logo sm-e">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+            <div class="small-logo sm-f">
+                <div class="monogram"><span class="letter-s">S</span><span class="letter-m">M</span></div>
+                <div class="avocat-label">Avocat</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
