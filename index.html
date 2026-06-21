@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarah Mostfa — Avocate au Barreau de Lyon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -260,19 +260,66 @@
             background: var(--blanc);
         }
         .presentation-section-title {
-            font-family: var(--serif);
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 300;
-            font-style: italic;
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.6rem, 4.5vw, 3.5rem);
+            font-weight: 400;
             color: var(--noir);
             text-align: center;
             margin-bottom: 16px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
             line-height: 1.1;
+            position: relative;
+            display: inline-block;
         }
-        .presentation-section-title .title-accent {
-            color: var(--vert);
-            font-weight: 400;
+        .presentation-title-wrap {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .presentation-section-title .title-highlight {
+            position: absolute;
+            bottom: 4px;
+            left: -4px;
+            right: -4px;
+            height: 12px;
+            background: var(--vert);
+            opacity: 0;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s, opacity 0.4s ease 0.3s;
+        }
+        .presentation-title-wrap.visible .title-highlight {
+            opacity: 0.12;
+            transform: scaleX(1);
+        }
+
+        /* Presentation reveal animations */
+        .reveal-slide-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-slide-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
         }
         .presentation-section-line {
             width: 60px;
@@ -793,31 +840,32 @@
      PRÉSENTATION
 ═══════════════════════════════════════ -->
 <section class="presentation" id="presentation">
-    <h2 class="presentation-section-title reveal"><span class="title-accent">P</span>résentation</h2>
-    <div class="presentation-section-line reveal reveal-delay-1"></div>
+    <div class="presentation-title-wrap reveal-scale">
+        <h2 class="presentation-section-title">Présentation<span class="title-highlight"></span></h2>
+    </div>
     <div class="presentation-inner">
-        <div class="presentation-image-wrapper reveal">
+        <div class="presentation-image-wrapper reveal-slide-left">
             <img src="assets/sarah-mostfa.webp" onerror="this.src='photo%20site%20sarah.webp'" alt="Sarah Mostfa, Avocate au Barreau de Lyon" class="presentation-image">
             <div class="presentation-image-accent"></div>
             <div class="presentation-image-accent-bottom"></div>
         </div>
-        <div class="presentation-content">
-            <p class="presentation-text reveal reveal-delay-1">
+        <div class="presentation-content reveal-slide-right">
+            <p class="presentation-text">
                 Avocate en droit des affaires et en contentieux civil, j'accompagne les entreprises et les particuliers dans la résolution de leurs litiges et la sécurisation de leurs relations contractuelles.
             </p>
-            <p class="presentation-text reveal reveal-delay-2">
+            <p class="presentation-text">
                 Mon approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.
             </p>
 
-            <h3 class="presentation-formation-title reveal reveal-delay-2">Formation</h3>
-            <ul class="presentation-formation reveal reveal-delay-3">
+            <h3 class="presentation-formation-title">Formation</h3>
+            <ul class="presentation-formation">
                 <li><strong>Master I Droit des affaires</strong>, parcours Propriété littéraire et artistique — Université Lumière Lyon II</li>
                 <li><strong>Master II Droit des affaires comparé</strong> — Université Lumière Lyon II</li>
                 <li><strong>LL.M Business Law</strong> — Université de Montréal</li>
                 <li><strong>CAPA</strong> — Prestation de serment, Cour d'appel de Lyon</li>
             </ul>
 
-            <a href="#contact" class="presentation-cta reveal reveal-delay-4">Me contacter</a>
+            <a href="#contact" class="presentation-cta">Me contacter</a>
         </div>
     </div>
 </section>
@@ -1071,7 +1119,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal, .reveal-scale, .reveal-slide-left, .reveal-slide-right').forEach(el => observer.observe(el));
 
 // ─── Hero WebGL Mesh Gradient ───
 (function() {
