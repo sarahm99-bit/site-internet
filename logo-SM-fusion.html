@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo SM — Fusion S→M sans première barre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200;300&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ebe2;
+            min-height: 100vh;
+            padding: 60px 40px;
+        }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 70px;
+            letter-spacing: 0.15em;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo-card {
+            background: #fff;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e8e2d6;
+            position: relative;
+        }
+        .logo-card svg {
+            width: 220px;
+            height: 220px;
+        }
+        .option-label {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #999;
+            letter-spacing: 0.1em;
+        }
+        .option-desc {
+            position: absolute;
+            bottom: 38px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.65rem;
+            color: #bbb;
+            letter-spacing: 0.05em;
+        }
+        .small-section {
+            margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .small-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+        }
+        .small-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+        .small-row svg {
+            width: 70px;
+            height: 70px;
+        }
+        .color-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+        .color-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .color-item svg { width: 100px; height: 100px; }
+        .color-item span { font-size: 0.65rem; color: #999; letter-spacing: 0.1em; }
+        .on-dark {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SM — Fusion</h1>
+    <p class="subtitle">CORMORANT GARAMOND LIGHT · S CONTINUE DANS M SANS PREMIÈRE BARRE</p>
+
+    <div class="grid">
+
+        <!-- OPTION 1 : Courbe du S descend et remonte dans le V du M -->
+        <div class="logo-card">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- S top curve -->
+                    <path d="
+                        M 118 88
+                        C 108 82, 82 78, 68 82
+                        C 50 88, 44 100, 46 110
+                        C 48 122, 62 130, 80 136
+                        C 98 142, 114 150, 114 164
+                        C 114 178, 100 188, 82 188
+                        C 68 188, 56 182, 50 176
+                    " stroke-width="3.5"/>
+
+                    <!-- Transition : la courbe basse du S remonte directement dans le premier V du M -->
+                    <path d="
+                        M 114 164
+                        C 114 178, 108 192, 114 198
+                        C 120 206, 128 198, 140 148
+                        L 164 88
+                    " stroke-width="3.5"/>
+
+                    <!-- Deuxième V du M + barre droite -->
+                    <path d="
+                        M 164 88
+                        L 188 168
+                        L 212 88
+                        L 212 210
+                    " stroke-width="3.5"/>
+
+                    <!-- Empattement bas droit -->
+                    <line x1="204" y1="210" x2="220" y2="210" stroke-width="2.5"/>
+
+                    <!-- AVOCAT -->
+                    <text x="150" y="240" text-anchor="middle"
+                          font-family="'Inter', sans-serif" font-size="10" font-weight="200"
+                          letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                </g>
+            </svg>
+            <div class="option-desc">Le bas du S remonte dans le premier pic du M</div>
+            <div class="option-label">Proposition 1</div>
+        </div>
+
+        <!-- OPTION 2 : S fin, la dernière courbe du S EST la première diagonale du M -->
+        <div class="logo-card">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- S complet avec sa courbe basse qui se transforme en diagonale montante du M -->
+                    <path d="
+                        M 110 86
+                        C 98 80, 72 78, 60 86
+                        C 46 96, 46 108, 56 118
+                        C 66 128, 88 134, 100 142
+                        C 112 150, 118 162, 108 174
+                        C 98 186, 76 188, 62 182
+                    " stroke-width="3"/>
+
+                    <!-- La boucle basse du S continue sans interruption vers le haut pour devenir le M -->
+                    <path d="
+                        M 108 174
+                        C 118 164, 124 140, 132 110
+                        L 148 86
+                    " stroke-width="3"/>
+
+                    <!-- Du pic : descente, remontée, descente finale + barre verticale -->
+                    <path d="
+                        M 148 86
+                        L 172 174
+                        L 196 86
+                        L 196 210
+                    " stroke-width="3"/>
+
+                    <!-- Petit empattement -->
+                    <line x1="189" y1="210" x2="203" y2="210" stroke-width="2"/>
+
+                    <!-- AVOCAT -->
+                    <text x="140" y="240" text-anchor="middle"
+                          font-family="'Inter', sans-serif" font-size="10" font-weight="200"
+                          letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                </g>
+            </svg>
+            <div class="option-desc">Courbe du S = diagonale montante du M</div>
+            <div class="option-label">Proposition 2</div>
+        </div>
+
+        <!-- OPTION 3 : Plus géométrique, trait fin, S épuré -->
+        <div class="logo-card">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- S avec empattements fins style Cormorant light -->
+                    <!-- Empattement haut du S -->
+                    <line x1="66" y1="82" x2="108" y2="82" stroke-width="2"/>
+
+                    <!-- Corps du S -->
+                    <path d="
+                        M 106 82
+                        C 106 82, 112 84, 112 96
+                        C 112 110, 94 118, 78 124
+                        C 62 130, 50 140, 50 154
+                        C 50 170, 62 180, 76 184
+                        C 90 188, 104 184, 112 176
+                    " stroke-width="2.5"/>
+
+                    <!-- Empattement bas du S = transition vers le M -->
+                    <!-- Au lieu de terminer, la courbe continue vers le haut -->
+                    <path d="
+                        M 112 176
+                        C 118 168, 122 148, 130 120
+                        L 150 82
+                    " stroke-width="2.5"/>
+
+                    <!-- Empattement haut du pic du M -->
+                    <line x1="144" y1="82" x2="156" y2="82" stroke-width="2"/>
+
+                    <!-- Descente, V, remontée, barre finale -->
+                    <path d="
+                        M 150 82
+                        L 175 170
+                        L 200 82
+                    " stroke-width="2.5"/>
+
+                    <!-- Empattement haut droit -->
+                    <line x1="194" y1="82" x2="206" y2="82" stroke-width="2"/>
+
+                    <!-- Barre verticale droite -->
+                    <line x1="200" y1="82" x2="200" y2="210" stroke-width="2.5"/>
+
+                    <!-- Empattement bas droit -->
+                    <line x1="192" y1="210" x2="208" y2="210" stroke-width="2"/>
+
+                    <!-- AVOCAT -->
+                    <text x="138" y="240" text-anchor="middle"
+                          font-family="'Inter', sans-serif" font-size="9.5" font-weight="200"
+                          letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                </g>
+            </svg>
+            <div class="option-desc">Avec empattements, style typographique pur</div>
+            <div class="option-label">Proposition 3</div>
+        </div>
+
+        <!-- OPTION 4 : Le plus épuré — trait fin continu, S gracieux -->
+        <div class="logo-card">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Un seul path continu : S qui se fond dans M -->
+                    <path d="
+                        M 54 178
+                        C 66 186, 82 188, 96 182
+                        C 112 174, 114 160, 102 148
+                        C 90 136, 64 130, 56 116
+                        C 48 102, 54 88, 70 82
+                        C 86 76, 106 80, 116 88
+                    " stroke-width="2.8"/>
+
+                    <!-- Le S est fini. Maintenant la queue du S devient la montante du M -->
+                    <!-- On repart du creux bas du S -->
+                    <path d="
+                        M 96 182
+                        C 108 190, 116 186, 122 170
+                        C 130 148, 140 112, 152 82
+                        L 178 182
+                        L 204 82
+                        L 204 210
+                    " stroke-width="2.8"/>
+
+                    <!-- Empattement droit bas -->
+                    <line x1="196" y1="210" x2="212" y2="210" stroke-width="2"/>
+
+                    <!-- AVOCAT label -->
+                    <text x="138" y="242" text-anchor="middle"
+                          font-family="'Inter', sans-serif" font-size="10" font-weight="200"
+                          letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                </g>
+            </svg>
+            <div class="option-desc">S inversé, queue remonte dans le M — un geste</div>
+            <div class="option-label">Proposition 4</div>
+        </div>
+
+    </div>
+
+    <!-- Petits formats -->
+    <div class="small-section">
+        <h2>Rendu en petit format</h2>
+        <div class="small-row">
+            <div>
+                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 118 88 C 108 82, 82 78, 68 82 C 50 88, 44 100, 46 110 C 48 122, 62 130, 80 136 C 98 142, 114 150, 114 164 C 114 178, 100 188, 82 188 C 68 188, 56 182, 50 176" stroke-width="4.5"/>
+                        <path d="M 114 164 C 114 178, 108 192, 114 198 C 120 206, 128 198, 140 148 L 164 88" stroke-width="4.5"/>
+                        <path d="M 164 88 L 188 168 L 212 88 L 212 210" stroke-width="4.5"/>
+                        <line x1="204" y1="210" x2="220" y2="210" stroke-width="3"/>
+                        <text x="150" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="200" letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                    </g>
+                </svg>
+            </div>
+            <div>
+                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 110 86 C 98 80, 72 78, 60 86 C 46 96, 46 108, 56 118 C 66 128, 88 134, 100 142 C 112 150, 118 162, 108 174 C 98 186, 76 188, 62 182" stroke-width="4"/>
+                        <path d="M 108 174 C 118 164, 124 140, 132 110 L 148 86" stroke-width="4"/>
+                        <path d="M 148 86 L 172 174 L 196 86 L 196 210" stroke-width="4"/>
+                        <line x1="189" y1="210" x2="203" y2="210" stroke-width="3"/>
+                        <text x="140" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="200" letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                    </g>
+                </svg>
+            </div>
+            <div>
+                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="66" y1="82" x2="108" y2="82" stroke-width="3"/>
+                        <path d="M 106 82 C 106 82, 112 84, 112 96 C 112 110, 94 118, 78 124 C 62 130, 50 140, 50 154 C 50 170, 62 180, 76 184 C 90 188, 104 184, 112 176" stroke-width="3.5"/>
+                        <path d="M 112 176 C 118 168, 122 148, 130 120 L 150 82" stroke-width="3.5"/>
+                        <line x1="144" y1="82" x2="156" y2="82" stroke-width="3"/>
+                        <path d="M 150 82 L 175 170 L 200 82" stroke-width="3.5"/>
+                        <line x1="194" y1="82" x2="206" y2="82" stroke-width="3"/>
+                        <line x1="200" y1="82" x2="200" y2="210" stroke-width="3.5"/>
+                        <line x1="192" y1="210" x2="208" y2="210" stroke-width="3"/>
+                        <text x="138" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="200" letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                    </g>
+                </svg>
+            </div>
+            <div>
+                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 54 178 C 66 186, 82 188, 96 182 C 112 174, 114 160, 102 148 C 90 136, 64 130, 56 116 C 48 102, 54 88, 70 82 C 86 76, 106 80, 116 88" stroke-width="3.5"/>
+                        <path d="M 96 182 C 108 190, 116 186, 122 170 C 130 148, 140 112, 152 82 L 178 182 L 204 82 L 204 210" stroke-width="3.5"/>
+                        <line x1="196" y1="210" x2="212" y2="210" stroke-width="3"/>
+                        <text x="138" y="242" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="200" letter-spacing="5" fill="#1a1a1a" stroke="none">AVOCAT</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sur fond sombre -->
+    <div class="small-section color-section">
+        <h2>Déclinaison sur fond sombre</h2>
+        <div class="color-row">
+            <div class="color-item">
+                <div class="on-dark">
+                    <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#f0ebe2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M 118 88 C 108 82, 82 78, 68 82 C 50 88, 44 100, 46 110 C 48 122, 62 130, 80 136 C 98 142, 114 150, 114 164 C 114 178, 100 188, 82 188 C 68 188, 56 182, 50 176" stroke-width="3.5"/>
+                            <path d="M 114 164 C 114 178, 108 192, 114 198 C 120 206, 128 198, 140 148 L 164 88" stroke-width="3.5"/>
+                            <path d="M 164 88 L 188 168 L 212 88 L 212 210" stroke-width="3.5"/>
+                            <line x1="204" y1="210" x2="220" y2="210" stroke-width="2.5"/>
+                            <text x="150" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="200" letter-spacing="5" fill="#f0ebe2" stroke="none">AVOCAT</text>
+                        </g>
+                    </svg>
+                </div>
+                <span>Beige sur noir</span>
+            </div>
+            <div class="color-item">
+                <div class="on-dark">
+                    <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M 118 88 C 108 82, 82 78, 68 82 C 50 88, 44 100, 46 110 C 48 122, 62 130, 80 136 C 98 142, 114 150, 114 164 C 114 178, 100 188, 82 188 C 68 188, 56 182, 50 176" stroke-width="3.5"/>
+                            <path d="M 114 164 C 114 178, 108 192, 114 198 C 120 206, 128 198, 140 148 L 164 88" stroke-width="3.5"/>
+                            <path d="M 164 88 L 188 168 L 212 88 L 212 210" stroke-width="3.5"/>
+                            <line x1="204" y1="210" x2="220" y2="210" stroke-width="2.5"/>
+                            <text x="150" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="200" letter-spacing="5" fill="#ffffff" stroke="none">AVOCAT</text>
+                        </g>
+                    </svg>
+                </div>
+                <span>Blanc sur noir</span>
+            </div>
+            <div class="color-item">
+                <div class="on-dark">
+                    <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#72785f" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M 118 88 C 108 82, 82 78, 68 82 C 50 88, 44 100, 46 110 C 48 122, 62 130, 80 136 C 98 142, 114 150, 114 164 C 114 178, 100 188, 82 188 C 68 188, 56 182, 50 176" stroke-width="3.5"/>
+                            <path d="M 114 164 C 114 178, 108 192, 114 198 C 120 206, 128 198, 140 148 L 164 88" stroke-width="3.5"/>
+                            <path d="M 164 88 L 188 168 L 212 88 L 212 210" stroke-width="3.5"/>
+                            <line x1="204" y1="210" x2="220" y2="210" stroke-width="2.5"/>
+                            <text x="150" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="200" letter-spacing="5" fill="#72785f" stroke="none">AVOCAT</text>
+                        </g>
+                    </svg>
+                </div>
+                <span>Vert olive sur noir</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
