@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fonds Hero — Propositions Art Déco</title>
+    <title>Fonds Hero — Gradients Blur Argentiques</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,7 +62,7 @@
         .option-content p {
             font-size: 0.75rem;
             font-weight: 300;
-            color: #72785f;
+            color: #5a6049;
             letter-spacing: 0.18em;
             text-transform: uppercase;
         }
@@ -74,256 +74,206 @@
             right: 0;
             text-align: center;
             font-size: 0.6rem;
-            color: rgba(114,120,95,0.6);
+            color: rgba(100,100,90,0.7);
             letter-spacing: 0.15em;
             z-index: 3;
         }
 
-        /* ─── BASE : beige nacré ─── */
-        .base-bg {
-            position: absolute;
-            inset: 0;
-            background: #f0ebe2;
-            z-index: 0;
-        }
-
-        /* ─── A : Art Déco éventails / arches ─── */
-        .pattern-a {
+        /* ─── Grain argentique (shared) ─── */
+        .film-grain {
             position: absolute;
             inset: 0;
             z-index: 1;
-            opacity: 0.18;
-            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 A40 40 0 0 1 40 40 A40 40 0 0 1 80 80' fill='none' stroke='%2372785f' stroke-width='1'/%3E%3Cpath d='M0 80 A30 30 0 0 1 30 50 A30 30 0 0 1 60 80' fill='none' stroke='%2372785f' stroke-width='0.5' transform='translate(10,0)'/%3E%3C/svg%3E");
-            background-size: 80px 80px;
-        }
-
-        /* ─── B : Lignes rayonnantes sunburst ─── */
-        .pattern-b {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            opacity: 0.15;
-        }
-        .pattern-b svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* ─── C : Grille géométrique fine ─── */
-        .pattern-c {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            opacity: 0.2;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='60' y2='60' stroke='%2372785f' stroke-width='0.5'/%3E%3Cline x1='60' y1='0' x2='0' y2='60' stroke='%2372785f' stroke-width='0.5'/%3E%3Crect x='15' y='15' width='30' height='30' fill='none' stroke='%2372785f' stroke-width='0.5'/%3E%3C/svg%3E");
-            background-size: 60px 60px;
-        }
-
-        /* ─── D : Losanges Art Déco ─── */
-        .pattern-d {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            opacity: 0.2;
-            background-image: url("data:image/svg+xml,%3Csvg width='48' height='64' viewBox='0 0 48 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M24 0 L48 32 L24 64 L0 32 Z' fill='none' stroke='%2372785f' stroke-width='0.6'/%3E%3Cpath d='M24 8 L40 32 L24 56 L8 32 Z' fill='none' stroke='%2372785f' stroke-width='0.3'/%3E%3C/svg%3E");
-            background-size: 48px 64px;
-        }
-
-        /* ─── E : Papier texturé grain fin ─── */
-        .pattern-e {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            opacity: 0.6;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 256px 256px;
+            pointer-events: none;
         }
 
-        /* ─── F : Arches concentriques Art Déco ─── */
-        .pattern-f {
+        /* ─── A : Brume douce — beige/vert olive, flux diagonal ─── */
+        .gradient-a {
             position: absolute;
             inset: 0;
-            z-index: 1;
-            opacity: 0.2;
-            background-image: url("data:image/svg+xml,%3Csvg width='120' height='60' viewBox='0 0 120 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 60 A60 60 0 0 1 120 60' fill='none' stroke='%2372785f' stroke-width='0.6'/%3E%3Cpath d='M60 60 A50 50 0 0 1 110 60' fill='none' stroke='%2372785f' stroke-width='0.4'/%3E%3Cpath d='M60 60 A40 40 0 0 1 100 60' fill='none' stroke='%2372785f' stroke-width='0.3'/%3E%3Cpath d='M0 60 A60 60 0 0 0 60 0' fill='none' stroke='%2372785f' stroke-width='0.6' transform='translate(-60,60) scale(1,-1) translate(0,-60)'/%3E%3C/svg%3E");
-            background-size: 120px 60px;
+            background:
+                radial-gradient(ellipse 120% 80% at 20% 30%, #c8c4a9 0%, transparent 70%),
+                radial-gradient(ellipse 100% 90% at 80% 60%, #a8ad8e 0%, transparent 65%),
+                radial-gradient(ellipse 80% 60% at 50% 80%, #d6cdb8 0%, transparent 60%),
+                linear-gradient(135deg, #e8e3d4 0%, #ccc8ae 40%, #b0b499 70%, #d2cbb5 100%);
         }
 
-        /* ─── G : Chevrons / zigzag Art Déco ─── */
-        .pattern-g {
+        /* ─── B : Aube argentique — tons chauds très doux ─── */
+        .gradient-b {
             position: absolute;
             inset: 0;
-            z-index: 1;
-            opacity: 0.2;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='24' viewBox='0 0 40 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 18 L20 6 L40 18' fill='none' stroke='%2372785f' stroke-width='0.6'/%3E%3Cpath d='M0 24 L20 12 L40 24' fill='none' stroke='%2372785f' stroke-width='0.3'/%3E%3C/svg%3E");
-            background-size: 40px 24px;
+            background:
+                radial-gradient(ellipse 90% 70% at 30% 20%, #ddd8c4 0%, transparent 65%),
+                radial-gradient(ellipse 110% 80% at 75% 70%, #bbb89e 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 15% 75%, #c9c0a6 0%, transparent 55%),
+                linear-gradient(160deg, #e2ddd0 0%, #d1cbba 35%, #b5b39a 65%, #cfc9b5 100%);
         }
 
-        /* ─── H : Grand motif central Art Déco (soleil/rosace) ─── */
-        .pattern-h {
+        /* ─── C : Olive profond — plus de vert, plus de caractère ─── */
+        .gradient-c {
             position: absolute;
             inset: 0;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.2;
+            background:
+                radial-gradient(ellipse 80% 90% at 65% 25%, #a3a888 0%, transparent 65%),
+                radial-gradient(ellipse 100% 70% at 20% 70%, #c5c1a8 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 85% 80%, #8e9475 0%, transparent 55%),
+                linear-gradient(145deg, #d0ccb5 0%, #b4b597 40%, #969b7e 70%, #c2bda8 100%);
         }
-        .pattern-h svg {
-            width: 70%;
-            height: auto;
-            max-width: 500px;
+
+        /* ─── D : Nacre — très clair, presque blanc avec des reflets ─── */
+        .gradient-d {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 90% 80% at 40% 35%, #eae5d8 0%, transparent 70%),
+                radial-gradient(ellipse 80% 70% at 75% 65%, #d8d4c0 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 20% 80%, #e0dccb 0%, transparent 50%),
+                linear-gradient(130deg, #f0ebe2 0%, #e4dfcf 40%, #d5d0bd 65%, #ece7dc 100%);
+        }
+
+        /* ─── E : Film flou — mouvement horizontal, effet cinéma ─── */
+        .gradient-e {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 150% 50% at 0% 40%, #c2bf9f 0%, transparent 60%),
+                radial-gradient(ellipse 130% 45% at 100% 55%, #adb08f 0%, transparent 55%),
+                radial-gradient(ellipse 80% 30% at 50% 30%, #dcd7c5 0%, transparent 50%),
+                linear-gradient(90deg, #d8d3c0 0%, #c5c1a5 30%, #b3b495 55%, #cec9b4 80%, #ddd8c6 100%);
+        }
+
+        /* ─── F : Crépuscule discret — touche rosée très subtile ─── */
+        .gradient-f {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 70% at 25% 30%, #d4cfba 0%, transparent 65%),
+                radial-gradient(ellipse 90% 60% at 70% 75%, #c0b8a0 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 80% 20%, #c5bfac 0%, transparent 50%),
+                radial-gradient(ellipse 40% 30% at 40% 85%, #c9bfae 0%, transparent 45%),
+                linear-gradient(155deg, #e2ddd0 0%, #d0c9b5 35%, #bbb5a0 60%, #d5cfc0 100%);
+        }
+
+        /* ─── G : Brouillard vert — atmosphérique, une seule masse floue ─── */
+        .gradient-g {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 120% 100% at 50% 50%, #b5b899 0%, transparent 70%),
+                radial-gradient(ellipse 70% 60% at 20% 25%, #ccc8b0 0%, transparent 55%),
+                radial-gradient(ellipse 60% 50% at 80% 75%, #a9ad8c 0%, transparent 50%),
+                linear-gradient(180deg, #d5d1ba 0%, #c0bd9f 45%, #b0b392 65%, #cbc6b2 100%);
+        }
+
+        /* ─── H : Lumière rasante — contraste doux haut/bas ─── */
+        .gradient-h {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 140% 40% at 50% 0%, #e8e4d5 0%, transparent 70%),
+                radial-gradient(ellipse 120% 50% at 50% 100%, #a5a889 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 30% 50%, #d0cbba 0%, transparent 50%),
+                linear-gradient(180deg, #eae5d8 0%, #d5d0be 40%, #b8ba9d 70%, #a8ab8c 100%);
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Fonds d'écran Hero</h1>
-        <p>ART DÉCO · TEXTURES SUBTILES · FILIGRANE</p>
+        <h1>Fonds Gradient Blur</h1>
+        <p>EFFET ARGENTIQUE · FLOU ORGANIQUE · TONS NATURELS</p>
     </div>
 
     <div class="grid">
 
-        <!-- A : Éventails -->
+        <!-- A -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-a"></div>
+            <div class="gradient-a"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">A — ÉVENTAILS ART DÉCO</div>
+            <div class="option-label">A — BRUME DOUCE</div>
         </div>
 
-        <!-- B : Sunburst -->
+        <!-- B -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-b">
-                <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                    <g stroke="#72785f" stroke-width="0.5" fill="none" transform="translate(400,500)">
-                        <line x1="0" y1="0" x2="0" y2="-500"/>
-                        <line x1="0" y1="0" x2="-87" y2="-496"/>
-                        <line x1="0" y1="0" x2="-174" y2="-469"/>
-                        <line x1="0" y1="0" x2="-250" y2="-433"/>
-                        <line x1="0" y1="0" x2="-321" y2="-383"/>
-                        <line x1="0" y1="0" x2="-383" y2="-321"/>
-                        <line x1="0" y1="0" x2="-433" y2="-250"/>
-                        <line x1="0" y1="0" x2="-469" y2="-174"/>
-                        <line x1="0" y1="0" x2="-496" y2="-87"/>
-                        <line x1="0" y1="0" x2="87" y2="-496"/>
-                        <line x1="0" y1="0" x2="174" y2="-469"/>
-                        <line x1="0" y1="0" x2="250" y2="-433"/>
-                        <line x1="0" y1="0" x2="321" y2="-383"/>
-                        <line x1="0" y1="0" x2="383" y2="-321"/>
-                        <line x1="0" y1="0" x2="433" y2="-250"/>
-                        <line x1="0" y1="0" x2="469" y2="-174"/>
-                        <line x1="0" y1="0" x2="496" y2="-87"/>
-                    </g>
-                </svg>
-            </div>
+            <div class="gradient-b"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">B — SUNBURST RAYONNANT</div>
+            <div class="option-label">B — AUBE ARGENTIQUE</div>
         </div>
 
-        <!-- C : Grille géométrique -->
+        <!-- C -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-c"></div>
+            <div class="gradient-c"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">C — GRILLE GÉOMÉTRIQUE</div>
+            <div class="option-label">C — OLIVE PROFOND</div>
         </div>
 
-        <!-- D : Losanges -->
+        <!-- D -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-d"></div>
+            <div class="gradient-d"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">D — LOSANGES ART DÉCO</div>
+            <div class="option-label">D — NACRE</div>
         </div>
 
-        <!-- E : Grain papier -->
+        <!-- E -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-e"></div>
+            <div class="gradient-e"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">E — GRAIN PAPIER TEXTURÉ</div>
+            <div class="option-label">E — FILM FLOU</div>
         </div>
 
-        <!-- F : Arches concentriques -->
+        <!-- F -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-f"></div>
+            <div class="gradient-f"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">F — ARCHES CONCENTRIQUES</div>
+            <div class="option-label">F — CRÉPUSCULE DISCRET</div>
         </div>
 
-        <!-- G : Chevrons -->
+        <!-- G -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-g"></div>
+            <div class="gradient-g"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">G — CHEVRONS / ZIGZAG</div>
+            <div class="option-label">G — BROUILLARD VERT</div>
         </div>
 
-        <!-- H : Rosace centrale -->
+        <!-- H -->
         <div class="option">
-            <div class="base-bg"></div>
-            <div class="pattern-h">
-                <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                    <g fill="none" stroke="#72785f" transform="translate(200,200)">
-                        <circle r="180" stroke-width="0.5"/>
-                        <circle r="150" stroke-width="0.4"/>
-                        <circle r="120" stroke-width="0.3"/>
-                        <circle r="90" stroke-width="0.3"/>
-                        <circle r="60" stroke-width="0.2"/>
-                        <!-- Radial lines -->
-                        <line x1="0" y1="-180" x2="0" y2="180" stroke-width="0.3"/>
-                        <line x1="-180" y1="0" x2="180" y2="0" stroke-width="0.3"/>
-                        <line x1="-127" y1="-127" x2="127" y2="127" stroke-width="0.3"/>
-                        <line x1="127" y1="-127" x2="-127" y2="127" stroke-width="0.3"/>
-                        <line x1="-47" y1="-174" x2="47" y2="174" stroke-width="0.2"/>
-                        <line x1="47" y1="-174" x2="-47" y2="174" stroke-width="0.2"/>
-                        <line x1="-174" y1="-47" x2="174" y2="47" stroke-width="0.2"/>
-                        <line x1="-174" y1="47" x2="174" y2="-47" stroke-width="0.2"/>
-                        <line x1="-90" y1="-156" x2="90" y2="156" stroke-width="0.2"/>
-                        <line x1="90" y1="-156" x2="-90" y2="156" stroke-width="0.2"/>
-                        <line x1="-156" y1="-90" x2="156" y2="90" stroke-width="0.2"/>
-                        <line x1="-156" y1="90" x2="156" y2="-90" stroke-width="0.2"/>
-                        <!-- Art deco arcs -->
-                        <path d="M0,-180 A30,30 0 0,1 30,-150" stroke-width="0.4"/>
-                        <path d="M0,-180 A30,30 0 0,0 -30,-150" stroke-width="0.4"/>
-                        <path d="M180,0 A30,30 0 0,1 150,30" stroke-width="0.4"/>
-                        <path d="M180,0 A30,30 0 0,0 150,-30" stroke-width="0.4"/>
-                        <path d="M0,180 A30,30 0 0,1 -30,150" stroke-width="0.4"/>
-                        <path d="M0,180 A30,30 0 0,0 30,150" stroke-width="0.4"/>
-                        <path d="M-180,0 A30,30 0 0,1 -150,-30" stroke-width="0.4"/>
-                        <path d="M-180,0 A30,30 0 0,0 -150,30" stroke-width="0.4"/>
-                    </g>
-                </svg>
-            </div>
+            <div class="gradient-h"></div>
+            <div class="film-grain"></div>
             <div class="option-content">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
-            <div class="option-label">H — ROSACE CENTRALE ART DÉCO</div>
+            <div class="option-label">H — LUMIÈRE RASANTE</div>
         </div>
 
     </div>
