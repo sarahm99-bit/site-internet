@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyline Lyon — Option A (trait continu)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ebe2;
+        }
+
+        .spacer {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .spacer h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #2c2418;
+            text-align: center;
+        }
+
+        .spacer p {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        /* Skyline container */
+        .skyline-section {
+            position: relative;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            background: #f0ebe2;
+        }
+
+        .skyline-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* The stroke-based skyline */
+        .skyline-line {
+            fill: none;
+            stroke: #72785f;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 3000;
+            stroke-dashoffset: 3000;
+            transition: stroke-dashoffset 0s;
+        }
+
+        /* Fill that fades in after the line draws */
+        .skyline-fill {
+            fill: #72785f;
+            opacity: 0;
+            transition: opacity 1.2s ease 0.3s;
+        }
+
+        .skyline-section.drawn .skyline-fill {
+            opacity: 0.06;
+        }
+
+        .next-section {
+            background: #1a1a1a;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .next-section p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #555;
+        }
+
+        .label {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #72785f;
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="label">OPTION A — TRAIT CONTINU (scrollez)</div>
+
+    <div class="spacer">
+        <div>
+            <h1>Sarah <em>Mostfa.</em></h1>
+            <p>↓ Scrollez pour voir la skyline se dessiner ↓</p>
+        </div>
+    </div>
+
+    <div class="skyline-section" id="skylineSection">
+        <svg class="skyline-svg" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Fill shape -->
+            <path class="skyline-fill" d="
+                M0,200 L0,160
+                L60,160 L65,140 L70,125 L75,140 L80,160
+                L130,160 L135,145 L140,130 L142,115 L144,100 L146,115 L150,130 L155,145 L160,160
+                L200,160 L205,148 L210,135 L215,128 L218,118 L220,110 L222,118 L225,128 L230,135 L235,148 L240,160
+                L290,160 L295,150 L300,140 L305,128 L308,110 L310,95 L311,85 L312,78 L313,85 L314,95 L318,110 L323,128 L328,140 L333,150 L338,160
+                L390,160 L395,148 L398,135 L400,122 L402,112 L405,105 L407,98 L408,92 L409,85 L410,78 L411,85 L412,92 L413,98 L415,105 L418,112 L420,122 L422,135 L425,148 L430,160
+                L480,160 L485,150 L490,138 L495,128 L498,115 L500,108 L502,115 L505,128 L510,138 L515,150 L520,160
+                L560,160 L565,152 L570,142 L575,130 L578,120 L580,112 L582,105 L583,100 L584,105 L586,112 L588,120 L592,130 L597,142 L602,152 L607,160
+                L650,160 L655,148 L658,138 L660,125 L662,115 L664,108 L666,102 L668,108 L670,115 L672,125 L675,138 L678,148 L683,160
+                L720,160 L725,152 L728,145 L730,135 L732,128 L734,120 L735,115 L736,110 L737,105 L738,100 L739,95 L740,88 L741,82 L742,88 L743,95 L744,100 L745,105 L746,110 L747,115 L748,120 L750,128 L752,135 L755,145 L758,152 L763,160
+                L800,160 L805,150 L810,140 L815,130 L818,122 L820,115 L822,122 L825,130 L830,140 L835,150 L840,160
+                L880,160 L885,148 L888,135 L890,125 L892,118 L895,112 L897,108 L898,104 L899,108 L900,112 L903,118 L905,125 L908,135 L912,148 L917,160
+                L960,160 L965,150 L968,142 L970,132 L972,122 L974,115 L975,110 L976,115 L978,122 L980,132 L983,142 L986,150 L991,160
+                L1030,160 L1035,148 L1038,138 L1040,128 L1042,120 L1044,112 L1046,105 L1048,98 L1049,92 L1050,86 L1051,80 L1052,86 L1053,92 L1054,98 L1056,105 L1058,112 L1060,120 L1062,128 L1065,138 L1068,148 L1073,160
+                L1110,160 L1115,150 L1118,140 L1120,132 L1122,125 L1124,118 L1126,125 L1128,132 L1132,140 L1136,150 L1141,160
+                L1180,160 L1185,152 L1188,142 L1190,135 L1192,128 L1194,120 L1196,115 L1197,110 L1198,115 L1200,120 L1202,128 L1204,135 L1208,142 L1212,152 L1217,160
+                L1260,160 L1265,150 L1270,140 L1275,132 L1278,125 L1280,118 L1282,125 L1285,132 L1290,140 L1295,150 L1300,160
+                L1340,160 L1345,148 L1350,138 L1355,130 L1358,122 L1360,115 L1362,110 L1364,105 L1365,100 L1366,105 L1368,110 L1370,115 L1372,122 L1375,130 L1380,138 L1385,148 L1390,160
+                L1440,160 L1440,200 Z
+            " />
+            <!-- Stroke line (same path, drawn on scroll) -->
+            <path class="skyline-line" id="skylinePath" d="
+                M0,160
+                L60,160 L65,140 L70,125 L75,140 L80,160
+                L130,160 L135,145 L140,130 L142,115 L144,100 L146,115 L150,130 L155,145 L160,160
+                L200,160 L205,148 L210,135 L215,128 L218,118 L220,110 L222,118 L225,128 L230,135 L235,148 L240,160
+                L290,160 L295,150 L300,140 L305,128 L308,110 L310,95 L311,85 L312,78 L313,85 L314,95 L318,110 L323,128 L328,140 L333,150 L338,160
+                L390,160 L395,148 L398,135 L400,122 L402,112 L405,105 L407,98 L408,92 L409,85 L410,78 L411,85 L412,92 L413,98 L415,105 L418,112 L420,122 L422,135 L425,148 L430,160
+                L480,160 L485,150 L490,138 L495,128 L498,115 L500,108 L502,115 L505,128 L510,138 L515,150 L520,160
+                L560,160 L565,152 L570,142 L575,130 L578,120 L580,112 L582,105 L583,100 L584,105 L586,112 L588,120 L592,130 L597,142 L602,152 L607,160
+                L650,160 L655,148 L658,138 L660,125 L662,115 L664,108 L666,102 L668,108 L670,115 L672,125 L675,138 L678,148 L683,160
+                L720,160 L725,152 L728,145 L730,135 L732,128 L734,120 L735,115 L736,110 L737,105 L738,100 L739,95 L740,88 L741,82 L742,88 L743,95 L744,100 L745,105 L746,110 L747,115 L748,120 L750,128 L752,135 L755,145 L758,152 L763,160
+                L800,160 L805,150 L810,140 L815,130 L818,122 L820,115 L822,122 L825,130 L830,140 L835,150 L840,160
+                L880,160 L885,148 L888,135 L890,125 L892,118 L895,112 L897,108 L898,104 L899,108 L900,112 L903,118 L905,125 L908,135 L912,148 L917,160
+                L960,160 L965,150 L968,142 L970,132 L972,122 L974,115 L975,110 L976,115 L978,122 L980,132 L983,142 L986,150 L991,160
+                L1030,160 L1035,148 L1038,138 L1040,128 L1042,120 L1044,112 L1046,105 L1048,98 L1049,92 L1050,86 L1051,80 L1052,86 L1053,92 L1054,98 L1056,105 L1058,112 L1060,120 L1062,128 L1065,138 L1068,148 L1073,160
+                L1110,160 L1115,150 L1118,140 L1120,132 L1122,125 L1124,118 L1126,125 L1128,132 L1132,140 L1136,150 L1141,160
+                L1180,160 L1185,152 L1188,142 L1190,135 L1192,128 L1194,120 L1196,115 L1197,110 L1198,115 L1200,120 L1202,128 L1204,135 L1208,142 L1212,152 L1217,160
+                L1260,160 L1265,150 L1270,140 L1275,132 L1278,125 L1280,118 L1282,125 L1285,132 L1290,140 L1295,150 L1300,160
+                L1340,160 L1345,148 L1350,138 L1355,130 L1358,122 L1360,115 L1362,110 L1364,105 L1365,100 L1366,105 L1368,110 L1370,115 L1372,122 L1375,130 L1380,138 L1385,148 L1390,160
+                L1440,160
+            " />
+        </svg>
+    </div>
+
+    <div class="next-section">
+        <p>— Section suivante —</p>
+    </div>
+
+    <script>
+        const section = document.getElementById('skylineSection');
+        const path = document.getElementById('skylinePath');
+        const totalLength = path.getTotalLength();
+
+        path.style.strokeDasharray = totalLength;
+        path.style.strokeDashoffset = totalLength;
+
+        window.addEventListener('scroll', () => {
+            const rect = section.getBoundingClientRect();
+            const windowH = window.innerHeight;
+
+            // Start drawing when section enters viewport, finish when it's fully visible
+            const start = windowH;
+            const end = -rect.height * 0.3;
+            const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+
+            path.style.strokeDashoffset = totalLength * (1 - progress);
+
+            if (progress > 0.9) {
+                section.classList.add('drawn');
+            } else {
+                section.classList.remove('drawn');
+            }
+        });
+    </script>
+</body>
+</html>

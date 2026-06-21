@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyline Lyon — Option C (parallax multicouche)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ebe2;
+        }
+
+        .spacer {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .spacer h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #2c2418;
+            text-align: center;
+        }
+        .spacer p { text-align: center; color: #888; font-size: 0.9rem; margin-top: 15px; }
+
+        .skyline-section {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f0ebe2 0%, #e8e0d4 100%);
+        }
+
+        .sky-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: none;
+        }
+
+        .sky-layer svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 3 layers at different depths */
+        .layer-back { opacity: 0.05; }
+        .layer-mid  { opacity: 0.1; }
+        .layer-front { opacity: 0.18; }
+
+        /* Lyon label */
+        .lyon-label {
+            position: absolute;
+            bottom: 20px;
+            right: 60px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #72785f;
+            opacity: 0;
+            transition: opacity 0.8s;
+            letter-spacing: 2px;
+        }
+
+        .skyline-section.active .lyon-label { opacity: 0.5; }
+
+        /* Horizontal line */
+        .sky-baseline {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #72785f 20%, #72785f 80%, transparent 100%);
+            opacity: 0;
+            transition: opacity 1s 0.5s;
+        }
+
+        .skyline-section.active .sky-baseline { opacity: 0.12; }
+
+        .next-section {
+            background: #1a1a1a;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .next-section p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #555;
+        }
+
+        .label {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #72785f;
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="label">OPTION C — PARALLAX 3 COUCHES (scrollez)</div>
+
+    <div class="spacer">
+        <div>
+            <h1>Sarah <em>Mostfa.</em></h1>
+            <p>↓ Scrollez pour voir les couches se séparer ↓</p>
+        </div>
+    </div>
+
+    <div class="skyline-section" id="skylineSection">
+        <!-- Back layer (distant, softer buildings) -->
+        <div class="sky-layer layer-back" id="layerBack">
+            <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#72785f" d="
+                    M0,180 L0,140
+                    L80,140 L90,120 L95,105 L100,120 L110,140
+                    L200,140 L210,125 L215,112 L218,100 L220,112 L225,125 L235,140
+                    L340,140 L350,128 L355,115 L358,105 L360,95 L362,105 L365,115 L370,128 L380,140
+                    L480,140 L490,122 L495,108 L498,95 L500,85 L502,95 L505,108 L510,122 L520,140
+                    L620,140 L630,125 L635,110 L638,98 L640,88 L642,98 L645,110 L650,125 L660,140
+                    L760,140 L770,128 L775,115 L778,102 L780,90 L782,102 L785,115 L790,128 L800,140
+                    L900,140 L910,125 L915,112 L918,100 L920,90 L922,100 L925,112 L930,125 L940,140
+                    L1040,140 L1050,128 L1055,115 L1058,105 L1060,95 L1062,105 L1065,115 L1070,128 L1080,140
+                    L1180,140 L1190,122 L1195,108 L1198,95 L1200,85 L1202,95 L1205,108 L1210,122 L1220,140
+                    L1320,140 L1330,128 L1335,115 L1338,105 L1340,95 L1342,105 L1345,115 L1350,128 L1360,140
+                    L1440,140 L1440,180 Z
+                "/>
+            </svg>
+        </div>
+
+        <!-- Mid layer -->
+        <div class="sky-layer layer-mid" id="layerMid">
+            <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#72785f" d="
+                    M0,180 L0,150
+                    L50,150 L55,135 L58,125 L60,115 L62,105 L63,95 L64,105 L66,115 L68,125 L72,135 L77,150
+                    L150,150 L155,138 L158,128 L160,118 L162,108 L163,100 L164,108 L166,118 L168,128 L172,138 L177,150
+                    L260,150 L265,140 L268,130 L270,120 L272,110 L274,102 L275,95 L276,88 L277,82 L278,75 L279,82 L280,88 L281,95 L282,102 L284,110 L286,120 L288,130 L292,140 L297,150
+                    L370,150 L375,138 L378,125 L380,115 L382,108 L384,100 L385,95 L386,100 L388,108 L390,115 L393,125 L398,138 L403,150
+                    L480,150 L485,140 L488,128 L490,118 L492,108 L494,100 L495,92 L496,85 L497,78 L498,72 L499,78 L500,85 L501,92 L502,100 L504,108 L506,118 L508,128 L512,140 L517,150
+                    L590,150 L595,138 L598,128 L600,118 L602,110 L603,105 L604,110 L606,118 L608,128 L612,138 L617,150
+                    L700,150 L705,140 L708,130 L710,118 L712,108 L714,100 L715,92 L716,85 L717,78 L718,72 L719,66 L720,60 L721,66 L722,72 L723,78 L724,85 L725,92 L726,100 L728,108 L730,118 L732,130 L736,140 L741,150
+                    L820,150 L825,140 L828,128 L830,118 L832,110 L834,102 L835,95 L836,102 L838,110 L840,118 L843,128 L848,140 L853,150
+                    L930,150 L935,138 L938,128 L940,118 L942,108 L944,100 L945,95 L946,100 L948,108 L950,118 L953,128 L958,138 L963,150
+                    L1040,150 L1045,140 L1048,128 L1050,118 L1052,108 L1054,100 L1055,92 L1056,85 L1057,78 L1058,72 L1059,78 L1060,85 L1061,92 L1062,100 L1064,108 L1066,118 L1068,128 L1072,140 L1077,150
+                    L1150,150 L1155,140 L1158,130 L1160,120 L1162,112 L1163,105 L1164,112 L1166,120 L1168,130 L1172,140 L1177,150
+                    L1260,150 L1265,138 L1268,128 L1270,118 L1272,110 L1274,102 L1275,96 L1276,102 L1278,110 L1280,118 L1283,128 L1288,138 L1293,150
+                    L1370,150 L1375,138 L1378,125 L1380,115 L1382,105 L1384,98 L1385,92 L1386,98 L1388,105 L1390,115 L1393,125 L1398,138 L1403,150
+                    L1440,150 L1440,180 Z
+                "/>
+            </svg>
+        </div>
+
+        <!-- Front layer (closest, most defined) -->
+        <div class="sky-layer layer-front" id="layerFront">
+            <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#72785f" d="
+                    M0,180 L0,158
+                    L100,158 L105,145 L108,135 L110,128 L112,122 L113,118 L114,122 L116,128 L118,135 L122,145 L127,158
+                    L230,158 L235,148 L238,138 L240,130 L242,122 L244,115 L245,110 L246,105 L247,100 L248,105 L250,110 L252,115 L254,122 L256,130 L258,138 L262,148 L267,158
+                    L360,158 L365,148 L368,140 L370,132 L372,125 L373,120 L374,125 L376,132 L378,140 L382,148 L387,158
+                    L490,158 L495,148 L498,138 L500,128 L502,120 L504,112 L505,105 L506,98 L507,92 L508,86 L509,80 L510,75 L511,70 L512,75 L513,80 L514,86 L515,92 L516,98 L517,105 L518,112 L520,120 L522,128 L524,138 L528,148 L533,158
+                    L630,158 L635,148 L638,138 L640,130 L642,122 L644,115 L645,108 L646,115 L648,122 L650,130 L653,138 L658,148 L663,158
+                    L760,158 L765,148 L768,138 L770,128 L772,118 L774,110 L775,105 L776,100 L777,95 L778,100 L780,105 L782,110 L784,118 L786,128 L788,138 L792,148 L797,158
+                    L890,158 L895,148 L898,138 L900,130 L902,122 L903,118 L904,122 L906,130 L908,138 L912,148 L917,158
+                    L1010,158 L1015,148 L1018,135 L1020,125 L1022,115 L1024,108 L1025,102 L1026,96 L1027,102 L1028,108 L1030,115 L1032,125 L1035,135 L1040,148 L1045,158
+                    L1140,158 L1145,148 L1148,140 L1150,132 L1152,125 L1154,118 L1155,112 L1156,118 L1158,125 L1160,132 L1162,140 L1166,148 L1171,158
+                    L1260,158 L1265,148 L1268,138 L1270,128 L1272,120 L1274,112 L1275,108 L1276,104 L1277,100 L1278,104 L1280,108 L1282,112 L1284,120 L1286,128 L1288,138 L1292,148 L1297,158
+                    L1390,158 L1395,148 L1398,140 L1400,132 L1402,125 L1403,120 L1404,125 L1406,132 L1408,140 L1412,148 L1417,158
+                    L1440,158 L1440,180 Z
+                "/>
+            </svg>
+        </div>
+
+        <div class="sky-baseline"></div>
+        <div class="lyon-label">Lyon</div>
+    </div>
+
+    <div class="next-section">
+        <p>— Section suivante —</p>
+    </div>
+
+    <script>
+        const section = document.getElementById('skylineSection');
+        const layerBack = document.getElementById('layerBack');
+        const layerMid = document.getElementById('layerMid');
+        const layerFront = document.getElementById('layerFront');
+
+        window.addEventListener('scroll', () => {
+            const rect = section.getBoundingClientRect();
+            const windowH = window.innerHeight;
+            const start = windowH;
+            const end = -rect.height;
+            const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+
+            // Each layer moves at different speeds (parallax)
+            const backOffset = (1 - progress) * 80;
+            const midOffset = (1 - progress) * 50;
+            const frontOffset = (1 - progress) * 25;
+
+            layerBack.style.transform = `translateX(${backOffset}px)`;
+            layerMid.style.transform = `translateX(${midOffset * 0.6}px) translateY(${(1-progress) * 15}px)`;
+            layerFront.style.transform = `translateX(${-frontOffset * 0.3}px)`;
+
+            // Fade in layers progressively
+            layerBack.style.opacity = Math.min(0.06, progress * 0.12);
+            layerMid.style.opacity = Math.min(0.12, Math.max(0, (progress - 0.15)) * 0.2);
+            layerFront.style.opacity = Math.min(0.2, Math.max(0, (progress - 0.3)) * 0.35);
+
+            if (progress > 0.5) {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
