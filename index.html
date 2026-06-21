@@ -190,23 +190,67 @@
         }
 
         /* ═══════════════════════════════════════
-           SECTION TRANSITION — elegant scroll divider
+           SCROLL TRANSITION — Horizontal line draw
         ═══════════════════════════════════════ */
-        .section-divider {
+        .scroll-line-section {
             position: relative;
-            height: 120px;
+            height: 180px;
             background: var(--beige-nacre);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-        .divider-line {
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(180deg, transparent, var(--vert), transparent);
-            opacity: 0.3;
+        .scroll-line-track {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            height: 1px;
         }
+        .scroll-line-bg {
+            position: absolute;
+            inset: 0;
+            background: var(--beige);
+            opacity: 0.4;
+        }
+        .scroll-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--vert);
+            transition: none;
+        }
+        .scroll-line-dot {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%);
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--vert);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .scroll-line-section.active .scroll-line-dot {
+            opacity: 1;
+        }
+        .scroll-line-label-left,
+        .scroll-line-label-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--serif);
+            font-size: 0.75rem;
+            font-style: italic;
+            color: var(--vert);
+            opacity: 0.5;
+            letter-spacing: 0.05em;
+        }
+        .scroll-line-label-left { right: calc(100% + 20px); }
+        .scroll-line-label-right { left: calc(100% + 20px); }
 
         /* ═══════════════════════════════════════
            PRÉSENTATION — Editorial style with more character
@@ -217,13 +261,24 @@
         }
         .presentation-section-title {
             font-family: var(--serif);
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--vert);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--noir);
             text-align: center;
-            margin-bottom: 70px;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        .presentation-section-title .title-accent {
+            color: var(--vert);
+            font-weight: 400;
+        }
+        .presentation-section-line {
+            width: 60px;
+            height: 1.5px;
+            background: var(--vert);
+            margin: 0 auto 70px;
         }
         .presentation-inner {
             max-width: 1200px;
@@ -722,17 +777,24 @@
 </section>
 
 <!-- ═══════════════════════════════════════
-     SECTION DIVIDER
+     SCROLL LINE TRANSITION
 ═══════════════════════════════════════ -->
-<div class="section-divider">
-    <div class="divider-line"></div>
+<div class="scroll-line-section" id="scrollLineSection">
+    <div class="scroll-line-track">
+        <div class="scroll-line-bg"></div>
+        <div class="scroll-line-fill" id="scrollLineFill"></div>
+        <div class="scroll-line-dot" id="scrollLineDot"></div>
+        <span class="scroll-line-label-left">SM</span>
+        <span class="scroll-line-label-right">Avocat</span>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════
      PRÉSENTATION
 ═══════════════════════════════════════ -->
 <section class="presentation" id="presentation">
-    <h2 class="presentation-section-title reveal">Présentation</h2>
+    <h2 class="presentation-section-title reveal"><span class="title-accent">P</span>résentation</h2>
+    <div class="presentation-section-line reveal reveal-delay-1"></div>
     <div class="presentation-inner">
         <div class="presentation-image-wrapper reveal">
             <img src="assets/sarah-mostfa.webp" onerror="this.src='photo%20site%20sarah.webp'" alt="Sarah Mostfa, Avocate au Barreau de Lyon" class="presentation-image">
@@ -759,13 +821,6 @@
         </div>
     </div>
 </section>
-
-<!-- ═══════════════════════════════════════
-     SECTION DIVIDER
-═══════════════════════════════════════ -->
-<div class="section-divider">
-    <div class="divider-line"></div>
-</div>
 
 <!-- ═══════════════════════════════════════
      DOMAINES D'INTERVENTION
@@ -983,6 +1038,28 @@ document.querySelectorAll('.domaine-header').forEach(header => {
         document.querySelectorAll('.domaine-item').forEach(d => d.classList.remove('open'));
         if (!wasOpen) item.classList.add('open');
     });
+});
+
+// ─── Scroll line animation ───
+const scrollLineSection = document.getElementById('scrollLineSection');
+const scrollLineFill = document.getElementById('scrollLineFill');
+const scrollLineDot = document.getElementById('scrollLineDot');
+
+window.addEventListener('scroll', () => {
+    const rect = scrollLineSection.getBoundingClientRect();
+    const windowH = window.innerHeight;
+    const start = windowH;
+    const end = -rect.height * 0.2;
+    const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+
+    scrollLineFill.style.width = (progress * 100) + '%';
+    scrollLineDot.style.left = (progress * 100) + '%';
+
+    if (progress > 0.05) {
+        scrollLineSection.classList.add('active');
+    } else {
+        scrollLineSection.classList.remove('active');
+    }
 });
 
 // ─── Scroll reveal ───
