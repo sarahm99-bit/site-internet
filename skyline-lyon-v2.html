@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyline Lyon — Monuments reconnaissables</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0ebe2; }
+        .spacer {
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .spacer h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem; font-weight: 400; color: #2c2418; text-align: center;
+        }
+        .spacer p { text-align: center; color: #888; font-size: 0.9rem; margin-top: 15px; }
+
+        .skyline-section {
+            position: relative; width: 100%; overflow: hidden;
+            background: #f0ebe2; padding: 0;
+        }
+
+        .skyline-svg { display: block; width: 100%; height: auto; }
+
+        .skyline-stroke {
+            fill: none;
+            stroke: #72785f;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .skyline-fill-path {
+            fill: #72785f;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .skyline-section.drawn .skyline-fill-path { opacity: 0.08; }
+
+        .skyline-detail {
+            stroke: #72785f;
+            fill: none;
+            stroke-linecap: round;
+        }
+
+        .next-section {
+            background: #1a1a1a; min-height: 60vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .next-section p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #555; }
+
+        .label {
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            background: #72785f; color: #fff; padding: 6px 18px;
+            border-radius: 20px; font-size: 0.7rem; letter-spacing: 2px; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="label">SKYLINE LYON — scrollez ↓</div>
+
+    <div class="spacer">
+        <div>
+            <h1>Sarah <em>Mostfa.</em></h1>
+            <p>↓ Scrollez pour voir Lyon se dessiner ↓</p>
+        </div>
+    </div>
+
+    <div class="skyline-section" id="skylineSection">
+        <svg class="skyline-svg" viewBox="0 0 1400 300" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- ══════ FILL ══════ -->
+            <path class="skyline-fill-path" id="fillPath" d="
+                M0,280 L0,270
+
+                L50,270 L55,265 L60,270
+                L90,270
+
+                L100,270 L102,268 L104,265 L104,250 L106,248 L108,245
+                L108,220 L110,218 L118,218 L120,220
+                L120,245 L122,248 L124,250 L124,265 L126,268 L128,270
+                L150,270
+
+                L170,270 L172,265 L174,260 L174,240
+                L176,238 L184,238 L186,240
+                L186,260 L188,265 L190,270
+                L210,270
+
+                L230,270 L232,268 L234,265 L234,230
+                L236,228 L240,226 L244,224
+                L244,160
+                L246,155 L248,150 L250,145 L252,140
+                L254,138 L256,136 L258,134
+                L260,130
+                L262,128
+                L264,126
+                L264,110 L265,108 L266,106
+                L266,96 L266.5,94 L267,92 L267.5,90
+                L268,88
+                L268.5,86
+                L269,84
+                L269.5,86
+                L270,88
+                L270.5,90 L271,92 L271.5,94
+                L272,96
+                L272,106 L273,108 L274,110
+                L274,126
+                L276,128
+                L278,130
+                L280,134 L282,136 L284,138
+                L286,140 L288,145 L290,150 L292,155
+                L294,160
+                L294,224 L298,226 L302,228 L304,230
+                L304,265 L306,268 L308,270
+                L330,270
+
+                L350,270 L352,268 L354,265
+                L354,185
+                L356,183 L358,181
+                L358,95
+                L359,92 L360,89
+                L360,75
+                L361,72 L362,70 L363,68
+                L364,66
+                L365,64
+                L365,62
+                L365,58
+                L366,56
+                L367,54
+                L368,56
+                L369,58
+                L369,62
+                L369,64
+                L370,66
+                L371,68 L372,70 L373,72
+                L374,75
+                L374,89 L375,92
+                L376,95
+                L376,181 L378,183 L380,185
+                L380,265 L382,268 L384,270
+                L400,270
+
+                L420,270 L422,265
+                L422,175
+                L424,172 L426,170
+                L426,80
+                L427,77 L428,74
+                L430,70
+                L430,65 L431,63 L432,61
+                L434,60 L436,61 L438,63
+                L438,65
+                L438,70
+                L440,74 L441,77
+                L442,80
+                L442,170 L444,172 L446,175
+                L446,265
+                L448,270
+
+                L490,270
+
+                L530,270
+
+                L560,270 L562,268 L564,265
+                L564,220 L565,218 L566,216
+                L566,210
+                L568,208 L576,206 L584,204 L592,202
+                L600,200
+                L608,198
+                L616,200
+                L624,202 L632,204 L640,206 L648,208
+                L650,210
+                L650,216 L651,218 L652,220
+                L652,265 L654,268 L656,270
+                L680,270
+
+                L720,270
+
+                L760,270
+
+                L820,270 L825,268 L830,265
+                L830,245
+                L832,243 L834,242 L836,241
+                L838,240
+                L838,210
+                L840,208
+                L840,198 L842,196 L844,194 L846,192
+                L846,185 L847,182
+                L848,180
+                L849,178
+                L850,176
+                L850,172
+                L851,170
+                L852,168
+                L852,165
+                L853,162 L854,160 L855,158
+                L856,156
+                L857,154
+                L858,156
+                L859,158 L860,160 L861,162
+                L862,165
+                L862,168
+                L863,170
+                L864,172
+                L864,176
+                L865,178
+                L866,180
+                L867,182
+                L868,185
+                L868,192 L870,194 L872,196 L874,198
+                L874,208
+                L876,210
+                L876,240
+                L878,241 L880,242 L882,243
+                L884,245
+                L884,265 L889,268 L894,270
+
+                L920,270
+
+                L950,270
+
+                L980,270 L982,268 L984,266
+                L984,252
+                L985,250 L986,248 L987,246 L988,244
+                L989,242
+                L990,238
+                L990,225
+                L991,222 L992,220
+                L993,218
+                L993,210
+                L994,208
+                L995,206
+                L995,198
+                L996,195
+                L997,192
+                L1000,188 L1003,185 L1006,182
+                L1012,178
+                L1018,175
+                L1024,178
+                L1030,182 L1033,185 L1036,188
+                L1039,192
+                L1040,195
+                L1041,198
+                L1041,206
+                L1042,208
+                L1043,210
+                L1043,218
+                L1044,220 L1045,222
+                L1046,225
+                L1046,238
+                L1047,242
+                L1048,244 L1049,246 L1050,248 L1051,250
+                L1052,252
+                L1052,266 L1054,268 L1056,270
+
+                L1090,270
+
+                L1110,270 L1112,268
+                L1112,260
+                L1114,258
+                L1114,245
+                L1116,243 L1118,241
+                L1120,240
+                L1120,230
+                L1122,228
+                L1124,226
+                L1124,218
+                L1125,215 L1126,212
+                L1126,200
+                L1128,198
+                L1130,196
+                L1130,185
+                L1131,182 L1132,180
+                L1132,170
+                L1134,168
+                L1138,168
+                L1140,170
+                L1140,180 L1141,182
+                L1142,185
+                L1142,196
+                L1144,198
+                L1146,200
+                L1146,212 L1147,215
+                L1148,218
+                L1148,226
+                L1150,228
+                L1152,230
+                L1152,240
+                L1154,241 L1156,243
+                L1158,245
+                L1158,258
+                L1160,260
+                L1160,268 L1162,270
+
+                L1200,270
+
+                L1230,270 L1232,268 L1234,266
+                L1234,250
+                L1236,248
+                L1236,232
+                L1237,230
+                L1238,228
+                L1238,218
+                L1239,215
+                L1240,212
+                L1242,210
+                L1244,208
+                L1246,206
+                L1250,204
+                L1254,202
+                L1258,204
+                L1262,206
+                L1264,208
+                L1266,210
+                L1268,212
+                L1269,215
+                L1270,218
+                L1270,228
+                L1271,230
+                L1272,232
+                L1272,248
+                L1274,250
+                L1274,266 L1276,268 L1278,270
+
+                L1320,270
+
+                L1350,270 L1352,268 L1354,265
+                L1354,245
+                L1356,242
+                L1356,225
+                L1358,222
+                L1360,220
+                L1360,210
+                L1362,208
+                L1364,206
+                L1366,205
+                L1366,195
+                L1367,192
+                L1368,190
+                L1370,188
+                L1372,190
+                L1373,192
+                L1374,195
+                L1374,205
+                L1376,206
+                L1378,208
+                L1380,210
+                L1380,220
+                L1382,222
+                L1384,225
+                L1384,242
+                L1386,245
+                L1386,265 L1388,268 L1390,270
+
+                L1400,270 L1400,280 L0,280 Z
+            "/>
+
+            <!-- ══════ MAIN STROKE (draws on scroll) ══════ -->
+            <path class="skyline-stroke" id="skylinePath" d="
+                M0,270
+
+                L50,270 L55,265 L60,270
+                L90,270
+
+                L100,270 L102,268 L104,265 L104,250 L106,248 L108,245
+                L108,220 L110,218 L118,218 L120,220
+                L120,245 L122,248 L124,250 L124,265 L126,268 L128,270
+                L150,270
+
+                L170,270 L172,265 L174,260 L174,240
+                L176,238 L184,238 L186,240
+                L186,260 L188,265 L190,270
+                L210,270
+
+                L230,270 L232,268 L234,265 L234,230
+                L236,228 L240,226 L244,224
+                L244,160
+                L246,155 L248,150 L250,145 L252,140
+                L254,138 L256,136 L258,134
+                L260,130
+                L262,128
+                L264,126
+                L264,110 L265,108 L266,106
+                L266,96 L266.5,94 L267,92 L267.5,90
+                L268,88
+                L268.5,86
+                L269,84
+                L269.5,86
+                L270,88
+                L270.5,90 L271,92 L271.5,94
+                L272,96
+                L272,106 L273,108 L274,110
+                L274,126
+                L276,128
+                L278,130
+                L280,134 L282,136 L284,138
+                L286,140 L288,145 L290,150 L292,155
+                L294,160
+                L294,224 L298,226 L302,228 L304,230
+                L304,265 L306,268 L308,270
+                L330,270
+
+                L350,270 L352,268 L354,265
+                L354,185
+                L356,183 L358,181
+                L358,95
+                L359,92 L360,89
+                L360,75
+                L361,72 L362,70 L363,68
+                L364,66
+                L365,64
+                L365,62
+                L365,58
+                L366,56
+                L367,54
+                L368,56
+                L369,58
+                L369,62
+                L369,64
+                L370,66
+                L371,68 L372,70 L373,72
+                L374,75
+                L374,89 L375,92
+                L376,95
+                L376,181 L378,183 L380,185
+                L380,265 L382,268 L384,270
+                L400,270
+
+                L420,270 L422,265
+                L422,175
+                L424,172 L426,170
+                L426,80
+                L427,77 L428,74
+                L430,70
+                L430,65 L431,63 L432,61
+                L434,60 L436,61 L438,63
+                L438,65
+                L438,70
+                L440,74 L441,77
+                L442,80
+                L442,170 L444,172 L446,175
+                L446,265
+                L448,270
+
+                L490,270
+
+                L530,270
+
+                L560,270 L562,268 L564,265
+                L564,220 L565,218 L566,216
+                L566,210
+                L568,208 L576,206 L584,204 L592,202
+                L600,200
+                L608,198
+                L616,200
+                L624,202 L632,204 L640,206 L648,208
+                L650,210
+                L650,216 L651,218 L652,220
+                L652,265 L654,268 L656,270
+                L680,270
+
+                L720,270
+
+                L760,270
+
+                L820,270 L825,268 L830,265
+                L830,245
+                L832,243 L834,242 L836,241
+                L838,240
+                L838,210
+                L840,208
+                L840,198 L842,196 L844,194 L846,192
+                L846,185 L847,182
+                L848,180
+                L849,178
+                L850,176
+                L850,172
+                L851,170
+                L852,168
+                L852,165
+                L853,162 L854,160 L855,158
+                L856,156
+                L857,154
+                L858,156
+                L859,158 L860,160 L861,162
+                L862,165
+                L862,168
+                L863,170
+                L864,172
+                L864,176
+                L865,178
+                L866,180
+                L867,182
+                L868,185
+                L868,192 L870,194 L872,196 L874,198
+                L874,208
+                L876,210
+                L876,240
+                L878,241 L880,242 L882,243
+                L884,245
+                L884,265 L889,268 L894,270
+
+                L920,270
+
+                L950,270
+
+                L980,270 L982,268 L984,266
+                L984,252
+                L985,250 L986,248 L987,246 L988,244
+                L989,242
+                L990,238
+                L990,225
+                L991,222 L992,220
+                L993,218
+                L993,210
+                L994,208
+                L995,206
+                L995,198
+                L996,195
+                L997,192
+                L1000,188 L1003,185 L1006,182
+                L1012,178
+                L1018,175
+                L1024,178
+                L1030,182 L1033,185 L1036,188
+                L1039,192
+                L1040,195
+                L1041,198
+                L1041,206
+                L1042,208
+                L1043,210
+                L1043,218
+                L1044,220 L1045,222
+                L1046,225
+                L1046,238
+                L1047,242
+                L1048,244 L1049,246 L1050,248 L1051,250
+                L1052,252
+                L1052,266 L1054,268 L1056,270
+
+                L1090,270
+
+                L1110,270 L1112,268
+                L1112,260
+                L1114,258
+                L1114,245
+                L1116,243 L1118,241
+                L1120,240
+                L1120,230
+                L1122,228
+                L1124,226
+                L1124,218
+                L1125,215 L1126,212
+                L1126,200
+                L1128,198
+                L1130,196
+                L1130,185
+                L1131,182 L1132,180
+                L1132,170
+                L1134,168
+                L1138,168
+                L1140,170
+                L1140,180 L1141,182
+                L1142,185
+                L1142,196
+                L1144,198
+                L1146,200
+                L1146,212 L1147,215
+                L1148,218
+                L1148,226
+                L1150,228
+                L1152,230
+                L1152,240
+                L1154,241 L1156,243
+                L1158,245
+                L1158,258
+                L1160,260
+                L1160,268 L1162,270
+
+                L1200,270
+
+                L1230,270 L1232,268 L1234,266
+                L1234,250
+                L1236,248
+                L1236,232
+                L1237,230
+                L1238,228
+                L1238,218
+                L1239,215
+                L1240,212
+                L1242,210
+                L1244,208
+                L1246,206
+                L1250,204
+                L1254,202
+                L1258,204
+                L1262,206
+                L1264,208
+                L1266,210
+                L1268,212
+                L1269,215
+                L1270,218
+                L1270,228
+                L1271,230
+                L1272,232
+                L1272,248
+                L1274,250
+                L1274,266 L1276,268 L1278,270
+
+                L1320,270
+
+                L1350,270 L1352,268 L1354,265
+                L1354,245
+                L1356,242
+                L1356,225
+                L1358,222
+                L1360,220
+                L1360,210
+                L1362,208
+                L1364,206
+                L1366,205
+                L1366,195
+                L1367,192
+                L1368,190
+                L1370,188
+                L1372,190
+                L1373,192
+                L1374,195
+                L1374,205
+                L1376,206
+                L1378,208
+                L1380,210
+                L1380,220
+                L1382,222
+                L1384,225
+                L1384,242
+                L1386,245
+                L1386,265 L1388,268 L1390,270
+
+                L1400,270
+            "/>
+
+            <!-- ══════ DETAILS (appear progressively) ══════ -->
+
+            <!-- Le Crayon: window lines -->
+            <g id="detailCrayon" class="skyline-detail" opacity="0" stroke-width="0.6">
+                <line x1="264" y1="130" x2="274" y2="130"/>
+                <line x1="256" y1="150" x2="282" y2="150"/>
+                <line x1="248" y1="170" x2="290" y2="170"/>
+                <line x1="244" y1="190" x2="294" y2="190"/>
+                <line x1="244" y1="210" x2="294" y2="210"/>
+            </g>
+
+            <!-- Tour Incity: horizontal bands -->
+            <g id="detailIncity" class="skyline-detail" opacity="0" stroke-width="0.5">
+                <line x1="358" y1="110" x2="376" y2="110"/>
+                <line x1="358" y1="130" x2="376" y2="130"/>
+                <line x1="358" y1="150" x2="376" y2="150"/>
+                <line x1="354" y1="200" x2="380" y2="200"/>
+                <line x1="354" y1="220" x2="380" y2="220"/>
+                <line x1="354" y1="240" x2="380" y2="240"/>
+            </g>
+
+            <!-- Tour Oxygène: top cut -->
+            <g id="detailOxygene" class="skyline-detail" opacity="0" stroke-width="0.5">
+                <line x1="426" y1="100" x2="442" y2="100"/>
+                <line x1="426" y1="120" x2="442" y2="120"/>
+                <line x1="426" y1="140" x2="442" y2="140"/>
+                <line x1="422" y1="200" x2="446" y2="200"/>
+                <line x1="422" y1="230" x2="446" y2="230"/>
+            </g>
+
+            <!-- Grande Roue: full wheel -->
+            <g id="detailRoue" opacity="0">
+                <circle cx="608" cy="210" r="40" fill="none" stroke="#72785f" stroke-width="1.5"/>
+                <circle cx="608" cy="210" r="38" fill="none" stroke="#72785f" stroke-width="0.3"/>
+                <!-- Spokes -->
+                <line x1="608" y1="170" x2="608" y2="250" stroke="#72785f" stroke-width="0.7"/>
+                <line x1="568" y1="210" x2="648" y2="210" stroke="#72785f" stroke-width="0.7"/>
+                <line x1="580" y1="182" x2="636" y2="238" stroke="#72785f" stroke-width="0.7"/>
+                <line x1="636" y1="182" x2="580" y2="238" stroke="#72785f" stroke-width="0.7"/>
+                <line x1="571" y1="198" x2="645" y2="222" stroke="#72785f" stroke-width="0.5"/>
+                <line x1="571" y1="222" x2="645" y2="198" stroke="#72785f" stroke-width="0.5"/>
+                <line x1="596" y1="171" x2="620" y2="249" stroke="#72785f" stroke-width="0.5"/>
+                <line x1="620" y1="171" x2="596" y2="249" stroke="#72785f" stroke-width="0.5"/>
+                <!-- Hub -->
+                <circle cx="608" cy="210" r="3" fill="#72785f" opacity="0.4"/>
+                <!-- Cabins (small circles) -->
+                <circle cx="608" cy="170" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <circle cx="636" cy="182" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <circle cx="648" cy="210" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <circle cx="636" cy="238" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <circle cx="608" cy="250" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <circle cx="580" cy="238" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <circle cx="568" cy="210" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <circle cx="580" cy="182" r="2.5" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <!-- Support legs -->
+                <line x1="590" y1="250" x2="608" y2="270" stroke="#72785f" stroke-width="1"/>
+                <line x1="626" y1="250" x2="608" y2="270" stroke="#72785f" stroke-width="1"/>
+            </g>
+
+            <!-- Tour métallique Fourvière: lattice -->
+            <g id="detailTour" class="skyline-detail" opacity="0" stroke-width="0.5">
+                <!-- Main legs converging -->
+                <line x1="1126" y1="200" x2="1132" y2="170"/>
+                <line x1="1146" y1="200" x2="1140" y2="170"/>
+                <line x1="1128" y1="185" x2="1134" y2="170"/>
+                <line x1="1144" y1="185" x2="1138" y2="170"/>
+                <!-- Cross bracing -->
+                <line x1="1128" y1="195" x2="1144" y2="180" stroke-width="0.3"/>
+                <line x1="1144" y1="195" x2="1128" y2="180" stroke-width="0.3"/>
+                <line x1="1130" y1="210" x2="1142" y2="198" stroke-width="0.3"/>
+                <line x1="1142" y1="210" x2="1130" y2="198" stroke-width="0.3"/>
+                <!-- Antenna -->
+                <line x1="1136" y1="168" x2="1136" y2="155" stroke-width="0.8"/>
+            </g>
+
+            <!-- Fourvière basilique: towers & crosses -->
+            <g id="detailFourviere" opacity="0">
+                <!-- Left tower -->
+                <rect x="1238" y="208" width="6" height="18" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <!-- Right tower -->
+                <rect x="1264" y="208" width="6" height="18" fill="none" stroke="#72785f" stroke-width="0.6"/>
+                <!-- Tower tops (small pinnacles) -->
+                <line x1="1241" y1="208" x2="1241" y2="202" stroke="#72785f" stroke-width="0.8"/>
+                <line x1="1267" y1="208" x2="1267" y2="202" stroke="#72785f" stroke-width="0.8"/>
+                <!-- Crosses -->
+                <line x1="1241" y1="198" x2="1241" y2="205" stroke="#72785f" stroke-width="0.7"/>
+                <line x1="1238" y1="201" x2="1244" y2="201" stroke="#72785f" stroke-width="0.7"/>
+                <line x1="1267" y1="198" x2="1267" y2="205" stroke="#72785f" stroke-width="0.7"/>
+                <line x1="1264" y1="201" x2="1270" y2="201" stroke="#72785f" stroke-width="0.7"/>
+                <!-- Windows row -->
+                <line x1="1242" y1="230" x2="1266" y2="230" stroke="#72785f" stroke-width="0.4"/>
+                <line x1="1244" y1="222" x2="1264" y2="222" stroke="#72785f" stroke-width="0.4"/>
+                <!-- Arched entrance hint -->
+                <path d="M1250,270 L1250,260 Q1254,255 1258,260 L1258,270" fill="none" stroke="#72785f" stroke-width="0.5"/>
+            </g>
+
+            <!-- Pont (bridge between Fourvière and city) -->
+            <g id="detailPont" opacity="0">
+                <!-- Bridge deck -->
+                <line x1="720" y1="268" x2="820" y2="268" stroke="#72785f" stroke-width="1.2"/>
+                <!-- Arches -->
+                <path d="M725,268 Q742,255 760,268" fill="none" stroke="#72785f" stroke-width="0.8"/>
+                <path d="M760,268 Q777,255 795,268" fill="none" stroke="#72785f" stroke-width="0.8"/>
+                <path d="M795,268 Q807,258 820,268" fill="none" stroke="#72785f" stroke-width="0.8"/>
+                <!-- Railings -->
+                <line x1="725" y1="266" x2="820" y2="266" stroke="#72785f" stroke-width="0.3"/>
+                <!-- Pillars -->
+                <line x1="760" y1="268" x2="760" y2="275" stroke="#72785f" stroke-width="0.6"/>
+                <line x1="795" y1="268" x2="795" y2="275" stroke="#72785f" stroke-width="0.6"/>
+            </g>
+
+            <!-- Water hint -->
+            <g id="detailWater" opacity="0">
+                <path d="M700,278 Q720,276 740,278 Q760,280 780,278 Q800,276 820,278 Q840,280 860,278" fill="none" stroke="#72785f" stroke-width="0.4" opacity="0.3"/>
+            </g>
+
+            <!-- Baseline -->
+            <line x1="0" y1="270" x2="1400" y2="270" stroke="#72785f" stroke-width="0.5" opacity="0.15"/>
+        </svg>
+    </div>
+
+    <div class="next-section">
+        <p>— Section suivante —</p>
+    </div>
+
+    <script>
+        const section = document.getElementById('skylineSection');
+        const path = document.getElementById('skylinePath');
+        const totalLength = path.getTotalLength();
+
+        path.style.strokeDasharray = totalLength;
+        path.style.strokeDashoffset = totalLength;
+
+        const details = [
+            { el: document.getElementById('detailCrayon'), at: 0.15 },
+            { el: document.getElementById('detailIncity'), at: 0.22 },
+            { el: document.getElementById('detailOxygene'), at: 0.28 },
+            { el: document.getElementById('detailRoue'), at: 0.38 },
+            { el: document.getElementById('detailPont'), at: 0.50 },
+            { el: document.getElementById('detailWater'), at: 0.52 },
+            { el: document.getElementById('detailTour'), at: 0.72 },
+            { el: document.getElementById('detailFourviere'), at: 0.80 },
+        ];
+
+        details.forEach(d => {
+            d.el.style.transition = 'opacity 0.8s ease';
+        });
+
+        window.addEventListener('scroll', () => {
+            const rect = section.getBoundingClientRect();
+            const windowH = window.innerHeight;
+            const start = windowH;
+            const end = -rect.height * 0.3;
+            const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+
+            path.style.strokeDashoffset = totalLength * (1 - progress);
+
+            details.forEach(d => {
+                d.el.style.opacity = progress > d.at ? '0.6' : '0';
+            });
+
+            section.classList.toggle('drawn', progress > 0.92);
+        });
+    </script>
+</body>
+</html>
