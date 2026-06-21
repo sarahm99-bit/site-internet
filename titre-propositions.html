@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titre Présentation — Propositions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0ebe2; }
+        .header {
+            text-align: center;
+            padding: 60px 40px 40px;
+        }
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .header p { font-size: 0.75rem; color: #999; letter-spacing: 0.15em; }
+
+        .proposals {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 40px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .proposal {
+            background: #fdfcfa;
+            padding: 70px 60px;
+            border-bottom: 1px solid #e8e2d6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .proposal:first-child { border-top: 1px solid #e8e2d6; }
+        .proposal-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 0.65rem;
+            color: #bbb;
+            letter-spacing: 0.1em;
+        }
+        .proposal-desc {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            color: #999;
+            text-align: center;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        /* ─── Individual title styles ─── */
+
+        /* A — Tout caps, espacement large, trait fin */
+        .title-a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: #72785f;
+        }
+        .title-a-line {
+            width: 50px;
+            height: 1px;
+            background: #72785f;
+            margin-top: 14px;
+        }
+
+        /* B — Grand serif avec numéro */
+        .title-b {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+        }
+        .title-b .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: #72785f;
+            letter-spacing: 0.1em;
+        }
+        .title-b .text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        /* C — Gras sans-serif moderne, tout caps compact */
+        .title-c {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            color: #1a1a1a;
+            text-transform: uppercase;
+        }
+
+        /* D — Mix serif/sans : mot coupé sur 2 lignes */
+        .title-d {
+            text-align: center;
+            line-height: 1;
+        }
+        .title-d .line1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #72785f;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .title-d .line2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.8rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: -0.01em;
+        }
+
+        /* E — Italic serif XXL, léger */
+        .title-e {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            font-style: italic;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        /* F — Tout caps fin avec tirets de chaque côté */
+        .title-f {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .title-f-line {
+            width: 60px;
+            height: 0.5px;
+            background: #1a1a1a;
+            opacity: 0.3;
+        }
+        .title-f .text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #1a1a1a;
+        }
+
+        /* G — Playfair bold, grande taille, noir pur */
+        .title-g {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        /* H — Contraste : "à propos" petit + "de moi" grand italic */
+        .title-h {
+            text-align: center;
+            line-height: 1.1;
+        }
+        .title-h .small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #72785f;
+            display: block;
+        }
+        .title-h .big {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #1a1a1a;
+            display: block;
+            letter-spacing: -0.02em;
+        }
+
+        /* I — Numéro large + texte minimaliste */
+        .title-i {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+        }
+        .title-i .num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: #d6cdb8;
+            line-height: 0.8;
+        }
+        .title-i .text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: 0.02em;
+        }
+
+        /* J — Underline épaisse, serif */
+        .title-j-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .title-j {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.2rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            position: relative;
+            z-index: 1;
+        }
+        .title-j-underline {
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: #72785f;
+            opacity: 0.12;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Titre « Présentation »</h1>
+        <p>PROPOSITIONS TYPOGRAPHIQUES</p>
+    </div>
+
+    <div class="proposals">
+
+        <div class="proposal">
+            <span class="proposal-number">A</span>
+            <span class="title-a">Présentation</span>
+            <div class="title-a-line"></div>
+            <p class="proposal-desc">Minimaliste, tout caps espacé, très cabinet d'avocat. Le trait vert souligne sans surcharger.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">B</span>
+            <div class="title-b">
+                <span class="num">01 —</span>
+                <span class="text">Présentation</span>
+            </div>
+            <p class="proposal-desc">Numérotation + serif léger. Structure éditoriale, comme un magazine.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">C</span>
+            <span class="title-c">Présentation</span>
+            <p class="proposal-desc">Sans-serif bold moderne (Space Grotesk). Tranche radicalement avec le reste du site serif. Impact.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">D</span>
+            <div class="title-d">
+                <span class="line1">À propos</span>
+                <span class="line2">Présentation</span>
+            </div>
+            <p class="proposal-desc">Double niveau : petit label « à propos » + grand titre serif. Lecture hiérarchique.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">E</span>
+            <span class="title-e">Présentation</span>
+            <p class="proposal-desc">Cormorant italic XXL, très léger. Élégant mais peut faire "développement personnel" — à voir.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">F</span>
+            <div class="title-f">
+                <div class="title-f-line"></div>
+                <span class="text">Présentation</span>
+                <div class="title-f-line"></div>
+            </div>
+            <p class="proposal-desc">Encadré par deux lignes. Clean, sobre, professionnel. Pas de serif.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">G</span>
+            <span class="title-g">Présentation</span>
+            <p class="proposal-desc">Playfair bold. Imposant, empattements marqués, contraste fort. Très éditorial.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">H</span>
+            <div class="title-h">
+                <span class="small">à propos</span>
+                <span class="big">Qui suis-je</span>
+            </div>
+            <p class="proposal-desc">Change le wording : « à propos » en petit + « Qui suis-je » en grand italic. Plus personnel, moins corporate.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">I</span>
+            <div class="title-i">
+                <span class="num">01</span>
+                <span class="text">Présentation</span>
+            </div>
+            <p class="proposal-desc">Grand numéro décoratif beige + texte sans-serif moderne. Structuré comme un portfolio haut de gamme.</p>
+        </div>
+
+        <div class="proposal">
+            <span class="proposal-number">J</span>
+            <div class="title-j-wrap">
+                <span class="title-j">Présentation</span>
+                <div class="title-j-underline"></div>
+            </div>
+            <p class="proposal-desc">DM Serif avec surlignage vert discret en fond. Donne du poids sans changer de couleur.</p>
+        </div>
+
+    </div>
+</body>
+</html>
