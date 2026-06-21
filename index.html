@@ -21,6 +21,7 @@
         :root {
             --vert: #72785f;
             --vert-dark: #5a6049;
+            --vert-light: rgba(114, 120, 95, 0.12);
             --beige: #d6cdb8;
             --beige-light: #e8e2d6;
             --beige-nacre: #f0ebe2;
@@ -31,7 +32,7 @@
         }
 
         /* ═══════════════════════════════════════
-           NAVIGATION — Sliding tabs style
+           NAVIGATION — Sliding tabs
         ═══════════════════════════════════════ */
         .nav {
             position: fixed;
@@ -143,30 +144,34 @@
         }
         .hero-title {
             font-family: var(--serif);
-            font-size: clamp(3.5rem, 8vw, 7rem);
-            font-weight: 400;
-            line-height: 1.05;
+            font-size: clamp(4rem, 9vw, 8rem);
+            font-weight: 300;
+            line-height: 1.0;
             color: var(--noir);
             letter-spacing: -0.03em;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+        }
+        .hero-title .vert {
+            color: var(--vert);
         }
         .hero-title em {
             font-style: italic;
+            font-weight: 500;
         }
         .hero-subtitle {
             font-family: var(--sans);
-            font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+            font-size: clamp(1rem, 1.3vw, 1.2rem);
             font-weight: 300;
             color: var(--vert);
-            letter-spacing: 0.15em;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
         .hero-scroll {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             color: var(--vert);
             font-size: 0.7rem;
             letter-spacing: 0.2em;
@@ -176,7 +181,7 @@
         }
         .hero-scroll-line {
             width: 1px;
-            height: 40px;
+            height: 50px;
             background: linear-gradient(180deg, var(--vert), transparent);
         }
         @keyframes gentleBounce {
@@ -185,129 +190,137 @@
         }
 
         /* ═══════════════════════════════════════
-           SKYLINE (between hero & presentation)
+           SECTION TRANSITION — elegant scroll divider
         ═══════════════════════════════════════ */
-        .skyline-section {
+        .section-divider {
             position: relative;
-            width: 100%;
-            padding: 0;
-            overflow: hidden;
+            height: 120px;
             background: var(--beige-nacre);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
-        .skyline-svg {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-        .skyline-line {
-            fill: none;
-            stroke: var(--vert);
-            stroke-width: 1.2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .skyline-fill {
-            fill: var(--vert);
-            opacity: 0;
-            transition: opacity 1.2s ease 0.3s;
-        }
-        .skyline-section.drawn .skyline-fill {
-            opacity: 0.04;
+        .divider-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(180deg, transparent, var(--vert), transparent);
+            opacity: 0.3;
         }
 
         /* ═══════════════════════════════════════
-           PRESENTATION — Editorial card style
+           PRÉSENTATION — Editorial style with more character
         ═══════════════════════════════════════ */
         .presentation {
-            padding: 120px 60px;
+            padding: 100px 60px 120px;
             background: var(--blanc);
+        }
+        .presentation-section-title {
+            font-family: var(--serif);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--vert);
+            text-align: center;
+            margin-bottom: 70px;
         }
         .presentation-inner {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1.1fr 1fr;
             gap: 80px;
-            align-items: center;
+            align-items: start;
         }
         .presentation-image-wrapper {
             position: relative;
+            background: var(--beige-light);
         }
         .presentation-image {
             width: 100%;
-            height: 600px;
+            height: 650px;
             object-fit: cover;
+            object-position: top center;
             display: block;
         }
-        .presentation-image-overlay {
+        .presentation-image-accent {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.08) 100%);
-            pointer-events: none;
+            top: -12px;
+            left: -12px;
+            width: 60px;
+            height: 60px;
+            border-top: 2px solid var(--vert);
+            border-left: 2px solid var(--vert);
         }
-        .presentation-label {
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--vert);
-            margin-bottom: 30px;
+        .presentation-image-accent-bottom {
+            position: absolute;
+            bottom: -12px;
+            right: -12px;
+            width: 60px;
+            height: 60px;
+            border-bottom: 2px solid var(--vert);
+            border-right: 2px solid var(--vert);
         }
-        .presentation-name {
-            font-family: var(--serif);
-            font-size: clamp(2.8rem, 4vw, 4rem);
-            font-weight: 300;
-            line-height: 1.1;
-            color: var(--noir);
-            margin-bottom: 40px;
-            letter-spacing: -0.02em;
-        }
-        .presentation-name strong {
-            font-weight: 500;
+        .presentation-content {
+            padding-top: 30px;
         }
         .presentation-text {
-            font-size: 1rem;
-            line-height: 1.9;
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #444;
+            font-weight: 300;
+            margin-bottom: 35px;
+        }
+        .presentation-formation-title {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--vert);
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+        .presentation-formation {
+            list-style: none;
+            padding: 0;
+        }
+        .presentation-formation li {
+            font-size: 0.92rem;
+            line-height: 1.7;
             color: #555;
             font-weight: 300;
-            margin-bottom: 30px;
-            max-width: 500px;
+            padding: 10px 0;
+            padding-left: 18px;
+            border-left: 2px solid var(--beige);
+            margin-bottom: 8px;
+        }
+        .presentation-formation li strong {
+            font-weight: 500;
+            color: var(--noir);
         }
         .presentation-cta {
             display: inline-flex;
             align-items: center;
             gap: 14px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--noir);
+            color: var(--blanc);
+            background: var(--vert);
+            padding: 14px 30px;
+            border-radius: 100px;
+            margin-top: 40px;
             cursor: pointer;
-            transition: gap 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
         .presentation-cta:hover {
-            gap: 20px;
-        }
-        .presentation-cta-circle {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid var(--beige);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        .presentation-cta:hover .presentation-cta-circle {
-            background: var(--noir);
-            border-color: var(--noir);
-        }
-        .presentation-cta:hover .presentation-cta-circle svg {
-            stroke: var(--blanc);
+            background: var(--vert-dark);
+            transform: scale(0.97);
         }
 
         /* ═══════════════════════════════════════
-           DOMAINES — Accordion style
+           DOMAINES D'INTERVENTION
         ═══════════════════════════════════════ */
         .domaines {
             padding: 120px 60px;
@@ -315,7 +328,8 @@
         }
         .domaines-header {
             max-width: 1200px;
-            margin: 0 auto 60px;
+            margin: 0 auto 70px;
+            text-align: center;
         }
         .domaines-header h2 {
             font-family: var(--serif);
@@ -323,6 +337,10 @@
             font-weight: 400;
             color: var(--noir);
             letter-spacing: -0.02em;
+        }
+        .domaines-header h2 em {
+            font-style: italic;
+            color: var(--vert);
         }
         .domaines-list {
             max-width: 1200px;
@@ -337,48 +355,58 @@
         }
         .domaine-header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            padding: 35px 0;
+            padding: 40px 0;
             cursor: pointer;
             transition: padding 0.3s;
         }
         .domaine-item.open .domaine-header {
             padding-bottom: 20px;
         }
+        .domaine-number {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--vert);
+            margin-right: 20px;
+            margin-top: 4px;
+        }
+        .domaine-header-text {
+            flex: 1;
+        }
         .domaine-title {
             font-family: var(--serif);
-            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-            font-weight: 400;
+            font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+            font-weight: 600;
+            font-style: italic;
             color: var(--noir);
+            margin-bottom: 10px;
         }
         .domaine-catchphrase {
-            font-family: var(--serif);
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--vert);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .domaine-item.open .domaine-catchphrase,
-        .domaine-header:hover .domaine-catchphrase {
-            opacity: 1;
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: #555;
+            line-height: 1.6;
+            max-width: 600px;
         }
         .domaine-toggle {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            border: 1px solid var(--beige);
+            border: 1.5px solid var(--vert);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
             flex-shrink: 0;
+            margin-top: 4px;
         }
         .domaine-item.open .domaine-toggle {
             transform: rotate(45deg);
-            background: var(--noir);
-            border-color: var(--noir);
+            background: var(--vert);
+            border-color: var(--vert);
         }
         .domaine-item.open .domaine-toggle svg {
             stroke: var(--blanc);
@@ -392,17 +420,20 @@
             max-height: 400px;
         }
         .domaine-content-inner {
-            padding: 0 0 35px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px 60px;
+            padding: 10px 0 40px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .domaine-service {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #555;
-            line-height: 1.6;
-            padding-left: 16px;
-            border-left: 2px solid var(--beige);
+            line-height: 1.5;
+            padding: 10px 18px;
+            background: var(--blanc);
+            border: 1px solid var(--beige);
+            border-radius: 100px;
+            white-space: nowrap;
         }
 
         /* ═══════════════════════════════════════
@@ -451,6 +482,7 @@
             border-radius: 2px;
             transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
             cursor: pointer;
+            border-left: 3px solid var(--vert);
         }
         .publication-card:hover {
             transform: translateY(-4px);
@@ -484,9 +516,9 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
             padding: 5px 12px;
-            border: 1px solid var(--beige);
+            border: 1px solid var(--vert);
             border-radius: 100px;
-            color: #777;
+            color: var(--vert);
         }
 
         /* ═══════════════════════════════════════
@@ -632,6 +664,7 @@
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
 
         /* ═══════════════════════════════════════
            RESPONSIVE
@@ -640,17 +673,19 @@
             .nav { padding: 15px 30px; }
             .nav-tabs { display: none; }
             .presentation-inner { grid-template-columns: 1fr; gap: 50px; }
-            .presentation-image { height: 400px; }
+            .presentation-image { height: 450px; }
             .contact-inner { grid-template-columns: 1fr; gap: 60px; }
             .publications-grid { grid-template-columns: 1fr 1fr; }
-            .domaine-content-inner { grid-template-columns: 1fr; }
+            .domaine-content-inner { flex-direction: column; }
+            .domaine-service { white-space: normal; }
         }
         @media (max-width: 640px) {
-            .hero-title { font-size: 3rem; }
+            .hero-title { font-size: 3.5rem; }
             .presentation, .domaines, .publications, .contact { padding: 80px 24px; }
             .publications-grid { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
             .footer { flex-direction: column; gap: 20px; text-align: center; }
+            .domaine-content-inner { padding-left: 0; }
         }
     </style>
 </head>
@@ -660,7 +695,7 @@
      NAVIGATION
 ═══════════════════════════════════════ -->
 <nav class="nav" id="nav">
-    <a href="#" class="nav-logo">Sarah <em>Mostfa.</em></a>
+    <a href="#" class="nav-logo">S<em>M.</em></a>
     <div class="nav-tabs" id="navTabs">
         <a href="#presentation" class="nav-tab active" data-index="0">Présentation</a>
         <a href="#domaines" class="nav-tab" data-index="1">Domaines</a>
@@ -677,7 +712,7 @@
 <section class="hero" id="hero">
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-content">
-        <h1 class="hero-title">Sarah <em>Mostfa.</em></h1>
+        <h1 class="hero-title">Sarah <em class="vert">Mostfa</em><span class="vert">.</span></h1>
         <p class="hero-subtitle">Avocate au Barreau de Lyon</p>
         <div class="hero-scroll">
             <span>Découvrir</span>
@@ -687,98 +722,65 @@
 </section>
 
 <!-- ═══════════════════════════════════════
-     SKYLINE
+     SECTION DIVIDER
 ═══════════════════════════════════════ -->
-<section class="skyline-section" id="skylineSection">
-    <svg class="skyline-svg" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="skyline-fill" d="
-            M0,200 L0,160
-            L60,160 L65,140 L70,125 L75,140 L80,160
-            L130,160 L135,145 L140,130 L142,115 L144,100 L146,115 L150,130 L155,145 L160,160
-            L200,160 L205,148 L210,135 L215,128 L218,118 L220,110 L222,118 L225,128 L230,135 L235,148 L240,160
-            L290,160 L295,150 L300,140 L305,128 L308,110 L310,95 L311,85 L312,78 L313,85 L314,95 L318,110 L323,128 L328,140 L333,150 L338,160
-            L390,160 L395,148 L398,135 L400,122 L402,112 L405,105 L407,98 L408,92 L409,85 L410,78 L411,85 L412,92 L413,98 L415,105 L418,112 L420,122 L422,135 L425,148 L430,160
-            L480,160 L485,150 L490,138 L495,128 L498,115 L500,108 L502,115 L505,128 L510,138 L515,150 L520,160
-            L560,160 L565,152 L570,142 L575,130 L578,120 L580,112 L582,105 L583,100 L584,105 L586,112 L588,120 L592,130 L597,142 L602,152 L607,160
-            L650,160 L655,148 L658,138 L660,125 L662,115 L664,108 L666,102 L668,108 L670,115 L672,125 L675,138 L678,148 L683,160
-            L720,160 L725,152 L728,145 L730,135 L732,128 L734,120 L735,115 L736,110 L737,105 L738,100 L739,95 L740,88 L741,82 L742,88 L743,95 L744,100 L745,105 L746,110 L747,115 L748,120 L750,128 L752,135 L755,145 L758,152 L763,160
-            L800,160 L805,150 L810,140 L815,130 L818,122 L820,115 L822,122 L825,130 L830,140 L835,150 L840,160
-            L880,160 L885,148 L888,135 L890,125 L892,118 L895,112 L897,108 L898,104 L899,108 L900,112 L903,118 L905,125 L908,135 L912,148 L917,160
-            L960,160 L965,150 L968,142 L970,132 L972,122 L974,115 L975,110 L976,115 L978,122 L980,132 L983,142 L986,150 L991,160
-            L1030,160 L1035,148 L1038,138 L1040,128 L1042,120 L1044,112 L1046,105 L1048,98 L1049,92 L1050,86 L1051,80 L1052,86 L1053,92 L1054,98 L1056,105 L1058,112 L1060,120 L1062,128 L1065,138 L1068,148 L1073,160
-            L1110,160 L1115,150 L1118,140 L1120,132 L1122,125 L1124,118 L1126,125 L1128,132 L1132,140 L1136,150 L1141,160
-            L1180,160 L1185,152 L1188,142 L1190,135 L1192,128 L1194,120 L1196,115 L1197,110 L1198,115 L1200,120 L1202,128 L1204,135 L1208,142 L1212,152 L1217,160
-            L1260,160 L1265,150 L1270,140 L1275,132 L1278,125 L1280,118 L1282,125 L1285,132 L1290,140 L1295,150 L1300,160
-            L1340,160 L1345,148 L1350,138 L1355,130 L1358,122 L1360,115 L1362,110 L1364,105 L1365,100 L1366,105 L1368,110 L1370,115 L1372,122 L1375,130 L1380,138 L1385,148 L1390,160
-            L1440,160 L1440,200 Z
-        " />
-        <path class="skyline-line" id="skylinePath" d="
-            M0,160
-            L60,160 L65,140 L70,125 L75,140 L80,160
-            L130,160 L135,145 L140,130 L142,115 L144,100 L146,115 L150,130 L155,145 L160,160
-            L200,160 L205,148 L210,135 L215,128 L218,118 L220,110 L222,118 L225,128 L230,135 L235,148 L240,160
-            L290,160 L295,150 L300,140 L305,128 L308,110 L310,95 L311,85 L312,78 L313,85 L314,95 L318,110 L323,128 L328,140 L333,150 L338,160
-            L390,160 L395,148 L398,135 L400,122 L402,112 L405,105 L407,98 L408,92 L409,85 L410,78 L411,85 L412,92 L413,98 L415,105 L418,112 L420,122 L422,135 L425,148 L430,160
-            L480,160 L485,150 L490,138 L495,128 L498,115 L500,108 L502,115 L505,128 L510,138 L515,150 L520,160
-            L560,160 L565,152 L570,142 L575,130 L578,120 L580,112 L582,105 L583,100 L584,105 L586,112 L588,120 L592,130 L597,142 L602,152 L607,160
-            L650,160 L655,148 L658,138 L660,125 L662,115 L664,108 L666,102 L668,108 L670,115 L672,125 L675,138 L678,148 L683,160
-            L720,160 L725,152 L728,145 L730,135 L732,128 L734,120 L735,115 L736,110 L737,105 L738,100 L739,95 L740,88 L741,82 L742,88 L743,95 L744,100 L745,105 L746,110 L747,115 L748,120 L750,128 L752,135 L755,145 L758,152 L763,160
-            L800,160 L805,150 L810,140 L815,130 L818,122 L820,115 L822,122 L825,130 L830,140 L835,150 L840,160
-            L880,160 L885,148 L888,135 L890,125 L892,118 L895,112 L897,108 L898,104 L899,108 L900,112 L903,118 L905,125 L908,135 L912,148 L917,160
-            L960,160 L965,150 L968,142 L970,132 L972,122 L974,115 L975,110 L976,115 L978,122 L980,132 L983,142 L986,150 L991,160
-            L1030,160 L1035,148 L1038,138 L1040,128 L1042,120 L1044,112 L1046,105 L1048,98 L1049,92 L1050,86 L1051,80 L1052,86 L1053,92 L1054,98 L1056,105 L1058,112 L1060,120 L1062,128 L1065,138 L1068,148 L1073,160
-            L1110,160 L1115,150 L1118,140 L1120,132 L1122,125 L1124,118 L1126,125 L1128,132 L1132,140 L1136,150 L1141,160
-            L1180,160 L1185,152 L1188,142 L1190,135 L1192,128 L1194,120 L1196,115 L1197,110 L1198,115 L1200,120 L1202,128 L1204,135 L1208,142 L1212,152 L1217,160
-            L1260,160 L1265,150 L1270,140 L1275,132 L1278,125 L1280,118 L1282,125 L1285,132 L1290,140 L1295,150 L1300,160
-            L1340,160 L1345,148 L1350,138 L1355,130 L1358,122 L1360,115 L1362,110 L1364,105 L1365,100 L1366,105 L1368,110 L1370,115 L1372,122 L1375,130 L1380,138 L1385,148 L1390,160
-            L1440,160
-        " />
-    </svg>
-</section>
+<div class="section-divider">
+    <div class="divider-line"></div>
+</div>
 
 <!-- ═══════════════════════════════════════
      PRÉSENTATION
 ═══════════════════════════════════════ -->
 <section class="presentation" id="presentation">
+    <h2 class="presentation-section-title reveal">Présentation</h2>
     <div class="presentation-inner">
         <div class="presentation-image-wrapper reveal">
-            <img src="assets/sarah-mostfa.webp" alt="Sarah Mostfa, Avocate" class="presentation-image">
-            <div class="presentation-image-overlay"></div>
+            <img src="assets/sarah-mostfa.webp" alt="Sarah Mostfa, Avocate au Barreau de Lyon" class="presentation-image">
+            <div class="presentation-image-accent"></div>
+            <div class="presentation-image-accent-bottom"></div>
         </div>
-        <div>
-            <p class="presentation-label reveal reveal-delay-1">Avocate au Barreau de Lyon</p>
-            <h2 class="presentation-name reveal reveal-delay-1">Sarah<br><strong>Mostfa.</strong></h2>
-            <p class="presentation-text reveal reveal-delay-2">
+        <div class="presentation-content">
+            <p class="presentation-text reveal reveal-delay-1">
                 Avocate en droit des affaires et en contentieux civil, j'accompagne les entreprises et les particuliers dans la résolution de leurs litiges et la sécurisation de leurs relations contractuelles.
             </p>
             <p class="presentation-text reveal reveal-delay-2">
                 Mon approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.
             </p>
-            <a href="#contact" class="presentation-cta reveal reveal-delay-3">
-                <span class="presentation-cta-circle">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </span>
-                Me contacter
-            </a>
+
+            <h3 class="presentation-formation-title reveal reveal-delay-2">Formation</h3>
+            <ul class="presentation-formation reveal reveal-delay-3">
+                <li><strong>Master I Droit des affaires</strong>, parcours Propriété littéraire et artistique — Université Lumière Lyon II</li>
+                <li><strong>Master II Droit des affaires comparé</strong> — Université Lumière Lyon II</li>
+                <li><strong>LL.M Business Law</strong> — Université de Montréal</li>
+                <li><strong>CAPA</strong> — Prestation de serment, Cour d'appel de Lyon</li>
+            </ul>
+
+            <a href="#contact" class="presentation-cta reveal reveal-delay-4">Me contacter</a>
         </div>
     </div>
 </section>
+
+<!-- ═══════════════════════════════════════
+     SECTION DIVIDER
+═══════════════════════════════════════ -->
+<div class="section-divider">
+    <div class="divider-line"></div>
+</div>
 
 <!-- ═══════════════════════════════════════
      DOMAINES D'INTERVENTION
 ═══════════════════════════════════════ -->
 <section class="domaines" id="domaines">
     <div class="domaines-header">
-        <h2 class="reveal">Domaines d'intervention</h2>
+        <h2 class="reveal">Domaines <em>d'intervention</em></h2>
     </div>
     <div class="domaines-list">
         <div class="domaine-item open" data-domaine="0">
             <div class="domaine-header">
-                <div>
+                <span class="domaine-number">01.</span>
+                <div class="domaine-header-text">
                     <h3 class="domaine-title">Contentieux commercial</h3>
-                    <span class="domaine-catchphrase">Défendre vos intérêts commerciaux avec détermination</span>
+                    <p class="domaine-catchphrase">Vous faites face à un différend dans le cadre de vos relations d'affaires.</p>
                 </div>
                 <div class="domaine-toggle">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
@@ -786,20 +788,23 @@
             </div>
             <div class="domaine-content">
                 <div class="domaine-content-inner">
-                    <div class="domaine-service">Litiges entre associés et conflits de gouvernance</div>
-                    <div class="domaine-service">Rupture abusive des relations commerciales</div>
-                    <div class="domaine-service">Recouvrement de créances et injonctions de payer</div>
-                    <div class="domaine-service">Concurrence déloyale et parasitisme</div>
-                    <div class="domaine-service">Contentieux des baux commerciaux</div>
-                    <div class="domaine-service">Procédures devant le Tribunal de Commerce</div>
+                    <span class="domaine-service">Inexécution, retard ou mauvaise exécution contractuelle</span>
+                    <span class="domaine-service">Responsabilité civile délictuelle</span>
+                    <span class="domaine-service">Concurrence déloyale et parasitisme</span>
+                    <span class="domaine-service">Rupture brutale de relations commerciales</span>
+                    <span class="domaine-service">Conflits entre associés</span>
+                    <span class="domaine-service">Litiges</span>
+                    <span class="domaine-service">Recouvrement de créances et procédures d'exécution</span>
+                    <span class="domaine-service">Référés et procédures d'urgence</span>
                 </div>
             </div>
         </div>
         <div class="domaine-item" data-domaine="1">
             <div class="domaine-header">
-                <div>
+                <span class="domaine-number">02.</span>
+                <div class="domaine-header-text">
                     <h3 class="domaine-title">Contentieux civil</h3>
-                    <span class="domaine-catchphrase">Protéger vos droits avec rigueur et humanité</span>
+                    <p class="domaine-catchphrase">Vous êtes un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits.</p>
                 </div>
                 <div class="domaine-toggle">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
@@ -807,20 +812,21 @@
             </div>
             <div class="domaine-content">
                 <div class="domaine-content-inner">
-                    <div class="domaine-service">Responsabilité contractuelle et délictuelle</div>
-                    <div class="domaine-service">Droit de la copropriété et troubles du voisinage</div>
-                    <div class="domaine-service">Litiges de la construction et malfaçons</div>
-                    <div class="domaine-service">Contentieux de la consommation</div>
-                    <div class="domaine-service">Exécution et inexécution des contrats</div>
-                    <div class="domaine-service">Référés et procédures d'urgence</div>
+                    <span class="domaine-service">Actions en responsabilité civile</span>
+                    <span class="domaine-service">Cautionnements</span>
+                    <span class="domaine-service">Baux d'habitation et loyers impayés</span>
+                    <span class="domaine-service">Indemnisation par les assurances</span>
+                    <span class="domaine-service">Contentieux de la consommation</span>
+                    <span class="domaine-service">Litiges de la construction et malfaçons</span>
                 </div>
             </div>
         </div>
         <div class="domaine-item" data-domaine="2">
             <div class="domaine-header">
-                <div>
+                <span class="domaine-number">03.</span>
+                <div class="domaine-header-text">
                     <h3 class="domaine-title">Rédaction contractuelle</h3>
-                    <span class="domaine-catchphrase">Sécuriser vos engagements en toute sérénité</span>
+                    <p class="domaine-catchphrase">Vous souhaitez sécuriser vos relations d'affaires ou protéger votre propriété intellectuelle. Un contrat bien rédigé est la meilleure prévention du contentieux.</p>
                 </div>
                 <div class="domaine-toggle">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
@@ -828,12 +834,12 @@
             </div>
             <div class="domaine-content">
                 <div class="domaine-content-inner">
-                    <div class="domaine-service">Conditions générales de vente et d'utilisation</div>
-                    <div class="domaine-service">Contrats commerciaux et de prestation</div>
-                    <div class="domaine-service">Pactes d'associés et conventions</div>
-                    <div class="domaine-service">Baux commerciaux et professionnels</div>
-                    <div class="domaine-service">Audit contractuel et mise en conformité</div>
-                    <div class="domaine-service">Négociation et renégociation de contrats</div>
+                    <span class="domaine-service">Négociation et renégociation de contrats</span>
+                    <span class="domaine-service">CGV</span>
+                    <span class="domaine-service">Accords de confidentialité</span>
+                    <span class="domaine-service">Contrats de licence</span>
+                    <span class="domaine-service">Cession de droits d'auteur</span>
+                    <span class="domaine-service">Contrats commerciaux et propriété intellectuelle</span>
                 </div>
             </div>
         </div>
@@ -989,23 +995,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ─── Skyline draw on scroll ───
-const skylineSection = document.getElementById('skylineSection');
-const skylinePath = document.getElementById('skylinePath');
-const skylineLength = skylinePath.getTotalLength();
-skylinePath.style.strokeDasharray = skylineLength;
-skylinePath.style.strokeDashoffset = skylineLength;
-
-window.addEventListener('scroll', () => {
-    const rect = skylineSection.getBoundingClientRect();
-    const windowH = window.innerHeight;
-    const start = windowH;
-    const end = -rect.height * 0.3;
-    const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
-    skylinePath.style.strokeDashoffset = skylineLength * (1 - progress);
-    skylineSection.classList.toggle('drawn', progress > 0.9);
-});
 
 // ─── Hero WebGL Mesh Gradient ───
 (function() {
