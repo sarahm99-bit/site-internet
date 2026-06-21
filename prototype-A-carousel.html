@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype A - Carousel à cartes</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            background: #f8f6f3;
+            color: #2c2c2c;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b6b6b;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .card {
+            min-width: 100%;
+            padding: 0 20px;
+        }
+
+        .card-inner {
+            background: white;
+            border-radius: 12px;
+            padding: 50px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-left: 5px solid #8b6914;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #8b6914;
+            opacity: 0.3;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+
+        .card-accroche {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .card-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .card-services span {
+            background: #f5f0e6;
+            color: #6b5210;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .card-link {
+            margin-top: 25px;
+            color: #8b6914;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .card-link:hover { text-decoration: underline; }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .carousel-nav button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #8b6914;
+            background: transparent;
+            color: #8b6914;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-nav button:hover {
+            background: #8b6914;
+            color: white;
+        }
+
+        .dots {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #8b6914;
+            width: 28px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Domaines d'intervention</h2>
+    <p class="subtitle">Un accompagnement juridique sur mesure</p>
+
+    <div class="carousel-container">
+        <div class="carousel-track" id="track">
+            <div class="card">
+                <div class="card-inner">
+                    <div>
+                        <div class="card-number">01</div>
+                        <h3 class="card-title">Contentieux commercial</h3>
+                        <p class="card-accroche">« Vous faites face à un différend dans le cadre de vos relations d'affaires. »</p>
+                        <div class="card-services">
+                            <span>Inexécution contractuelle</span>
+                            <span>Responsabilité délictuelle</span>
+                            <span>Concurrence déloyale</span>
+                            <span>Rupture brutale</span>
+                            <span>Conflits entre associés</span>
+                            <span>Recouvrement de créances</span>
+                        </div>
+                    </div>
+                    <a href="#" class="card-link">En savoir plus →</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div>
+                        <div class="card-number">02</div>
+                        <h3 class="card-title">Contentieux civil</h3>
+                        <p class="card-accroche">« Vous êtes un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits. »</p>
+                        <div class="card-services">
+                            <span>Responsabilité civile</span>
+                            <span>Cautionnements</span>
+                            <span>Baux d'habitation</span>
+                            <span>Loyers impayés</span>
+                            <span>Indemnisation assurances</span>
+                        </div>
+                    </div>
+                    <a href="#" class="card-link">En savoir plus →</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div>
+                        <div class="card-number">03</div>
+                        <h3 class="card-title">Rédaction contractuelle</h3>
+                        <p class="card-accroche">« Vous souhaitez sécuriser vos relations d'affaires ou protéger votre propriété intellectuelle. Un contrat bien rédigé est la meilleure prévention du contentieux. »</p>
+                        <div class="card-services">
+                            <span>CGV</span>
+                            <span>Accords de confidentialité</span>
+                            <span>Contrats de licence</span>
+                            <span>Cession de droits d'auteur</span>
+                            <span>Propriété intellectuelle</span>
+                        </div>
+                    </div>
+                    <a href="#" class="card-link">En savoir plus →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel-nav">
+        <button onclick="move(-1)">&#8592;</button>
+        <div class="dots">
+            <div class="dot active" id="dot0"></div>
+            <div class="dot" id="dot1"></div>
+            <div class="dot" id="dot2"></div>
+        </div>
+        <button onclick="move(1)">&#8594;</button>
+    </div>
+
+    <script>
+        let current = 0;
+        const track = document.getElementById('track');
+
+        function move(dir) {
+            current = Math.max(0, Math.min(2, current + dir));
+            track.style.transform = `translateX(-${current * 100}%)`;
+            document.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype C - Accordéon élégant</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            background: #fdfcfa;
+            color: #2c2c2c;
+            min-height: 100vh;
+            padding: 60px 20px;
+        }
+
+        .section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #e5e0d8;
+            padding-bottom: 30px;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e5e0d8;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            padding: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .accordion-header:hover { padding-left: 10px; }
+
+        .accordion-number {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #c4a35a;
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .accordion-header-content {
+            flex: 1;
+        }
+
+        .accordion-title {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .accordion-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+        }
+
+        .accordion-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #999;
+            transition: all 0.3s;
+        }
+
+        .accordion-item.active .accordion-toggle {
+            transform: rotate(45deg);
+            border-color: #c4a35a;
+            color: #c4a35a;
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding-left: 80px;
+        }
+
+        .accordion-item.active .accordion-body {
+            max-height: 400px;
+        }
+
+        .accordion-accroche {
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-right: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .service-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #c4a35a;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .accordion-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #c4a35a;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            font-family: sans-serif;
+            font-weight: 500;
+        }
+
+        .accordion-cta:hover { gap: 12px; }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h2>Domaines d'intervention</h2>
+        <p class="subtitle">Chaque situation est unique. Mon approche aussi.</p>
+
+        <div class="accordion-item active">
+            <div class="accordion-header" onclick="toggle(this)">
+                <div class="accordion-number">01</div>
+                <div class="accordion-header-content">
+                    <h3 class="accordion-title">Contentieux commercial</h3>
+                    <span class="accordion-tag">Professionnels</span>
+                </div>
+                <div class="accordion-toggle">+</div>
+            </div>
+            <div class="accordion-body">
+                <p class="accordion-accroche">« Vous faites face à un différend dans le cadre de vos relations d'affaires. »</p>
+                <div class="services-grid">
+                    <div class="service-item">Inexécution contractuelle</div>
+                    <div class="service-item">Responsabilité délictuelle</div>
+                    <div class="service-item">Concurrence déloyale</div>
+                    <div class="service-item">Rupture brutale</div>
+                    <div class="service-item">Conflits entre associés</div>
+                    <div class="service-item">Recouvrement de créances</div>
+                    <div class="service-item">Procédures d'exécution</div>
+                </div>
+                <a href="#" class="accordion-cta">En savoir plus <span>→</span></a>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggle(this)">
+                <div class="accordion-number">02</div>
+                <div class="accordion-header-content">
+                    <h3 class="accordion-title">Contentieux civil</h3>
+                    <span class="accordion-tag">Particuliers</span>
+                </div>
+                <div class="accordion-toggle">+</div>
+            </div>
+            <div class="accordion-body">
+                <p class="accordion-accroche">« Vous êtes un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits. »</p>
+                <div class="services-grid">
+                    <div class="service-item">Actions en responsabilité civile</div>
+                    <div class="service-item">Cautionnements</div>
+                    <div class="service-item">Baux d'habitation</div>
+                    <div class="service-item">Loyers impayés</div>
+                    <div class="service-item">Indemnisation assurances</div>
+                </div>
+                <a href="#" class="accordion-cta">En savoir plus <span>→</span></a>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggle(this)">
+                <div class="accordion-number">03</div>
+                <div class="accordion-header-content">
+                    <h3 class="accordion-title">Rédaction contractuelle</h3>
+                    <span class="accordion-tag">Prévention</span>
+                </div>
+                <div class="accordion-toggle">+</div>
+            </div>
+            <div class="accordion-body">
+                <p class="accordion-accroche">« Vous souhaitez sécuriser vos relations d'affaires ou protéger votre propriété intellectuelle. Un contrat bien rédigé est la meilleure prévention du contentieux. »</p>
+                <div class="services-grid">
+                    <div class="service-item">CGV</div>
+                    <div class="service-item">Accords de confidentialité</div>
+                    <div class="service-item">Contrats de licence</div>
+                    <div class="service-item">Cession de droits d'auteur</div>
+                    <div class="service-item">Contrats commerciaux</div>
+                    <div class="service-item">Propriété intellectuelle</div>
+                </div>
+                <a href="#" class="accordion-cta">En savoir plus <span>→</span></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggle(header) {
+            const item = header.parentElement;
+            const wasActive = item.classList.contains('active');
+            document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+            if (!wasActive) item.classList.add('active');
+        }
+    </script>
+</body>
+</html>
