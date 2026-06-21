@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonds Hero — Propositions Art Déco</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #1a1a1a; }
+
+        .header {
+            text-align: center;
+            padding: 50px 40px 30px;
+        }
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #f0ebe2;
+            margin-bottom: 6px;
+        }
+        .header p { font-size: 0.7rem; color: #666; letter-spacing: 0.2em; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px 80px;
+        }
+
+        .option {
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(240,235,226,0.06);
+        }
+
+        .option-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .option-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 300;
+            color: #1a1a1a;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .option-content h2 em {
+            font-style: italic;
+            font-weight: 500;
+            color: #72785f;
+        }
+        .option-content p {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: #72785f;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .option-label {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.6rem;
+            color: rgba(114,120,95,0.6);
+            letter-spacing: 0.15em;
+            z-index: 3;
+        }
+
+        /* ─── BASE : beige nacré ─── */
+        .base-bg {
+            position: absolute;
+            inset: 0;
+            background: #f0ebe2;
+            z-index: 0;
+        }
+
+        /* ─── A : Art Déco éventails / arches ─── */
+        .pattern-a {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.045;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 A40 40 0 0 1 40 40 A40 40 0 0 1 80 80' fill='none' stroke='%2372785f' stroke-width='1'/%3E%3Cpath d='M0 80 A30 30 0 0 1 30 50 A30 30 0 0 1 60 80' fill='none' stroke='%2372785f' stroke-width='0.5' transform='translate(10,0)'/%3E%3C/svg%3E");
+            background-size: 80px 80px;
+        }
+
+        /* ─── B : Lignes rayonnantes sunburst ─── */
+        .pattern-b {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.035;
+        }
+        .pattern-b svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ─── C : Grille géométrique fine ─── */
+        .pattern-c {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='60' y2='60' stroke='%2372785f' stroke-width='0.5'/%3E%3Cline x1='60' y1='0' x2='0' y2='60' stroke='%2372785f' stroke-width='0.5'/%3E%3Crect x='15' y='15' width='30' height='30' fill='none' stroke='%2372785f' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+        }
+
+        /* ─── D : Losanges Art Déco ─── */
+        .pattern-d {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='48' height='64' viewBox='0 0 48 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M24 0 L48 32 L24 64 L0 32 Z' fill='none' stroke='%2372785f' stroke-width='0.6'/%3E%3Cpath d='M24 8 L40 32 L24 56 L8 32 Z' fill='none' stroke='%2372785f' stroke-width='0.3'/%3E%3C/svg%3E");
+            background-size: 48px 64px;
+        }
+
+        /* ─── E : Papier texturé grain fin ─── */
+        .pattern-e {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.3;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+        }
+
+        /* ─── F : Arches concentriques Art Déco ─── */
+        .pattern-f {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='60' viewBox='0 0 120 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 60 A60 60 0 0 1 120 60' fill='none' stroke='%2372785f' stroke-width='0.6'/%3E%3Cpath d='M60 60 A50 50 0 0 1 110 60' fill='none' stroke='%2372785f' stroke-width='0.4'/%3E%3Cpath d='M60 60 A40 40 0 0 1 100 60' fill='none' stroke='%2372785f' stroke-width='0.3'/%3E%3Cpath d='M0 60 A60 60 0 0 0 60 0' fill='none' stroke='%2372785f' stroke-width='0.6' transform='translate(-60,60) scale(1,-1) translate(0,-60)'/%3E%3C/svg%3E");
+            background-size: 120px 60px;
+        }
+
+        /* ─── G : Chevrons / zigzag Art Déco ─── */
+        .pattern-g {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='24' viewBox='0 0 40 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 18 L20 6 L40 18' fill='none' stroke='%2372785f' stroke-width='0.6'/%3E%3Cpath d='M0 24 L20 12 L40 24' fill='none' stroke='%2372785f' stroke-width='0.3'/%3E%3C/svg%3E");
+            background-size: 40px 24px;
+        }
+
+        /* ─── H : Grand motif central Art Déco (soleil/rosace) ─── */
+        .pattern-h {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.04;
+        }
+        .pattern-h svg {
+            width: 70%;
+            height: auto;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Fonds d'écran Hero</h1>
+        <p>ART DÉCO · TEXTURES SUBTILES · FILIGRANE</p>
+    </div>
+
+    <div class="grid">
+
+        <!-- A : Éventails -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-a"></div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">A — ÉVENTAILS ART DÉCO</div>
+        </div>
+
+        <!-- B : Sunburst -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-b">
+                <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                    <g stroke="#72785f" stroke-width="0.5" fill="none" transform="translate(400,500)">
+                        <line x1="0" y1="0" x2="0" y2="-500"/>
+                        <line x1="0" y1="0" x2="-87" y2="-496"/>
+                        <line x1="0" y1="0" x2="-174" y2="-469"/>
+                        <line x1="0" y1="0" x2="-250" y2="-433"/>
+                        <line x1="0" y1="0" x2="-321" y2="-383"/>
+                        <line x1="0" y1="0" x2="-383" y2="-321"/>
+                        <line x1="0" y1="0" x2="-433" y2="-250"/>
+                        <line x1="0" y1="0" x2="-469" y2="-174"/>
+                        <line x1="0" y1="0" x2="-496" y2="-87"/>
+                        <line x1="0" y1="0" x2="87" y2="-496"/>
+                        <line x1="0" y1="0" x2="174" y2="-469"/>
+                        <line x1="0" y1="0" x2="250" y2="-433"/>
+                        <line x1="0" y1="0" x2="321" y2="-383"/>
+                        <line x1="0" y1="0" x2="383" y2="-321"/>
+                        <line x1="0" y1="0" x2="433" y2="-250"/>
+                        <line x1="0" y1="0" x2="469" y2="-174"/>
+                        <line x1="0" y1="0" x2="496" y2="-87"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">B — SUNBURST RAYONNANT</div>
+        </div>
+
+        <!-- C : Grille géométrique -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-c"></div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">C — GRILLE GÉOMÉTRIQUE</div>
+        </div>
+
+        <!-- D : Losanges -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-d"></div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">D — LOSANGES ART DÉCO</div>
+        </div>
+
+        <!-- E : Grain papier -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-e"></div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">E — GRAIN PAPIER TEXTURÉ</div>
+        </div>
+
+        <!-- F : Arches concentriques -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-f"></div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">F — ARCHES CONCENTRIQUES</div>
+        </div>
+
+        <!-- G : Chevrons -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-g"></div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">G — CHEVRONS / ZIGZAG</div>
+        </div>
+
+        <!-- H : Rosace centrale -->
+        <div class="option">
+            <div class="base-bg"></div>
+            <div class="pattern-h">
+                <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#72785f" transform="translate(200,200)">
+                        <circle r="180" stroke-width="0.5"/>
+                        <circle r="150" stroke-width="0.4"/>
+                        <circle r="120" stroke-width="0.3"/>
+                        <circle r="90" stroke-width="0.3"/>
+                        <circle r="60" stroke-width="0.2"/>
+                        <!-- Radial lines -->
+                        <line x1="0" y1="-180" x2="0" y2="180" stroke-width="0.3"/>
+                        <line x1="-180" y1="0" x2="180" y2="0" stroke-width="0.3"/>
+                        <line x1="-127" y1="-127" x2="127" y2="127" stroke-width="0.3"/>
+                        <line x1="127" y1="-127" x2="-127" y2="127" stroke-width="0.3"/>
+                        <line x1="-47" y1="-174" x2="47" y2="174" stroke-width="0.2"/>
+                        <line x1="47" y1="-174" x2="-47" y2="174" stroke-width="0.2"/>
+                        <line x1="-174" y1="-47" x2="174" y2="47" stroke-width="0.2"/>
+                        <line x1="-174" y1="47" x2="174" y2="-47" stroke-width="0.2"/>
+                        <line x1="-90" y1="-156" x2="90" y2="156" stroke-width="0.2"/>
+                        <line x1="90" y1="-156" x2="-90" y2="156" stroke-width="0.2"/>
+                        <line x1="-156" y1="-90" x2="156" y2="90" stroke-width="0.2"/>
+                        <line x1="-156" y1="90" x2="156" y2="-90" stroke-width="0.2"/>
+                        <!-- Art deco arcs -->
+                        <path d="M0,-180 A30,30 0 0,1 30,-150" stroke-width="0.4"/>
+                        <path d="M0,-180 A30,30 0 0,0 -30,-150" stroke-width="0.4"/>
+                        <path d="M180,0 A30,30 0 0,1 150,30" stroke-width="0.4"/>
+                        <path d="M180,0 A30,30 0 0,0 150,-30" stroke-width="0.4"/>
+                        <path d="M0,180 A30,30 0 0,1 -30,150" stroke-width="0.4"/>
+                        <path d="M0,180 A30,30 0 0,0 30,150" stroke-width="0.4"/>
+                        <path d="M-180,0 A30,30 0 0,1 -150,-30" stroke-width="0.4"/>
+                        <path d="M-180,0 A30,30 0 0,0 -150,30" stroke-width="0.4"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="option-content">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">H — ROSACE CENTRALE ART DÉCO</div>
+        </div>
+
+    </div>
+</body>
+</html>
