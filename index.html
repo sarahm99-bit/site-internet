@@ -53,14 +53,15 @@
         }
         .nav-logo {
             font-family: var(--serif);
-            font-size: 1.3rem;
-            font-weight: 500;
+            font-size: 1.5rem;
+            font-weight: 600;
             color: var(--noir);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.04em;
         }
         .nav-logo em {
             font-style: italic;
             font-weight: 400;
+            color: var(--vert);
         }
 
         .nav-tabs {
@@ -86,8 +87,10 @@
             transition: color 0.3s;
             white-space: nowrap;
         }
-        .nav-tab:hover,
-        .nav-tab.active {
+        .nav-tab:hover {
+            color: var(--blanc);
+        }
+        .nav-tab.tab-highlighted {
             color: var(--blanc);
         }
         .nav-cursor {
@@ -815,7 +818,7 @@
      NAVIGATION
 ═══════════════════════════════════════ -->
 <nav class="nav" id="nav">
-    <div style="width:60px"></div>
+    <a href="#" class="nav-logo">S<em>M</em></a>
     <div class="nav-tabs" id="navTabs">
         <a href="#presentation" class="nav-tab active" data-index="0">Présentation</a>
         <a href="#domaines" class="nav-tab" data-index="1">Domaines</a>
@@ -1077,19 +1080,31 @@ function positionCursor(index) {
     cursor.style.width = tab.offsetWidth + 'px';
 }
 
+function updateHighlight(index) {
+    tabs.forEach(t => t.classList.remove('tab-highlighted'));
+    tabs[index].classList.add('tab-highlighted');
+}
+
 tabs.forEach((tab, i) => {
-    tab.addEventListener('mouseenter', () => positionCursor(i));
+    tab.addEventListener('mouseenter', () => {
+        positionCursor(i);
+        updateHighlight(i);
+    });
     tab.addEventListener('click', (e) => {
         tabs[activeTab].classList.remove('active');
         activeTab = i;
         tab.classList.add('active');
         positionCursor(i);
+        updateHighlight(i);
     });
 });
 
-navTabs.addEventListener('mouseleave', () => positionCursor(activeTab));
+navTabs.addEventListener('mouseleave', () => {
+    positionCursor(activeTab);
+    updateHighlight(activeTab);
+});
 
-window.addEventListener('load', () => positionCursor(activeTab));
+window.addEventListener('load', () => { positionCursor(activeTab); updateHighlight(activeTab); });
 window.addEventListener('resize', () => positionCursor(activeTab));
 
 // Nav scroll state
@@ -1306,6 +1321,7 @@ window.addEventListener('scroll', () => {
         activeTab = current;
         tabs[activeTab].classList.add('active');
         positionCursor(activeTab);
+        updateHighlight(activeTab);
     }
 });
 </script>
