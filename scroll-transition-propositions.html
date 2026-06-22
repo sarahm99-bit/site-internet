@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Transition — Propositions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #f0ebe2; color: #1a1a1a; }
+
+        :root {
+            --vert: #72785f;
+            --vert-dark: #5a6049;
+            --beige: #d6cdb8;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 40px 10px;
+        }
+        .header h1 {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--noir);
+            margin-bottom: 6px;
+        }
+        .header p { font-size: 0.7rem; color: #999; letter-spacing: 0.2em; }
+
+        /* ═══════ Fake hero / presentation blocks ═══════ */
+        .fake-hero {
+            height: 45vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--beige-nacre);
+        }
+        .fake-hero span {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--noir);
+            opacity: 0.3;
+        }
+        .fake-presentation {
+            min-height: 45vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--blanc);
+        }
+        .fake-presentation span {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--noir);
+            opacity: 0.3;
+        }
+
+        .label {
+            text-align: center;
+            padding: 50px 40px 10px;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #999;
+        }
+        .label-desc {
+            text-align: center;
+            padding: 5px 40px 20px;
+            font-size: 0.75rem;
+            color: #777;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════
+           A — BANDE ÉPAISSE PROGRESSIVE
+           Barre épaisse qui se remplit de gauche à droite
+        ═══════════════════════════════════════ */
+        .transition-a {
+            position: relative;
+            height: 120px;
+            background: var(--beige-nacre);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .transition-a-track {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            height: 6px;
+            background: var(--beige);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .transition-a-fill {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--vert);
+            border-radius: 3px;
+            transition: none;
+        }
+
+        /* ═══════════════════════════════════════
+           B — DOUBLE LIGNE + TEXTE CENTRAL
+           Deux lignes partent du centre vers les bords
+        ═══════════════════════════════════════ */
+        .transition-b {
+            position: relative;
+            height: 140px;
+            background: var(--beige-nacre);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .transition-b-inner {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .transition-b-line {
+            flex: 1;
+            height: 3px;
+            background: var(--beige);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        .transition-b-line-fill {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--vert);
+            border-radius: 2px;
+        }
+        .transition-b-line.left .transition-b-line-fill {
+            right: 0;
+        }
+        .transition-b-line.right .transition-b-line-fill {
+            left: 0;
+        }
+        .transition-b-center {
+            font-family: var(--serif);
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--vert);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+        }
+
+        /* ═══════════════════════════════════════
+           C — BANDE PLEINE LARGEUR + GRADIENT
+           Bloc coloré qui se déploie sur toute la largeur
+        ═══════════════════════════════════════ */
+        .transition-c {
+            position: relative;
+            height: 100px;
+            background: var(--beige-nacre);
+            overflow: hidden;
+        }
+        .transition-c-band {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            height: 0px;
+            background: linear-gradient(90deg, transparent 0%, var(--vert) 20%, var(--vert) 80%, transparent 100%);
+            opacity: 0.12;
+            transition: none;
+        }
+        .transition-c-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--vert);
+            opacity: 0.4;
+            transform: translateY(-50%);
+        }
+
+        /* ═══════════════════════════════════════
+           D — TRAIT ÉPAIS AVEC POINT QUI PULSE
+           Ligne épaisse + cercle animé
+        ═══════════════════════════════════════ */
+        .transition-d {
+            position: relative;
+            height: 130px;
+            background: var(--beige-nacre);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .transition-d-track {
+            position: relative;
+            width: 85%;
+            max-width: 1100px;
+            height: 4px;
+            background: var(--beige);
+            border-radius: 2px;
+        }
+        .transition-d-fill {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--vert), var(--vert-dark));
+            border-radius: 2px;
+        }
+        .transition-d-dot {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2.5px solid var(--vert);
+            background: var(--beige-nacre);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .transition-d-dot-inner {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--vert);
+        }
+
+        /* ═══════════════════════════════════════
+           E — SÉPARATEUR DÉCORATIF ART DÉCO
+           Lignes parallèles qui s'écartent
+        ═══════════════════════════════════════ */
+        .transition-e {
+            position: relative;
+            height: 150px;
+            background: var(--beige-nacre);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            overflow: hidden;
+        }
+        .transition-e-line {
+            height: 2px;
+            background: var(--vert);
+            border-radius: 1px;
+            width: 0%;
+            max-width: 1200px;
+            opacity: 0;
+            transition: none;
+        }
+        .transition-e-line.main {
+            height: 4px;
+            border-radius: 2px;
+        }
+        .transition-e-diamond {
+            width: 10px;
+            height: 10px;
+            border: 1.5px solid var(--vert);
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
+        }
+
+        /* ═══════════════════════════════════════
+           F — VAGUE / COURBE SUBTILE
+           SVG path qui se dessine
+        ═══════════════════════════════════════ */
+        .transition-f {
+            position: relative;
+            height: 130px;
+            background: var(--beige-nacre);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .transition-f svg {
+            width: 90%;
+            max-width: 1200px;
+            height: 60px;
+            overflow: visible;
+        }
+        .transition-f-path {
+            fill: none;
+            stroke: var(--vert);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+        }
+
+        /* ═══════════════════════════════════════
+           G — GRADIENT REVEAL
+           Bande de gradient qui s'étend
+        ═══════════════════════════════════════ */
+        .transition-g {
+            position: relative;
+            height: 100px;
+            background: var(--beige-nacre);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .transition-g-bar {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 5%;
+            right: 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--beige) 0%, var(--vert) 50%, var(--beige) 100%);
+            opacity: 0.25;
+            transform-origin: center;
+            scale: 0 1;
+        }
+        .transition-g-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0%;
+            max-width: 1200px;
+            height: 3px;
+            background: var(--vert);
+            border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           H — TIRETS PROGRESSIFS
+           Plusieurs segments qui apparaissent
+        ═══════════════════════════════════════ */
+        .transition-h {
+            position: relative;
+            height: 110px;
+            background: var(--beige-nacre);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .transition-h-segments {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .transition-h-seg {
+            flex: 1;
+            height: 5px;
+            background: var(--vert);
+            border-radius: 3px;
+            transform: scaleX(0);
+            opacity: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Transitions de scroll</h1>
+    <p>ANIMATION ENTRE HERO ET PRÉSENTATION</p>
+</div>
+
+<!-- ═══════ A — BANDE ÉPAISSE ═══════ -->
+<p class="label">— A — BANDE ÉPAISSE PROGRESSIVE</p>
+<p class="label-desc">Barre large (6px) qui se remplit de gauche à droite sur 90% de la largeur. Simple et imposant.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-a" data-transition="a">
+    <div class="transition-a-track">
+        <div class="transition-a-fill" id="fillA"></div>
+    </div>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<!-- ═══════ B — DOUBLE LIGNE + TEXTE ═══════ -->
+<p class="label">— B — DOUBLE LIGNE DEPUIS LE CENTRE + TEXTE</p>
+<p class="label-desc">Deux lignes partent du centre vers les bords avec « SM Avocat » qui apparaît au milieu.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-b" data-transition="b">
+    <div class="transition-b-inner">
+        <div class="transition-b-line left"><div class="transition-b-line-fill" id="fillBL"></div></div>
+        <span class="transition-b-center" id="textB">SM Avocat</span>
+        <div class="transition-b-line right"><div class="transition-b-line-fill" id="fillBR"></div></div>
+    </div>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<!-- ═══════ C — BANDE PLEINE LARGEUR ═══════ -->
+<p class="label">— C — BANDE TRANSLUCIDE PLEINE LARGEUR</p>
+<p class="label-desc">Une bande verte translucide se déploie en hauteur + une ligne fine se dessine par-dessus. Très large et visible.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-c" data-transition="c">
+    <div class="transition-c-band" id="bandC"></div>
+    <div class="transition-c-line" id="lineC"></div>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<!-- ═══════ D — TRAIT + POINT QUI PULSE ═══════ -->
+<p class="label">— D — TRAIT ÉPAIS + CERCLE QUI SUIT</p>
+<p class="label-desc">Ligne de 4px avec un cercle qui avance au bout. Plus robuste que l'actuelle.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-d" data-transition="d">
+    <div class="transition-d-track">
+        <div class="transition-d-fill" id="fillD"></div>
+        <div class="transition-d-dot" id="dotD"><div class="transition-d-dot-inner"></div></div>
+    </div>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<!-- ═══════ E — SÉPARATEUR ART DÉCO ═══════ -->
+<p class="label">— E — SÉPARATEUR ART DÉCO (3 LIGNES + LOSANGE)</p>
+<p class="label-desc">Trois lignes parallèles de largeurs différentes + un losange central. Graphique et élégant.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-e" data-transition="e">
+    <div class="transition-e-line" id="lineE1"></div>
+    <div class="transition-e-line main" id="lineE2"></div>
+    <div class="transition-e-diamond" id="diamondE"></div>
+    <div class="transition-e-line" id="lineE3"></div>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<!-- ═══════ F — VAGUE SVG ═══════ -->
+<p class="label">— F — COURBE ONDULÉE QUI SE DESSINE</p>
+<p class="label-desc">Un trait courbe/ondulé en SVG qui se dessine au scroll. Organique et fluide.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-f" data-transition="f">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path class="transition-f-path" id="pathF" d="M0,30 C100,10 200,50 300,30 C400,10 500,50 600,30 C700,10 800,50 900,30 C1000,10 1100,50 1200,30" />
+    </svg>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<!-- ═══════ G — GRADIENT REVEAL ═══════ -->
+<p class="label">— G — GRADIENT QUI S'ÉTEND DEPUIS LE CENTRE</p>
+<p class="label-desc">Barre épaisse (8px) avec gradient beige→vert→beige + ligne fine qui s'ouvre depuis le centre.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-g" data-transition="g">
+    <div class="transition-g-bar" id="barG"></div>
+    <div class="transition-g-core" id="coreG"></div>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<!-- ═══════ H — TIRETS PROGRESSIFS ═══════ -->
+<p class="label">— H — TIRETS QUI APPARAISSENT UN PAR UN</p>
+<p class="label-desc">12 segments qui se révèlent progressivement de gauche à droite. Rythme graphique.</p>
+<div class="fake-hero"><span>Hero</span></div>
+<div class="transition-h" data-transition="h">
+    <div class="transition-h-segments" id="segsH">
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+        <div class="transition-h-seg"></div>
+    </div>
+</div>
+<div class="fake-presentation"><span>Présentation</span></div>
+
+<div style="height: 100px;"></div>
+
+<script>
+function getProgress(el) {
+    const rect = el.getBoundingClientRect();
+    const wh = window.innerHeight;
+    const start = wh;
+    const end = -rect.height * 0.2;
+    return Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+}
+
+window.addEventListener('scroll', () => {
+
+    // A — Bande épaisse
+    const tA = document.querySelector('[data-transition="a"]');
+    if (tA) {
+        const p = getProgress(tA);
+        document.getElementById('fillA').style.width = (p * 100) + '%';
+    }
+
+    // B — Double ligne + texte
+    const tB = document.querySelector('[data-transition="b"]');
+    if (tB) {
+        const p = getProgress(tB);
+        document.getElementById('fillBL').style.width = (p * 100) + '%';
+        document.getElementById('fillBR').style.width = (p * 100) + '%';
+        document.getElementById('textB').style.opacity = p > 0.15 ? Math.min(1, (p - 0.15) * 3) : 0;
+    }
+
+    // C — Bande pleine largeur
+    const tC = document.querySelector('[data-transition="c"]');
+    if (tC) {
+        const p = getProgress(tC);
+        const band = document.getElementById('bandC');
+        band.style.height = (p * 50) + 'px';
+        document.getElementById('lineC').style.width = (p * 100) + '%';
+    }
+
+    // D — Trait + point
+    const tD = document.querySelector('[data-transition="d"]');
+    if (tD) {
+        const p = getProgress(tD);
+        document.getElementById('fillD').style.width = (p * 100) + '%';
+        const dot = document.getElementById('dotD');
+        dot.style.left = (p * 100) + '%';
+        dot.style.opacity = p > 0.02 ? 1 : 0;
+    }
+
+    // E — Art Déco
+    const tE = document.querySelector('[data-transition="e"]');
+    if (tE) {
+        const p = getProgress(tE);
+        const w1 = Math.min(p * 1.5, 1) * 70;
+        const w2 = Math.min(p * 1.3, 1) * 85;
+        const w3 = Math.min(p * 1.5, 1) * 60;
+        document.getElementById('lineE1').style.width = w1 + '%';
+        document.getElementById('lineE1').style.opacity = p > 0.05 ? 0.3 : 0;
+        document.getElementById('lineE2').style.width = w2 + '%';
+        document.getElementById('lineE2').style.opacity = p > 0.05 ? 0.5 : 0;
+        document.getElementById('lineE3').style.width = w3 + '%';
+        document.getElementById('lineE3').style.opacity = p > 0.05 ? 0.2 : 0;
+        const diamond = document.getElementById('diamondE');
+        if (p > 0.4) {
+            diamond.style.transform = 'rotate(45deg) scale(1)';
+            diamond.style.opacity = '0.5';
+        } else {
+            diamond.style.transform = 'rotate(45deg) scale(0)';
+            diamond.style.opacity = '0';
+        }
+    }
+
+    // F — Vague SVG
+    const tF = document.querySelector('[data-transition="f"]');
+    if (tF) {
+        const p = getProgress(tF);
+        const path = document.getElementById('pathF');
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = len;
+        path.style.strokeDashoffset = len * (1 - p);
+    }
+
+    // G — Gradient reveal
+    const tG = document.querySelector('[data-transition="g"]');
+    if (tG) {
+        const p = getProgress(tG);
+        document.getElementById('barG').style.scale = p + ' 1';
+        document.getElementById('coreG').style.width = (p * 90) + '%';
+    }
+
+    // H — Tirets
+    const tH = document.querySelector('[data-transition="h"]');
+    if (tH) {
+        const p = getProgress(tH);
+        const segs = document.querySelectorAll('.transition-h-seg');
+        segs.forEach((seg, i) => {
+            const threshold = i / segs.length;
+            if (p > threshold) {
+                const segP = Math.min(1, (p - threshold) * segs.length * 0.8);
+                seg.style.transform = 'scaleX(' + segP + ')';
+                seg.style.opacity = segP;
+            } else {
+                seg.style.transform = 'scaleX(0)';
+                seg.style.opacity = 0;
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
