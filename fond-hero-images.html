@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonds Hero — Images d'arrière-plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #1a1a1a; }
+
+        .header {
+            text-align: center;
+            padding: 50px 40px 20px;
+        }
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #f0ebe2;
+            margin-bottom: 6px;
+        }
+        .header p { font-size: 0.7rem; color: #666; letter-spacing: 0.2em; }
+
+        .section-label {
+            max-width: 1400px;
+            margin: 40px auto 15px;
+            padding: 0 40px;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+
+        .option {
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        /* Overlay styles */
+        .overlay-beige {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .option-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+        .option-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .option-content p {
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .option-label {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.55rem;
+            color: rgba(200,195,185,0.6);
+            letter-spacing: 0.15em;
+            z-index: 4;
+        }
+
+        .film-grain {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+            pointer-events: none;
+        }
+
+        /* ═══════════════════════════════════════
+           IMAGES — loaded from Unsplash (free)
+        ═══════════════════════════════════════ */
+
+        .bg-library-grand {
+            background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&q=80&auto=format');
+        }
+        .bg-books-old {
+            background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1920&q=80&auto=format');
+        }
+        .bg-columns {
+            background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80&auto=format');
+            background-position: center 30%;
+        }
+        .bg-marble-hall {
+            background-image: url('https://images.unsplash.com/photo-1564594985645-4427056e22e2?w=1920&q=80&auto=format');
+        }
+        .bg-books-close {
+            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80&auto=format');
+        }
+        .bg-library-dark {
+            background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80&auto=format');
+        }
+        .bg-arches {
+            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80&auto=format');
+        }
+        .bg-desk {
+            background-image: url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1920&q=80&auto=format');
+        }
+
+        /* ═══════════════════════════════════════
+           OVERLAY VARIANTS
+        ═══════════════════════════════════════ */
+
+        /* A — Heavy beige overlay, très fondu, image quasi-filigrane */
+        .ov-heavy-beige {
+            background: rgba(240, 235, 226, 0.82);
+        }
+        .ov-heavy-beige + .film-grain + .option-content h2 { color: #1a1a1a; }
+        .ov-heavy-beige + .film-grain + .option-content h2 em { color: #72785f; }
+        .ov-heavy-beige + .film-grain + .option-content p { color: #5a6049; }
+
+        /* B — Gradient fondu vers beige, image visible en haut */
+        .ov-gradient-top {
+            background: linear-gradient(180deg, rgba(240,235,226,0.4) 0%, rgba(240,235,226,0.88) 60%, rgba(240,235,226,0.95) 100%);
+        }
+
+        /* C — Overlay sombre élégant */
+        .ov-dark {
+            background: rgba(26, 26, 26, 0.6);
+        }
+
+        /* D — Gradient latéral, image visible à gauche */
+        .ov-gradient-right {
+            background: linear-gradient(90deg, rgba(240,235,226,0.3) 0%, rgba(240,235,226,0.85) 50%, rgba(240,235,226,0.95) 100%);
+        }
+
+        /* E — Sépia doux + beige */
+        .ov-sepia {
+            background: rgba(220, 210, 190, 0.75);
+            mix-blend-mode: multiply;
+        }
+
+        /* F — Très léger, image presque visible */
+        .ov-light {
+            background: rgba(240, 235, 226, 0.65);
+        }
+
+        /* G — Sombre avec teinte verte */
+        .ov-dark-green {
+            background: linear-gradient(150deg, rgba(26,26,26,0.55) 0%, rgba(90,96,73,0.45) 100%);
+        }
+
+        /* H — Blur (via backdrop-filter) */
+        .ov-blur {
+            background: rgba(240, 235, 226, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        /* Text colors */
+        .text-dark h2 { color: #1a1a1a; }
+        .text-dark h2 em { font-style: italic; font-weight: 500; color: #72785f; }
+        .text-dark p { color: #5a6049; }
+
+        .text-light h2 { color: #f0ebe2; }
+        .text-light h2 em { font-style: italic; font-weight: 500; color: #d6cdb8; }
+        .text-light p { color: rgba(240,235,226,0.7); }
+
+        .text-cream h2 { color: #fdfcfa; }
+        .text-cream h2 em { font-style: italic; font-weight: 500; color: #d6cdb8; }
+        .text-cream p { color: rgba(253,252,250,0.6); }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Arrière-plans photographiques</h1>
+        <p>BIBLIOTHÈQUE · COLONNES · MARBRE · LIVRES ANCIENS</p>
+    </div>
+
+    <!-- ═══════ Bibliothèque — overlay beige lourd (filigrane) ═══════ -->
+    <p class="section-label">— BIBLIOTHÈQUE FONDUE EN FILIGRANE (image quasi invisible, juste une texture)</p>
+    <div class="grid">
+        <div class="option">
+            <div class="option-bg bg-library-grand"></div>
+            <div class="overlay-beige ov-heavy-beige"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">A1 — BIBLIOTHÈQUE GRAND ANGLE · FILIGRANE LOURD</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-books-old"></div>
+            <div class="overlay-beige ov-heavy-beige"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">A2 — LIVRES ANCIENS · FILIGRANE LOURD</div>
+        </div>
+    </div>
+
+    <!-- ═══════ Colonnes / architecture — overlay gradient ═══════ -->
+    <p class="section-label">— COLONNES & ARCHITECTURE · GRADIENT QUI FOND VERS LE BEIGE</p>
+    <div class="grid">
+        <div class="option">
+            <div class="option-bg bg-columns"></div>
+            <div class="overlay-beige ov-gradient-top"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">B1 — COLONNES PALAIS · GRADIENT VERTICAL</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-marble-hall"></div>
+            <div class="overlay-beige ov-gradient-top"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">B2 — HALL MARBRE · GRADIENT VERTICAL</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-arches"></div>
+            <div class="overlay-beige ov-gradient-right"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">B3 — ARCHES · GRADIENT LATÉRAL</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-columns"></div>
+            <div class="overlay-beige ov-gradient-right"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">B4 — COLONNES · GRADIENT LATÉRAL</div>
+        </div>
+    </div>
+
+    <!-- ═══════ Ambiance sombre / texte clair ═══════ -->
+    <p class="section-label">— AMBIANCE SOMBRE · TEXTE CLAIR · PLUS DRAMATIQUE</p>
+    <div class="grid">
+        <div class="option">
+            <div class="option-bg bg-library-dark"></div>
+            <div class="overlay-beige ov-dark"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-light">
+                <h2>Sarah <em>Mostfa</em><span style="color:#d6cdb8">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">C1 — BIBLIOTHÈQUE SOMBRE · OVERLAY FONCÉ</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-columns"></div>
+            <div class="overlay-beige ov-dark-green"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-cream">
+                <h2>Sarah <em>Mostfa</em><span style="color:#d6cdb8">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">C2 — COLONNES · OVERLAY SOMBRE + TEINTE VERTE</div>
+        </div>
+    </div>
+
+    <!-- ═══════ Blur + image visible ═══════ -->
+    <p class="section-label">— FLOU (BLUR) · IMAGE VISIBLE MAIS TRÈS DOUCE</p>
+    <div class="grid">
+        <div class="option">
+            <div class="option-bg bg-library-grand"></div>
+            <div class="overlay-beige ov-blur"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">D1 — BIBLIOTHÈQUE · BLUR + OVERLAY LÉGER</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-books-close"></div>
+            <div class="overlay-beige ov-blur"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">D2 — LIVRES PROCHES · BLUR + OVERLAY LÉGER</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-columns"></div>
+            <div class="overlay-beige ov-blur"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">D3 — COLONNES · BLUR + OVERLAY LÉGER</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-marble-hall"></div>
+            <div class="overlay-beige ov-blur"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">D4 — HALL MARBRE · BLUR + OVERLAY LÉGER</div>
+        </div>
+    </div>
+
+    <!-- ═══════ Sépia / vintage ═══════ -->
+    <p class="section-label">— SÉPIA VINTAGE · RENDU ANCIEN CHALEUREUX</p>
+    <div class="grid">
+        <div class="option">
+            <div class="option-bg bg-library-grand"></div>
+            <div class="overlay-beige ov-sepia"></div>
+            <div class="overlay-beige" style="background:rgba(240,235,226,0.3)"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">E1 — BIBLIOTHÈQUE · SÉPIA DOUX</div>
+        </div>
+        <div class="option">
+            <div class="option-bg bg-books-old"></div>
+            <div class="overlay-beige ov-sepia"></div>
+            <div class="overlay-beige" style="background:rgba(240,235,226,0.3)"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">E2 — LIVRES ANCIENS · SÉPIA DOUX</div>
+        </div>
+    </div>
+
+    <div style="text-align:center; padding: 40px; color: #444; font-size: 0.7rem; letter-spacing: 0.1em;">
+        IMAGES UNSPLASH (LIBRES DE DROIT) · ON PEUT AUSSI UTILISER UNE VRAIE PHOTO DU PALAIS DE JUSTICE DE LYON
+    </div>
+</body>
+</html>
