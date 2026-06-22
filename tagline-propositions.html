@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagline — Propositions de style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #e8e3da; }
+
+        :root {
+            --vert: #72785f;
+            --vert-dark: #5a6049;
+            --beige: #d6cdb8;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+            --dm: 'DM Serif Display', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 50px 40px 10px;
+        }
+        .page-header h1 {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--noir);
+        }
+        .page-header p {
+            font-size: 0.6rem;
+            color: #999;
+            letter-spacing: 0.2em;
+            margin-top: 6px;
+        }
+
+        .proposals {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 40px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .proposal {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .proposal-label {
+            position: absolute;
+            top: 20px;
+            left: 24px;
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #aaa;
+            z-index: 5;
+        }
+
+        .proposal-desc {
+            font-size: 0.7rem;
+            color: #999;
+            text-align: center;
+            padding: 10px 20px 14px;
+            letter-spacing: 0.02em;
+            background: rgba(0,0,0,0.02);
+            border-top: 1px solid rgba(0,0,0,0.04);
+        }
+
+        /* ═══════ Hero mock ═══════ */
+        .hero-mock {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: -40px;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 65% 55% at 78% 82%, rgba(172,120,108,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 15% 20%, rgba(160,115,105,0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 90% 80% at 35% 35%, #e2ddd0 0%, transparent 70%),
+                radial-gradient(ellipse 70% 55% at 65% 45%, #ccc8ae 0%, transparent 55%),
+                radial-gradient(ellipse 55% 45% at 50% 75%, rgba(114,120,95,0.18) 0%, transparent 50%),
+                linear-gradient(150deg, #ece7dc 0%, #ddd7c8 30%, #cfc9b5 60%, #d8d2c2 100%);
+            filter: blur(30px);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 30px 40px;
+        }
+        .hero-name {
+            font-family: var(--serif);
+            font-size: clamp(3.5rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.0;
+            color: var(--noir);
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+        .hero-name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .hero-name .dot { color: var(--vert); }
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
+            font-weight: 300;
+            color: var(--vert);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════
+           A — LETTRES ESPACÉES INTER CAPS
+           Sobre, moderne, très lisible
+        ═══════════════════════════════════════ */
+        .style-a .tagline {
+            margin-top: 30px;
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--noir);
+            opacity: 0.45;
+        }
+
+        /* ═══════════════════════════════════════
+           B — SERIF GRANDE TAILLE LIGHT
+           Affirmée, éditoriale
+        ═══════════════════════════════════════ */
+        .style-b .tagline {
+            margin-top: 28px;
+            font-family: var(--serif);
+            font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+            font-weight: 300;
+            color: var(--noir);
+            opacity: 0.5;
+            letter-spacing: 0.01em;
+            max-width: 600px;
+            line-height: 1.4;
+        }
+
+        /* ═══════════════════════════════════════
+           C — TRAIT VERT + INTER MEDIUM
+           Structuré, le trait crée une respiration
+        ═══════════════════════════════════════ */
+        .style-c .tagline-wrap {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .style-c .tagline-line {
+            width: 45px;
+            height: 1.5px;
+            background: var(--vert);
+            opacity: 0.35;
+        }
+        .style-c .tagline {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: var(--noir);
+            opacity: 0.5;
+            letter-spacing: 0.06em;
+        }
+
+        /* ═══════════════════════════════════════
+           D — DM SERIF DISPLAY ITALIC
+           Typographiquement forte, contraste marqué
+        ═══════════════════════════════════════ */
+        .style-d .tagline {
+            margin-top: 28px;
+            font-family: var(--dm);
+            font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--vert-dark);
+            opacity: 0.6;
+            letter-spacing: -0.01em;
+            max-width: 550px;
+            line-height: 1.45;
+        }
+
+        /* ═══════════════════════════════════════
+           E — BICOLORE VERT + NOIR
+           Le mot "défense" ressort en vert
+        ═══════════════════════════════════════ */
+        .style-e .tagline {
+            margin-top: 28px;
+            font-family: var(--serif);
+            font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+            font-weight: 400;
+            color: var(--noir);
+            opacity: 0.55;
+            letter-spacing: 0.01em;
+            max-width: 600px;
+            line-height: 1.45;
+        }
+        .style-e .tagline strong {
+            font-weight: 500;
+            color: var(--vert);
+            opacity: 1;
+        }
+
+        /* ═══════════════════════════════════════
+           F — BANDEAU TRANSLUCIDE
+           Encadrement subtil qui donne du poids
+        ═══════════════════════════════════════ */
+        .style-f .tagline-wrap {
+            margin-top: 32px;
+            background: rgba(114, 120, 95, 0.06);
+            border-left: 2px solid rgba(114, 120, 95, 0.25);
+            padding: 14px 28px;
+        }
+        .style-f .tagline {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--noir);
+            opacity: 0.6;
+            letter-spacing: 0.04em;
+        }
+
+        /* ═══════════════════════════════════════
+           G — DEUX LIGNES SÉPARÉES · CAPS + SERIF
+           Mix typographique audacieux
+        ═══════════════════════════════════════ */
+        .style-g .tagline-wrap {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .style-g .tagline-top {
+            font-family: var(--sans);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--vert);
+            opacity: 0.7;
+        }
+        .style-g .tagline-bottom {
+            font-family: var(--serif);
+            font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--noir);
+            opacity: 0.45;
+        }
+
+        /* ═══════════════════════════════════════
+           H — GRANDE INTER LIGHT · PLEINE LARGEUR
+           Impact maximal, très contemporain
+        ═══════════════════════════════════════ */
+        .style-h .tagline {
+            margin-top: 30px;
+            font-family: var(--sans);
+            font-size: clamp(1rem, 1.7vw, 1.3rem);
+            font-weight: 200;
+            color: var(--noir);
+            opacity: 0.4;
+            letter-spacing: 0.08em;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════
+           I — ENCADRÉE ENTRE DEUX TRAITS
+           Graphique, équilibré
+        ═══════════════════════════════════════ */
+        .style-i .tagline-wrap {
+            margin-top: 32px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .style-i .tagline-dash {
+            flex-shrink: 0;
+            width: 35px;
+            height: 1px;
+            background: var(--vert);
+            opacity: 0.3;
+        }
+        .style-i .tagline {
+            font-family: var(--serif);
+            font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--noir);
+            opacity: 0.5;
+            letter-spacing: 0.01em;
+            line-height: 1.4;
+        }
+
+        /* ═══════════════════════════════════════
+           J — HIGHLIGHT VERT TRANSLUCIDE
+           Original, le surlignage attire l'œil
+        ═══════════════════════════════════════ */
+        .style-j .tagline {
+            margin-top: 28px;
+            font-family: var(--serif);
+            font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+            font-weight: 400;
+            color: var(--noir);
+            opacity: 0.6;
+            letter-spacing: 0.01em;
+            max-width: 600px;
+            line-height: 1.55;
+        }
+        .style-j .tagline .highlight {
+            background: linear-gradient(to top, rgba(114,120,95,0.12) 40%, transparent 40%);
+            padding: 0 2px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>Style de la tagline</h1>
+    <p>PHRASE D'ACCROCHE HERO — 10 PROPOSITIONS</p>
+</div>
+
+<div class="proposals">
+
+    <!-- A -->
+    <div class="proposal">
+        <div class="hero-mock style-a">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">A</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <p class="tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <p class="proposal-desc">Inter · Lettres espacées · Caps · Sobre et moderne</p>
+    </div>
+
+    <!-- B -->
+    <div class="proposal">
+        <div class="hero-mock style-b">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">B</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <p class="tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <p class="proposal-desc">Cormorant Garamond · Grande taille · Light · Éditoriale</p>
+    </div>
+
+    <!-- C -->
+    <div class="proposal">
+        <div class="hero-mock style-c">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">C</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <div class="tagline-wrap">
+                    <div class="tagline-line"></div>
+                    <p class="tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+                </div>
+            </div>
+        </div>
+        <p class="proposal-desc">Inter medium + trait vert séparateur · Structuré</p>
+    </div>
+
+    <!-- D -->
+    <div class="proposal">
+        <div class="hero-mock style-d">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">D</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <p class="tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <p class="proposal-desc">DM Serif Display italic · Contraste typographique fort · Vert foncé</p>
+    </div>
+
+    <!-- E -->
+    <div class="proposal">
+        <div class="hero-mock style-e">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">E</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <p class="tagline">Assure la <strong>défense</strong> de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <p class="proposal-desc">Cormorant Garamond · « défense » en vert accentué · Bicolore</p>
+    </div>
+
+    <!-- F -->
+    <div class="proposal">
+        <div class="hero-mock style-f">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">F</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <div class="tagline-wrap">
+                    <p class="tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+                </div>
+            </div>
+        </div>
+        <p class="proposal-desc">Inter light · Bandeau translucide vert + trait latéral · Encadré subtil</p>
+    </div>
+
+    <!-- G -->
+    <div class="proposal">
+        <div class="hero-mock style-g">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">G</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <div class="tagline-wrap">
+                    <span class="tagline-top">Défense de vos intérêts</span>
+                    <span class="tagline-bottom">devant les juridictions civiles et commerciales</span>
+                </div>
+            </div>
+        </div>
+        <p class="proposal-desc">Mix caps Inter + italic Cormorant · Deux lignes · Audacieux</p>
+    </div>
+
+    <!-- H -->
+    <div class="proposal">
+        <div class="hero-mock style-h">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">H</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <p class="tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <p class="proposal-desc">Inter ultra-light · Grande · Aérée · Impact contemporain</p>
+    </div>
+
+    <!-- I -->
+    <div class="proposal">
+        <div class="hero-mock style-i">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">I</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <div class="tagline-wrap">
+                    <span class="tagline-dash"></span>
+                    <p class="tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+                    <span class="tagline-dash"></span>
+                </div>
+            </div>
+        </div>
+        <p class="proposal-desc">Cormorant italic · Encadrée entre deux traits · Graphique et équilibré</p>
+    </div>
+
+    <!-- J -->
+    <div class="proposal">
+        <div class="hero-mock style-j">
+            <div class="hero-bg"></div>
+            <span class="proposal-label">J</span>
+            <div class="hero-content">
+                <h1 class="hero-name">Sarah <em>Mostfa</em><span class="dot">.</span></h1>
+                <p class="hero-sub">Avocate au Barreau de Lyon</p>
+                <p class="tagline">Assure la <span class="highlight">défense de vos intérêts</span> devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <p class="proposal-desc">Cormorant · Surlignage vert translucide sur « défense de vos intérêts » · Original</p>
+    </div>
+
+</div>
+
+</body>
+</html>
