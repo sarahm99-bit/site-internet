@@ -220,20 +220,18 @@
         ═══════════════════════════════════════ */
         .scroll-transition {
             position: relative;
-            height: 140px;
-            background: var(--beige-nacre);
-            display: flex;
-            align-items: center;
-            overflow: hidden;
+            height: 0;
+            background: transparent;
+            overflow: visible;
+            z-index: 10;
         }
         .scroll-transition-bar {
             position: absolute;
-            top: 50%;
+            top: -4px;
             left: 5%;
             right: 5%;
             max-width: 1200px;
             margin: 0 auto;
-            transform: translateY(-50%);
             height: 8px;
             border-radius: 4px;
             background: linear-gradient(90deg, var(--beige) 0%, var(--vert) 50%, var(--beige) 100%);
@@ -243,9 +241,9 @@
         }
         .scroll-transition-core {
             position: absolute;
-            top: 50%;
+            top: -1.5px;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             width: 0%;
             max-width: 1200px;
             height: 3px;
@@ -348,23 +346,9 @@
             object-position: top center;
             display: block;
         }
-        .presentation-image-accent {
-            position: absolute;
-            top: -12px;
-            left: -12px;
-            width: 60px;
-            height: 60px;
-            border-top: 2px solid var(--vert);
-            border-left: 2px solid var(--vert);
-        }
+        .presentation-image-accent,
         .presentation-image-accent-bottom {
-            position: absolute;
-            bottom: -12px;
-            right: -12px;
-            width: 60px;
-            height: 60px;
-            border-bottom: 2px solid var(--vert);
-            border-right: 2px solid var(--vert);
+            display: none;
         }
         .presentation-content {
             padding-top: 30px;
@@ -859,10 +843,11 @@
 
             <h3 class="presentation-formation-title">Formation</h3>
             <ul class="presentation-formation">
-                <li><strong>Master I Droit des affaires</strong>, parcours Propriété littéraire et artistique — Université Lumière Lyon II</li>
-                <li><strong>Master II Droit des affaires comparé</strong> — Université Lumière Lyon II</li>
-                <li><strong>LL.M Business Law</strong> — Université de Montréal</li>
-                <li><strong>CAPA</strong> — Prestation de serment, Cour d'appel de Lyon</li>
+                <li><strong>Master I Droit des affaires</strong>, parcours Propriété littéraire et artistique — Université Lumière Lyon II (2021)</li>
+                <li><strong>Master II Droit des affaires comparé</strong> — Université Lumière Lyon II (2022)</li>
+                <li><strong>LL.M Business Law</strong> — Université de Montréal (2022)</li>
+                <li><strong>CRFPA</strong> — Examen d'entrée au Centre Régional de Formation Professionnelle des Avocats, spécialité droit pénal et procédure pénale (2022)</li>
+                <li><strong>CAPA</strong> — Certificat d'Aptitude à la Profession d'Avocat, prestation de serment, Cour d'appel de Lyon (2024)</li>
             </ul>
 
             <a href="#contact" class="presentation-cta">Me contacter</a>
