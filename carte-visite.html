@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte de visite — Sarah Mostfa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e8e3da;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 40px;
+            gap: 30px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 0.65rem;
+            color: #999;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .section-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #999;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        /* ═══════ CARTE 85×55mm affiché à 2x pour la netteté ═══════ */
+        .card {
+            width: 510px;   /* 85mm × 6 */
+            height: 330px;  /* 55mm × 6 */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px -8px rgba(0,0,0,0.12);
+        }
+
+        /* ═══════════════════════════════════════
+           PROPOSITION 1 — CLASSIQUE ÉPURÉE
+        ═══════════════════════════════════════ */
+
+        /* Recto */
+        .card-1-front {
+            background: #fdfcfa;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+        }
+        .card-1-front .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .card-1-front .name em {
+            font-style: italic;
+            font-weight: 500;
+            color: #72785f;
+        }
+        .card-1-front .title-line {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #72785f;
+            margin-bottom: 28px;
+        }
+        .card-1-front .contact-block {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .card-1-front .contact-item {
+            font-size: 10px;
+            font-weight: 300;
+            color: #888;
+            letter-spacing: 0.02em;
+        }
+        .card-1-front .vert-line {
+            position: absolute;
+            left: 38px;
+            top: 45px;
+            bottom: 45px;
+            width: 1.5px;
+            background: #72785f;
+            opacity: 0.25;
+        }
+
+        /* Verso */
+        .card-1-back {
+            background: #fdfcfa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-1-back .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 600;
+            color: #1a1a1a;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+        .card-1-back .logo em {
+            font-style: italic;
+            font-weight: 400;
+            color: #72785f;
+        }
+        .card-1-back .label {
+            position: absolute;
+            bottom: 40px;
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #72785f;
+        }
+
+        /* ═══════════════════════════════════════
+           PROPOSITION 2 — FOND VERT SOMBRE
+        ═══════════════════════════════════════ */
+
+        .card-2-front {
+            background: #3d4033;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+        }
+        .card-2-front .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 400;
+            color: #f0ebe2;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .card-2-front .name em {
+            font-style: italic;
+            font-weight: 500;
+        }
+        .card-2-front .dot {
+            color: #d6cdb8;
+        }
+        .card-2-front .title-line {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #d6cdb8;
+            margin-bottom: 28px;
+        }
+        .card-2-front .contact-block {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .card-2-front .contact-item {
+            font-size: 10px;
+            font-weight: 300;
+            color: rgba(240,235,226,0.5);
+        }
+
+        .card-2-back {
+            background: #3d4033;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-2-back .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 600;
+            color: #f0ebe2;
+            letter-spacing: -0.04em;
+        }
+        .card-2-back .logo em {
+            font-style: italic;
+            font-weight: 400;
+            color: #d6cdb8;
+        }
+        .card-2-back .label {
+            position: absolute;
+            bottom: 40px;
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: rgba(240,235,226,0.4);
+        }
+
+        /* ═══════════════════════════════════════
+           PROPOSITION 3 — BEIGE NACRÉ + CENTRÉ
+        ═══════════════════════════════════════ */
+
+        .card-3-front {
+            background: #f0ebe2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+        }
+        .card-3-front .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .card-3-front .name em {
+            font-style: italic;
+            font-weight: 500;
+            color: #72785f;
+        }
+        .card-3-front .title-line {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #72785f;
+            margin-bottom: 5px;
+        }
+        .card-3-front .separator {
+            width: 40px;
+            height: 1px;
+            background: #72785f;
+            opacity: 0.3;
+            margin: 18px auto;
+        }
+        .card-3-front .contact-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+        }
+        .card-3-front .contact-item {
+            font-size: 9.5px;
+            font-weight: 300;
+            color: #888;
+        }
+
+        .card-3-back {
+            background: #f0ebe2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-3-back .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            font-weight: 300;
+            color: #1a1a1a;
+            letter-spacing: -0.04em;
+        }
+        .card-3-back .logo em {
+            font-style: italic;
+            color: #72785f;
+        }
+        .card-3-back .label {
+            position: absolute;
+            bottom: 38px;
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #aaa;
+        }
+
+        /* ═══════════════════════════════════════
+           PROPOSITION 4 — NOIR ÉLÉGANT
+        ═══════════════════════════════════════ */
+
+        .card-4-front {
+            background: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+        }
+        .card-4-front .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 400;
+            color: #f0ebe2;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .card-4-front .name em {
+            font-style: italic;
+            font-weight: 500;
+            color: #d6cdb8;
+        }
+        .card-4-front .title-line {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(240,235,226,0.4);
+            margin-bottom: 28px;
+        }
+        .card-4-front .contact-block {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .card-4-front .contact-item {
+            font-size: 10px;
+            font-weight: 300;
+            color: rgba(240,235,226,0.35);
+        }
+        .card-4-front .vert-line {
+            position: absolute;
+            right: 50px;
+            top: 50px;
+            bottom: 50px;
+            width: 1px;
+            background: #72785f;
+            opacity: 0.4;
+        }
+
+        .card-4-back {
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-4-back .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 600;
+            color: #f0ebe2;
+            letter-spacing: -0.04em;
+        }
+        .card-4-back .logo em {
+            font-style: italic;
+            font-weight: 400;
+            color: #72785f;
+        }
+        .card-4-back .top-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: #72785f;
+        }
+        .card-4-back .label {
+            position: absolute;
+            bottom: 40px;
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: rgba(240,235,226,0.25);
+        }
+
+        /* ═══════════════════════════════════════
+           PRINT GUIDE
+        ═══════════════════════════════════════ */
+        .print-guide {
+            max-width: 600px;
+            text-align: center;
+            padding: 30px 40px;
+            margin-top: 20px;
+            font-size: 0.75rem;
+            line-height: 1.8;
+            color: #888;
+        }
+        .print-guide strong {
+            color: #555;
+            font-weight: 500;
+        }
+
+        @media print {
+            body { background: white; padding: 20px; }
+            .card { box-shadow: none; border: 0.5px solid #eee; }
+            h1, .subtitle, .section-label, .card-label, .print-guide { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Carte de visite</h1>
+<p class="subtitle">4 PROPOSITIONS · RECTO + VERSO · 85 × 55 MM</p>
+
+<!-- ═══════ PROPOSITION 1 ═══════ -->
+<p class="section-label">— 1 — CLASSIQUE BLANCHE + TRAIT VERT LATÉRAL</p>
+<div class="cards-row">
+    <div class="card-container">
+        <div class="card card-1-front">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">contact@sarahmostfa-avocat.fr</span>
+                <span class="contact-item">Sur rendez-vous</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+    <div class="card-container">
+        <div class="card card-1-back">
+            <div class="logo">S<em>M</em></div>
+            <div class="label">Avocat</div>
+        </div>
+        <span class="card-label">Verso</span>
+    </div>
+</div>
+
+<!-- ═══════ PROPOSITION 2 ═══════ -->
+<p class="section-label">— 2 — FOND VERT OLIVE SOMBRE</p>
+<div class="cards-row">
+    <div class="card-container">
+        <div class="card card-2-front">
+            <div class="name">Sarah <em>Mostfa</em><span class="dot">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">contact@sarahmostfa-avocat.fr</span>
+                <span class="contact-item">Sur rendez-vous</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+    <div class="card-container">
+        <div class="card card-2-back">
+            <div class="logo">S<em>M</em></div>
+            <div class="label">Avocat</div>
+        </div>
+        <span class="card-label">Verso</span>
+    </div>
+</div>
+
+<!-- ═══════ PROPOSITION 3 ═══════ -->
+<p class="section-label">— 3 — BEIGE NACRÉ · CENTRÉ</p>
+<div class="cards-row">
+    <div class="card-container">
+        <div class="card card-3-front">
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="separator"></div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">contact@sarahmostfa-avocat.fr</span>
+                <span class="contact-item">Sur rendez-vous</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+    <div class="card-container">
+        <div class="card card-3-back">
+            <div class="logo">S<em>M</em></div>
+            <div class="label">Avocat</div>
+        </div>
+        <span class="card-label">Verso</span>
+    </div>
+</div>
+
+<!-- ═══════ PROPOSITION 4 ═══════ -->
+<p class="section-label">— 4 — NOIR ÉLÉGANT + LIGNE VERTE</p>
+<div class="cards-row">
+    <div class="card-container">
+        <div class="card card-4-front">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">contact@sarahmostfa-avocat.fr</span>
+                <span class="contact-item">Sur rendez-vous</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+    <div class="card-container">
+        <div class="card card-4-back">
+            <div class="top-line"></div>
+            <div class="logo">S<em>M</em></div>
+            <div class="label">Avocat</div>
+        </div>
+        <span class="card-label">Verso</span>
+    </div>
+</div>
+
+<div class="print-guide">
+    <strong>Pour imprimer sur Vistaprint :</strong><br>
+    1. Choisis ta proposition préférée<br>
+    2. Fais une capture d'écran du recto et du verso séparément<br>
+    3. Ou bien dis-moi ton choix et je te génère un fichier SVG/PDF prêt à uploader<br>
+    <br>
+    <strong>Format :</strong> 85 × 55 mm · <strong>Fond perdu :</strong> ajouter 2mm de chaque côté pour Vistaprint
+</div>
+
+</body>
+</html>
