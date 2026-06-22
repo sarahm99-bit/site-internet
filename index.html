@@ -188,7 +188,23 @@
             color: var(--vert);
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            margin-bottom: 60px;
+            margin-bottom: 24px;
+        }
+        .hero-tagline {
+            font-family: var(--serif);
+            font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--noir);
+            letter-spacing: 0.01em;
+            max-width: 560px;
+            margin: 0 auto 60px;
+            line-height: 1.5;
+            animation: taglineFade 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+        }
+        @keyframes taglineFade {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 0.55; transform: translateY(0); }
         }
         .hero-scroll {
             display: flex;
@@ -815,6 +831,7 @@
     <div class="hero-content">
         <h1 class="hero-title">Sarah <em class="vert">Mostfa</em><span class="vert">.</span></h1>
         <p class="hero-subtitle">Avocate au Barreau de Lyon</p>
+        <p class="hero-tagline">Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
         <div class="hero-scroll">
             <span>Découvrir</span>
             <div class="hero-scroll-line"></div>
@@ -891,7 +908,6 @@
                     <span class="domaine-service">Concurrence déloyale et parasitisme</span>
                     <span class="domaine-service">Rupture brutale de relations commerciales</span>
                     <span class="domaine-service">Conflits entre associés</span>
-                    <span class="domaine-service">Litiges</span>
                     <span class="domaine-service">Recouvrement de créances et procédures d'exécution</span>
                     <span class="domaine-service">Référés et procédures d'urgence</span>
                 </div>
@@ -902,7 +918,7 @@
                 <span class="domaine-number">02.</span>
                 <div class="domaine-header-text">
                     <h3 class="domaine-title">Contentieux civil</h3>
-                    <p class="domaine-catchphrase">Vous êtes un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits.</p>
+                    <p class="domaine-catchphrase">Vous êtes une société ou un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits.</p>
                 </div>
                 <div class="domaine-toggle">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
