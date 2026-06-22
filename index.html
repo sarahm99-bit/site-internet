@@ -343,6 +343,20 @@
             object-position: top center;
             display: block;
         }
+        .presentation-image-wrapper {
+            box-shadow: 0 15px 45px -12px rgba(0,0,0,0.12);
+        }
+        .presentation-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            bottom: 30px;
+            left: -10px;
+            width: 2px;
+            background: var(--vert);
+            opacity: 0.35;
+            z-index: 2;
+        }
         .presentation-image-accent,
         .presentation-image-accent-bottom {
             display: none;
