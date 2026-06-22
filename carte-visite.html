@@ -237,13 +237,31 @@
         ═══════════════════════════════════════ */
 
         .card-3-front {
-            background: #f0ebe2;
+            background: linear-gradient(150deg, #ece7dc 0%, #ddd7c8 30%, #cfc9b5 60%, #d8d2c2 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 40px;
             text-align: center;
+            position: relative;
+        }
+        .card-3-front::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background:
+                radial-gradient(ellipse 65% 55% at 78% 82%, rgba(172,120,108,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 15% 20%, rgba(160,115,105,0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 90% 80% at 35% 35%, #e2ddd0 0%, transparent 70%),
+                radial-gradient(ellipse 70% 55% at 65% 45%, #ccc8ae 0%, transparent 55%),
+                radial-gradient(ellipse 55% 45% at 50% 75%, rgba(114,120,95,0.18) 0%, transparent 50%);
+            filter: blur(25px);
+            z-index: 0;
+        }
+        .card-3-front > * {
+            position: relative;
+            z-index: 1;
         }
         .card-3-front .name {
             font-family: 'Cormorant Garamond', serif;
@@ -287,10 +305,28 @@
         }
 
         .card-3-back {
-            background: #f0ebe2;
+            background: linear-gradient(150deg, #ece7dc 0%, #ddd7c8 30%, #cfc9b5 60%, #d8d2c2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+        .card-3-back::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background:
+                radial-gradient(ellipse 65% 55% at 78% 82%, rgba(172,120,108,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 15% 20%, rgba(160,115,105,0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 90% 80% at 35% 35%, #e2ddd0 0%, transparent 70%),
+                radial-gradient(ellipse 70% 55% at 65% 45%, #ccc8ae 0%, transparent 55%),
+                radial-gradient(ellipse 55% 45% at 50% 75%, rgba(114,120,95,0.18) 0%, transparent 50%);
+            filter: blur(25px);
+            z-index: 0;
+        }
+        .card-3-back > * {
+            position: relative;
+            z-index: 1;
         }
         .card-3-back .logo {
             font-family: 'Cormorant Garamond', serif;
@@ -480,7 +516,7 @@
 </div>
 
 <!-- ═══════ PROPOSITION 3 ═══════ -->
-<p class="section-label">— 3 — BEIGE NACRÉ · CENTRÉ</p>
+<p class="section-label">— 3 — GRADIENT NACRÉ BLUR · CENTRÉ</p>
 <div class="cards-row">
     <div class="card-container">
         <div class="card card-3-front">
