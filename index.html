@@ -135,23 +135,18 @@
             overflow: hidden;
         }
         .hero-canvas {
-            display: none;
-        }
-        .hero-gradient {
             position: absolute;
             inset: 0;
             z-index: 0;
-            background:
-                radial-gradient(ellipse 70% 50% at 80% 85%, rgba(178,132,120,0.35) 0%, transparent 65%),
-                radial-gradient(ellipse 90% 80% at 35% 30%, #e6e1d4 0%, transparent 70%),
-                radial-gradient(ellipse 80% 60% at 70% 40%, #d6d2be 0%, transparent 55%),
-                linear-gradient(150deg, #ece7dc 0%, #e0dace 35%, #d2ccba 65%, #ddd7ca 100%);
+        }
+        .hero-gradient {
+            display: none;
         }
         .hero-film-grain {
             position: absolute;
             inset: 0;
             z-index: 1;
-            opacity: 0.04;
+            opacity: 0.035;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 256px 256px;
             pointer-events: none;
@@ -1224,34 +1219,52 @@ document.querySelectorAll('.reveal, .reveal-scale, .reveal-slide-left, .reveal-s
             vec2 uv = gl_FragCoord.xy / u_resolution;
             float aspect = u_resolution.x / u_resolution.y;
             vec2 p = vec2(uv.x * aspect, uv.y);
-            float t = u_time * 0.15;
+            float t = u_time * 0.12;
 
             vec2 mousePos = vec2(u_mouse.x * aspect, u_mouse.y);
             float mouseDist = distance(p, mousePos);
-            float mouseInfluence = smoothstep(1.0, 0.0, mouseDist) * 0.07;
+            float mouseInfluence = smoothstep(1.2, 0.0, mouseDist) * 0.09;
 
-            float distortion = 0.45;
-            float swirl = 0.3;
+            float distortion = 0.5;
+            float swirl = 0.35;
 
-            float n1 = fbm(p + vec2(t * 0.3, t * 0.2));
-            float n2 = fbm(p + vec2(n1 * distortion + t * 0.1, n1 * swirl - t * 0.15));
-            float n3 = fbm(p + vec2(n2 * distortion * 0.7, n2 * swirl * 0.8 + t * 0.05) + mouseInfluence);
+            float n1 = fbm(p + vec2(t * 0.25, t * 0.18));
+            float n2 = fbm(p + vec2(n1 * distortion + t * 0.08, n1 * swirl - t * 0.12));
+            float n3 = fbm(p + vec2(n2 * distortion * 0.7, n2 * swirl * 0.8 + t * 0.04) + mouseInfluence);
 
             float finalNoise = n3 * 0.5 + 0.5;
 
-            vec3 cream   = vec3(0.945, 0.925, 0.890);
-            vec3 sand    = vec3(0.895, 0.865, 0.810);
-            vec3 golden  = vec3(0.855, 0.815, 0.730);
-            vec3 olive   = vec3(0.820, 0.790, 0.700);
+            // Palette nacré + rosé + olive
+            vec3 nacre    = vec3(0.940, 0.920, 0.885);
+            vec3 sable    = vec3(0.900, 0.875, 0.825);
+            vec3 blush    = vec3(0.855, 0.790, 0.760);
+            vec3 rose     = vec3(0.780, 0.620, 0.580);
+            vec3 olive    = vec3(0.750, 0.770, 0.650);
+            vec3 vert     = vec3(0.690, 0.720, 0.590);
+
+            // Position-based bias for rosé in corner
+            float roseBias = smoothstep(0.0, 1.2, uv.x * 0.6 + (1.0 - uv.y) * 0.8);
+            float vertBias = smoothstep(0.0, 1.0, (1.0 - uv.x) * 0.5 + uv.y * 0.6);
 
             vec3 color;
-            if (finalNoise < 0.35) {
-                color = mix(cream, sand, smoothstep(0.0, 0.35, finalNoise));
-            } else if (finalNoise < 0.6) {
-                color = mix(sand, golden, smoothstep(0.35, 0.6, finalNoise));
+            if (finalNoise < 0.25) {
+                color = mix(nacre, sable, smoothstep(0.0, 0.25, finalNoise));
+            } else if (finalNoise < 0.45) {
+                color = mix(sable, blush, smoothstep(0.25, 0.45, finalNoise));
+            } else if (finalNoise < 0.65) {
+                vec3 mid = mix(blush, olive, vertBias);
+                color = mix(blush, mid, smoothstep(0.45, 0.65, finalNoise));
+            } else if (finalNoise < 0.8) {
+                vec3 warm = mix(olive, rose, roseBias * 0.6);
+                color = mix(olive, warm, smoothstep(0.65, 0.8, finalNoise));
             } else {
-                color = mix(golden, olive, smoothstep(0.6, 1.0, finalNoise));
+                vec3 deep = mix(vert, rose, roseBias * 0.4);
+                color = mix(vert, deep, smoothstep(0.8, 1.0, finalNoise));
             }
+
+            // Subtle rose glow in bottom-right
+            float roseGlow = smoothstep(0.6, 0.0, distance(uv, vec2(0.85, 0.15))) * 0.12;
+            color = mix(color, rose, roseGlow);
 
             gl_FragColor = vec4(color, 1.0);
         }
