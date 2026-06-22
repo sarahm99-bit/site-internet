@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fonds Hero — Gradients Blur Argentiques</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <title>Fonds Hero — Gradients Blur + Touche Rosée</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #1a1a1a; }
 
         .header {
             text-align: center;
-            padding: 50px 40px 30px;
+            padding: 50px 40px 20px;
         }
         .header h1 {
             font-family: 'Cormorant Garamond', serif;
@@ -22,13 +22,23 @@
         }
         .header p { font-size: 0.7rem; color: #666; letter-spacing: 0.2em; }
 
+        .section-label {
+            max-width: 1400px;
+            margin: 40px auto 15px;
+            padding: 0 40px;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #555;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 30px 40px 80px;
+            padding: 0 40px 30px;
         }
 
         .option {
@@ -50,19 +60,12 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(2.5rem, 4vw, 3.5rem);
             font-weight: 300;
-            color: #1a1a1a;
             line-height: 1;
             margin-bottom: 12px;
-        }
-        .option-content h2 em {
-            font-style: italic;
-            font-weight: 500;
-            color: #72785f;
         }
         .option-content p {
             font-size: 0.75rem;
             font-weight: 300;
-            color: #5a6049;
             letter-spacing: 0.18em;
             text-transform: uppercase;
         }
@@ -73,38 +76,30 @@
             left: 0;
             right: 0;
             text-align: center;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: rgba(100,100,90,0.7);
             letter-spacing: 0.15em;
             z-index: 3;
         }
 
-        /* ─── Grain argentique (shared) ─── */
         .film-grain {
             position: absolute;
             inset: 0;
             z-index: 1;
-            opacity: 0.035;
+            opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 256px 256px;
             pointer-events: none;
         }
 
-        /* ─── A : Brume douce — beige/vert olive, flux diagonal ─── */
-        .gradient-a {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 120% 80% at 20% 30%, #c8c4a9 0%, transparent 70%),
-                radial-gradient(ellipse 100% 90% at 80% 60%, #a8ad8e 0%, transparent 65%),
-                radial-gradient(ellipse 80% 60% at 50% 80%, #d6cdb8 0%, transparent 60%),
-                linear-gradient(135deg, #e8e3d4 0%, #ccc8ae 40%, #b0b499 70%, #d2cbb5 100%);
-        }
+        /* ══════════════════════════════════════════
+           SECTION 1 : Fonds gardés (B, D, E, F, H)
+           Avec meilleur contraste texte
+           ══════════════════════════════════════════ */
 
-        /* ─── B : Aube argentique — tons chauds très doux ─── */
+        /* B — Aube argentique */
         .gradient-b {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background:
                 radial-gradient(ellipse 90% 70% at 30% 20%, #ddd8c4 0%, transparent 65%),
                 radial-gradient(ellipse 110% 80% at 75% 70%, #bbb89e 0%, transparent 60%),
@@ -112,21 +107,9 @@
                 linear-gradient(160deg, #e2ddd0 0%, #d1cbba 35%, #b5b39a 65%, #cfc9b5 100%);
         }
 
-        /* ─── C : Olive profond — plus de vert, plus de caractère ─── */
-        .gradient-c {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 90% at 65% 25%, #a3a888 0%, transparent 65%),
-                radial-gradient(ellipse 100% 70% at 20% 70%, #c5c1a8 0%, transparent 60%),
-                radial-gradient(ellipse 70% 50% at 85% 80%, #8e9475 0%, transparent 55%),
-                linear-gradient(145deg, #d0ccb5 0%, #b4b597 40%, #969b7e 70%, #c2bda8 100%);
-        }
-
-        /* ─── D : Nacre — très clair, presque blanc avec des reflets ─── */
+        /* D — Nacre */
         .gradient-d {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background:
                 radial-gradient(ellipse 90% 80% at 40% 35%, #eae5d8 0%, transparent 70%),
                 radial-gradient(ellipse 80% 70% at 75% 65%, #d8d4c0 0%, transparent 60%),
@@ -134,10 +117,9 @@
                 linear-gradient(130deg, #f0ebe2 0%, #e4dfcf 40%, #d5d0bd 65%, #ece7dc 100%);
         }
 
-        /* ─── E : Film flou — mouvement horizontal, effet cinéma ─── */
+        /* E — Film flou */
         .gradient-e {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background:
                 radial-gradient(ellipse 150% 50% at 0% 40%, #c2bf9f 0%, transparent 60%),
                 radial-gradient(ellipse 130% 45% at 100% 55%, #adb08f 0%, transparent 55%),
@@ -145,10 +127,9 @@
                 linear-gradient(90deg, #d8d3c0 0%, #c5c1a5 30%, #b3b495 55%, #cec9b4 80%, #ddd8c6 100%);
         }
 
-        /* ─── F : Crépuscule discret — touche rosée très subtile ─── */
+        /* F — Crépuscule discret */
         .gradient-f {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background:
                 radial-gradient(ellipse 80% 70% at 25% 30%, #d4cfba 0%, transparent 65%),
                 radial-gradient(ellipse 90% 60% at 70% 75%, #c0b8a0 0%, transparent 60%),
@@ -157,125 +138,301 @@
                 linear-gradient(155deg, #e2ddd0 0%, #d0c9b5 35%, #bbb5a0 60%, #d5cfc0 100%);
         }
 
-        /* ─── G : Brouillard vert — atmosphérique, une seule masse floue ─── */
-        .gradient-g {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 120% 100% at 50% 50%, #b5b899 0%, transparent 70%),
-                radial-gradient(ellipse 70% 60% at 20% 25%, #ccc8b0 0%, transparent 55%),
-                radial-gradient(ellipse 60% 50% at 80% 75%, #a9ad8c 0%, transparent 50%),
-                linear-gradient(180deg, #d5d1ba 0%, #c0bd9f 45%, #b0b392 65%, #cbc6b2 100%);
-        }
-
-        /* ─── H : Lumière rasante — contraste doux haut/bas ─── */
+        /* H — Lumière rasante */
         .gradient-h {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background:
                 radial-gradient(ellipse 140% 40% at 50% 0%, #e8e4d5 0%, transparent 70%),
                 radial-gradient(ellipse 120% 50% at 50% 100%, #a5a889 0%, transparent 60%),
                 radial-gradient(ellipse 60% 40% at 30% 50%, #d0cbba 0%, transparent 50%),
                 linear-gradient(180deg, #eae5d8 0%, #d5d0be 40%, #b8ba9d 70%, #a8ab8c 100%);
         }
+
+        /* Texte noir classique pour section 1 */
+        .text-classic h2 { color: #1a1a1a; }
+        .text-classic h2 em { font-style: italic; font-weight: 500; color: #72785f; }
+        .text-classic p { color: #5a6049; }
+
+        /* ══════════════════════════════════════════
+           SECTION 2 : Gradients avec touche rosée
+           dans le fond
+           ══════════════════════════════════════════ */
+
+        /* 1 — Nacre + voile rosé en coin bas */
+        .gradient-rose-1 {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 80% 85%, rgba(178,132,120,0.35) 0%, transparent 65%),
+                radial-gradient(ellipse 90% 80% at 35% 30%, #e6e1d4 0%, transparent 70%),
+                radial-gradient(ellipse 80% 60% at 70% 40%, #d6d2be 0%, transparent 55%),
+                linear-gradient(150deg, #ece7dc 0%, #e0dace 35%, #d2ccba 65%, #ddd7ca 100%);
+        }
+
+        /* 2 — Film blur + rosé diffus central */
+        .gradient-rose-2 {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 60%, rgba(185,140,130,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse 120% 50% at 10% 40%, #ccc8ae 0%, transparent 55%),
+                radial-gradient(ellipse 100% 45% at 90% 30%, #bbb89e 0%, transparent 50%),
+                linear-gradient(90deg, #ddd8c6 0%, #d0cbb5 35%, #c5bfaa 60%, #d8d3c2 100%);
+        }
+
+        /* 3 — Lumière rasante + halo rosé bas-droit */
+        .gradient-rose-3 {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 60% 45% at 75% 80%, rgba(172,125,115,0.35) 0%, transparent 60%),
+                radial-gradient(ellipse 140% 40% at 50% 0%, #e8e4d5 0%, transparent 70%),
+                radial-gradient(ellipse 80% 50% at 25% 55%, #d0cbba 0%, transparent 50%),
+                linear-gradient(180deg, #eae5d8 0%, #d5d0be 45%, #b8ba9d 75%, #c2bda8 100%);
+        }
+
+        /* 4 — Brume olive + trainée rosée diagonale */
+        .gradient-rose-4 {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 100% 40% at 70% 70%, rgba(175,130,122,0.3) 0%, transparent 55%),
+                radial-gradient(ellipse 80% 50% at 15% 25%, rgba(170,128,118,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 70% at 45% 40%, #c5c2a8 0%, transparent 60%),
+                linear-gradient(135deg, #e0dbce 0%, #cfc9b5 40%, #b8b59a 65%, #d5d0be 100%);
+        }
+
+        /* 5 — Aube chaude — rosé en haut, vert olive en bas */
+        .gradient-rose-5 {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 120% 50% at 50% 0%, rgba(180,138,128,0.3) 0%, transparent 65%),
+                radial-gradient(ellipse 100% 50% at 50% 100%, #adb08f 0%, transparent 55%),
+                radial-gradient(ellipse 60% 40% at 30% 50%, #d8d3c2 0%, transparent 45%),
+                linear-gradient(180deg, #e0d8cc 0%, #d5cfbe 40%, #c0bd9f 70%, #b5b899 100%);
+        }
+
+        /* Texte noir pour fonds rosés */
+        .text-rose-dark h2 { color: #1a1a1a; }
+        .text-rose-dark h2 em { font-style: italic; font-weight: 500; color: #72785f; }
+        .text-rose-dark p { color: #5a6049; }
+
+        /* ══════════════════════════════════════════
+           SECTION 3 : Nom en couleur rosée/rouge
+           sur fonds gardés
+           ══════════════════════════════════════════ */
+
+        /* Nom en rose ancien */
+        .text-nom-rose h2 { color: #1a1a1a; }
+        .text-nom-rose h2 em { font-style: italic; font-weight: 500; color: #9c6b62; }
+        .text-nom-rose p { color: #5a6049; }
+
+        /* Nom en bordeaux profond */
+        .text-nom-bordeaux h2 { color: #1a1a1a; }
+        .text-nom-bordeaux h2 em { font-style: italic; font-weight: 500; color: #7a4a45; }
+        .text-nom-bordeaux p { color: #5a6049; }
+
+        /* Nom en terre de sienne */
+        .text-nom-terre h2 { color: #1a1a1a; }
+        .text-nom-terre h2 em { font-style: italic; font-weight: 500; color: #8b5e55; }
+        .text-nom-terre p { color: #5a6049; }
+
+        /* Point en rose */
+        .dot-rose { color: #9c6b62 !important; }
+        .dot-bordeaux { color: #7a4a45 !important; }
+        .dot-terre { color: #8b5e55 !important; }
+
+        /* ══════════════════════════════════════════
+           SECTION 4 : Combo — fond rosé + nom rosé
+           ══════════════════════════════════════════ */
+
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Fonds Gradient Blur</h1>
-        <p>EFFET ARGENTIQUE · FLOU ORGANIQUE · TONS NATURELS</p>
+        <h1>Gradients Blur — Palette étendue</h1>
+        <p>TONS NATURELS · TOUCHE ROSÉE · EFFET ARGENTIQUE</p>
     </div>
 
+    <!-- ═══════ SECTION 1 : Fonds gardés ═══════ -->
+    <p class="section-label">— RAPPEL DES FONDS QUE TU AIMES (B, D, E, F, H)</p>
     <div class="grid">
-
-        <!-- A -->
-        <div class="option">
-            <div class="gradient-a"></div>
-            <div class="film-grain"></div>
-            <div class="option-content">
-                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
-                <p>Avocate au Barreau de Lyon</p>
-            </div>
-            <div class="option-label">A — BRUME DOUCE</div>
-        </div>
-
-        <!-- B -->
         <div class="option">
             <div class="gradient-b"></div>
             <div class="film-grain"></div>
-            <div class="option-content">
+            <div class="option-content text-classic">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
             <div class="option-label">B — AUBE ARGENTIQUE</div>
         </div>
-
-        <!-- C -->
-        <div class="option">
-            <div class="gradient-c"></div>
-            <div class="film-grain"></div>
-            <div class="option-content">
-                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
-                <p>Avocate au Barreau de Lyon</p>
-            </div>
-            <div class="option-label">C — OLIVE PROFOND</div>
-        </div>
-
-        <!-- D -->
         <div class="option">
             <div class="gradient-d"></div>
             <div class="film-grain"></div>
-            <div class="option-content">
+            <div class="option-content text-classic">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
             <div class="option-label">D — NACRE</div>
         </div>
-
-        <!-- E -->
         <div class="option">
             <div class="gradient-e"></div>
             <div class="film-grain"></div>
-            <div class="option-content">
+            <div class="option-content text-classic">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
             <div class="option-label">E — FILM FLOU</div>
         </div>
-
-        <!-- F -->
         <div class="option">
             <div class="gradient-f"></div>
             <div class="film-grain"></div>
-            <div class="option-content">
+            <div class="option-content text-classic">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
             <div class="option-label">F — CRÉPUSCULE DISCRET</div>
         </div>
-
-        <!-- G -->
-        <div class="option">
-            <div class="gradient-g"></div>
-            <div class="film-grain"></div>
-            <div class="option-content">
-                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
-                <p>Avocate au Barreau de Lyon</p>
-            </div>
-            <div class="option-label">G — BROUILLARD VERT</div>
-        </div>
-
-        <!-- H -->
         <div class="option">
             <div class="gradient-h"></div>
             <div class="film-grain"></div>
-            <div class="option-content">
+            <div class="option-content text-classic">
                 <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
                 <p>Avocate au Barreau de Lyon</p>
             </div>
             <div class="option-label">H — LUMIÈRE RASANTE</div>
         </div>
-
+        <div class="option" style="border:none; background: transparent;"></div>
     </div>
+
+    <!-- ═══════ SECTION 2 : Fonds avec touche rosée ═══════ -->
+    <p class="section-label">— NOUVEAUX FONDS AVEC TOUCHE ROSÉE DANS LE GRADIENT</p>
+    <div class="grid">
+        <div class="option">
+            <div class="gradient-rose-1"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-rose-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">R1 — NACRE + VOILE ROSÉ EN COIN</div>
+        </div>
+        <div class="option">
+            <div class="gradient-rose-2"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-rose-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">R2 — FILM BLUR + ROSÉ DIFFUS</div>
+        </div>
+        <div class="option">
+            <div class="gradient-rose-3"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-rose-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">R3 — LUMIÈRE + HALO ROSÉ</div>
+        </div>
+        <div class="option">
+            <div class="gradient-rose-4"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-rose-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">R4 — BRUME + TRAINÉE ROSÉE DIAG.</div>
+        </div>
+        <div class="option">
+            <div class="gradient-rose-5"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-rose-dark">
+                <h2>Sarah <em>Mostfa</em><span style="color:#72785f">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">R5 — AUBE CHAUDE ROSÉ/OLIVE</div>
+        </div>
+        <div class="option" style="border:none; background: transparent;"></div>
+    </div>
+
+    <!-- ═══════ SECTION 3 : Couleur du nom ═══════ -->
+    <p class="section-label">— COULEUR DU NOM : ROSE ANCIEN / BORDEAUX / TERRE DE SIENNE (sur fond D — Nacre)</p>
+    <div class="grid">
+        <div class="option">
+            <div class="gradient-d"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-nom-rose">
+                <h2>Sarah <em>Mostfa</em><span class="dot-rose">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">N1 — MOSTFA EN ROSE ANCIEN (#9c6b62)</div>
+        </div>
+        <div class="option">
+            <div class="gradient-d"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-nom-bordeaux">
+                <h2>Sarah <em>Mostfa</em><span class="dot-bordeaux">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">N2 — MOSTFA EN BORDEAUX (#7a4a45)</div>
+        </div>
+        <div class="option">
+            <div class="gradient-d"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-nom-terre">
+                <h2>Sarah <em>Mostfa</em><span class="dot-terre">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">N3 — MOSTFA EN TERRE DE SIENNE (#8b5e55)</div>
+        </div>
+        <div class="option">
+            <div class="gradient-d"></div>
+            <div class="film-grain"></div>
+            <div class="option-content">
+                <h2 style="color:#1a1a1a">Sarah <em style="font-style:italic;font-weight:500;color:#1a1a1a">Mostfa</em><span class="dot-rose">.</span></h2>
+                <p style="color:#9c6b62">Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">N4 — NOM NOIR + POINT ROSÉ + SOUS-TITRE ROSÉ</div>
+        </div>
+    </div>
+
+    <!-- ═══════ SECTION 4 : Combo fond rosé + nom rosé ═══════ -->
+    <p class="section-label">— COMBOS : FOND ROSÉ + NOM EN COULEUR</p>
+    <div class="grid">
+        <div class="option">
+            <div class="gradient-rose-1"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-nom-terre">
+                <h2>Sarah <em>Mostfa</em><span class="dot-terre">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">C1 — NACRE ROSÉ + NOM TERRE</div>
+        </div>
+        <div class="option">
+            <div class="gradient-rose-3"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-nom-bordeaux">
+                <h2>Sarah <em>Mostfa</em><span class="dot-bordeaux">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">C2 — LUMIÈRE ROSÉ + NOM BORDEAUX</div>
+        </div>
+        <div class="option">
+            <div class="gradient-rose-5"></div>
+            <div class="film-grain"></div>
+            <div class="option-content text-nom-rose">
+                <h2>Sarah <em>Mostfa</em><span class="dot-rose">.</span></h2>
+                <p>Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">C3 — AUBE CHAUDE + NOM ROSE ANCIEN</div>
+        </div>
+        <div class="option">
+            <div class="gradient-rose-2"></div>
+            <div class="film-grain"></div>
+            <div class="option-content">
+                <h2 style="color:#1a1a1a">Sarah <em style="font-style:italic;font-weight:500;color:#1a1a1a">Mostfa</em><span class="dot-terre">.</span></h2>
+                <p style="color:#8b5e55">Avocate au Barreau de Lyon</p>
+            </div>
+            <div class="option-label">C4 — FILM ROSÉ + NOM NOIR + DÉTAILS TERRE</div>
+        </div>
+    </div>
+
 </body>
 </html>
