@@ -216,67 +216,42 @@
         }
 
         /* ═══════════════════════════════════════
-           SCROLL TRANSITION — Horizontal line draw
+           SCROLL TRANSITION — Gradient reveal from center
         ═══════════════════════════════════════ */
-        .scroll-line-section {
+        .scroll-transition {
             position: relative;
-            height: 180px;
+            height: 140px;
             background: var(--beige-nacre);
             display: flex;
             align-items: center;
-            justify-content: center;
             overflow: hidden;
         }
-        .scroll-line-track {
-            position: relative;
-            width: 80%;
-            max-width: 900px;
-            height: 1px;
-        }
-        .scroll-line-bg {
-            position: absolute;
-            inset: 0;
-            background: var(--beige);
-            opacity: 0.4;
-        }
-        .scroll-line-fill {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: var(--vert);
-            transition: none;
-        }
-        .scroll-line-dot {
+        .scroll-transition-bar {
             position: absolute;
             top: 50%;
-            left: 0%;
-            transform: translate(-50%, -50%);
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--vert);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .scroll-line-section.active .scroll-line-dot {
-            opacity: 1;
-        }
-        .scroll-line-label-left,
-        .scroll-line-label-right {
-            position: absolute;
-            top: 50%;
+            left: 5%;
+            right: 5%;
+            max-width: 1200px;
+            margin: 0 auto;
             transform: translateY(-50%);
-            font-family: var(--serif);
-            font-size: 0.75rem;
-            font-style: italic;
-            color: var(--vert);
-            opacity: 0.5;
-            letter-spacing: 0.05em;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--beige) 0%, var(--vert) 50%, var(--beige) 100%);
+            opacity: 0.25;
+            transform-origin: center;
+            scale: 0 1;
         }
-        .scroll-line-label-left { right: calc(100% + 20px); }
-        .scroll-line-label-right { left: calc(100% + 20px); }
+        .scroll-transition-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0%;
+            max-width: 1200px;
+            height: 3px;
+            background: var(--vert);
+            border-radius: 2px;
+        }
 
         /* ═══════════════════════════════════════
            PRÉSENTATION — Editorial style with more character
@@ -856,14 +831,9 @@
 <!-- ═══════════════════════════════════════
      SCROLL LINE TRANSITION
 ═══════════════════════════════════════ -->
-<div class="scroll-line-section" id="scrollLineSection">
-    <div class="scroll-line-track">
-        <div class="scroll-line-bg"></div>
-        <div class="scroll-line-fill" id="scrollLineFill"></div>
-        <div class="scroll-line-dot" id="scrollLineDot"></div>
-        <span class="scroll-line-label-left">SM</span>
-        <span class="scroll-line-label-right">Avocat</span>
-    </div>
+<div class="scroll-transition" id="scrollTransition">
+    <div class="scroll-transition-bar" id="scrollBar"></div>
+    <div class="scroll-transition-core" id="scrollCore"></div>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -1130,26 +1100,20 @@ document.querySelectorAll('.domaine-header').forEach(header => {
     });
 });
 
-// ─── Scroll line animation ───
-const scrollLineSection = document.getElementById('scrollLineSection');
-const scrollLineFill = document.getElementById('scrollLineFill');
-const scrollLineDot = document.getElementById('scrollLineDot');
+// ─── Scroll transition — Gradient reveal ───
+const scrollTransition = document.getElementById('scrollTransition');
+const scrollBar = document.getElementById('scrollBar');
+const scrollCore = document.getElementById('scrollCore');
 
 window.addEventListener('scroll', () => {
-    const rect = scrollLineSection.getBoundingClientRect();
+    const rect = scrollTransition.getBoundingClientRect();
     const windowH = window.innerHeight;
     const start = windowH;
     const end = -rect.height * 0.2;
     const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
 
-    scrollLineFill.style.width = (progress * 100) + '%';
-    scrollLineDot.style.left = (progress * 100) + '%';
-
-    if (progress > 0.05) {
-        scrollLineSection.classList.add('active');
-    } else {
-        scrollLineSection.classList.remove('active');
-    }
+    scrollBar.style.scale = progress + ' 1';
+    scrollCore.style.width = (progress * 90) + '%';
 });
 
 // ─── Scroll reveal ───
