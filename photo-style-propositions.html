@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Photo — Propositions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #fdfcfa; }
+
+        :root {
+            --vert: #72785f;
+            --beige: #d6cdb8;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 40px 20px;
+        }
+        .header h1 {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--noir);
+            margin-bottom: 6px;
+        }
+        .header p { font-size: 0.7rem; color: #999; letter-spacing: 0.2em; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 60px 80px;
+        }
+
+        .proposal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .proposal-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #999;
+            text-align: center;
+        }
+        .proposal-desc {
+            font-size: 0.75rem;
+            color: #777;
+            text-align: center;
+            max-width: 280px;
+            line-height: 1.5;
+        }
+
+        .photo-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .photo {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            background: var(--beige-nacre);
+        }
+
+        /* ═══════ A — BRUTE (aucun effet) ═══════ */
+        .style-a .photo {
+            /* rien */
+        }
+
+        /* ═══════ B — OMBRE DOUCE ═══════ */
+        .style-b .photo {
+            box-shadow: 0 20px 60px -15px rgba(0,0,0,0.15), 0 8px 20px -10px rgba(0,0,0,0.08);
+        }
+
+        /* ═══════ C — BORDURE FINE BEIGE ═══════ */
+        .style-c .photo {
+            border: 3px solid var(--beige);
+        }
+
+        /* ═══════ D — BORDURE FINE VERTE ═══════ */
+        .style-d .photo {
+            border: 2px solid var(--vert);
+        }
+
+        /* ═══════ E — COINS ARRONDIS + OMBRE ═══════ */
+        .style-e .photo {
+            border-radius: 8px;
+            box-shadow: 0 20px 50px -15px rgba(0,0,0,0.12);
+        }
+
+        /* ═══════ F — BLOC COLORÉ DÉCALÉ DERRIÈRE ═══════ */
+        .style-f .photo-wrap::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: -16px;
+            bottom: -16px;
+            background: var(--beige);
+            z-index: 0;
+        }
+        .style-f .photo {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════ G — BLOC VERT DÉCALÉ ═══════ */
+        .style-g .photo-wrap::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            right: -14px;
+            bottom: -14px;
+            background: var(--vert);
+            opacity: 0.15;
+            z-index: 0;
+        }
+        .style-g .photo {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════ H — LIGNE VERTE EN BAS ═══════ */
+        .style-h .photo-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--vert);
+        }
+
+        /* ═══════ I — CADRE FIN AVEC ESPACE (PASSE-PARTOUT) ═══════ */
+        .style-i .photo-wrap {
+            padding: 12px;
+            border: 1px solid var(--beige);
+        }
+
+        /* ═══════ J — OMBRE + TRAIT LATÉRAL VERT ═══════ */
+        .style-j .photo {
+            box-shadow: 0 15px 45px -12px rgba(0,0,0,0.12);
+        }
+        .style-j .photo-wrap::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: -10px;
+            width: 3px;
+            background: var(--vert);
+            z-index: 2;
+        }
+
+        /* ═══════ K — DOUBLE TRAIT ENCADRÉ ═══════ */
+        .style-k .photo-wrap {
+            border: 1px solid rgba(114,120,95,0.2);
+            padding: 6px;
+        }
+        .style-k .photo {
+            border: 1px solid rgba(114,120,95,0.1);
+        }
+
+        /* ═══════ L — FOND BEIGE NACRÉ DÉCALÉ + OMBRE ═══════ */
+        .style-l .photo-wrap::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: 10px;
+            bottom: 10px;
+            background: var(--beige-nacre);
+            border: 1px solid var(--beige);
+            z-index: 0;
+        }
+        .style-l .photo {
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Style de la photo</h1>
+        <p>SECTION PRÉSENTATION — 12 PROPOSITIONS</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="proposal style-a">
+            <p class="proposal-label">A</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Brute, rien du tout. Minimaliste radical.</p>
+        </div>
+
+        <div class="proposal style-b">
+            <p class="proposal-label">B</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Ombre portée douce. Donne de la profondeur sans cadre.</p>
+        </div>
+
+        <div class="proposal style-c">
+            <p class="proposal-label">C</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Bordure fine beige. Discret, comme un cadre photo classique.</p>
+        </div>
+
+        <div class="proposal style-d">
+            <p class="proposal-label">D</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Bordure fine verte. Rappel de la couleur signature.</p>
+        </div>
+
+        <div class="proposal style-e">
+            <p class="proposal-label">E</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Coins arrondis + ombre. Moderne, doux.</p>
+        </div>
+
+        <div class="proposal style-f">
+            <p class="proposal-label">F</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Bloc beige décalé derrière. Effet éditorial / magazine.</p>
+        </div>
+
+        <div class="proposal style-g">
+            <p class="proposal-label">G</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Bloc vert translucide décalé. Touche de couleur subtile.</p>
+        </div>
+
+        <div class="proposal style-h">
+            <p class="proposal-label">H</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Ligne verte en bas. Simple, graphique.</p>
+        </div>
+
+        <div class="proposal style-i">
+            <p class="proposal-label">I</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Passe-partout. Cadre fin avec marge intérieure, effet galerie.</p>
+        </div>
+
+        <div class="proposal style-j">
+            <p class="proposal-label">J</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Ombre + trait vert latéral. Combinaison profondeur + accent couleur.</p>
+        </div>
+
+        <div class="proposal style-k">
+            <p class="proposal-label">K</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Double trait fin. Encadrement classique, raffiné.</p>
+        </div>
+
+        <div class="proposal style-l">
+            <p class="proposal-label">L</p>
+            <div class="photo-wrap">
+                <img src="assets/sarah-mostfa.webp" onerror="this.onerror=null;this.src='photo site sarah.webp'" class="photo" alt="">
+            </div>
+            <p class="proposal-desc">Fond nacré décalé + ombre. Élégant, comme posée sur un support.</p>
+        </div>
+
+    </div>
+</body>
+</html>
