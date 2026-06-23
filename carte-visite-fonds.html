@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte de visite — Fonds teintés</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e8e3da;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 30px 100px;
+            gap: 20px;
+        }
+
+        :root {
+            --vert: #72785f;
+            --beige: #d6cdb8;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        h1 { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--noir); }
+        .subtitle { font-size: 0.6rem; color: #999; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; }
+        .section-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--noir); margin-top: 50px; margin-bottom: 5px; }
+        .section-sub { font-size: 0.55rem; color: #aaa; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; }
+
+        .cards-row { display: flex; gap: 35px; flex-wrap: wrap; justify-content: center; }
+        .card-group { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .card {
+            width: 510px;
+            height: 330px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px -8px rgba(0,0,0,0.12);
+        }
+        .card-label { font-size: 0.5rem; letter-spacing: 0.15em; color: #bbb; text-transform: uppercase; }
+
+        /* ═══════════════════════════════════════
+           FORMAT B — POINTS MÉDIANS
+        ═══════════════════════════════════════ */
+        .fb .vert-line {
+            position: absolute; left: 38px; top: 45px; bottom: 45px;
+            width: 1.5px; background: var(--vert); opacity: 0.25;
+        }
+        .fb {
+            display: flex; flex-direction: column;
+            align-items: flex-start; justify-content: center;
+            padding: 50px 55px;
+        }
+        .fb .name {
+            font-family: var(--serif); font-size: 36px; font-weight: 400;
+            color: var(--noir); letter-spacing: -0.02em; line-height: 1; margin-bottom: 10px;
+        }
+        .fb .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .fb .title-line {
+            font-size: 11px; font-weight: 300; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--vert); margin-bottom: 8px;
+        }
+        .fb .specs-inline {
+            font-size: 9px; font-weight: 300; color: #999;
+            letter-spacing: 0.04em; margin-bottom: 22px;
+        }
+        .fb .specs-inline .dot { margin: 0 6px; opacity: 0.4; }
+        .fb .contact-block { display: flex; flex-direction: column; gap: 5px; }
+        .fb .contact-item { font-size: 10px; font-weight: 300; color: #888; }
+
+        /* Variantes de fond pour B */
+        .fb-1 { background: #f5f0e8; }
+        .fb-2 { background: #eee9df; }
+        .fb-3 { background: #f2ede4; }
+        .fb-3 .vert-line { opacity: 0.18; }
+        .fb-4 { background: linear-gradient(165deg, #f5f0e8 0%, #ebe5d8 100%); }
+        .fb-5 { background: linear-gradient(165deg, #f0ebe2 0%, #e8e0d0 60%, #e5ddd0 100%); }
+        .fb-6 {
+            background: linear-gradient(150deg, #ece7dc 0%, #e5dfd2 50%, #e0d9ca 100%);
+        }
+        .fb-6::before {
+            content: ''; position: absolute; inset: -15px;
+            background:
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(172,120,108,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 15% 20%, rgba(160,115,105,0.08) 0%, transparent 55%);
+            filter: blur(20px); z-index: 0;
+        }
+        .fb-6 > * { position: relative; z-index: 1; }
+        .fb-6 .vert-line { z-index: 1; }
+
+        /* Ajustements texte sur fonds teintés pour B */
+        .fb-dark .contact-item { color: #8a8578; }
+        .fb-dark .specs-inline { color: #8a8578; }
+        .fb-dark .title-line { color: #5a6049; }
+
+        /* ═══════════════════════════════════════
+           FORMAT G — ASYMÉTRIQUE
+        ═══════════════════════════════════════ */
+        .fg {
+            display: flex; flex-direction: column;
+            justify-content: space-between; padding: 40px 50px;
+        }
+        .fg .top-section { display: flex; justify-content: space-between; align-items: flex-start; }
+        .fg .title-line {
+            font-size: 9px; font-weight: 300; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--vert); margin-bottom: 4px;
+        }
+        .fg .specs-col { display: flex; flex-direction: column; gap: 2px; }
+        .fg .spec-text { font-size: 8px; font-weight: 300; color: #bbb; letter-spacing: 0.04em; }
+        .fg .contact-block { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
+        .fg .contact-item { font-size: 9px; font-weight: 300; color: #999; }
+        .fg .bottom-section { display: flex; align-items: flex-end; gap: 12px; }
+        .fg .name {
+            font-family: var(--serif); font-size: 48px; font-weight: 300;
+            color: var(--noir); letter-spacing: -0.03em; line-height: 0.85;
+        }
+        .fg .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .fg .dot-accent { font-family: var(--serif); font-size: 60px; color: var(--vert); line-height: 0.65; }
+
+        /* Variantes de fond pour G */
+        .fg-1 { background: #f5f0e8; }
+        .fg-2 { background: #eee9df; }
+        .fg-3 { background: #f2ede4; }
+        .fg-4 { background: linear-gradient(165deg, #f5f0e8 0%, #ebe5d8 100%); }
+        .fg-5 { background: linear-gradient(165deg, #f0ebe2 0%, #e8e0d0 60%, #e5ddd0 100%); }
+        .fg-6 {
+            background: linear-gradient(150deg, #ece7dc 0%, #e5dfd2 50%, #e0d9ca 100%);
+        }
+        .fg-6::before {
+            content: ''; position: absolute; inset: -15px;
+            background:
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(172,120,108,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 15% 20%, rgba(160,115,105,0.08) 0%, transparent 55%);
+            filter: blur(20px); z-index: 0;
+        }
+        .fg-6 > * { position: relative; z-index: 1; }
+
+        /* Ajustements texte sur fonds teintés pour G */
+        .fg-dark .contact-item { color: #8a8578; }
+        .fg-dark .spec-text { color: #a8a196; }
+        .fg-dark .title-line { color: #5a6049; }
+
+    </style>
+</head>
+<body>
+
+<h1>Fonds teintés</h1>
+<p class="subtitle">FORMAT B + G · 6 TEINTES CHACUN</p>
+
+<!-- ═══════════════════════════════════════
+     FORMAT B — 6 FONDS
+═══════════════════════════════════════ -->
+<h2 class="section-title">Format B — Points médians</h2>
+<p class="section-sub">6 TEINTES DE FOND</p>
+
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card fb fb-1">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">B1 — Crème chaud</span>
+    </div>
+    <div class="card-group">
+        <div class="card fb fb-2 fb-dark">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">B2 — Sable</span>
+    </div>
+</div>
+
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card fb fb-3">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">B3 — Nacré doux</span>
+    </div>
+    <div class="card-group">
+        <div class="card fb fb-4 fb-dark">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">B4 — Dégradé crème</span>
+    </div>
+</div>
+
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card fb fb-5 fb-dark">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">B5 — Dégradé nacré appuyé</span>
+    </div>
+    <div class="card-group">
+        <div class="card fb fb-6 fb-dark">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">B6 — Gradient blur rosé (hero V1)</span>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FORMAT G — 6 FONDS
+═══════════════════════════════════════ -->
+<h2 class="section-title">Format G — Asymétrique</h2>
+<p class="section-sub">6 TEINTES DE FOND</p>
+
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card fg fg-1">
+            <div class="top-section">
+                <div class="top-left">
+                    <div class="title-line">Avocate au Barreau de Lyon</div>
+                    <div class="specs-col">
+                        <span class="spec-text">Contentieux commercial</span>
+                        <span class="spec-text">Contentieux civil</span>
+                        <span class="spec-text">Rédaction contractuelle</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="contact-block">
+                        <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                        <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="name">Sarah <em>Mostfa</em></div>
+                <span class="dot-accent">.</span>
+            </div>
+        </div>
+        <span class="card-label">G1 — Crème chaud</span>
+    </div>
+    <div class="card-group">
+        <div class="card fg fg-2 fg-dark">
+            <div class="top-section">
+                <div class="top-left">
+                    <div class="title-line">Avocate au Barreau de Lyon</div>
+                    <div class="specs-col">
+                        <span class="spec-text">Contentieux commercial</span>
+                        <span class="spec-text">Contentieux civil</span>
+                        <span class="spec-text">Rédaction contractuelle</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="contact-block">
+                        <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                        <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="name">Sarah <em>Mostfa</em></div>
+                <span class="dot-accent">.</span>
+            </div>
+        </div>
+        <span class="card-label">G2 — Sable</span>
+    </div>
+</div>
+
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card fg fg-3">
+            <div class="top-section">
+                <div class="top-left">
+                    <div class="title-line">Avocate au Barreau de Lyon</div>
+                    <div class="specs-col">
+                        <span class="spec-text">Contentieux commercial</span>
+                        <span class="spec-text">Contentieux civil</span>
+                        <span class="spec-text">Rédaction contractuelle</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="contact-block">
+                        <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                        <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="name">Sarah <em>Mostfa</em></div>
+                <span class="dot-accent">.</span>
+            </div>
+        </div>
+        <span class="card-label">G3 — Nacré doux</span>
+    </div>
+    <div class="card-group">
+        <div class="card fg fg-4 fg-dark">
+            <div class="top-section">
+                <div class="top-left">
+                    <div class="title-line">Avocate au Barreau de Lyon</div>
+                    <div class="specs-col">
+                        <span class="spec-text">Contentieux commercial</span>
+                        <span class="spec-text">Contentieux civil</span>
+                        <span class="spec-text">Rédaction contractuelle</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="contact-block">
+                        <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                        <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="name">Sarah <em>Mostfa</em></div>
+                <span class="dot-accent">.</span>
+            </div>
+        </div>
+        <span class="card-label">G4 — Dégradé crème</span>
+    </div>
+</div>
+
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card fg fg-5 fg-dark">
+            <div class="top-section">
+                <div class="top-left">
+                    <div class="title-line">Avocate au Barreau de Lyon</div>
+                    <div class="specs-col">
+                        <span class="spec-text">Contentieux commercial</span>
+                        <span class="spec-text">Contentieux civil</span>
+                        <span class="spec-text">Rédaction contractuelle</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="contact-block">
+                        <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                        <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="name">Sarah <em>Mostfa</em></div>
+                <span class="dot-accent">.</span>
+            </div>
+        </div>
+        <span class="card-label">G5 — Dégradé nacré appuyé</span>
+    </div>
+    <div class="card-group">
+        <div class="card fg fg-6 fg-dark">
+            <div class="top-section">
+                <div class="top-left">
+                    <div class="title-line">Avocate au Barreau de Lyon</div>
+                    <div class="specs-col">
+                        <span class="spec-text">Contentieux commercial</span>
+                        <span class="spec-text">Contentieux civil</span>
+                        <span class="spec-text">Rédaction contractuelle</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="contact-block">
+                        <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                        <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="name">Sarah <em>Mostfa</em></div>
+                <span class="dot-accent">.</span>
+            </div>
+        </div>
+        <span class="card-label">G6 — Gradient blur rosé (hero V1)</span>
+    </div>
+</div>
+
+</body>
+</html>
