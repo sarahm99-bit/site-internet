@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte de visite — Propositions design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e8e3da;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 30px 100px;
+            gap: 20px;
+        }
+
+        :root {
+            --vert: #72785f;
+            --beige: #d6cdb8;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+            --dm: 'DM Serif Display', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--noir);
+        }
+        .subtitle {
+            font-size: 0.6rem;
+            color: #999;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--noir);
+            margin-top: 50px;
+            margin-bottom: 5px;
+        }
+        .section-sub {
+            font-size: 0.55rem;
+            color: #aaa;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-desc {
+            font-size: 0.65rem;
+            color: #999;
+            text-align: center;
+            max-width: 500px;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        .card {
+            width: 510px;
+            height: 330px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px -8px rgba(0,0,0,0.12);
+        }
+        .card-label {
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            color: #bbb;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════
+           DESIGN A — BLANCHE CLASSIQUE (actuelle)
+           Trait vert latéral, spécialités en tags
+        ═══════════════════════════════════════ */
+        .da-a {
+            background: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+        }
+        .da-a .vert-line {
+            position: absolute;
+            left: 38px;
+            top: 45px;
+            bottom: 45px;
+            width: 1.5px;
+            background: var(--vert);
+            opacity: 0.25;
+        }
+        .da-a .name {
+            font-family: var(--serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--noir);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .da-a .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .da-a .title-line {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 22px;
+        }
+        .da-a .contact-block { display: flex; flex-direction: column; gap: 5px; }
+        .da-a .contact-item { font-size: 10px; font-weight: 300; color: #888; }
+        .da-a .specs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .da-a .spec-tag {
+            font-size: 7.5px;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--vert);
+            border: 0.5px solid rgba(114,120,95,0.3);
+            padding: 3px 8px;
+        }
+
+        /* ═══════════════════════════════════════
+           DESIGN B — BLANCHE · SPÉCIALITÉS INLINE
+           Texte simple séparé par des points médians
+        ═══════════════════════════════════════ */
+        .da-b {
+            background: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+        }
+        .da-b .vert-line {
+            position: absolute;
+            left: 38px;
+            top: 45px;
+            bottom: 45px;
+            width: 1.5px;
+            background: var(--vert);
+            opacity: 0.25;
+        }
+        .da-b .name {
+            font-family: var(--serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--noir);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .da-b .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .da-b .title-line {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 8px;
+        }
+        .da-b .specs-inline {
+            font-size: 9px;
+            font-weight: 300;
+            color: #999;
+            letter-spacing: 0.04em;
+            margin-bottom: 22px;
+        }
+        .da-b .specs-inline .dot { margin: 0 6px; opacity: 0.4; }
+        .da-b .contact-block { display: flex; flex-direction: column; gap: 5px; }
+        .da-b .contact-item { font-size: 10px; font-weight: 300; color: #888; }
+
+        /* ═══════════════════════════════════════
+           DESIGN C — BLANCHE · SPÉCIALITÉS ITALIC SERIF
+           Cormorant italic sous le titre, élégant
+        ═══════════════════════════════════════ */
+        .da-c {
+            background: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+        }
+        .da-c .vert-line {
+            position: absolute;
+            left: 38px;
+            top: 45px;
+            bottom: 45px;
+            width: 1.5px;
+            background: var(--vert);
+            opacity: 0.25;
+        }
+        .da-c .name {
+            font-family: var(--serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--noir);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .da-c .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .da-c .title-line {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 6px;
+        }
+        .da-c .specs-serif {
+            font-family: var(--serif);
+            font-size: 12.5px;
+            font-weight: 300;
+            font-style: italic;
+            color: #999;
+            margin-bottom: 22px;
+        }
+        .da-c .contact-block { display: flex; flex-direction: column; gap: 5px; }
+        .da-c .contact-item { font-size: 10px; font-weight: 300; color: #888; }
+
+        /* ═══════════════════════════════════════
+           DESIGN D — FOND GRADIENT BLUR (hero V1)
+           Même fond que la page d'accueil
+        ═══════════════════════════════════════ */
+        .da-d {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+            background: linear-gradient(150deg, #ece7dc 0%, #ddd7c8 30%, #cfc9b5 60%, #d8d2c2 100%);
+        }
+        .da-d::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background:
+                radial-gradient(ellipse 65% 55% at 78% 82%, rgba(172,120,108,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 15% 20%, rgba(160,115,105,0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 90% 80% at 35% 35%, #e2ddd0 0%, transparent 70%),
+                radial-gradient(ellipse 70% 55% at 65% 45%, #ccc8ae 0%, transparent 55%),
+                radial-gradient(ellipse 55% 45% at 50% 75%, rgba(114,120,95,0.18) 0%, transparent 50%);
+            filter: blur(25px);
+            z-index: 0;
+        }
+        .da-d > * { position: relative; z-index: 1; }
+        .da-d .vert-line {
+            position: absolute;
+            left: 38px;
+            top: 45px;
+            bottom: 45px;
+            width: 1.5px;
+            background: var(--vert);
+            opacity: 0.2;
+            z-index: 1;
+        }
+        .da-d .name {
+            font-family: var(--serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--noir);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .da-d .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .da-d .title-line {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5a6049;
+            margin-bottom: 6px;
+        }
+        .da-d .specs-serif {
+            font-family: var(--serif);
+            font-size: 12.5px;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(26,26,26,0.45);
+            margin-bottom: 22px;
+        }
+        .da-d .contact-block { display: flex; flex-direction: column; gap: 5px; }
+        .da-d .contact-item { font-size: 10px; font-weight: 300; color: rgba(26,26,26,0.45); }
+
+        /* ═══════════════════════════════════════
+           DESIGN E — SPLIT VERTICALE
+           Bande verte à gauche, blanc à droite
+        ═══════════════════════════════════════ */
+        .da-e {
+            display: flex;
+            background: var(--blanc);
+        }
+        .da-e .left-band {
+            width: 160px;
+            background: var(--vert);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            gap: 14px;
+        }
+        .da-e .left-band .logo {
+            font-family: var(--serif);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--beige-nacre);
+            letter-spacing: -0.04em;
+        }
+        .da-e .left-band .logo em { font-style: italic; font-weight: 400; color: var(--beige); }
+        .da-e .left-band .sep {
+            width: 20px;
+            height: 1px;
+            background: var(--beige);
+            opacity: 0.4;
+        }
+        .da-e .left-band .label-text {
+            font-size: 7px;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--beige);
+            opacity: 0.6;
+        }
+        .da-e .right-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 35px 40px;
+        }
+        .da-e .name {
+            font-family: var(--serif);
+            font-size: 30px;
+            font-weight: 400;
+            color: var(--noir);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .da-e .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .da-e .title-line {
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 5px;
+        }
+        .da-e .specs-inline {
+            font-size: 8px;
+            font-weight: 300;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        .da-e .specs-inline .dot { margin: 0 5px; opacity: 0.4; }
+        .da-e .contact-block { display: flex; flex-direction: column; gap: 4px; }
+        .da-e .contact-item { font-size: 9px; font-weight: 300; color: #888; }
+
+        /* ═══════════════════════════════════════
+           DESIGN F — NOIR MINIMAL
+           Fond noir, typo blanche, trait doré
+        ═══════════════════════════════════════ */
+        .da-f {
+            background: #141414;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 55px;
+        }
+        .da-f .accent-line {
+            position: absolute;
+            top: 0; left: 55px; right: 55px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--beige) 0%, var(--vert) 100%);
+            opacity: 0.5;
+        }
+        .da-f .name {
+            font-family: var(--serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--beige-nacre);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .da-f .name em { font-style: italic; font-weight: 500; color: var(--beige); }
+        .da-f .title-line {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(214,205,184,0.5);
+            margin-bottom: 6px;
+        }
+        .da-f .specs-serif {
+            font-family: var(--serif);
+            font-size: 12px;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(240,235,226,0.3);
+            margin-bottom: 22px;
+        }
+        .da-f .contact-block { display: flex; flex-direction: column; gap: 5px; }
+        .da-f .contact-item { font-size: 10px; font-weight: 300; color: rgba(240,235,226,0.3); }
+
+        /* ═══════════════════════════════════════
+           DESIGN G — ASYMÉTRIQUE MODERNE
+           Nom très grand en bas, infos en haut
+        ═══════════════════════════════════════ */
+        .da-g {
+            background: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 50px;
+        }
+        .da-g .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .da-g .top-left {}
+        .da-g .title-line {
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 4px;
+        }
+        .da-g .specs-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .da-g .spec-text {
+            font-size: 8px;
+            font-weight: 300;
+            color: #bbb;
+            letter-spacing: 0.04em;
+        }
+        .da-g .top-right {
+            text-align: right;
+        }
+        .da-g .contact-block { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
+        .da-g .contact-item { font-size: 9px; font-weight: 300; color: #999; }
+        .da-g .bottom-section {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+        }
+        .da-g .name {
+            font-family: var(--serif);
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--noir);
+            letter-spacing: -0.03em;
+            line-height: 0.85;
+        }
+        .da-g .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+        .da-g .dot-accent {
+            font-family: var(--serif);
+            font-size: 60px;
+            color: var(--vert);
+            line-height: 0.65;
+        }
+
+        /* ═══════════════════════════════════════
+           DESIGN H — VERT OLIVE + CENTRÉ
+           Fond vert, centré, premium
+        ═══════════════════════════════════════ */
+        .da-h {
+            background: #3d4033;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+        }
+        .da-h .name {
+            font-family: var(--serif);
+            font-size: 34px;
+            font-weight: 400;
+            color: var(--beige-nacre);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .da-h .name em { font-style: italic; font-weight: 500; }
+        .da-h .title-line {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--beige);
+            opacity: 0.5;
+            margin-bottom: 4px;
+        }
+        .da-h .sep {
+            width: 35px;
+            height: 1px;
+            background: var(--beige);
+            opacity: 0.25;
+            margin: 14px auto;
+        }
+        .da-h .specs-serif {
+            font-family: var(--serif);
+            font-size: 12px;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(240,235,226,0.35);
+            margin-bottom: 18px;
+        }
+        .da-h .contact-block { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+        .da-h .contact-item { font-size: 9px; font-weight: 300; color: rgba(240,235,226,0.35); }
+
+    </style>
+</head>
+<body>
+
+<h1>Carte de visite — Propositions</h1>
+<p class="subtitle">DESIGNS + FORMATS SPÉCIALITÉS</p>
+
+<!-- ═══════ A — ACTUELLE ═══════ -->
+<h2 class="section-title">A — Actuelle (tags bordurés)</h2>
+<p class="section-sub">BLANCHE · TRAIT VERT · SPÉCIALITÉS EN TAGS</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-a">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+            <div class="specs">
+                <span class="spec-tag">Contentieux commercial</span>
+                <span class="spec-tag">Contentieux civil</span>
+                <span class="spec-tag">Rédaction contractuelle</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+<!-- ═══════ B — INLINE DOTS ═══════ -->
+<h2 class="section-title">B — Points médians</h2>
+<p class="section-sub">BLANCHE · SPÉCIALITÉS EN LIGNE SOUS LE TITRE</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-b">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+<!-- ═══════ C — SERIF ITALIC ═══════ -->
+<h2 class="section-title">C — Serif italic</h2>
+<p class="section-sub">BLANCHE · SPÉCIALITÉS EN CORMORANT ITALIC</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-c">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-serif">Contentieux commercial · Contentieux civil · Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+<!-- ═══════ D — GRADIENT BLUR ═══════ -->
+<h2 class="section-title">D — Fond gradient blur (hero V1)</h2>
+<p class="section-sub">FOND PAGE D'ACCUEIL · SERIF ITALIC</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-d">
+            <div class="vert-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-serif">Contentieux commercial · Contentieux civil · Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+<!-- ═══════ E — SPLIT ═══════ -->
+<h2 class="section-title">E — Split verticale</h2>
+<p class="section-sub">BANDE VERTE + LOGO À GAUCHE · CONTENU À DROITE</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-e">
+            <div class="left-band">
+                <div class="logo">S<em>M</em></div>
+                <div class="sep"></div>
+                <div class="label-text">Avocat</div>
+            </div>
+            <div class="right-content">
+                <div class="name">Sarah <em>Mostfa</em><span style="color:#72785f">.</span></div>
+                <div class="title-line">Avocate au Barreau de Lyon</div>
+                <div class="specs-inline">Contentieux commercial<span class="dot">·</span>Contentieux civil<span class="dot">·</span>Rédaction contractuelle</div>
+                <div class="contact-block">
+                    <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                    <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                </div>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+<!-- ═══════ F — NOIR ═══════ -->
+<h2 class="section-title">F — Noir minimal</h2>
+<p class="section-sub">FOND NOIR · DÉGRADÉ BEIGE-VERT EN ACCENT · SERIF ITALIC</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-f">
+            <div class="accent-line"></div>
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#d6cdb8">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="specs-serif">Contentieux commercial · Contentieux civil · Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+<!-- ═══════ G — ASYMÉTRIQUE ═══════ -->
+<h2 class="section-title">G — Asymétrique moderne</h2>
+<p class="section-sub">NOM TRÈS GRAND EN BAS · INFOS EN HAUT · DESIGN AUDACIEUX</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-g">
+            <div class="top-section">
+                <div class="top-left">
+                    <div class="title-line">Avocate au Barreau de Lyon</div>
+                    <div class="specs-col">
+                        <span class="spec-text">Contentieux commercial</span>
+                        <span class="spec-text">Contentieux civil</span>
+                        <span class="spec-text">Rédaction contractuelle</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="contact-block">
+                        <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                        <span class="contact-item">sarah.mostfa@avocat.fr</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="name">Sarah <em>Mostfa</em></div>
+                <span class="dot-accent">.</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+<!-- ═══════ H — VERT OLIVE CENTRÉ ═══════ -->
+<h2 class="section-title">H — Vert olive centré</h2>
+<p class="section-sub">FOND VERT SOMBRE · CENTRÉ · PREMIUM</p>
+<div class="cards-row">
+    <div class="card-group">
+        <div class="card da-h">
+            <div class="name">Sarah <em>Mostfa</em><span style="color:#d6cdb8">.</span></div>
+            <div class="title-line">Avocate au Barreau de Lyon</div>
+            <div class="sep"></div>
+            <div class="specs-serif">Contentieux commercial · Contentieux civil · Rédaction contractuelle</div>
+            <div class="contact-block">
+                <span class="contact-item">14 rue de la Charité, 69002 Lyon</span>
+                <span class="contact-item">sarah.mostfa@avocat.fr</span>
+            </div>
+        </div>
+        <span class="card-label">Recto</span>
+    </div>
+</div>
+
+</body>
+</html>
