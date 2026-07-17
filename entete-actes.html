@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah Mostfa — Modèle d'en-tête pour actes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --vert: #72785f;
+            --vert-dark: #5a6049;
+            --beige: #d6cdb8;
+            --beige-light: #e8e2d6;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--beige-nacre);
+            color: var(--noir);
+            -webkit-font-smoothing: antialiased;
+            padding: 40px 20px 80px;
+        }
+
+        /* ═══════════════════════════════════════
+           BARRE D'OUTILS — masquée à l'impression
+        ═══════════════════════════════════════ */
+        .toolbar {
+            max-width: 794px;
+            margin: 0 auto 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .toolbar-text {
+            font-size: 0.82rem;
+            color: var(--vert-dark);
+            line-height: 1.5;
+            max-width: 480px;
+        }
+        .toolbar-text strong { color: var(--noir); }
+        .toolbar-btn {
+            font-family: var(--sans);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--blanc);
+            background: var(--vert);
+            border: none;
+            border-radius: 100px;
+            padding: 12px 26px;
+            cursor: pointer;
+            transition: background 0.25s;
+            white-space: nowrap;
+        }
+        .toolbar-btn:hover { background: var(--vert-dark); }
+
+        /* ═══════════════════════════════════════
+           PAGE A4
+        ═══════════════════════════════════════ */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            margin: 0 auto;
+            background: var(--blanc);
+            box-shadow: 0 10px 40px rgba(26, 26, 26, 0.12);
+            padding: 56px 64px 48px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── En-tête ───────────────────────── */
+        .letterhead {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            padding-bottom: 22px;
+            border-bottom: 1.5px solid var(--vert);
+        }
+        .letterhead-mark {
+            font-family: var(--serif);
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            color: var(--noir);
+            line-height: 1;
+        }
+        .letterhead-mark em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--vert);
+        }
+        .letterhead-identity {
+            text-align: right;
+        }
+        .letterhead-name {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--noir);
+        }
+        .letterhead-role {
+            margin-top: 4px;
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--vert-dark);
+        }
+        .letterhead-toque {
+            margin-top: 2px;
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: #6b675e;
+        }
+
+        /* ── Ligne de coordonnées ─────────────── */
+        .coords {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 14px 0 0;
+            font-family: var(--sans);
+            font-size: 0.74rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: #55524a;
+            text-align: center;
+        }
+        .coords .dot {
+            color: var(--beige);
+            font-size: 0.7rem;
+        }
+
+        /* ── Corps de l'acte ───────────────────── */
+        .body-area {
+            flex: 1;
+            margin-top: 56px;
+        }
+        .body-placeholder {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #b9b4a6;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* ── Pied de page ──────────────────────── */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 18px;
+            border-top: 1px solid var(--beige-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: var(--sans);
+            font-size: 0.66rem;
+            letter-spacing: 0.03em;
+            color: #9a9587;
+        }
+        .page-footer .vert { color: var(--vert); }
+
+        /* ═══════════════════════════════════════
+           IMPRESSION
+        ═══════════════════════════════════════ */
+        @media print {
+            @page { size: A4; margin: 0; }
+            body { background: var(--blanc); padding: 0; }
+            .toolbar { display: none; }
+            .page {
+                width: auto;
+                min-height: 100vh;
+                box-shadow: none;
+                margin: 0;
+                padding: 22mm 20mm 18mm;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .page { width: 100%; padding: 40px 24px; }
+            .letterhead { flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+            .letterhead-identity { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <p class="toolbar-text">
+            <strong>Modèle d'en-tête pour vos actes.</strong> Complétez le corps du document ci-dessous, puis imprimez ou enregistrez en PDF — la mise en page A4 est prête pour l'impression.
+        </p>
+        <button class="toolbar-btn" onclick="window.print()">Imprimer / Enregistrer en PDF</button>
+    </div>
+
+    <div class="page">
+
+        <header class="letterhead">
+            <div class="letterhead-mark">S<em>M</em></div>
+            <div class="letterhead-identity">
+                <div class="letterhead-name">Sarah MOSTFA</div>
+                <div class="letterhead-role">Avocate au Barreau de Lyon</div>
+                <div class="letterhead-toque">Toque n°2434</div>
+            </div>
+        </header>
+
+        <div class="coords">
+            <span>14, rue de la Charité — 69002 Lyon</span>
+            <span class="dot">•</span>
+            <span>06 52 54 76 03</span>
+            <span class="dot">•</span>
+            <span>sarah.mostfa@avocat.fr</span>
+        </div>
+
+        <main class="body-area">
+            <p class="body-placeholder">[ Corps de l'acte ]</p>
+        </main>
+
+        <footer class="page-footer">
+            <span>Sarah <span class="vert">Mostfa</span> — Avocate</span>
+            <span>14, rue de la Charité, 69002 Lyon</span>
+        </footer>
+
+    </div>
+
+</body>
+</html>
