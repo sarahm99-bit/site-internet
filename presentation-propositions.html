@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Présentation — Propositions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e8e3da;
+        }
+
+        :root {
+            --vert: #72785f;
+            --vert-dark: #5a6049;
+            --beige: #d6cdb8;
+            --beige-nacre: #f0ebe2;
+            --noir: #1a1a1a;
+            --blanc: #fdfcfa;
+            --serif: 'Cormorant Garamond', serif;
+            --dm: 'DM Serif Display', serif;
+            --play: 'Playfair Display', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 50px 40px 10px;
+        }
+        .page-header h1 {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--noir);
+        }
+        .page-header p {
+            font-size: 0.6rem;
+            color: #999;
+            letter-spacing: 0.2em;
+            margin-top: 6px;
+        }
+
+        .proposal-label {
+            text-align: center;
+            padding: 40px 20px 0;
+            font-size: 0.55rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #aaa;
+        }
+        .proposal-desc {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #999;
+            padding: 6px 20px 0;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ═══════ Section mock ═══════ */
+        .section-mock {
+            background: var(--blanc);
+            max-width: 1100px;
+            margin: 15px auto 40px;
+            padding: 80px 60px 90px;
+            box-shadow: 0 4px 30px -10px rgba(0,0,0,0.06);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mock-inner {
+            display: grid;
+            grid-template-columns: 0.4fr 1fr;
+            gap: 60px;
+            align-items: start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .mock-photo {
+            width: 100%;
+            height: 320px;
+            background: var(--beige-nacre);
+            position: relative;
+        }
+        .mock-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #d4cfc4 0%, #c8c0b0 100%);
+            opacity: 0.5;
+        }
+        .mock-photo-line {
+            position: absolute;
+            top: 25px;
+            bottom: 25px;
+            left: -8px;
+            width: 2px;
+            background: var(--vert);
+            opacity: 0.3;
+        }
+
+        .mock-text-line {
+            height: 8px;
+            background: var(--beige);
+            opacity: 0.3;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        .mock-text-line:nth-child(1) { width: 100%; }
+        .mock-text-line:nth-child(2) { width: 92%; }
+        .mock-text-line:nth-child(3) { width: 85%; }
+        .mock-text-line:nth-child(4) { width: 60%; margin-bottom: 30px; }
+        .mock-text-line:nth-child(5) { width: 95%; }
+        .mock-text-line:nth-child(6) { width: 88%; }
+        .mock-text-line:nth-child(7) { width: 70%; }
+
+
+        /* ═══════════════════════════════════════
+           A — ACTUELLE (DM Serif + highlight vert)
+        ═══════════════════════════════════════ */
+        .style-a .title-area {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .style-a .title {
+            font-family: var(--dm);
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--noir);
+            display: inline-block;
+            position: relative;
+        }
+        .style-a .title-hl {
+            position: absolute;
+            bottom: 4px;
+            left: -4px;
+            right: -4px;
+            height: 12px;
+            background: var(--vert);
+            opacity: 0.12;
+            z-index: -1;
+        }
+        .style-a .title-sep {
+            width: 60px;
+            height: 1.5px;
+            background: var(--vert);
+            margin: 16px auto 0;
+        }
+
+
+        /* ═══════════════════════════════════════
+           B — LETTRES ÉCLATÉES · INTER ULTRA-LIGHT
+           Chaque lettre espacée, contemporain
+        ═══════════════════════════════════════ */
+        .style-b .title-area {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .style-b .title {
+            font-family: var(--sans);
+            font-size: 2.2rem;
+            font-weight: 200;
+            color: var(--noir);
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+        }
+        .style-b .title-sep {
+            width: 40px;
+            height: 2px;
+            background: var(--vert);
+            margin: 20px auto 0;
+            opacity: 0.4;
+        }
+
+
+        /* ═══════════════════════════════════════
+           C — NUMÉRO + TITRE LATÉRAL
+           "02" grand + titre à droite, graphique
+        ═══════════════════════════════════════ */
+        .style-c .title-area {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 60px;
+            padding-left: 10px;
+        }
+        .style-c .title-num {
+            font-family: var(--serif);
+            font-size: 5rem;
+            font-weight: 300;
+            color: var(--beige);
+            line-height: 0.8;
+            letter-spacing: -0.04em;
+        }
+        .style-c .title-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .style-c .title {
+            font-family: var(--dm);
+            font-size: 2.4rem;
+            font-weight: 400;
+            color: var(--noir);
+            letter-spacing: -0.01em;
+        }
+        .style-c .title-sub {
+            font-family: var(--sans);
+            font-size: 0.65rem;
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--vert);
+        }
+
+
+        /* ═══════════════════════════════════════
+           D — MOT COUPÉ · SERIF ITALIC + SANS
+           "Présen" en serif italic + "tation" en sans
+        ═══════════════════════════════════════ */
+        .style-d .title-area {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .style-d .title {
+            font-size: 3.2rem;
+            color: var(--noir);
+            line-height: 1;
+        }
+        .style-d .title-part1 {
+            font-family: var(--serif);
+            font-weight: 300;
+            font-style: italic;
+        }
+        .style-d .title-part2 {
+            font-family: var(--sans);
+            font-weight: 200;
+            letter-spacing: 0.06em;
+        }
+        .style-d .title-dot {
+            color: var(--vert);
+            font-family: var(--serif);
+            font-weight: 600;
+        }
+
+
+        /* ═══════════════════════════════════════
+           E — VERTICAL + TRAIT
+           Titre vertical le long du bord gauche
+        ═══════════════════════════════════════ */
+        .style-e .title-area {
+            position: absolute;
+            left: 20px;
+            top: 80px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+        .style-e .title {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--vert);
+        }
+        .style-e .title-line-v {
+            display: inline-block;
+            width: 1.5px;
+            height: 50px;
+            background: var(--vert);
+            opacity: 0.3;
+            margin-top: 15px;
+        }
+        .style-e .mock-inner {
+            margin-left: 50px;
+        }
+
+
+        /* ═══════════════════════════════════════
+           F — OUTLINE · LETTRES ÉVIDÉES
+           Grandes lettres sans remplissage
+        ═══════════════════════════════════════ */
+        .style-f .title-area {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+        .style-f .title {
+            font-family: var(--play);
+            font-size: 4rem;
+            font-weight: 400;
+            color: transparent;
+            -webkit-text-stroke: 1.2px var(--noir);
+            letter-spacing: 0.04em;
+            opacity: 0.35;
+        }
+        .style-f .title em {
+            -webkit-text-stroke-color: var(--vert);
+            font-style: italic;
+            opacity: 1;
+        }
+
+
+        /* ═══════════════════════════════════════
+           G — GRANDE LETTRE INITIALE
+           "P" géant décoratif + texte
+        ═══════════════════════════════════════ */
+        .style-g .title-area {
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+            margin-bottom: 55px;
+            justify-content: center;
+        }
+        .style-g .title-initial {
+            font-family: var(--play);
+            font-size: 7rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--vert);
+            line-height: 0.75;
+            opacity: 0.25;
+        }
+        .style-g .title-rest-wrap {
+            padding-top: 12px;
+        }
+        .style-g .title-rest {
+            font-family: var(--sans);
+            font-size: 1.8rem;
+            font-weight: 200;
+            color: var(--noir);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .style-g .title-sub {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--vert);
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+
+
+        /* ═══════════════════════════════════════
+           H — DEUX LIGNES CONTRASTÉES
+           Mot sur deux lignes avec mix de typos
+        ═══════════════════════════════════════ */
+        .style-h .title-area {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+        .style-h .title-line1 {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--vert);
+            margin-bottom: 6px;
+        }
+        .style-h .title-line2 {
+            font-family: var(--play);
+            font-size: 3.5rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--noir);
+            letter-spacing: -0.02em;
+        }
+        .style-h .title-sep {
+            width: 30px;
+            height: 1px;
+            background: var(--vert);
+            margin: 16px auto 0;
+            opacity: 0.35;
+        }
+
+
+        /* ═══════════════════════════════════════
+           I — OVERLINE + UNDERLINE
+           Titre encadré par deux traits fins
+        ═══════════════════════════════════════ */
+        .style-i .title-area {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .style-i .title-frame {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .style-i .title-bar {
+            width: 120px;
+            height: 1px;
+            background: var(--vert);
+            opacity: 0.2;
+        }
+        .style-i .title {
+            font-family: var(--serif);
+            font-size: 2.8rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--noir);
+            letter-spacing: 0.04em;
+        }
+        .style-i .title strong {
+            font-weight: 600;
+            font-style: normal;
+            color: var(--vert);
+        }
+
+
+        /* ═══════════════════════════════════════
+           J — FOND VERT DÉCALÉ DERRIÈRE LE TITRE
+           Bloc de couleur décalé, éditorial
+        ═══════════════════════════════════════ */
+        .style-j .title-area {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .style-j .title-block {
+            display: inline-block;
+            position: relative;
+        }
+        .style-j .title-block::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: -15px;
+            right: -15px;
+            bottom: -6px;
+            background: var(--vert);
+            opacity: 0.07;
+            z-index: 0;
+            transform: rotate(-1deg);
+        }
+        .style-j .title {
+            position: relative;
+            z-index: 1;
+            font-family: var(--play);
+            font-size: 3rem;
+            font-weight: 500;
+            color: var(--noir);
+            letter-spacing: -0.01em;
+        }
+        .style-j .title em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--vert-dark);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>Section Présentation</h1>
+    <p>TITRE + MISE EN PAGE — 10 PROPOSITIONS</p>
+</div>
+
+<!-- ═══════ A — ACTUELLE ═══════ -->
+<p class="proposal-label">A — ACTUELLE</p>
+<p class="proposal-desc">DM Serif Display + surlignage vert translucide + trait séparateur. Classique, propre.</p>
+<div class="section-mock style-a">
+    <div class="title-area">
+        <h2 class="title">Présentation<span class="title-hl"></span></h2>
+        <div class="title-sep"></div>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ B — LETTRES ÉCLATÉES ═══════ -->
+<p class="proposal-label">B — LETTRES ÉCLATÉES</p>
+<p class="proposal-desc">Inter ultra-light, lettres très espacées, caps. Minimaliste et contemporain.</p>
+<div class="section-mock style-b">
+    <div class="title-area">
+        <h2 class="title">Présentation</h2>
+        <div class="title-sep"></div>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ C — NUMÉRO + LATÉRAL ═══════ -->
+<p class="proposal-label">C — NUMÉRO + TITRE LATÉRAL</p>
+<p class="proposal-desc">Grand numéro « 01 » décoratif en beige + titre DM Serif + sous-titre caps. Graphique et éditorial.</p>
+<div class="section-mock style-c">
+    <div class="title-area">
+        <span class="title-num">01</span>
+        <div class="title-text">
+            <h2 class="title">Présentation</h2>
+            <span class="title-sub">Sarah Mostfa · Avocate</span>
+        </div>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ D — MOT COUPÉ ═══════ -->
+<p class="proposal-label">D — MOT COUPÉ · MIX TYPO</p>
+<p class="proposal-desc">Le mot est coupé visuellement : « Présen » en Cormorant italic + « tation » en Inter light. Point vert. Audacieux.</p>
+<div class="section-mock style-d">
+    <div class="title-area">
+        <h2 class="title"><span class="title-part1">Présen</span><span class="title-part2">tation</span><span class="title-dot">.</span></h2>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ E — VERTICAL ═══════ -->
+<p class="proposal-label">E — TITRE VERTICAL</p>
+<p class="proposal-desc">Le titre longe le bord gauche verticalement, en caps Inter. Libère l'espace, très design magazine.</p>
+<div class="section-mock style-e">
+    <div class="title-area">
+        <span class="title">Présentation</span>
+        <span class="title-line-v"></span>
+    </div>
+    <div class="mock-inner" style="margin-left: 50px;">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ F — OUTLINE ═══════ -->
+<p class="proposal-label">F — LETTRES ÉVIDÉES (OUTLINE)</p>
+<p class="proposal-desc">Playfair Display, grandes lettres sans remplissage. « tion » en vert italic. Effet typographique fort.</p>
+<div class="section-mock style-f">
+    <div class="title-area">
+        <h2 class="title">Présenta<em>tion</em></h2>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ G — LETTRE INITIALE ═══════ -->
+<p class="proposal-label">G — GRANDE LETTRE INITIALE</p>
+<p class="proposal-desc">Le « P » en Playfair italic géant et vert translucide + « résentation » en Inter caps. Sous-titre serif. Éditorial luxe.</p>
+<div class="section-mock style-g">
+    <div class="title-area">
+        <span class="title-initial">P</span>
+        <div class="title-rest-wrap">
+            <h2 class="title-rest">résentation</h2>
+            <p class="title-sub">parcours & formation</p>
+        </div>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ H — DEUX LIGNES ═══════ -->
+<p class="proposal-label">H — DEUX LIGNES CONTRASTÉES</p>
+<p class="proposal-desc">Première ligne « À PROPOS » en Inter caps vert + deuxième ligne « Présentation » en Playfair italic grande. Contraste fort.</p>
+<div class="section-mock style-h">
+    <div class="title-area">
+        <p class="title-line1">À propos</p>
+        <h2 class="title-line2">Présentation</h2>
+        <div class="title-sep"></div>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ I — OVERLINE / UNDERLINE ═══════ -->
+<p class="proposal-label">I — ENCADRÉ PAR DEUX TRAITS</p>
+<p class="proposal-desc">Cormorant italic light entre deux traits fins. Le « P » en vert bold. Raffiné et original.</p>
+<div class="section-mock style-i">
+    <div class="title-area">
+        <div class="title-frame">
+            <div class="title-bar"></div>
+            <h2 class="title"><strong>P</strong>résentation</h2>
+            <div class="title-bar"></div>
+        </div>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ J — FOND DÉCALÉ ═══════ -->
+<p class="proposal-label">J — BLOC VERT DÉCALÉ</p>
+<p class="proposal-desc">Playfair Display avec un rectangle vert translucide légèrement incliné derrière le titre. Éditorial, comme un tampon.</p>
+<div class="section-mock style-j">
+    <div class="title-area">
+        <div class="title-block">
+            <h2 class="title">Présenta<em>tion</em></h2>
+        </div>
+    </div>
+    <div class="mock-inner">
+        <div class="mock-photo"><div class="mock-photo-line"></div></div>
+        <div class="mock-content">
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+            <div class="mock-text-line"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
