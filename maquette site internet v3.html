@@ -312,6 +312,41 @@
     .cta svg { transition: transform 0.5s var(--ease); }
     .cta:hover svg { transform: translateX(5px); }
 
+    /* ═════════ DOMAINES ═════════ */
+    .dom { background: var(--noir); color: var(--blanc); padding: 150px 5vw 140px; }
+    .dom-inner { max-width: 1200px; margin: 0 auto; }
+    .dom .kicker { color: var(--beige); }
+    .dom-phrase { font-family: var(--display); font-weight: 400; font-size: clamp(2.5rem, 5.6vw, 5rem); line-height: 1.04; letter-spacing: -0.015em; }
+    .dom-sub { margin-top: 24px; max-width: 34em; font-size: 1rem; line-height: 1.85; font-weight: 300; color: rgba(255, 255, 255, 0.55); }
+    .dom-list { margin-top: 80px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+    .dom-item { border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
+    .dom-row {
+        width: 100%; display: grid; grid-template-columns: 80px 1fr 40px; align-items: start; gap: 20px;
+        padding: 34px 0; background: none; border: 0; color: inherit; text-align: left; cursor: pointer; font: inherit;
+    }
+    .dom-num { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--beige); opacity: 0.6; padding-top: 6px; }
+    .dom-title { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.1; transition: transform 0.6s var(--ease), color 0.4s; }
+    .dom-catch { display: block; margin-top: 10px; max-width: 42em; font-size: 0.92rem; line-height: 1.7; font-weight: 300; color: rgba(255, 255, 255, 0.5); transition: transform 0.6s var(--ease); }
+    .dom-row:hover .dom-title, .dom-row:hover .dom-catch { transform: translateX(10px); }
+    .dom-item.open .dom-title { color: #d4aa9f; }
+    .dom-plus { position: relative; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.25); transition: transform 0.6s var(--ease), background 0.3s, border-color 0.3s; }
+    .dom-plus::before, .dom-plus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 1px; background: currentColor; transform: translate(-50%, -50%); }
+    .dom-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .dom-row:hover .dom-plus { border-color: rgba(255, 255, 255, 0.6); }
+    .dom-item.open .dom-plus { transform: rotate(45deg); background: var(--blanc); color: var(--noir); border-color: var(--blanc); }
+    .dom-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.7s var(--ease); }
+    .dom-item.open .dom-panel { grid-template-rows: 1fr; }
+    .dom-panel > div { overflow: hidden; }
+    .dom-services { list-style: none; columns: 2; column-gap: 50px; padding: 0 60px 40px 100px; }
+    .dom-services li { break-inside: avoid; position: relative; padding: 9px 0 9px 22px; font-size: 0.92rem; font-weight: 300; line-height: 1.55; color: rgba(255, 255, 255, 0.75); }
+    .dom-services li::before { content: ''; position: absolute; left: 0; top: 19px; width: 10px; height: 1px; background: #d4aa9f; }
+
+    .rot { display: inline-block; position: relative; white-space: nowrap; font-style: italic; color: #d4aa9f; clip-path: inset(-0.1em -0.4em -0.22em -0.4em); transition: width 0.7s var(--ease); }
+    .rot .rw { display: inline-block; transition: transform 0.75s var(--ease), opacity 0.75s var(--ease); }
+    .rot .rw.enter { transform: translateY(105%); }
+    .rot .rw.leave { position: absolute; left: 0; top: 0; transform: translateY(-105%); opacity: 0; }
+    .rot .measure { position: absolute; visibility: hidden; left: 0; top: 0; }
+
     /* ═════════ SUITE ═════════ */
     .suite { background: var(--nacre); padding: 120px 5vw; text-align: center; }
     .suite p.big { font-family: var(--display); font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.2; max-width: 22em; margin: 0 auto 18px; }
@@ -340,6 +375,9 @@
         .timeline li::before { left: 60px; }
         .tl-body { padding-left: 26px; }
         .rail { right: 8px; }
+        .dom { padding: 110px 20px; }
+        .dom-row { grid-template-columns: 44px 1fr 40px; gap: 12px; }
+        .dom-services { columns: 1; padding: 0 0 30px 56px; }
         .footer { flex-direction: column; }
     }
 
@@ -363,7 +401,7 @@
     <div class="nav-right">
         <div class="nav-tabs" id="navTabs">
             <a href="#presentation" class="nav-tab" data-spy="presentation">Présentation</a>
-            <a href="#suite" class="nav-tab" data-spy="suite">Domaines</a>
+            <a href="#domaines" class="nav-tab" data-spy="domaines">Domaines</a>
             <a href="#suite" class="nav-tab">Publications</a>
             <a href="#suite" class="nav-tab">Contact</a>
             <div class="nav-cursor" id="navCursor"></div>
@@ -573,9 +611,89 @@
     </div>
 </section>
 
+<section class="dom" id="domaines">
+    <div class="dom-inner">
+        <p class="kicker reveal">02 — Domaines d'intervention</p>
+        <h2 class="dom-phrase reveal">Vous êtes <span class="rot" data-words="une entreprise|un particulier|un dirigeant|un associé|un créateur"></span>.</h2>
+        <p class="dom-sub reveal" style="--d:120ms">Je vous accompagne dans la résolution de vos litiges et la sécurisation de vos relations contractuelles.</p>
+        <div class="dom-list">
+            <div class="dom-item open">
+                <button class="dom-row" type="button" aria-expanded="true">
+                    <span class="dom-num">01</span>
+                    <span><span class="dom-title">Contentieux commercial</span><span class="dom-catch">Vous faites face à un différend dans le cadre de vos relations d'affaires.</span></span>
+                    <span class="dom-plus" aria-hidden="true"></span>
+                </button>
+                <div class="dom-panel"><div>
+                    <ul class="dom-services">
+                            <li>Inexécution, retard ou mauvaise exécution contractuelle</li>
+                            <li>Responsabilité civile délictuelle</li>
+                            <li>Concurrence déloyale et parasitisme</li>
+                            <li>Rupture brutale de relations commerciales</li>
+                            <li>Conflits entre associés</li>
+                            <li>Recouvrement de créances et procédures d'exécution</li>
+                            <li>Référés et procédures d'urgence</li>
+                    </ul>
+                </div></div>
+            </div>
+            <div class="dom-item">
+                <button class="dom-row" type="button" aria-expanded="false">
+                    <span class="dom-num">02</span>
+                    <span><span class="dom-title">Contentieux civil</span><span class="dom-catch">Vous êtes une société ou un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits.</span></span>
+                    <span class="dom-plus" aria-hidden="true"></span>
+                </button>
+                <div class="dom-panel"><div>
+                    <ul class="dom-services">
+                            <li>Actions en responsabilité civile</li>
+                            <li>Cautionnements</li>
+                            <li>Baux d'habitation et loyers impayés</li>
+                            <li>Indemnisation par les assurances</li>
+                            <li>Contentieux de la consommation</li>
+                            <li>Litiges de la construction et malfaçons</li>
+                    </ul>
+                </div></div>
+            </div>
+            <div class="dom-item">
+                <button class="dom-row" type="button" aria-expanded="false">
+                    <span class="dom-num">03</span>
+                    <span><span class="dom-title">Rédaction contractuelle</span><span class="dom-catch">Vous souhaitez sécuriser vos relations d'affaires ou protéger votre propriété intellectuelle. Un contrat bien rédigé est la meilleure prévention du contentieux.</span></span>
+                    <span class="dom-plus" aria-hidden="true"></span>
+                </button>
+                <div class="dom-panel"><div>
+                    <ul class="dom-services">
+                            <li>Négociation et renégociation de contrats</li>
+                            <li>CGV</li>
+                            <li>Accords de confidentialité</li>
+                            <li>Contrats de licence</li>
+                            <li>Cession de droits d'auteur</li>
+                            <li>Contrats commerciaux et propriété intellectuelle</li>
+                            <li>Protocoles d'accords transactionnels</li>
+                            <li>Accords de consortium</li>
+                            <li>Contrats de prestations de service</li>
+                            <li>Contrats fournisseurs</li>
+                    </ul>
+                </div></div>
+            </div>
+            <div class="dom-item">
+                <button class="dom-row" type="button" aria-expanded="false">
+                    <span class="dom-num">04</span>
+                    <span><span class="dom-title">Conseil et accompagnement des entreprises</span><span class="dom-catch">Vous souhaitez un appui juridique au quotidien, sans créer de service juridique interne.</span></span>
+                    <span class="dom-plus" aria-hidden="true"></span>
+                </button>
+                <div class="dom-panel"><div>
+                    <ul class="dom-services">
+                            <li>Service juridique externalisé</li>
+                            <li>Conseil juridique au quotidien</li>
+                            <li>Formations juridiques sur mesure pour vos équipes</li>
+                    </ul>
+                </div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="suite" id="suite">
-    <p class="big split">Domaines, publications et contact seront déclinés <em>dans ce langage</em> une fois la direction validée.</p>
-    <p class="small reveal">Maquette V3 — haut de page et présentation uniquement.</p>
+    <p class="big split">Publications et prise de rendez-vous seront déclinées <em>dans ce langage</em> une fois la direction validée.</p>
+    <p class="small reveal">Maquette V3 — haut de page, présentation et domaines.</p>
 </section>
 
 <footer class="footer">
@@ -752,6 +870,44 @@
             if (!navTabs.matches(':hover')) showCursor(activeTab);
         }
     }
+
+    // Domaines : accordéon
+    document.querySelectorAll('.dom-row').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var item = btn.parentElement;
+            var open = !item.classList.contains('open');
+            document.querySelectorAll('.dom-item').forEach(function (it) {
+                it.classList.remove('open');
+                it.querySelector('.dom-row').setAttribute('aria-expanded', 'false');
+            });
+            if (open) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+        });
+    });
+
+    // Mot qui change
+    function Rotator(el) {
+        var words = el.dataset.words.split('|');
+        var i = 0;
+        var measure = document.createElement('span'); measure.className = 'measure'; el.appendChild(measure);
+        var current = document.createElement('span'); current.className = 'rw'; current.textContent = words[0]; el.appendChild(current);
+        function widthOf(w) { measure.textContent = w; return measure.getBoundingClientRect().width; }
+        el.style.width = widthOf(words[0]) + 'px';
+        setInterval(function () {
+            i = (i + 1) % words.length;
+            el.style.width = widthOf(words[i]) + 'px';
+            if (reduce) { current.textContent = words[i]; return; }
+            var old = current;
+            old.classList.add('leave');
+            var neu = document.createElement('span'); neu.className = 'rw enter'; neu.textContent = words[i];
+            el.appendChild(neu);
+            requestAnimationFrame(function () { requestAnimationFrame(function () { neu.classList.remove('enter'); }); });
+            setTimeout(function () { old.remove(); }, 800);
+            current = neu;
+        }, 2400);
+        window.addEventListener('resize', function () { el.style.width = widthOf(words[i]) + 'px'; });
+    }
+    var startRot = function () { document.querySelectorAll('.rot').forEach(Rotator); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(startRot); else startRot();
 
     // Nav, frise et photo au défilement
     var nav = document.getElementById('nav');
