@@ -228,7 +228,7 @@
     .dom-title { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.1; transition: transform 0.6s var(--ease), color 0.4s; }
     .dom-catch { display: block; margin-top: 10px; max-width: 42em; font-size: 0.92rem; line-height: 1.7; font-weight: 400; color: #777; transition: transform 0.6s var(--ease); }
     .dom-row:hover .dom-title, .dom-row:hover .dom-catch { transform: translateX(10px); }
-    .dom-item.open .dom-title { color: var(--rose-txt); }
+    .dom-item.open .dom-title { color: var(--vert-dark); }
     .dom-plus { position: relative; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(26, 26, 26, 0.25); transition: transform 0.6s var(--ease), background 0.3s, border-color 0.3s; }
     .dom-plus::before, .dom-plus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 1px; background: currentColor; transform: translate(-50%, -50%); }
     .dom-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
@@ -239,9 +239,9 @@
     .dom-panel > div { overflow: hidden; }
     .dom-services { list-style: none; columns: 2; column-gap: 50px; padding: 0 60px 40px 100px; }
     .dom-services li { break-inside: avoid; position: relative; padding: 9px 0 9px 22px; font-size: 0.92rem; font-weight: 400; line-height: 1.55; color: #555; }
-    .dom-services li::before { content: ''; position: absolute; left: 0; top: 19px; width: 10px; height: 1px; background: var(--rose-txt); }
+    .dom-services li::before { content: ''; position: absolute; left: 0; top: 19px; width: 10px; height: 1px; background: var(--vert); }
 
-    .rot { display: inline-block; position: relative; white-space: nowrap; font-style: italic; color: var(--rose-txt); clip-path: inset(-0.1em -0.4em -0.22em -0.4em); transition: width 0.7s var(--ease); }
+    .rot { display: inline-block; position: relative; white-space: nowrap; font-style: italic; color: var(--vert); clip-path: inset(-0.1em -0.4em -0.22em -0.4em); transition: width 0.7s var(--ease); }
     .rot .rw { display: inline-block; transition: transform 0.75s var(--ease), opacity 0.75s var(--ease); }
     .rot .rw.enter { transform: translateY(105%); }
     .rot .rw.leave { position: absolute; left: 0; top: 0; transform: translateY(-105%); opacity: 0; }
@@ -380,8 +380,8 @@
     <!-- Vidéo amphithéâtre -->
     <section class="hv hv-l vid is-active">
         <video class="depth" poster="assets/videos/amphitheatre.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true">
-            <source src="assets/videos/amphitheatre.webm" type="video/webm">
             <source src="assets/videos/amphitheatre.mp4" type="video/mp4">
+            <source src="assets/videos/amphitheatre.webm" type="video/webm">
         </video>
         <div class="veil"></div>
         <div class="center">
@@ -694,11 +694,34 @@
     }
     window.addEventListener('mousemove', function (e) { mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5; applyDepth(); });
     window.addEventListener('scroll', applyDepth, { passive: true });
+    var heroVisible = true, usedBlob = false;
+    function onGesture() { ['pointerdown', 'touchstart', 'keydown', 'wheel', 'scroll'].forEach(function (ev) { window.removeEventListener(ev, onGesture); }); tryPlay(); }
+    function tryPlay() {
+        if (reduce || !heroVisible) return;
+        var pr = video.play();
+        if (pr && pr.catch) pr.catch(function () {
+            ['pointerdown', 'touchstart', 'keydown', 'wheel', 'scroll'].forEach(function (ev) { window.addEventListener(ev, onGesture, { passive: true }); });
+        });
+    }
+    function blobFallback() {
+        if (usedBlob || reduce || !window.fetch) return;
+        usedBlob = true;
+        var file = video.canPlayType('video/mp4; codecs="avc1.640028"') ? 'assets/videos/amphitheatre.mp4' : 'assets/videos/amphitheatre.webm';
+        fetch(file).then(function (r) { if (!r.ok) throw 0; return r.blob(); }).then(function (b) {
+            video.src = URL.createObjectURL(b); video.load(); tryPlay();
+        }).catch(function () {});
+    }
+    var sources = video.querySelectorAll('source');
+    sources[sources.length - 1].addEventListener('error', blobFallback);
+    video.addEventListener('error', blobFallback);
+    setTimeout(function () { if (video.readyState < 2) blobFallback(); }, 4000);
     if (reduce) { video.removeAttribute('autoplay'); video.pause(); }
     else {
         new IntersectionObserver(function (en) {
-            if (en[0].isIntersecting) { var pr = video.play(); if (pr && pr.catch) pr.catch(function () {}); } else video.pause();
+            heroVisible = en[0].isIntersecting;
+            if (heroVisible) tryPlay(); else video.pause();
         }).observe(heroEl);
+        tryPlay();
     }
 
     // Ouverture
