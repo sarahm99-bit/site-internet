@@ -151,7 +151,7 @@
     .center .tag { margin-top: 30px; }
 
     /* ═════════ HAUT DE PAGE — VIDÉO AMPHITHÉÂTRE ═════════ */
-    .vid video { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; transform: scale(1.04); transition: transform 1.2s var(--ease); }
+    .vid video, .vid .hero-anim { position: absolute; inset: -4%; width: 108%; height: 108%; max-width: none; object-fit: cover; transform: scale(1.04); transition: transform 1.2s var(--ease); }
     .vid .veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 60% 48% at 50% 50%, rgba(241, 236, 228, 0.88) 0%, rgba(241, 236, 228, 0.62) 55%, rgba(241, 236, 228, 0.38) 100%); }
     .vid::after { content: ''; position: absolute; inset: 0; z-index: 2; opacity: 0.06; background-image: var(--grain); background-size: 220px; pointer-events: none; }
     .vid .center { transition: transform 1.2s var(--ease); }
@@ -694,7 +694,7 @@
     }
     window.addEventListener('mousemove', function (e) { mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5; applyDepth(); });
     window.addEventListener('scroll', applyDepth, { passive: true });
-    var heroVisible = true, usedBlob = false;
+    var heroVisible = true;
     function onGesture() { ['pointerdown', 'touchstart', 'keydown', 'wheel', 'scroll'].forEach(function (ev) { window.removeEventListener(ev, onGesture); }); tryPlay(); }
     function tryPlay() {
         if (reduce || !heroVisible) return;
@@ -703,22 +703,30 @@
             ['pointerdown', 'touchstart', 'keydown', 'wheel', 'scroll'].forEach(function (ev) { window.addEventListener(ev, onGesture, { passive: true }); });
         });
     }
-    function blobFallback() {
-        if (usedBlob || reduce || !window.fetch) return;
-        usedBlob = true;
-        var file = video.canPlayType('video/mp4; codecs="avc1.640028"') ? 'assets/videos/amphitheatre.mp4' : 'assets/videos/amphitheatre.webm';
-        fetch(file).then(function (r) { if (!r.ok) throw 0; return r.blob(); }).then(function (b) {
-            video.src = URL.createObjectURL(b); video.load(); tryPlay();
-        }).catch(function () {});
+    var usedImg = false;
+    function imgFallback() {
+        if (usedImg || reduce) return;
+        usedImg = true;
+        var im = document.createElement('img');
+        im.className = 'depth hero-anim';
+        im.alt = '';
+        im.setAttribute('aria-hidden', 'true');
+        im.onerror = function () { im.onerror = null; im.src = 'assets/videos/amphitheatre.jpg'; };
+        im.src = 'assets/videos/amphitheatre-anim.webp';
+        im.style.transform = video.style.transform;
+        video.pause();
+        video.replaceWith(im);
+        depthEl = im;
     }
     var sources = video.querySelectorAll('source');
-    sources[sources.length - 1].addEventListener('error', blobFallback);
-    video.addEventListener('error', blobFallback);
-    setTimeout(function () { if (video.readyState < 2) blobFallback(); }, 4000);
+    sources[sources.length - 1].addEventListener('error', imgFallback);
+    video.addEventListener('error', imgFallback);
+    setTimeout(function () { if (!usedImg && video.readyState < 2) imgFallback(); }, 3500);
     if (reduce) { video.removeAttribute('autoplay'); video.pause(); }
     else {
         new IntersectionObserver(function (en) {
             heroVisible = en[0].isIntersecting;
+            if (usedImg) return;
             if (heroVisible) tryPlay(); else video.pause();
         }).observe(heroEl);
         tryPlay();
