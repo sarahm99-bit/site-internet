@@ -1,8 +1,8 @@
 # Site internet — Sarah Mostfa, Avocate au Barreau de Lyon
 
 ## Le site
-- `index.html` — version 1 (fond dégradé nacré/rosé)
-- `index-v2.html` — version 2 (fond photo bibliothèque floutée)
+- `maquette site internet.html` — version 1 (fond dégradé nacré/rosé)
+- `maquette site internet v2.html` — version 2 (fond photo bibliothèque floutée)
 - `assets/` — photo de profil
 
 ## Cartes de visite
@@ -11,10 +11,10 @@
 - `cartes-de-visite/carte-visite-fonds.html` — formats B et G, 6 fonds chacun
 
 ## Propositions (archives des pistes de design)
-- `propositions/accueil/` — fonds du hero, titre, phrase d'accroche, transition au scroll
-- `propositions/presentation/` — style de la photo, titre de la section
-- `propositions/logo/` — pistes de logo (en attente)
-- `propositions/skyline/` — skyline de Lyon (en attente)
+- `propositions site internet/accueil/` — fonds du hero, titre, phrase d'accroche, transition au scroll
+- `propositions site internet/presentation/` — style de la photo, titre de la section
+- `propositions site internet/logo/` — pistes de logo (en attente)
+- `propositions site internet/skyline/` — skyline de Lyon (en attente)
 
 ## Archives (pistes abandonnées)
 - `archives/accueil/` — anciennes pistes de hero (DA 1 à 6, options 1 à 4)
