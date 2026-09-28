@@ -211,6 +211,13 @@
     .hv-j .ph { filter: blur(6px) saturate(0.9); transition: transform 1.2s var(--ease); }
     .hv-j .center { transition: transform 1.2s var(--ease); }
 
+    /* ═════════ K, L — VIDÉOS ═════════ */
+    .vid video { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; transform: scale(1.04); transition: transform 1.2s var(--ease); }
+    .vid .veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 60% 48% at 50% 50%, rgba(241, 236, 228, 0.8) 0%, rgba(241, 236, 228, 0.5) 55%, rgba(241, 236, 228, 0.3) 100%); }
+    .bold-text .vid .veil { background: radial-gradient(ellipse 62% 50% at 50% 50%, rgba(241, 236, 228, 0.9) 0%, rgba(241, 236, 228, 0.66) 55%, rgba(241, 236, 228, 0.4) 100%); }
+    .vid::after { content: ''; position: absolute; inset: 0; z-index: 2; opacity: 0.06; background-image: var(--grain); background-size: 220px; pointer-events: none; }
+    .vid .center { transition: transform 1.2s var(--ease); }
+
     /* Texte épais */
     .bold-text .name-c { font-weight: 500; }
     .bold-text .name-c em { font-weight: 600; }
@@ -614,7 +621,48 @@
 
     <!-- J — Profondeur -->
     <section class="hv hv-j lib" data-hero="j">
-        <div class="ph" id="parPh"></div>
+        <div class="ph depth" id="parPh"></div>
+        <div class="veil"></div>
+        <div class="center">
+            <h1 class="name name-c">
+                <span class="mask"><span style="--d:300ms">Sarah</span></span>
+                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+            </h1>
+            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:800ms">
+                <div class="tag-line"></div>
+                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
+    </section>
+    <!-- K — Vidéo livre ouvert -->
+    <section class="hv hv-k vid" data-hero="k">
+        <video class="depth" poster="assets/videos/livre-ouvert.jpg" muted loop playsinline preload="none" aria-hidden="true">
+            <source src="assets/videos/livre-ouvert.webm" type="video/webm">
+            <source src="assets/videos/livre-ouvert.mp4" type="video/mp4">
+        </video>
+        <div class="veil"></div>
+        <div class="center">
+            <h1 class="name name-c">
+                <span class="mask"><span style="--d:300ms">Sarah</span></span>
+                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+            </h1>
+            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:800ms">
+                <div class="tag-line"></div>
+                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
+    </section>
+
+    <!-- L — Vidéo amphithéâtre -->
+    <section class="hv hv-l vid" data-hero="l">
+        <video class="depth" poster="assets/videos/amphitheatre.jpg" muted loop playsinline preload="none" aria-hidden="true">
+            <source src="assets/videos/amphitheatre.webm" type="video/webm">
+            <source src="assets/videos/amphitheatre.mp4" type="video/mp4">
+        </video>
         <div class="veil"></div>
         <div class="center">
             <h1 class="name name-c">
@@ -844,7 +892,9 @@
         ['g', 'Livres (V2)', 'La bibliothèque floutée de la V2, image fixe'],
         ['h', 'Livres — mise au point', 'Zoom lent, la netteté va et vient comme une caméra'],
         ['i', 'Livres — lumière', 'Rayon de lumière et poussière qui flotte'],
-        ['j', 'Livres — profondeur', "L'image suit la souris et le défilement"]
+        ['j', 'Livres — profondeur', "L'image suit la souris et le défilement"],
+        ['k', 'Vidéo — livre ouvert', 'Pages en gros plan, étalonnées dans tes tons, avec profondeur'],
+        ['l', 'Vidéo — amphithéâtre', 'Coupole et hémicycle, étalonnés nacré, avec profondeur']
     ];
     var rail = document.getElementById('rail');
     var buttons = {};
@@ -907,20 +957,25 @@
     window.addEventListener('resize', sizeDust);
     requestAnimationFrame(drawDust);
 
-    // Profondeur (concept J)
-    var parPh = document.getElementById('parPh');
-    var parCenter = document.querySelector('.hv-j .center');
+    // Profondeur (concepts J, K, L) et lecture des vidéos
+    var DEPTH = { j: 1, k: 1, l: 1 };
     var mx = 0, my = 0;
-    window.addEventListener('mousemove', function (e) {
-        if (current !== 'j' || reduce) return;
-        mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5;
-        parPh.style.transform = 'scale(1.06) translate(' + (mx * -2.4).toFixed(2) + '%,' + (my * -2.4 + window.scrollY / window.innerHeight * 6).toFixed(2) + '%)';
-        parCenter.style.transform = 'translate(' + (mx * 10).toFixed(1) + 'px,' + (my * 8).toFixed(1) + 'px)';
-    });
-    window.addEventListener('scroll', function () {
-        if (current !== 'j' || reduce) return;
-        parPh.style.transform = 'scale(1.06) translate(' + (mx * -2.4).toFixed(2) + '%,' + (my * -2.4 + window.scrollY / window.innerHeight * 6).toFixed(2) + '%)';
-    }, { passive: true });
+    function applyDepth() {
+        if (!DEPTH[current] || reduce) return;
+        var hv = document.querySelector('.hv[data-hero="' + current + '"]');
+        var el = hv.querySelector('.depth'), c = hv.querySelector('.center');
+        el.style.transform = 'scale(1.06) translate(' + (mx * -2.4).toFixed(2) + '%,' + (my * -2.4 + window.scrollY / window.innerHeight * 6).toFixed(2) + '%)';
+        c.style.transform = 'translate(' + (mx * 10).toFixed(1) + 'px,' + (my * 8).toFixed(1) + 'px)';
+    }
+    window.addEventListener('mousemove', function (e) { mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5; applyDepth(); });
+    window.addEventListener('scroll', applyDepth, { passive: true });
+    function syncVideos() {
+        document.querySelectorAll('.hv video').forEach(function (v) {
+            var on = v.closest('.hv').dataset.hero === current && !reduce;
+            if (on) { if (v.preload === 'none') v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+            else v.pause();
+        });
+    }
 
     function restart(el) { el.classList.remove('is-active'); void el.offsetWidth; el.classList.add('is-active'); }
     function setHero(id, fromUser) {
@@ -930,6 +985,7 @@
         });
         Object.keys(buttons).forEach(function (k) { buttons[k].classList.toggle('active', k === id); });
         current = id;
+        if (typeof syncVideos === 'function') syncVideos();
         try { localStorage.setItem('v3-hero', id); } catch (e) {}
         if (fromUser) {
             var b = buttons[id];
