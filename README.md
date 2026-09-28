@@ -13,6 +13,5 @@
 ## Propositions (archives des pistes de design)
 - `propositions/accueil/` — fonds du hero, titre, phrase d'accroche, transition au scroll
 - `propositions/presentation/` — style de la photo, titre de la section
-- `propositions/domaines/` — prototypes de mise en page des domaines d'intervention
 - `propositions/logo/` — pistes de logo (en attente)
 - `propositions/skyline/` — skyline de Lyon (en attente)
