@@ -78,7 +78,7 @@
     /* ═════════ NAV ═════════ */
     .nav {
         position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-        display: flex; align-items: center; justify-content: space-between;
+        display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
         padding: 24px 5vw;
         transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
     }
@@ -90,7 +90,7 @@
     }
     .logo { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; letter-spacing: -0.04em; }
     .logo em { font-style: italic; font-weight: 400; color: var(--vert); }
-    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-cta-wrap { justify-self: end; }
     .nav-tabs {
         position: relative; display: flex; align-items: center; padding: 4px;
         background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.15); border-radius: 100px;
@@ -126,7 +126,7 @@
     .rise { animation: rise 1.3s var(--ease) both; animation-delay: calc(var(--intro-delay) + var(--d, 0ms)); }
     @keyframes maskUp { from { transform: translateY(110%); } to { transform: none; } }
     @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fade { from { opacity: 0; } }
 
     .name em { font-style: italic; font-weight: 500; color: var(--vert); }
     .name .dot { color: var(--vert); }
@@ -149,74 +149,50 @@
     .name-c { font-family: var(--serif); font-weight: 300; font-size: clamp(3.6rem, 9vw, 8.5rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 22px; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.22em; }
     .center .tag { margin-top: 30px; }
 
-    /* ═════════ A — COUVERTURE ═════════ */
-    .hv-a::before {
-        content: ''; position: absolute; inset: 0;
-        background: radial-gradient(ellipse 55% 45% at 88% 92%, rgba(var(--rose), 0.22) 0%, transparent 70%);
-    }
-    .hv-a .wrap { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 108px 5vw 36px; }
-    .hv-a .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
-    .hv-a .top { border-bottom: 1px solid rgba(26, 26, 26, 0.14); padding-bottom: 14px; font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert-dark); }
-    .hv-a .bottom { border-top: 1px solid rgba(26, 26, 26, 0.14); padding-top: 20px; }
-    .hv-a .name-a { font-family: var(--serif); font-weight: 300; font-size: clamp(4.4rem, 15.5vw, 16rem); line-height: 0.82; letter-spacing: -0.045em; }
-    .hv-a .l2 { text-align: right; }
+    /* ═════════ A — AQUARELLE ═════════ */
+    .hv-a { background: #f1ebe1; }
+    .hv-a svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: fade 2.4s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
+    .hv-a::after { content: ''; position: absolute; inset: 0; opacity: 0.08; background-image: var(--grain); background-size: 200px; mix-blend-mode: multiply; }
 
-    /* ═════════ B — PORTRAIT ═════════ */
-    .hv-b .grid { display: grid; grid-template-columns: 1.05fr 0.95fr; height: 100%; }
-    .hv-b .txt { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: 100px 4vw 90px 7vw; }
-    .hv-b .name-b { font-family: var(--serif); font-weight: 300; font-size: clamp(3.4rem, 7.2vw, 7.4rem); line-height: 0.92; letter-spacing: -0.035em; margin-bottom: 26px; }
-    .hv-b .sub { margin-bottom: 34px; }
-    .hv-b .cue { position: absolute; left: 7vw; bottom: 30px; align-items: flex-start; }
-    .hv-b .phwrap { position: relative; }
-    .hv-b .ph {
-        position: absolute; inset: 0;
-        background: var(--photo) center 15% / cover no-repeat;
-        animation: clipIn 1.6s var(--ease) both; animation-delay: calc(var(--intro-delay) + 150ms);
+    /* ═════════ B — LUMIÈRE ARGENTIQUE ═════════ */
+    .hv-b { background: #efe7da; }
+    .hv-b .leak {
+        position: absolute; inset: -60px; filter: blur(28px);
+        background:
+            radial-gradient(ellipse 14% 38% at 97% 42%, rgba(255, 214, 178, 0.95) 0%, transparent 70%),
+            radial-gradient(ellipse 30% 70% at 100% 45%, rgba(214, 128, 98, 0.55) 0%, transparent 70%),
+            radial-gradient(ellipse 45% 55% at 92% 95%, rgba(190, 120, 100, 0.35) 0%, transparent 70%),
+            radial-gradient(ellipse 40% 45% at 4% 8%, rgba(114, 120, 95, 0.18) 0%, transparent 70%);
+        animation: fade 2.6s ease both; animation-delay: calc(var(--intro-delay) + 100ms);
     }
-    .hv-b .trait { position: absolute; left: -16px; top: 22%; bottom: 22%; width: 2px; background: var(--vert); opacity: 0.35; }
-    @keyframes clipIn { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+    .hv-b .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 70% at 45% 50%, transparent 55%, rgba(70, 55, 45, 0.2) 100%); }
+    .hv-b::after { content: ''; position: absolute; inset: 0; opacity: 0.13; background-image: var(--grain); background-size: 160px; mix-blend-mode: multiply; }
+    .hv-b .dust { position: absolute; inset: 0; }
+    .hv-b .dust i { position: absolute; border-radius: 50%; background: rgba(60, 50, 40, 0.35); }
 
-    /* ═════════ C — CONFLUENCE ═════════ */
-    .hv-c svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
-    .hv-c .river { fill: none; stroke: var(--vert); stroke-width: 1.3; opacity: 0.45; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3.2s var(--ease) forwards; animation-delay: calc(var(--intro-delay) + 250ms); }
-    .hv-c .river.bank { opacity: 0.2; animation-delay: calc(var(--intro-delay) + 550ms); }
-    .hv-c .river.merged { animation-duration: 1.4s; animation-delay: calc(var(--intro-delay) + 2600ms); }
-    .hv-c .point { fill: rgb(var(--rose)); opacity: 0; animation: fade 1s ease forwards; animation-delay: calc(var(--intro-delay) + 2500ms); }
-    .hv-c .point-ring { fill: none; stroke: rgb(var(--rose)); stroke-width: 1; opacity: 0; transform-origin: 720px 780px; animation: ring 3s ease-out infinite; animation-delay: calc(var(--intro-delay) + 2900ms); }
-    @keyframes draw { to { stroke-dashoffset: 0; } }
-    @keyframes ring { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(4); opacity: 0; } }
-    .hv-c .halo { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse 40% 28% at 50% 47%, rgba(240, 235, 226, 0.95) 35%, rgba(240, 235, 226, 0) 100%); }
-    .corner { position: absolute; bottom: 34px; z-index: 4; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert-dark); opacity: 0.75; }
-    .corner.l { left: 5vw; }
-    .corner.r { right: 5vw; }
+    /* ═════════ C — OMBRES DE FEUILLAGE ═════════ */
+    .hv-c { background: linear-gradient(200deg, #f7eee0 0%, #efe7da 45%, #e8dfd0 100%); }
+    .hv-c .sun { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 85% 10%, rgba(255, 236, 205, 0.8) 0%, transparent 65%); }
+    .hv-c svg { position: absolute; inset: -5%; width: 110%; height: 110%; opacity: 0.85;
+        -webkit-mask-image: radial-gradient(ellipse 65% 75% at 92% 12%, #000 25%, transparent 72%); mask-image: radial-gradient(ellipse 65% 75% at 92% 12%, #000 25%, transparent 72%);
+        animation: fade 2.4s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
+    .hv-c::after { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: var(--grain); background-size: 256px; }
 
-    /* ═════════ D — 24 COLONNES ═════════ */
-    .hv-d::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(var(--rose), 0.16) 0%, transparent 70%), radial-gradient(ellipse 55% 60% at 50% 0%, rgba(255, 255, 255, 0.7) 0%, transparent 70%); }
-    .hv-d .cols { position: absolute; inset: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; padding: 0 5vw; }
-    .hv-d .cols span {
-        width: clamp(4px, 0.6vw, 9px); height: 74%;
-        background: linear-gradient(to right, rgba(114, 120, 95, 0.55) 0 1px, transparent 1px calc(100% - 1px), rgba(114, 120, 95, 0.55) calc(100% - 1px));
-        -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
-        mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
-        opacity: var(--o); transform-origin: bottom;
-        animation: colUp 1.6s var(--ease) both; animation-delay: calc(var(--intro-delay) + var(--i) * 45ms);
-    }
-    @keyframes colUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-    .hv-d .halo { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse 36% 30% at 50% 48%, rgba(240, 235, 226, 0.97) 40%, rgba(240, 235, 226, 0) 100%); }
+    /* ═════════ D — PORTRAIT FLOU ═════════ */
+    .hv-d .ph { position: absolute; inset: -80px; background: var(--photo) 75% 20% / cover no-repeat; filter: blur(46px) saturate(0.85); transform: scale(1.1); animation: fade 2s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
+    .hv-d .veil { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(242, 237, 229, 0.92) 0%, rgba(242, 236, 228, 0.8) 45%, rgba(238, 222, 212, 0.62) 100%); }
+    .hv-d::after { content: ''; position: absolute; inset: 0; opacity: 0.07; background-image: var(--grain); background-size: 200px; }
 
-    /* ═════════ E — PAPIER ═════════ */
-    .hv-e { background: #f3eee5; }
-    .hv-e::before { content: ''; position: absolute; inset: 0; opacity: 0.07; background-image: var(--grain); background-size: 180px; }
-    .hv-e .frame { position: absolute; inset: 26px; z-index: 2; border: 1px solid rgba(114, 120, 95, 0.35); animation: fade 1.6s ease both; animation-delay: calc(var(--intro-delay) + 200ms); }
-    .hv-e .frame::after { content: ''; position: absolute; inset: 6px; border: 0.5px solid rgba(114, 120, 95, 0.22); }
-    .hv-e .seal {
-        width: 66px; height: 66px; border-radius: 50%; margin-bottom: 30px;
-        border: 1px solid rgba(114, 120, 95, 0.45); display: grid; place-items: center;
-        font-family: var(--serif); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.04em;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07), 0 1px 0 rgba(255, 255, 255, 0.85);
-    }
-    .hv-e .seal em { font-style: italic; font-weight: 400; color: var(--vert); }
-    .hv-e .name-c { color: #2b2b27; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75); }
+    /* ═════════ E — SOIE NACRÉE ═════════ */
+    .hv-e { background: linear-gradient(160deg, #f4efe7 0%, #ece5d9 100%); }
+    .hv-e svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.42; mix-blend-mode: multiply; animation: fade 2.4s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
+    .hv-e .glow { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 55% 45% at 85% 90%, rgba(172, 120, 108, 0.16) 0%, transparent 70%); }
+
+    /* ═════════ G — LIVRES (V2) ═════════ */
+    .hv-g .ph { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80&auto=format') center / cover no-repeat; }
+    .hv-g .veil { position: absolute; inset: 0; background: rgba(240, 235, 226, 0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+    .halo { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse 42% 32% at 50% 48%, rgba(241, 235, 225, 0.75) 20%, rgba(241, 235, 225, 0) 100%); }
 
     /* ═════════ F — ACTUEL V1 ═════════ */
     .hv-f .bg {
@@ -358,15 +334,6 @@
     /* ═════════ RESPONSIVE ═════════ */
     @media (max-width: 900px) {
         .nav-tabs { display: none; }
-        .hv-a .top span:nth-child(2) { display: none; }
-        .hv-a .bottom { flex-direction: column; align-items: flex-start; }
-        .hv-a .bottom .cue { display: none; }
-        .hv-b .grid { grid-template-columns: 1fr; grid-template-rows: 46% 1fr; }
-        .hv-b .phwrap { order: -1; }
-        .hv-b .trait { display: none; }
-        .hv-b .txt { padding: 30px 24px 70px; justify-content: flex-start; }
-        .hv-b .cue { left: 24px; }
-        .corner { display: none; }
         .pres { padding: 110px 20px; }
         .pres-grid { grid-template-columns: 1fr; gap: 60px; }
         .pres-sticky { position: relative; top: 0; max-width: 420px; }
@@ -398,127 +365,153 @@
 
 <nav class="nav" id="nav">
     <a href="#top" class="logo">S<em>M</em></a>
-    <div class="nav-right">
-        <div class="nav-tabs" id="navTabs">
-            <a href="#presentation" class="nav-tab" data-spy="presentation">Présentation</a>
-            <a href="#domaines" class="nav-tab" data-spy="domaines">Domaines</a>
-            <a href="#suite" class="nav-tab">Publications</a>
-            <a href="#suite" class="nav-tab">Contact</a>
-            <div class="nav-cursor" id="navCursor"></div>
-        </div>
-        <a href="#suite" class="nav-cta">Rendez-vous</a>
+    <div class="nav-tabs" id="navTabs">
+        <a href="#presentation" class="nav-tab" data-spy="presentation">Présentation</a>
+        <a href="#domaines" class="nav-tab" data-spy="domaines">Domaines</a>
+        <a href="#suite" class="nav-tab">Publications</a>
+        <a href="#suite" class="nav-tab">Contact</a>
+        <div class="nav-cursor" id="navCursor"></div>
     </div>
+    <div class="nav-cta-wrap"><a href="#suite" class="nav-cta">Rendez-vous</a></div>
 </nav>
 
-<!-- ═════════════════ HERO — 6 CONCEPTS ═════════════════ -->
+<!-- ═════════════════ HERO — CONCEPTS ═════════════════ -->
 <header class="hero" id="top">
     <div class="hero-grain"></div>
 
-    <!-- A — Couverture -->
+    <!-- A — Aquarelle -->
     <section class="hv hv-a" data-hero="a">
-        <div class="wrap">
-            <div class="row top rise" style="--d:500ms">
-                <span>Avocate au Barreau de Lyon</span>
-                <span>Contentieux civil &amp; commercial</span>
-                <span>Lyon 2<sup>e</sup></span>
-            </div>
-            <h1 class="name name-a">
-                <span class="mask"><span style="--d:100ms">Sarah</span></span>
-                <span class="mask l2"><span style="--d:250ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <div class="row bottom rise" style="--d:700ms">
-                <div class="tag left">
-                    <div class="tag-line"></div>
-                    <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-                </div>
-                <div class="cue"><span>Découvrir</span><i></i></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- B — Portrait -->
-    <section class="hv hv-b" data-hero="b">
-        <div class="grid">
-            <div class="txt">
-                <h1 class="name name-b">
-                    <span class="mask"><span style="--d:200ms">Sarah</span></span>
-                    <span class="mask"><span style="--d:320ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-                </h1>
-                <p class="sub rise" style="--d:550ms">Avocate au Barreau de Lyon</p>
-                <div class="tag left rise" style="--d:700ms">
-                    <div class="tag-line"></div>
-                    <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-                </div>
-                <div class="cue rise" style="--d:900ms"><span>Découvrir</span><i></i></div>
-            </div>
-            <div class="phwrap">
-                <div class="ph" role="img" aria-label="Portrait de Sarah Mostfa"></div>
-                <div class="trait"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- C — Confluence -->
-    <section class="hv hv-c" data-hero="c">
         <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <path class="river" pathLength="1" d="M 150 -10 C 240 170, 430 190, 480 330 S 600 600, 720 780"/>
-            <path class="river bank" pathLength="1" transform="translate(18 4)" d="M 150 -10 C 240 170, 430 190, 480 330 S 600 600, 720 780"/>
-            <path class="river" pathLength="1" d="M 1320 -10 C 1190 150, 1090 210, 1030 350 S 850 620, 720 780"/>
-            <path class="river bank" pathLength="1" transform="translate(-18 4)" d="M 1320 -10 C 1190 150, 1090 210, 1030 350 S 850 620, 720 780"/>
-            <path class="river merged" pathLength="1" d="M 720 780 C 705 830, 692 870, 702 920"/>
-            <circle class="point-ring" cx="720" cy="780" r="6"/>
-            <circle class="point" cx="720" cy="780" r="4.5"/>
+            <defs>
+                <filter id="wash" x="-30%" y="-30%" width="160%" height="160%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="4" seed="11" result="n"/>
+                    <feDisplacementMap in="SourceGraphic" in2="n" scale="170" xChannelSelector="R" yChannelSelector="G" result="d"/>
+                    <feGaussianBlur in="d" stdDeviation="16"/>
+                </filter>
+                <filter id="edge" x="-30%" y="-30%" width="160%" height="160%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="4" seed="11" result="n"/>
+                    <feDisplacementMap in="SourceGraphic" in2="n" scale="170" xChannelSelector="R" yChannelSelector="G" result="d"/>
+                    <feGaussianBlur in="d" stdDeviation="2.5"/>
+                </filter>
+            </defs>
+            <g filter="url(#wash)">
+                <ellipse cx="1180" cy="760" rx="430" ry="290" fill="#c38c7e" opacity="0.42"/>
+                <ellipse cx="1320" cy="120" rx="220" ry="160" fill="#c9998b" opacity="0.28"/>
+                <ellipse cx="200" cy="150" rx="400" ry="230" fill="#8e9375" opacity="0.26"/>
+                <ellipse cx="120" cy="820" rx="260" ry="170" fill="#b8ad93" opacity="0.3"/>
+            </g>
+            <g filter="url(#edge)" fill="none" stroke-width="1.2">
+                <ellipse cx="1180" cy="760" rx="410" ry="275" stroke="#a9705f" opacity="0.18"/>
+                <ellipse cx="200" cy="150" rx="385" ry="220" stroke="#6f7459" opacity="0.14"/>
+            </g>
         </svg>
         <div class="halo"></div>
         <div class="center">
             <h1 class="name name-c">
-                <span class="mask"><span style="--d:100ms">Sarah</span></span>
-                <span class="mask"><span style="--d:220ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+                <span class="mask"><span style="--d:900ms">Sarah</span></span>
+                <span class="mask"><span style="--d:1020ms"><em>Mostfa</em><span class="dot">.</span></span></span>
             </h1>
-            <p class="sub rise" style="--d:500ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:700ms">
+            <p class="sub rise" style="--d:1250ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:1400ms">
                 <div class="tag-line"></div>
                 <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
             </div>
         </div>
-        <span class="corner l rise" style="--d:1200ms">45°45′ N — 4°50′ E</span>
-        <span class="corner r rise" style="--d:1300ms">Saône · Rhône</span>
+        <div class="cue-abs"><div class="cue rise" style="--d:1700ms"><span>Découvrir</span><i></i></div></div>
     </section>
 
-    <!-- D — 24 colonnes -->
+    <!-- B — Lumière argentique -->
+    <section class="hv hv-b" data-hero="b">
+        <div class="leak"></div>
+        <div class="vignette"></div>
+        <div class="dust" id="dust"></div>
+        <div class="center">
+            <h1 class="name name-c">
+                <span class="mask"><span style="--d:400ms">Sarah</span></span>
+                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+            </h1>
+            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:900ms">
+                <div class="tag-line"></div>
+                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
+    </section>
+
+    <!-- C — Ombres de feuillage -->
+    <section class="hv hv-c" data-hero="c">
+        <div class="sun"></div>
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+                <filter id="leaves" x="0" y="0" width="100%" height="100%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.0065 0.0095" numOctaves="3" seed="4" result="n"/>
+                    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.33  0 0 0 0 0.3  0 0 0 0 0.24  -9 0 0 0 5" result="m"/>
+                    <feGaussianBlur in="m" stdDeviation="7"/>
+                </filter>
+            </defs>
+            <rect width="1440" height="900" filter="url(#leaves)"/>
+        </svg>
+        <div class="center">
+            <h1 class="name name-c">
+                <span class="mask"><span style="--d:400ms">Sarah</span></span>
+                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+            </h1>
+            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:900ms">
+                <div class="tag-line"></div>
+                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
+    </section>
+
+    <!-- D — Portrait flou -->
     <section class="hv hv-d" data-hero="d">
-        <div class="cols" id="cols"></div>
+        <div class="ph"></div>
+        <div class="veil"></div>
+        <div class="center">
+            <h1 class="name name-c">
+                <span class="mask"><span style="--d:400ms">Sarah</span></span>
+                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+            </h1>
+            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:900ms">
+                <div class="tag-line"></div>
+                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
+    </section>
+
+    <!-- E — Soie nacrée -->
+    <section class="hv hv-e" data-hero="e">
+        <div class="glow"></div>
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+                <filter id="silk" x="0" y="0" width="100%" height="100%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.0009 0.0035" numOctaves="2" seed="21" result="n"/>
+                    <feDiffuseLighting in="n" surfaceScale="38" diffuseConstant="1.05" lighting-color="#f6f0e7" result="light">
+                        <feDistantLight azimuth="235" elevation="38"/>
+                    </feDiffuseLighting>
+                    <feGaussianBlur in="light" stdDeviation="3"/>
+                </filter>
+            </defs>
+            <rect width="1440" height="900" filter="url(#silk)"/>
+        </svg>
         <div class="halo"></div>
         <div class="center">
             <h1 class="name name-c">
-                <span class="mask"><span style="--d:500ms">Sarah</span></span>
-                <span class="mask"><span style="--d:620ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+                <span class="mask"><span style="--d:400ms">Sarah</span></span>
+                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
             </h1>
-            <p class="sub rise" style="--d:850ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:1000ms">
+            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:900ms">
                 <div class="tag-line"></div>
                 <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
             </div>
         </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1300ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- E — Papier -->
-    <section class="hv hv-e" data-hero="e">
-        <div class="frame"></div>
-        <div class="center">
-            <div class="seal rise" style="--d:200ms">S<em>M</em></div>
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:350ms">Sarah</span></span>
-                <span class="mask"><span style="--d:470ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:700ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:850ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs" style="bottom:44px"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
+        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
     </section>
 
     <!-- F — Actuel (V1) -->
@@ -536,6 +529,23 @@
             </div>
         </div>
         <div class="cue-abs"><div class="cue rise" style="--d:900ms"><span>Découvrir</span><i></i></div></div>
+    </section>
+    <!-- G — Livres (V2) -->
+    <section class="hv hv-g" data-hero="g">
+        <div class="ph"></div>
+        <div class="veil"></div>
+        <div class="center">
+            <h1 class="name name-c">
+                <span class="mask"><span style="--d:300ms">Sarah</span></span>
+                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
+            </h1>
+            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
+            <div class="tag rise" style="--d:800ms">
+                <div class="tag-line"></div>
+                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
+            </div>
+        </div>
+        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
     </section>
 </header>
 
@@ -732,23 +742,24 @@
         });
     });
 
-    // Colonnes (concept D)
-    var cols = document.getElementById('cols');
-    for (var i = 0; i < 24; i++) {
-        var s = document.createElement('span');
-        s.style.setProperty('--i', i);
-        s.style.setProperty('--o', (0.25 + 0.75 * Math.abs(i - 11.5) / 11.5).toFixed(2));
-        cols.appendChild(s);
+    // Poussières (concept B)
+    var dust = document.getElementById('dust');
+    for (var i = 0; i < 26; i++) {
+        var d = document.createElement('i');
+        var sz = (Math.random() * 2.2 + 0.8).toFixed(1);
+        d.style.cssText = 'left:' + (Math.random() * 100).toFixed(1) + '%;top:' + (Math.random() * 100).toFixed(1) + '%;width:' + sz + 'px;height:' + sz + 'px;opacity:' + (Math.random() * 0.6 + 0.2).toFixed(2);
+        dust.appendChild(d);
     }
 
     // Sélecteur de concepts
     var HEROES = [
-        ['a', 'Couverture', 'Typographie seule, mise en page de couverture'],
-        ['b', 'Portrait', 'Ta photo en grand, le nom à côté'],
-        ['c', 'Confluence', 'La Saône et le Rhône se rejoignent à Lyon'],
-        ['d', '24 colonnes', 'Rythme inspiré du Palais de justice de Lyon'],
-        ['e', 'Papier', 'Matière de papier à lettres, cadre fin, sceau SM'],
-        ['f', 'Actuel (V1)', 'Le dégradé nacré/rosé actuel, pour comparer']
+        ['a', 'Aquarelle', 'Lavis rose et vert aux bords irréguliers'],
+        ['b', 'Lumière argentique', 'Fuite de lumière rosée, grain et vignettage de pellicule'],
+        ['c', 'Ombres de feuillage', 'Lumière de fin de journée filtrée par des feuilles'],
+        ['d', 'Portrait flou', 'Ta photo, très floutée et voilée, en toile de fond'],
+        ['e', 'Soie nacrée', 'Drapé de tissu satiné, lumière douce'],
+        ['f', 'Actuel (V1)', 'Le dégradé nacré/rosé actuel, pour comparer'],
+        ['g', 'Livres (V2)', 'La bibliothèque floutée de la V2, pour comparer']
     ];
     var rail = document.getElementById('rail');
     var buttons = {};
