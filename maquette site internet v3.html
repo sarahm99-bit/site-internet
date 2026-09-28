@@ -986,7 +986,7 @@
         Object.keys(buttons).forEach(function (k) { buttons[k].classList.toggle('active', k === id); });
         current = id;
         if (typeof syncVideos === 'function') syncVideos();
-        try { localStorage.setItem('v3-hero', id); } catch (e) {}
+        try { localStorage.setItem('v3-hero-l', id); } catch (e) {}
         if (fromUser) {
             var b = buttons[id];
             b.classList.add('flash');
@@ -995,9 +995,9 @@
             if (window.scrollY > window.innerHeight * 0.3) scrollToEl(0);
         }
     }
-    var saved = 'a';
-    try { saved = localStorage.getItem('v3-hero') || 'a'; } catch (e) {}
-    if (!buttons[saved]) saved = 'a';
+    var saved = 'l';
+    try { saved = localStorage.getItem('v3-hero-l') || 'l'; } catch (e) {}
+    if (!buttons[saved]) saved = 'l';
     setHero(saved, false);
 
     // Ouverture
