@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype B - Colonnes avec hover</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+            padding: 60px 20px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a0a0b0;
+            margin-bottom: 60px;
+            font-size: 1rem;
+        }
+
+        .columns {
+            display: flex;
+            gap: 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .column {
+            flex: 1;
+            position: relative;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            cursor: pointer;
+            transition: flex 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+        }
+
+        .column:hover {
+            flex: 2.5;
+        }
+
+        .column::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.9;
+            transition: opacity 0.4s;
+        }
+
+        .column:nth-child(1)::before { background: linear-gradient(180deg, #16213e 0%, #0f3460 100%); }
+        .column:nth-child(2)::before { background: linear-gradient(180deg, #1a1a2e 0%, #533483 100%); }
+        .column:nth-child(3)::before { background: linear-gradient(180deg, #16213e 0%, #1b4332 100%); }
+
+        .column:nth-child(1) { border-right: 1px solid rgba(255,255,255,0.1); }
+        .column:nth-child(2) { border-right: 1px solid rgba(255,255,255,0.1); }
+
+        .column-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .column-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .column-number {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 10px;
+        }
+
+        .column-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .column-accroche {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s, opacity 0.4s;
+            opacity: 0;
+        }
+
+        .column:hover .column-accroche {
+            max-height: 100px;
+            opacity: 1;
+        }
+
+        .column-services {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s 0.1s, opacity 0.4s 0.1s;
+            opacity: 0;
+        }
+
+        .column:hover .column-services {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        .column-services ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .column-services li {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            padding: 4px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .column-services li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .column-cta {
+            margin-top: 20px;
+            display: inline-block;
+            color: #fff;
+            font-size: 0.85rem;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+            padding-bottom: 2px;
+            opacity: 0;
+            transition: opacity 0.4s 0.2s;
+        }
+
+        .column:hover .column-cta { opacity: 1; }
+    </style>
+</head>
+<body>
+    <h2>Domaines d'intervention</h2>
+    <p class="subtitle">Expertise juridique au service de vos intérêts</p>
+
+    <div class="columns">
+        <div class="column">
+            <div class="column-content">
+                <div class="column-icon">⚖️</div>
+                <div class="column-number">01 — PROFESSIONNELS</div>
+                <h3 class="column-title">Contentieux commercial</h3>
+                <p class="column-accroche">« Vous faites face à un différend dans le cadre de vos relations d'affaires. »</p>
+                <div class="column-services">
+                    <ul>
+                        <li>Inexécution contractuelle</li>
+                        <li>Responsabilité civile délictuelle</li>
+                        <li>Concurrence déloyale</li>
+                        <li>Rupture brutale de relations commerciales</li>
+                        <li>Conflits entre associés</li>
+                        <li>Recouvrement de créances</li>
+                    </ul>
+                </div>
+                <a href="#" class="column-cta">Découvrir →</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="column-content">
+                <div class="column-icon">🏛️</div>
+                <div class="column-number">02 — PARTICULIERS</div>
+                <h3 class="column-title">Contentieux civil</h3>
+                <p class="column-accroche">« Vous êtes un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits. »</p>
+                <div class="column-services">
+                    <ul>
+                        <li>Actions en responsabilité civile</li>
+                        <li>Cautionnements</li>
+                        <li>Baux d'habitation et loyers impayés</li>
+                        <li>Indemnisation par les assurances</li>
+                    </ul>
+                </div>
+                <a href="#" class="column-cta">Découvrir →</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="column-content">
+                <div class="column-icon">✍️</div>
+                <div class="column-number">03 — PRÉVENTION</div>
+                <h3 class="column-title">Rédaction contractuelle</h3>
+                <p class="column-accroche">« Un contrat bien rédigé est la meilleure prévention du contentieux. »</p>
+                <div class="column-services">
+                    <ul>
+                        <li>CGV</li>
+                        <li>Accords de confidentialité</li>
+                        <li>Contrats de licence</li>
+                        <li>Cession de droits d'auteur</li>
+                        <li>Propriété intellectuelle</li>
+                    </ul>
+                </div>
+                <a href="#" class="column-cta">Découvrir →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

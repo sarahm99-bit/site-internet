@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero - Option 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a2e;
+            overflow-x: hidden;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 60px;
+            overflow: hidden;
+        }
+
+        /* Animated gradient background */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(196, 163, 90, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139, 90, 43, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(210, 190, 160, 0.1) 0%, transparent 70%);
+            animation: bgShift 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Subtle grain texture */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Header */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 60px;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #1a1a2e;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav a {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #1a1a2e;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav a:hover { opacity: 1; }
+
+        .contact-btn {
+            font-size: 0.8rem;
+            padding: 10px 24px;
+            border: 1px solid #1a1a2e;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #1a1a2e;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #1a1a2e;
+            color: #f5f0e8;
+        }
+
+        /* Hero content */
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 750px;
+        }
+
+        .hero-tag {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #8b6914;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: #1a1a2e;
+        }
+
+        .hero-title .name {
+            font-weight: 600;
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #444;
+            max-width: 600px;
+        }
+
+        .hero-subtitle em {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        /* ===== SCROLL INDICATOR - Option 1: Ligne animée ===== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .scroll-text {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #8b6914;
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { top: -100%; }
+            50% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* ===== NEXT SECTION (pour tester le scroll) ===== */
+        .next-section {
+            min-height: 50vh;
+            background: #fdfcfa;
+            padding: 80px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .next-section p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-bg"></div>
+
+        <header class="header">
+            <div class="logo">SM</div>
+            <nav class="nav">
+                <a href="#">Domaines</a>
+                <a href="#">Le cabinet</a>
+                <a href="#">Honoraires</a>
+            </nav>
+            <a href="#" class="contact-btn">Contact</a>
+        </header>
+
+        <div class="hero-content">
+            <p class="hero-tag">Avocate au Barreau de Lyon</p>
+            <h1 class="hero-title">
+                <span class="name">Sarah Mostfa.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Assure la défense de vos intérêts devant les juridictions <em>civiles</em> et <em>commerciales</em>.
+            </p>
+        </div>
+
+        <!-- Scroll indicator: ligne verticale animée -->
+        <div class="scroll-indicator">
+            <span class="scroll-text">Défiler</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <section class="next-section">
+        <p>— Section suivante : Domaines d'intervention —</p>
+    </section>
+</body>
+</html>
