@@ -3,6 +3,7 @@
 ## Le site
 - `maquette site internet.html` — version 1 (fond dégradé nacré/rosé)
 - `maquette site internet v2.html` — version 2 (fond photo bibliothèque floutée)
+- `maquette site internet v3.html` — version 3 haut de gamme (haut de page + présentation, 6 concepts d'accueil au choix)
 - `assets/` — photo de profil
 
 ## Cartes de visite
