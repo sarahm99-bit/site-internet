@@ -89,21 +89,29 @@
     }
     .logo { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; letter-spacing: -0.04em; }
     .logo em { font-style: italic; font-weight: 400; color: var(--vert); }
-    .nav-links { display: flex; align-items: center; gap: 34px; }
-    .nav-links a:not(.nav-cta) {
-        font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; position: relative; padding: 4px 0;
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-tabs {
+        position: relative; display: flex; align-items: center; padding: 4px;
+        background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.15); border-radius: 100px;
     }
-    .nav-links a:not(.nav-cta)::after {
-        content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--vert);
-        transform: scaleX(0); transform-origin: right; transition: transform 0.5s var(--ease);
+    .nav-tab {
+        position: relative; z-index: 2; padding: 10px 22px; white-space: nowrap;
+        font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--noir);
+        transition: color 0.3s;
     }
-    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); transform-origin: left; }
+    .nav-tab.lit { color: var(--blanc); }
+    .nav-cursor {
+        position: absolute; top: 4px; left: 0; height: calc(100% - 8px); width: 0; z-index: 1;
+        border-radius: 100px; background: var(--noir); opacity: 0;
+        transition: left 0.45s var(--ease), width 0.45s var(--ease), opacity 0.3s;
+    }
+    .nav-cursor.on { opacity: 1; }
     .nav-cta {
-        font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
-        border: 1px solid var(--noir); border-radius: 100px; padding: 10px 20px;
-        transition: background 0.3s, color 0.3s;
+        padding: 13px 24px; border-radius: 100px; background: var(--vert); color: var(--blanc);
+        font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+        transition: background 0.3s, transform 0.2s;
     }
-    .nav-cta:hover { background: var(--noir); color: var(--blanc); }
+    .nav-cta:hover { background: var(--vert-dark); transform: scale(0.97); }
 
     /* ═════════ HERO — commun ═════════ */
     .hero { position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; background: var(--nacre); }
@@ -314,7 +322,7 @@
 
     /* ═════════ RESPONSIVE ═════════ */
     @media (max-width: 900px) {
-        .nav-links a:not(.nav-cta) { display: none; }
+        .nav-tabs { display: none; }
         .hv-a .top span:nth-child(2) { display: none; }
         .hv-a .bottom { flex-direction: column; align-items: flex-start; }
         .hv-a .bottom .cue { display: none; }
@@ -352,11 +360,15 @@
 
 <nav class="nav" id="nav">
     <a href="#top" class="logo">S<em>M</em></a>
-    <div class="nav-links">
-        <a href="#presentation">Présentation</a>
-        <a href="#suite">Domaines</a>
-        <a href="#suite">Publications</a>
-        <a href="#suite" class="nav-cta">Prendre rendez-vous</a>
+    <div class="nav-right">
+        <div class="nav-tabs" id="navTabs">
+            <a href="#presentation" class="nav-tab" data-spy="presentation">Présentation</a>
+            <a href="#suite" class="nav-tab" data-spy="suite">Domaines</a>
+            <a href="#suite" class="nav-tab">Publications</a>
+            <a href="#suite" class="nav-tab">Contact</a>
+            <div class="nav-cursor" id="navCursor"></div>
+        </div>
+        <a href="#suite" class="nav-cta">Rendez-vous</a>
     </div>
 </nav>
 
@@ -713,6 +725,34 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.reveal, .split, .pres-frame').forEach(function (el) { io.observe(el); });
 
+    // Menu arrondi : curseur qui glisse au survol et suit la section affichée
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.nav-tab'));
+    var navTabs = document.getElementById('navTabs');
+    var cursor = document.getElementById('navCursor');
+    var activeTab = -1;
+    function showCursor(i) {
+        tabs.forEach(function (t, k) { t.classList.toggle('lit', k === i); });
+        if (i < 0) { cursor.classList.remove('on'); return; }
+        cursor.style.left = tabs[i].offsetLeft + 'px';
+        cursor.style.width = tabs[i].offsetWidth + 'px';
+        cursor.classList.add('on');
+    }
+    tabs.forEach(function (t, i) { t.addEventListener('mouseenter', function () { showCursor(i); }); });
+    navTabs.addEventListener('mouseleave', function () { showCursor(activeTab); });
+    var spyTargets = tabs.map(function (t) { return t.dataset.spy ? document.getElementById(t.dataset.spy) : null; });
+    function spy() {
+        var found = -1;
+        spyTargets.forEach(function (sec, i) {
+            if (!sec) return;
+            var r = sec.getBoundingClientRect();
+            if (r.top <= 140 && r.bottom > 140) found = i;
+        });
+        if (found !== activeTab) {
+            activeTab = found;
+            if (!navTabs.matches(':hover')) showCursor(activeTab);
+        }
+    }
+
     // Nav, frise et photo au défilement
     var nav = document.getElementById('nav');
     var tl = document.getElementById('timeline');
@@ -725,6 +765,7 @@
         ticking = false;
         var vh = window.innerHeight;
         nav.classList.toggle('scrolled', window.scrollY > 40);
+        spy();
         var r = tl.getBoundingClientRect();
         var p = Math.min(1, Math.max(0, (vh * 0.62 - r.top) / r.height));
         fill.style.transform = 'scaleY(' + p + ')';
@@ -736,7 +777,7 @@
         }
     }
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', function () { showCursor(activeTab); update(); });
     update();
 })();
 </script>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mot changeant — Propositions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --vert: #72785f;
+        --vert-dark: #5a6049;
+        --beige: #d6cdb8;
+        --nacre: #f0ebe2;
+        --noir: #1a1a1a;
+        --blanc: #fdfcfa;
+        --rose: #ac786c;
+        --serif: 'Cormorant Garamond', serif;
+        --display: 'Instrument Serif', serif;
+        --sans: 'Inter', sans-serif;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    body { font-family: var(--sans); background: #e8e3da; color: var(--noir); -webkit-font-smoothing: antialiased; }
+
+    .page-head { text-align: center; padding: 56px 24px 20px; }
+    .page-head h1 { font-family: var(--serif); font-weight: 300; font-size: 1.7rem; }
+    .page-head p { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; margin-top: 6px; }
+
+    .label { max-width: 1200px; margin: 50px auto 12px; padding: 0 24px; display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+    .label strong { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert-dark); font-weight: 500; }
+    .label span { font-size: 0.78rem; color: #888; }
+
+    .mock { max-width: 1200px; margin: 0 auto; position: relative; overflow: hidden; box-shadow: 0 6px 30px -12px rgba(0, 0, 0, 0.12); }
+    .grain::after { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: var(--grain); background-size: 256px; pointer-events: none; }
+
+    .kicker { display: flex; align-items: center; gap: 14px; font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--vert); margin-bottom: 28px; }
+    .kicker::before { content: ''; width: 38px; height: 1px; background: currentColor; opacity: 0.5; }
+
+    /* ═════════ Mot changeant ═════════ */
+    .rot {
+        --rc: var(--vert);
+        display: inline-block; position: relative; white-space: nowrap; vertical-align: baseline;
+        color: var(--rc); font-style: italic;
+        clip-path: inset(-0.1em -0.4em -0.22em -0.4em);
+        transition: width 0.7s var(--ease);
+    }
+    .rot .rw { display: inline-block; }
+    .rot .rw.leave { position: absolute; left: 0; top: 0; }
+    .rot .measure { position: absolute; visibility: hidden; left: 0; top: 0; }
+
+    .rot-slide .rw, .rot-line .rw { transition: transform 0.75s var(--ease), opacity 0.75s var(--ease); }
+    .rot-slide .rw.enter, .rot-line .rw.enter { transform: translateY(105%); }
+    .rot-slide .rw.leave, .rot-line .rw.leave { transform: translateY(-105%); opacity: 0; }
+
+    .rot-line::after {
+        content: ''; position: absolute; left: 0.04em; right: 0.04em; bottom: 0.02em; height: 1.5px;
+        background: currentColor; opacity: 0.55; transform-origin: left;
+    }
+    .rot-line.draw::after { animation: uline 1s var(--ease); }
+    @keyframes uline { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    .rot-blur .rw { transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s var(--ease); }
+    .rot-blur .rw.enter { opacity: 0; filter: blur(10px); transform: scale(0.96); }
+    .rot-blur .rw.leave { opacity: 0; filter: blur(10px); transform: scale(1.04); }
+
+    .rot-letters .rw.leave { transition: opacity 0.35s ease; opacity: 0; }
+    .rot-letters .ch { display: inline-block; animation: chUp 0.7s var(--ease) both; animation-delay: calc(var(--c) * 32ms); }
+    @keyframes chUp { from { transform: translateY(75%); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    /* ═════════ 1 — Accueil ═════════ */
+    .m1 { min-height: 86vh; background: var(--nacre); display: flex; flex-direction: column; justify-content: space-between; padding: 34px 6vw 40px; }
+    .m1::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 45% at 90% 95%, rgba(172, 120, 108, 0.2) 0%, transparent 70%); }
+    .m1 > * { position: relative; z-index: 1; }
+    .m1-top { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.04em; }
+    .logo em { font-style: italic; font-weight: 400; color: var(--vert); }
+    .m1-top span { font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert-dark); }
+    .m1-phrase { font-family: var(--display); font-weight: 400; font-size: clamp(2.5rem, 6.2vw, 5.8rem); line-height: 1.04; letter-spacing: -0.015em; max-width: 13.5em; }
+    .m1-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; border-top: 1px solid rgba(26, 26, 26, 0.14); padding-top: 20px; }
+    .m1-sign { font-family: var(--serif); font-weight: 300; font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.03em; line-height: 1; }
+    .m1-sign em { font-style: italic; font-weight: 500; color: var(--vert); }
+    .m1-sign small { display: block; margin-top: 10px; font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert); }
+    .cue { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--vert); }
+
+    /* ═════════ 2 — Domaines ═════════ */
+    .m2 { background: var(--nacre); padding: 90px 6vw 100px; }
+    .m2-phrase { font-family: var(--display); font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.06; letter-spacing: -0.015em; }
+    .m2-sub { margin-top: 22px; max-width: 34em; font-size: 1rem; line-height: 1.85; color: #666; font-weight: 300; }
+    .m2-list { margin-top: 50px; border-top: 1px solid rgba(26, 26, 26, 0.12); }
+    .m2-list div { display: flex; gap: 24px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid rgba(26, 26, 26, 0.12); font-family: var(--serif); font-size: 1.5rem; }
+    .m2-list small { font-family: var(--sans); font-size: 0.7rem; color: var(--vert); letter-spacing: 0.1em; }
+
+    /* ═════════ 3 — Bandeau ═════════ */
+    .m3 { background: var(--blanc); padding: 110px 6vw; text-align: center; }
+    .m3-phrase { font-family: var(--display); font-size: clamp(2.3rem, 5.2vw, 4.6rem); line-height: 1.08; letter-spacing: -0.015em; }
+    .m3-sub { margin-top: 18px; font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 2vw, 1.6rem); color: #777; font-weight: 300; }
+
+    /* ═════════ 4 — Contact ═════════ */
+    .m4 { background: var(--noir); color: var(--blanc); padding: 100px 6vw; display: grid; grid-template-columns: 1.2fr 1fr; gap: 6vw; align-items: end; }
+    .m4 .kicker { color: var(--beige); }
+    .m4-phrase { font-family: var(--display); font-size: clamp(2.4rem, 5.4vw, 4.8rem); line-height: 1.04; letter-spacing: -0.015em; }
+    .m4-phrase .rot { --rc: #d4aa9f; }
+    .m4 p.info { font-size: 0.95rem; line-height: 1.8; color: rgba(255, 255, 255, 0.55); font-weight: 300; margin-bottom: 26px; }
+    .btn { display: inline-flex; gap: 14px; align-items: center; padding: 16px 28px; border-radius: 100px; background: var(--vert); color: var(--blanc); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* ═════════ 5 — Styles ═════════ */
+    .m5 { background: var(--blanc); padding: 60px 5vw 70px; }
+    .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; align-items: center; }
+    .chips span { font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; margin-right: 6px; }
+    .chips button { font: 400 0.78rem var(--sans); padding: 9px 16px; border-radius: 100px; border: 1px solid rgba(26, 26, 26, 0.15); background: transparent; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .chips button i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    .chips button.active { background: var(--noir); color: var(--blanc); border-color: var(--noir); }
+    .styles { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(26, 26, 26, 0.1); border: 1px solid rgba(26, 26, 26, 0.1); }
+    .styles > div { background: var(--blanc); padding: 44px 36px; }
+    .styles h3 { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: #999; font-weight: 500; margin-bottom: 20px; }
+    .styles p { font-family: var(--display); font-size: clamp(1.9rem, 3.2vw, 2.8rem); line-height: 1.1; }
+    .m5[data-color="rose"] .rot { --rc: var(--rose); }
+    .m5[data-color="noir"] .rot { --rc: var(--noir); }
+
+    @media (max-width: 800px) {
+        .m4 { grid-template-columns: 1fr; }
+        .styles { grid-template-columns: 1fr; }
+        .m1-top span { display: none; }
+    }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+    <h1>Le mot qui change</h1>
+    <p>4 emplacements · 4 styles d'animation · 3 couleurs</p>
+</div>
+
+<!-- 1 -->
+<div class="label"><strong>1 — Page d'accueil</strong><span>La phrase devient le cœur du haut de page, ton nom signe en bas. Une nouvelle piste d'accueil.</span></div>
+<section class="mock m1 grain">
+    <div class="m1-top">
+        <span class="logo">S<em>M</em></span>
+        <span>Contentieux civil &amp; commercial — Lyon</span>
+    </div>
+    <h2 class="m1-phrase">
+        <span class="rot" data-style="line" data-interval="2800" data-words="Défendre|Représenter|Protéger|Faire valoir"></span>
+        vos intérêts devant les juridictions civiles et commerciales.
+    </h2>
+    <div class="m1-bottom">
+        <div class="m1-sign">Sarah <em>Mostfa</em><span style="color:var(--vert)">.</span><small>Avocate au Barreau de Lyon</small></div>
+        <span class="cue">Découvrir ↓</span>
+    </div>
+</section>
+
+<!-- 2 -->
+<div class="label"><strong>2 — Ouverture des domaines d'intervention</strong><span>On s'adresse directement au visiteur avant la liste des domaines.</span></div>
+<section class="mock m2">
+    <p class="kicker">02 — Domaines d'intervention</p>
+    <h2 class="m2-phrase">Vous êtes <span class="rot" data-style="blur" data-interval="2400" data-words="une entreprise|un particulier|un dirigeant|un associé|un créateur"></span>.</h2>
+    <p class="m2-sub">Je vous accompagne dans la résolution de vos litiges et la sécurisation de vos relations contractuelles.</p>
+    <div class="m2-list">
+        <div><small>01</small>Contentieux commercial</div>
+        <div><small>02</small>Contentieux civil</div>
+        <div><small>03</small>Rédaction contractuelle</div>
+    </div>
+</section>
+
+<!-- 3 -->
+<div class="label"><strong>3 — Bandeau entre présentation et domaines</strong><span>Une respiration en pleine largeur qui fait la transition entre deux sections.</span></div>
+<section class="mock m3">
+    <h2 class="m3-phrase">Un litige <span class="rot" data-style="letters" data-interval="2300" data-words="commercial|civil|locatif|entre associés|de construction|de consommation"></span> ?</h2>
+    <p class="m3-sub">Chaque situation appelle une stratégie sur mesure.</p>
+</section>
+
+<!-- 4 -->
+<div class="label"><strong>4 — Section rendez-vous</strong><span>Le titre du formulaire de contact devient une invitation.</span></div>
+<section class="mock m4">
+    <div>
+        <p class="kicker">Prendre rendez-vous</p>
+        <h2 class="m4-phrase">Parlons de votre <span class="rot" data-style="slide" data-interval="2200" data-words="litige|contrat|projet|dossier|situation"></span>.</h2>
+    </div>
+    <div>
+        <p class="info">14 rue de la Charité, 69002 Lyon<br>sarah.mostfa@avocat.fr</p>
+        <span class="btn">Écrire un message →</span>
+    </div>
+</section>
+
+<!-- 5 -->
+<div class="label"><strong>5 — Styles d'animation et couleur</strong><span>La même phrase avec 4 animations. Change la couleur du mot avec les boutons.</span></div>
+<section class="mock m5" id="m5" data-color="vert">
+    <div class="chips" id="chips">
+        <span>Couleur du mot</span>
+        <button type="button" class="active" data-color="vert"><i style="background:var(--vert)"></i>Vert olive</button>
+        <button type="button" data-color="rose"><i style="background:var(--rose)"></i>Vieux rose</button>
+        <button type="button" data-color="noir"><i style="background:var(--noir)"></i>Noir italique</button>
+    </div>
+    <div class="styles">
+        <div>
+            <h3>A — Glissement vertical</h3>
+            <p>Parlons de votre <span class="rot" data-style="slide" data-interval="2400" data-words="litige|contrat|projet|dossier"></span>.</p>
+        </div>
+        <div>
+            <h3>B — Glissement + soulignement</h3>
+            <p>Parlons de votre <span class="rot" data-style="line" data-interval="2400" data-words="litige|contrat|projet|dossier"></span>.</p>
+        </div>
+        <div>
+            <h3>C — Fondu flou</h3>
+            <p>Parlons de votre <span class="rot" data-style="blur" data-interval="2400" data-words="litige|contrat|projet|dossier"></span>.</p>
+        </div>
+        <div>
+            <h3>D — Lettre par lettre</h3>
+            <p>Parlons de votre <span class="rot" data-style="letters" data-interval="2400" data-words="litige|contrat|projet|dossier"></span>.</p>
+        </div>
+    </div>
+</section>
+<div style="height:80px"></div>
+
+<script>
+(function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function fill(span, word, style) {
+        span.textContent = '';
+        if (style === 'letters') {
+            word.split('').forEach(function (c, i) {
+                var ch = document.createElement('span');
+                ch.className = 'ch';
+                ch.style.setProperty('--c', i);
+                ch.textContent = c === ' ' ? ' ' : c;
+                span.appendChild(ch);
+            });
+        } else {
+            span.textContent = word;
+        }
+    }
+
+    function Rotator(el) {
+        var words = el.dataset.words.split('|');
+        var style = el.dataset.style || 'slide';
+        var interval = +el.dataset.interval || 2500;
+        var i = 0;
+        el.classList.add('rot-' + style);
+        var measure = document.createElement('span');
+        measure.className = 'measure';
+        el.appendChild(measure);
+        var current = document.createElement('span');
+        current.className = 'rw';
+        current.textContent = words[0];
+        el.appendChild(current);
+
+        function widthOf(w) { measure.textContent = w; return measure.getBoundingClientRect().width; }
+        el.style.width = widthOf(words[0]) + 'px';
+        if (style === 'line') el.classList.add('draw');
+
+        setInterval(function () {
+            i = (i + 1) % words.length;
+            var w = words[i];
+            el.style.width = widthOf(w) + 'px';
+            if (reduce) { current.textContent = w; return; }
+            var old = current;
+            old.classList.add('leave');
+            var neu = document.createElement('span');
+            neu.className = 'rw enter';
+            fill(neu, w, style);
+            el.appendChild(neu);
+            requestAnimationFrame(function () { requestAnimationFrame(function () { neu.classList.remove('enter'); }); });
+            if (style === 'line') { el.classList.remove('draw'); void el.offsetWidth; el.classList.add('draw'); }
+            setTimeout(function () { old.remove(); }, 800);
+            current = neu;
+        }, interval);
+
+        window.addEventListener('resize', function () { el.style.width = widthOf(words[i]) + 'px'; });
+    }
+
+    function start() { document.querySelectorAll('.rot').forEach(Rotator); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else window.addEventListener('load', start);
+
+    var m5 = document.getElementById('m5');
+    document.querySelectorAll('#chips button').forEach(function (b) {
+        b.addEventListener('click', function () {
+            m5.dataset.color = b.dataset.color;
+            document.querySelectorAll('#chips button').forEach(function (x) { x.classList.toggle('active', x === b); });
+        });
+    });
+})();
+</script>
+</body>
+</html>
