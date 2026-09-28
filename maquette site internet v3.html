@@ -15,7 +15,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -65,7 +65,7 @@
     .no-intro .intro, .intro.done { display: none; }
     .intro.out { clip-path: inset(0 0 100% 0); }
     .intro-name {
-        font-family: var(--serif); font-weight: 300;
+        font-family: var(--serif); font-weight: 500;
         font-size: clamp(2.6rem, 6vw, 5rem); letter-spacing: -0.03em; line-height: 1;
         display: flex; gap: 0.25em;
     }
@@ -90,7 +90,7 @@
     }
     .logo { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; letter-spacing: -0.04em; }
     .logo em { font-style: italic; font-weight: 400; color: var(--vert); }
-    .nav-cta-wrap { justify-self: end; }
+    .nav-cta-wrap { justify-self: end; grid-column: 3; }
     .nav-tabs {
         position: relative; display: flex; align-items: center; padding: 4px;
         background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.15); border-radius: 100px;
@@ -128,13 +128,14 @@
     @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
     @keyframes fade { from { opacity: 0; } }
 
-    .name em { font-style: italic; font-weight: 500; color: var(--vert); }
+    .name em { font-style: italic; font-weight: 600; color: var(--vert-dark); }
     .name .dot { color: var(--vert); }
-    .sub { font-size: clamp(0.76rem, 1vw, 0.92rem); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert); }
+    .sub { font-size: clamp(0.8rem, 1.05vw, 0.95rem); font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert-dark); }
     .tag { display: flex; flex-direction: column; align-items: center; gap: 14px; }
     .tag.left { align-items: flex-start; }
     .tag-line { width: 45px; height: 1.5px; background: var(--vert); opacity: 0.35; }
-    .tag p { font-size: 0.82rem; color: rgba(26, 26, 26, 0.55); letter-spacing: 0.06em; line-height: 1.6; max-width: 520px; }
+    .tag p { font-size: 0.9rem; font-weight: 400; color: rgba(26, 26, 26, 0.82); letter-spacing: 0.05em; line-height: 1.6; max-width: 540px; }
+    .hv .sub, .hv .tag p { text-shadow: 0 0 18px rgba(241, 236, 228, 0.95), 0 0 36px rgba(241, 236, 228, 0.8); }
 
     .cue { display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--vert); }
     .cue i { display: block; width: 1px; height: 44px; background: linear-gradient(var(--vert), transparent); transform-origin: top; animation: cue 2.4s ease-in-out infinite; }
@@ -146,125 +147,14 @@
         display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; padding: 90px 24px 120px;
     }
-    .name-c { font-family: var(--serif); font-weight: 300; font-size: clamp(3.6rem, 9vw, 8.5rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 22px; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.22em; }
+    .name-c { font-family: var(--serif); font-weight: 500; font-size: clamp(3.6rem, 9vw, 8.5rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 22px; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.22em; }
     .center .tag { margin-top: 30px; }
 
-    /* ═════════ A — AQUARELLE ═════════ */
-    .hv-a { background: #f1ebe1; }
-    .hv-a svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: fade 2.4s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
-    .hv-a::after { content: ''; position: absolute; inset: 0; opacity: 0.08; background-image: var(--grain); background-size: 200px; mix-blend-mode: multiply; }
-
-    /* ═════════ B — LUMIÈRE ARGENTIQUE ═════════ */
-    .hv-b { background: #efe7da; }
-    .hv-b .leak {
-        position: absolute; inset: -60px; filter: blur(28px);
-        background:
-            radial-gradient(ellipse 14% 38% at 97% 42%, rgba(255, 214, 178, 0.95) 0%, transparent 70%),
-            radial-gradient(ellipse 30% 70% at 100% 45%, rgba(214, 128, 98, 0.55) 0%, transparent 70%),
-            radial-gradient(ellipse 45% 55% at 92% 95%, rgba(190, 120, 100, 0.35) 0%, transparent 70%),
-            radial-gradient(ellipse 40% 45% at 4% 8%, rgba(114, 120, 95, 0.18) 0%, transparent 70%);
-        animation: fade 2.6s ease both; animation-delay: calc(var(--intro-delay) + 100ms);
-    }
-    .hv-b .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 70% at 45% 50%, transparent 55%, rgba(70, 55, 45, 0.2) 100%); }
-    .hv-b::after { content: ''; position: absolute; inset: 0; opacity: 0.13; background-image: var(--grain); background-size: 160px; mix-blend-mode: multiply; }
-    .hv-b .dust { position: absolute; inset: 0; }
-    .hv-b .dust i { position: absolute; border-radius: 50%; background: rgba(60, 50, 40, 0.35); }
-
-    /* ═════════ C — OMBRES DE FEUILLAGE ═════════ */
-    .hv-c { background: linear-gradient(200deg, #f7eee0 0%, #efe7da 45%, #e8dfd0 100%); }
-    .hv-c .sun { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 85% 10%, rgba(255, 236, 205, 0.8) 0%, transparent 65%); }
-    .hv-c svg { position: absolute; inset: -5%; width: 110%; height: 110%; opacity: 0.85;
-        -webkit-mask-image: radial-gradient(ellipse 65% 75% at 92% 12%, #000 25%, transparent 72%); mask-image: radial-gradient(ellipse 65% 75% at 92% 12%, #000 25%, transparent 72%);
-        animation: fade 2.4s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
-    .hv-c::after { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: var(--grain); background-size: 256px; }
-
-    /* ═════════ D — PORTRAIT FLOU ═════════ */
-    .hv-d .ph { position: absolute; inset: -80px; background: var(--photo) 75% 20% / cover no-repeat; filter: blur(46px) saturate(0.85); transform: scale(1.1); animation: fade 2s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
-    .hv-d .veil { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(242, 237, 229, 0.92) 0%, rgba(242, 236, 228, 0.8) 45%, rgba(238, 222, 212, 0.62) 100%); }
-    .hv-d::after { content: ''; position: absolute; inset: 0; opacity: 0.07; background-image: var(--grain); background-size: 200px; }
-
-    /* ═════════ E — SOIE NACRÉE ═════════ */
-    .hv-e { background: linear-gradient(160deg, #f4efe7 0%, #ece5d9 100%); }
-    .hv-e svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.42; mix-blend-mode: multiply; animation: fade 2.4s ease both; animation-delay: calc(var(--intro-delay) + 100ms); }
-    .hv-e .glow { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 55% 45% at 85% 90%, rgba(172, 120, 108, 0.16) 0%, transparent 70%); }
-
-    /* ═════════ G — LIVRES (V2) ═════════ */
-    .hv-g .ph { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80&auto=format') center / cover no-repeat; }
-    .hv-g .veil { position: absolute; inset: 0; background: rgba(240, 235, 226, 0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-
-    /* ═════════ H, I, J — BIBLIOTHÈQUE VIVANTE ═════════ */
-    .lib .ph { position: absolute; inset: -5%; background: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80&auto=format') center / cover no-repeat; will-change: transform, filter; }
-    .lib .veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 60% 48% at 50% 50%, rgba(241, 236, 228, 0.86) 0%, rgba(241, 236, 228, 0.6) 55%, rgba(241, 236, 228, 0.38) 100%); }
-    .lib::after { content: ''; position: absolute; inset: 0; z-index: 2; opacity: 0.06; background-image: var(--grain); background-size: 220px; pointer-events: none; }
-
-    .hv-h .ph { animation: libZoom 26s ease-in-out infinite alternate, focusPull 16s ease-in-out infinite; }
-    @keyframes libZoom { from { transform: scale(1.02) translate(0, 0); } to { transform: scale(1.14) translate(-1.8%, -1.2%); } }
-    @keyframes focusPull { 0%, 100% { filter: blur(10px) saturate(0.9); } 45%, 55% { filter: blur(2.5px) saturate(0.95); } }
-
-    .hv-i .ph { filter: blur(5px) saturate(0.9); animation: libZoom 40s ease-in-out infinite alternate; }
-    .hv-i .beam { position: absolute; inset: -10%; z-index: 2; mix-blend-mode: screen; pointer-events: none;
-        background: linear-gradient(112deg, transparent 30%, rgba(255, 238, 210, 0.55) 42%, rgba(255, 238, 210, 0.16) 50%, transparent 58%);
-        animation: beam 11s ease-in-out infinite alternate; }
-    @keyframes beam { from { opacity: 0.45; transform: translateX(-4%); } to { opacity: 1; transform: translateX(4%); } }
-    .hv-i canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
-
-    .hv-j .ph { filter: blur(6px) saturate(0.9); transition: transform 1.2s var(--ease); }
-    .hv-j .center { transition: transform 1.2s var(--ease); }
-
-    /* ═════════ K, L — VIDÉOS ═════════ */
+    /* ═════════ HAUT DE PAGE — VIDÉO AMPHITHÉÂTRE ═════════ */
     .vid video { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; transform: scale(1.04); transition: transform 1.2s var(--ease); }
-    .vid .veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 60% 48% at 50% 50%, rgba(241, 236, 228, 0.8) 0%, rgba(241, 236, 228, 0.5) 55%, rgba(241, 236, 228, 0.3) 100%); }
-    .bold-text .vid .veil { background: radial-gradient(ellipse 62% 50% at 50% 50%, rgba(241, 236, 228, 0.9) 0%, rgba(241, 236, 228, 0.66) 55%, rgba(241, 236, 228, 0.4) 100%); }
+    .vid .veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 60% 48% at 50% 50%, rgba(241, 236, 228, 0.88) 0%, rgba(241, 236, 228, 0.62) 55%, rgba(241, 236, 228, 0.38) 100%); }
     .vid::after { content: ''; position: absolute; inset: 0; z-index: 2; opacity: 0.06; background-image: var(--grain); background-size: 220px; pointer-events: none; }
     .vid .center { transition: transform 1.2s var(--ease); }
-
-    /* Texte épais */
-    .bold-text .name-c { font-weight: 500; }
-    .bold-text .name-c em { font-weight: 600; }
-    .bold-text .sub { font-weight: 500; color: var(--vert-dark); }
-    .bold-text .tag p { color: rgba(26, 26, 26, 0.8); font-weight: 400; }
-    .bold-text .hv .sub, .bold-text .hv .tag p { text-shadow: 0 0 18px rgba(241, 236, 228, 0.95), 0 0 36px rgba(241, 236, 228, 0.8); }
-    .bold-text .lib .veil { background: radial-gradient(ellipse 62% 50% at 50% 50%, rgba(241, 236, 228, 0.93) 0%, rgba(241, 236, 228, 0.7) 55%, rgba(241, 236, 228, 0.45) 100%); }
-
-    .halo { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse 42% 32% at 50% 48%, rgba(241, 235, 225, 0.75) 20%, rgba(241, 235, 225, 0) 100%); }
-
-    /* ═════════ F — ACTUEL V1 ═════════ */
-    .hv-f .bg {
-        position: absolute; inset: -40px; z-index: 0;
-        background:
-            radial-gradient(ellipse 65% 55% at 78% 82%, rgba(172,120,108,0.45) 0%, transparent 60%),
-            radial-gradient(ellipse 50% 40% at 15% 20%, rgba(160,115,105,0.2) 0%, transparent 55%),
-            radial-gradient(ellipse 90% 80% at 35% 35%, #e2ddd0 0%, transparent 70%),
-            radial-gradient(ellipse 70% 55% at 65% 45%, #ccc8ae 0%, transparent 55%),
-            radial-gradient(ellipse 55% 45% at 50% 75%, rgba(114,120,95,0.18) 0%, transparent 50%),
-            linear-gradient(150deg, #ece7dc 0%, #ddd7c8 30%, #cfc9b5 60%, #d8d2c2 100%);
-        filter: blur(30px);
-    }
-
-    /* ═════════ SÉLECTEUR DE CONCEPTS ═════════ */
-    .rail {
-        position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 300;
-        display: flex; flex-direction: column; align-items: center; gap: 5px;
-        padding: 12px 6px; border-radius: 100px;
-        background: rgba(26, 26, 26, 0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    }
-    .rail-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); margin-bottom: 6px; }
-    .rail button {
-        position: relative; width: 30px; height: 30px; border-radius: 50%; border: 0; cursor: pointer;
-        background: transparent; color: rgba(255, 255, 255, 0.75); font: 500 0.72rem var(--sans);
-        transition: background 0.3s, color 0.3s;
-    }
-    .rail button:hover { color: #fff; }
-    .rail button.active { background: var(--nacre); color: var(--noir); }
-    .rail .sep { width: 14px; height: 1px; background: rgba(255, 255, 255, 0.2); margin: 4px 0; }
-    .tip {
-        position: absolute; right: calc(100% + 16px); top: 50%; transform: translate(6px, -50%);
-        background: var(--noir); color: var(--blanc); padding: 10px 14px; border-radius: 8px;
-        white-space: nowrap; text-align: left; font-size: 0.74rem; letter-spacing: 0.02em;
-        opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s var(--ease);
-    }
-    .tip small { display: block; margin-top: 3px; font-size: 0.66rem; opacity: 0.6; }
-    .rail button:hover .tip, .rail button:focus-visible .tip, .rail button.flash .tip { opacity: 1; transform: translate(0, -50%); }
 
     /* ═════════ PRÉSENTATION ═════════ */
     .pres { position: relative; background: var(--blanc); padding: 150px 5vw 150px; }
@@ -294,7 +184,7 @@
     .caption { display: flex; justify-content: space-between; margin-top: 16px; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: #9a9a9a; }
 
     .lead { font-family: var(--serif); font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.45; font-weight: 400; margin-bottom: 26px; }
-    .body { font-size: 1rem; line-height: 1.95; color: #555; font-weight: 300; max-width: 34em; }
+    .body { font-size: 1rem; line-height: 1.95; color: #555; font-weight: 400; max-width: 34em; }
 
     .tl-title { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin: 84px 0 38px; padding-bottom: 14px; border-bottom: 1px solid rgba(26, 26, 26, 0.1); }
     .tl-title h3 { font-family: var(--display); font-weight: 400; font-size: 2.1rem; }
@@ -306,11 +196,11 @@
     .timeline li::before { content: ''; position: absolute; left: 84px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.45); transition: background 0.5s, border-color 0.5s, transform 0.5s var(--ease); }
     .timeline li.on { opacity: 1; }
     .timeline li.on::before { background: var(--vert); border-color: var(--vert); transform: scale(1.15); }
-    .tl-year { font-family: var(--serif); font-size: 1.7rem; font-weight: 300; line-height: 1; color: #b3aa96; transition: color 0.6s; }
+    .tl-year { font-family: var(--serif); font-size: 1.7rem; font-weight: 400; line-height: 1; color: #b3aa96; transition: color 0.6s; }
     .timeline li.on .tl-year { color: var(--vert); }
     .tl-body { padding-left: 34px; }
     .tl-name { font-weight: 500; font-size: 0.98rem; margin-bottom: 5px; }
-    .tl-detail { font-size: 0.9rem; line-height: 1.65; color: #777; font-weight: 300; }
+    .tl-detail { font-size: 0.9rem; line-height: 1.65; color: #777; font-weight: 400; }
 
     .cta {
         position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 16px;
@@ -327,16 +217,16 @@
     .dom { background: var(--nacre); color: var(--noir); padding: 150px 5vw 140px; }
     .dom-inner { max-width: 1200px; margin: 0 auto; }
     .dom-phrase { font-family: var(--display); font-weight: 400; font-size: clamp(2.5rem, 5.6vw, 5rem); line-height: 1.04; letter-spacing: -0.015em; }
-    .dom-sub { margin-top: 24px; max-width: 34em; font-size: 1rem; line-height: 1.85; font-weight: 300; color: #666; }
+    .dom-sub { margin-top: 24px; max-width: 34em; font-size: 1rem; line-height: 1.85; font-weight: 400; color: #666; }
     .dom-list { margin-top: 80px; border-top: 1px solid rgba(26, 26, 26, 0.12); }
     .dom-item { border-bottom: 1px solid rgba(26, 26, 26, 0.12); }
     .dom-row {
         width: 100%; display: grid; grid-template-columns: 80px 1fr 40px; align-items: start; gap: 20px;
         padding: 34px 0; background: none; border: 0; color: inherit; text-align: left; cursor: pointer; font: inherit;
     }
-    .dom-num { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--vert); padding-top: 6px; }
+    .dom-num { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; color: var(--vert); padding-top: 6px; }
     .dom-title { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.1; transition: transform 0.6s var(--ease), color 0.4s; }
-    .dom-catch { display: block; margin-top: 10px; max-width: 42em; font-size: 0.92rem; line-height: 1.7; font-weight: 300; color: #777; transition: transform 0.6s var(--ease); }
+    .dom-catch { display: block; margin-top: 10px; max-width: 42em; font-size: 0.92rem; line-height: 1.7; font-weight: 400; color: #777; transition: transform 0.6s var(--ease); }
     .dom-row:hover .dom-title, .dom-row:hover .dom-catch { transform: translateX(10px); }
     .dom-item.open .dom-title { color: var(--rose-txt); }
     .dom-plus { position: relative; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(26, 26, 26, 0.25); transition: transform 0.6s var(--ease), background 0.3s, border-color 0.3s; }
@@ -348,7 +238,7 @@
     .dom-item.open .dom-panel { grid-template-rows: 1fr; }
     .dom-panel > div { overflow: hidden; }
     .dom-services { list-style: none; columns: 2; column-gap: 50px; padding: 0 60px 40px 100px; }
-    .dom-services li { break-inside: avoid; position: relative; padding: 9px 0 9px 22px; font-size: 0.92rem; font-weight: 300; line-height: 1.55; color: #555; }
+    .dom-services li { break-inside: avoid; position: relative; padding: 9px 0 9px 22px; font-size: 0.92rem; font-weight: 400; line-height: 1.55; color: #555; }
     .dom-services li::before { content: ''; position: absolute; left: 0; top: 19px; width: 10px; height: 1px; background: var(--rose-txt); }
 
     .rot { display: inline-block; position: relative; white-space: nowrap; font-style: italic; color: var(--rose-txt); clip-path: inset(-0.1em -0.4em -0.22em -0.4em); transition: width 0.7s var(--ease); }
@@ -357,13 +247,83 @@
     .rot .rw.leave { position: absolute; left: 0; top: 0; transform: translateY(-105%); opacity: 0; }
     .rot .measure { position: absolute; visibility: hidden; left: 0; top: 0; }
 
-    /* ═════════ SUITE ═════════ */
-    .suite { background: var(--blanc); padding: 120px 5vw; text-align: center; }
-    .suite p.big { font-family: var(--display); font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.2; max-width: 22em; margin: 0 auto 18px; }
-    .suite p.big em { color: var(--vert); }
-    .suite p.small { font-size: 0.85rem; color: #888; font-weight: 300; }
-    .footer { background: var(--noir); color: rgba(255, 255, 255, 0.5); padding: 28px 5vw; display: flex; justify-content: space-between; gap: 20px; font-size: 0.72rem; letter-spacing: 0.04em; }
-    .footer .logo { font-size: 1.2rem; color: var(--blanc); }
+    /* ═════════ PUBLICATIONS ═════════ */
+    .pubs { background: var(--blanc); padding: 150px 5vw 140px; }
+    .pubs-inner { max-width: 1200px; margin: 0 auto; }
+    .pubs-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: 70px; }
+    .pubs-head h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.5rem, 5.6vw, 5rem); line-height: 1.04; letter-spacing: -0.015em; }
+    .pubs-head h2 em { color: var(--vert); }
+    .pubs-all { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--vert-dark); padding-bottom: 6px; border-bottom: 1px solid currentColor; }
+    .pubs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw; }
+    .pub { position: relative; padding-top: 28px; border-top: 1px solid rgba(26, 26, 26, 0.15); min-width: 0; }
+    .pub::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--vert); transform: scaleX(0); transform-origin: left; transition: transform 0.7s var(--ease); }
+    .pub:hover::before { transform: scaleX(1); }
+    .pub-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 22px; }
+    .pub-meta span:first-child { color: var(--vert); }
+    .pub-meta span:last-child { color: #a09a8e; }
+    .pub h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.5rem, 2vw, 1.85rem); line-height: 1.15; margin-bottom: 16px; text-wrap: balance; }
+    .pub p { font-size: 0.93rem; line-height: 1.75; color: #666; font-weight: 400; }
+
+    /* ═════════ RENDEZ-VOUS ═════════ */
+    .rdv { background: var(--noir); color: var(--blanc); padding: 150px 5vw 120px; }
+    .rdv-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 5fr 6fr; gap: 7vw; align-items: start; }
+    .rdv .kicker { color: var(--beige); }
+    .rdv h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 5.4vw, 4.8rem); line-height: 1.02; letter-spacing: -0.015em; margin-bottom: 28px; }
+    .rdv h2 em { color: #d4aa9f; }
+    .rdv-intro { font-size: 1rem; line-height: 1.85; font-weight: 400; color: rgba(255, 255, 255, 0.6); max-width: 30em; margin-bottom: 48px; }
+    .rdv-info { display: grid; gap: 22px; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 28px; }
+    .rdv-info dt { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--beige); margin-bottom: 6px; }
+    .rdv-info dd { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--blanc); }
+    .rdv-info a { border-bottom: 1px solid rgba(255, 255, 255, 0.25); transition: border-color 0.3s; }
+    .rdv-info a:hover { border-color: #d4aa9f; }
+
+    .form { display: grid; gap: 8px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; }
+    .field { position: relative; }
+    .field input, .field textarea, .field select {
+        width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); border-radius: 0;
+        color: var(--blanc); font: 300 1rem var(--sans); padding: 28px 0 10px; outline: none; transition: border-color 0.3s;
+        -webkit-appearance: none; appearance: none;
+    }
+    .field textarea { min-height: 130px; resize: vertical; line-height: 1.6; }
+    .field select { cursor: pointer; }
+    .field select option { color: var(--noir); }
+    .field.select::after { content: ''; position: absolute; right: 4px; top: 36px; width: 7px; height: 7px; border-right: 1px solid rgba(255, 255, 255, 0.6); border-bottom: 1px solid rgba(255, 255, 255, 0.6); transform: rotate(45deg); pointer-events: none; }
+    .field label { position: absolute; left: 0; top: 28px; font-size: 1rem; font-weight: 400; color: rgba(255, 255, 255, 0.45); pointer-events: none; transform-origin: left top; transition: transform 0.35s var(--ease), color 0.3s; }
+    .field input:focus, .field textarea:focus, .field select:focus { border-bottom-color: #d4aa9f; }
+    .field input:focus + label, .field input:not(:placeholder-shown) + label,
+    .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label,
+    .field.select label { transform: translateY(-22px) scale(0.72); color: #d4aa9f; }
+    .consent { display: flex; gap: 14px; align-items: flex-start; margin-top: 22px; font-size: 0.8rem; line-height: 1.6; color: rgba(255, 255, 255, 0.55); font-weight: 400; cursor: pointer; }
+    .consent input { width: 16px; height: 16px; margin-top: 3px; accent-color: #d4aa9f; flex-shrink: 0; }
+    .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 26px; }
+    .submit {
+        position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 16px; cursor: pointer;
+        padding: 17px 32px; border: 0; border-radius: 100px; background: var(--nacre); color: var(--noir);
+        font: 400 0.74rem var(--sans); letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .submit::before { content: ''; position: absolute; inset: 0; background: #d4aa9f; transform: scaleX(0); transform-origin: right; transition: transform 0.6s var(--ease); }
+    .submit:hover::before { transform: scaleX(1); transform-origin: left; }
+    .submit span, .submit svg { position: relative; z-index: 1; }
+    .submit svg { transition: transform 0.5s var(--ease); }
+    .submit:hover svg { transform: translateX(5px); }
+    .submit:focus-visible, .field input:focus-visible, .consent input:focus-visible { outline: 2px solid #d4aa9f; outline-offset: 3px; }
+    .form-note { font-size: 0.72rem; color: rgba(255, 255, 255, 0.4); font-weight: 400; }
+    .form-done { display: none; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 34px; }
+    .form-done p:first-child { font-family: var(--display); font-size: 2rem; margin-bottom: 12px; }
+    .form-done p:first-child em { color: #d4aa9f; }
+    .form-done p:last-child { font-size: 0.9rem; line-height: 1.7; color: rgba(255, 255, 255, 0.55); font-weight: 400; }
+    .form.sent { display: none; }
+    .form.sent + .form-done { display: block; }
+
+    /* ═════════ PIED DE PAGE ═════════ */
+    .footer { background: var(--noir); color: rgba(255, 255, 255, 0.55); padding: 0 5vw 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 50px; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; font-size: 0.82rem; line-height: 1.8; font-weight: 400; }
+    .footer .logo { font-size: 2.2rem; color: var(--blanc); display: inline-block; margin-bottom: 8px; }
+    .footer h4 { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--beige); font-weight: 400; margin-bottom: 12px; }
+    .footer a:hover { color: var(--blanc); }
+    .footer-bottom { max-width: 1200px; margin: 50px auto 0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 0.72rem; color: rgba(255, 255, 255, 0.35); }
+    .footer-bottom nav { display: flex; gap: 24px; flex-wrap: wrap; }
 
     /* ═════════ RESPONSIVE ═════════ */
     @media (max-width: 900px) {
@@ -375,11 +335,15 @@
         .timeline li { grid-template-columns: 64px 1fr; }
         .timeline li::before { left: 60px; }
         .tl-body { padding-left: 26px; }
-        .rail { right: 8px; }
         .dom { padding: 110px 20px; }
         .dom-row { grid-template-columns: 44px 1fr 40px; gap: 12px; }
         .dom-services { columns: 1; padding: 0 0 30px 56px; }
-        .footer { flex-direction: column; }
+        .pubs, .rdv { padding: 110px 20px; }
+        .pubs-grid { grid-template-columns: 1fr; gap: 50px; }
+        .rdv-inner { grid-template-columns: 1fr; gap: 60px; }
+        .form-row { grid-template-columns: 1fr; }
+        .footer { padding: 0 20px 30px; }
+        .footer-inner { grid-template-columns: 1fr; gap: 30px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -402,264 +366,20 @@
     <div class="nav-tabs" id="navTabs">
         <a href="#presentation" class="nav-tab" data-spy="presentation">Présentation</a>
         <a href="#domaines" class="nav-tab" data-spy="domaines">Domaines</a>
-        <a href="#suite" class="nav-tab">Publications</a>
-        <a href="#suite" class="nav-tab">Contact</a>
+        <a href="#publications" class="nav-tab" data-spy="publications">Publications</a>
+        <a href="#contact" class="nav-tab" data-spy="contact">Contact</a>
         <div class="nav-cursor" id="navCursor"></div>
     </div>
-    <div class="nav-cta-wrap"><a href="#suite" class="nav-cta">Rendez-vous</a></div>
+    <div class="nav-cta-wrap"><a href="#contact" class="nav-cta">Rendez-vous</a></div>
 </nav>
 
-<!-- ═════════════════ HERO — CONCEPTS ═════════════════ -->
+<!-- ═════════════════ HAUT DE PAGE ═════════════════ -->
 <header class="hero" id="top">
     <div class="hero-grain"></div>
 
-    <!-- A — Aquarelle -->
-    <section class="hv hv-a" data-hero="a">
-        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <defs>
-                <filter id="wash" x="-30%" y="-30%" width="160%" height="160%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="4" seed="11" result="n"/>
-                    <feDisplacementMap in="SourceGraphic" in2="n" scale="170" xChannelSelector="R" yChannelSelector="G" result="d"/>
-                    <feGaussianBlur in="d" stdDeviation="16"/>
-                </filter>
-                <filter id="edge" x="-30%" y="-30%" width="160%" height="160%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="4" seed="11" result="n"/>
-                    <feDisplacementMap in="SourceGraphic" in2="n" scale="170" xChannelSelector="R" yChannelSelector="G" result="d"/>
-                    <feGaussianBlur in="d" stdDeviation="2.5"/>
-                </filter>
-            </defs>
-            <g filter="url(#wash)">
-                <ellipse cx="1180" cy="760" rx="430" ry="290" fill="#c38c7e" opacity="0.42"/>
-                <ellipse cx="1320" cy="120" rx="220" ry="160" fill="#c9998b" opacity="0.28"/>
-                <ellipse cx="200" cy="150" rx="400" ry="230" fill="#8e9375" opacity="0.26"/>
-                <ellipse cx="120" cy="820" rx="260" ry="170" fill="#b8ad93" opacity="0.3"/>
-            </g>
-            <g filter="url(#edge)" fill="none" stroke-width="1.2">
-                <ellipse cx="1180" cy="760" rx="410" ry="275" stroke="#a9705f" opacity="0.18"/>
-                <ellipse cx="200" cy="150" rx="385" ry="220" stroke="#6f7459" opacity="0.14"/>
-            </g>
-        </svg>
-        <div class="halo"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:900ms">Sarah</span></span>
-                <span class="mask"><span style="--d:1020ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:1250ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:1400ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1700ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- B — Lumière argentique -->
-    <section class="hv hv-b" data-hero="b">
-        <div class="leak"></div>
-        <div class="vignette"></div>
-        <div class="dust" id="dust"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:400ms">Sarah</span></span>
-                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:900ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- C — Ombres de feuillage -->
-    <section class="hv hv-c" data-hero="c">
-        <div class="sun"></div>
-        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <defs>
-                <filter id="leaves" x="0" y="0" width="100%" height="100%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.0065 0.0095" numOctaves="3" seed="4" result="n"/>
-                    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.33  0 0 0 0 0.3  0 0 0 0 0.24  -9 0 0 0 5" result="m"/>
-                    <feGaussianBlur in="m" stdDeviation="7"/>
-                </filter>
-            </defs>
-            <rect width="1440" height="900" filter="url(#leaves)"/>
-        </svg>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:400ms">Sarah</span></span>
-                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:900ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- D — Portrait flou -->
-    <section class="hv hv-d" data-hero="d">
-        <div class="ph"></div>
-        <div class="veil"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:400ms">Sarah</span></span>
-                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:900ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- E — Soie nacrée -->
-    <section class="hv hv-e" data-hero="e">
-        <div class="glow"></div>
-        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <defs>
-                <filter id="silk" x="0" y="0" width="100%" height="100%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.0009 0.0035" numOctaves="2" seed="21" result="n"/>
-                    <feDiffuseLighting in="n" surfaceScale="38" diffuseConstant="1.05" lighting-color="#f6f0e7" result="light">
-                        <feDistantLight azimuth="235" elevation="38"/>
-                    </feDiffuseLighting>
-                    <feGaussianBlur in="light" stdDeviation="3"/>
-                </filter>
-            </defs>
-            <rect width="1440" height="900" filter="url(#silk)"/>
-        </svg>
-        <div class="halo"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:400ms">Sarah</span></span>
-                <span class="mask"><span style="--d:520ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:750ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:900ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1200ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- F — Actuel (V1) -->
-    <section class="hv hv-f" data-hero="f">
-        <div class="bg"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:100ms">Sarah</span></span>
-                <span class="mask"><span style="--d:220ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:450ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:600ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:900ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-    <!-- G — Livres (V2) -->
-    <section class="hv hv-g" data-hero="g">
-        <div class="ph"></div>
-        <div class="veil"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:300ms">Sarah</span></span>
-                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:800ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-    <!-- H — Mise au point -->
-    <section class="hv hv-h lib" data-hero="h">
-        <div class="ph"></div>
-        <div class="veil"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:300ms">Sarah</span></span>
-                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:800ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- I — Lumière et poussière -->
-    <section class="hv hv-i lib" data-hero="i">
-        <div class="ph"></div>
-        <div class="beam"></div>
-        <div class="veil"></div>
-        <canvas id="dustCanvas"></canvas>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:300ms">Sarah</span></span>
-                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:800ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- J — Profondeur -->
-    <section class="hv hv-j lib" data-hero="j">
-        <div class="ph depth" id="parPh"></div>
-        <div class="veil"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:300ms">Sarah</span></span>
-                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:800ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-    <!-- K — Vidéo livre ouvert -->
-    <section class="hv hv-k vid" data-hero="k">
-        <video class="depth" poster="assets/videos/livre-ouvert.jpg" muted loop playsinline preload="none" aria-hidden="true">
-            <source src="assets/videos/livre-ouvert.webm" type="video/webm">
-            <source src="assets/videos/livre-ouvert.mp4" type="video/mp4">
-        </video>
-        <div class="veil"></div>
-        <div class="center">
-            <h1 class="name name-c">
-                <span class="mask"><span style="--d:300ms">Sarah</span></span>
-                <span class="mask"><span style="--d:420ms"><em>Mostfa</em><span class="dot">.</span></span></span>
-            </h1>
-            <p class="sub rise" style="--d:650ms">Avocate au Barreau de Lyon</p>
-            <div class="tag rise" style="--d:800ms">
-                <div class="tag-line"></div>
-                <p>Assure la défense de vos intérêts devant les juridictions civiles et commerciales</p>
-            </div>
-        </div>
-        <div class="cue-abs"><div class="cue rise" style="--d:1100ms"><span>Découvrir</span><i></i></div></div>
-    </section>
-
-    <!-- L — Vidéo amphithéâtre -->
-    <section class="hv hv-l vid" data-hero="l">
-        <video class="depth" poster="assets/videos/amphitheatre.jpg" muted loop playsinline preload="none" aria-hidden="true">
+    <!-- Vidéo amphithéâtre -->
+    <section class="hv hv-l vid is-active">
+        <video class="depth" poster="assets/videos/amphitheatre.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true">
             <source src="assets/videos/amphitheatre.webm" type="video/webm">
             <source src="assets/videos/amphitheatre.mp4" type="video/mp4">
         </video>
@@ -743,7 +463,7 @@
                 </li>
             </ol>
 
-            <a href="#suite" class="cta reveal">
+            <a href="#contact" class="cta reveal">
                 <span>Prendre rendez-vous</span>
                 <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg>
             </a>
@@ -831,19 +551,107 @@
     </div>
 </section>
 
-<section class="suite" id="suite">
-    <p class="big split">Publications et prise de rendez-vous seront déclinées <em>dans ce langage</em> une fois la direction validée.</p>
-    <p class="small reveal">Maquette V3 — haut de page, présentation et domaines.</p>
+<section class="pubs" id="publications">
+    <div class="pubs-inner">
+        <div class="pubs-head">
+            <div>
+                <p class="kicker reveal">03 — Publications</p>
+                <h2 class="split">Analyses <em>et</em> décryptages</h2>
+            </div>
+            <a href="#publications" class="pubs-all reveal">Toutes les publications</a>
+        </div>
+        <div class="pubs-grid">
+            <article class="pub reveal">
+                <div class="pub-meta"><span>Droit commercial</span><span>Bientôt disponible</span></div>
+                <h3>La rupture brutale des relations commerciales établies</h3>
+                <p>Analyse des critères retenus par la jurisprudence pour caractériser la brutalité de la rupture et évaluer le préjudice.</p>
+            </article>
+            <article class="pub reveal" style="--d:120ms">
+                <div class="pub-meta"><span>Droit civil</span><span>Bientôt disponible</span></div>
+                <h3>Le devoir de conseil du professionnel en matière contractuelle</h3>
+                <p>Étendue et limites de l'obligation d'information et de conseil dans les rapports B2B et B2C.</p>
+            </article>
+            <article class="pub reveal" style="--d:240ms">
+                <div class="pub-meta"><span>Rédaction contractuelle</span><span>Bientôt disponible</span></div>
+                <h3>Clauses abusives : ce que change la réforme du droit des contrats</h3>
+                <p>Impact pratique des nouvelles dispositions sur la rédaction et la négociation des contrats d'affaires.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="rdv" id="contact">
+    <div class="rdv-inner">
+        <div>
+            <p class="kicker reveal">04 — Rendez-vous</p>
+            <h2 class="split">Prendre <em>rendez-vous</em>.</h2>
+            <p class="rdv-intro reveal">N'hésitez pas à me contacter pour toute question relative à un litige civil ou commercial, un besoin en rédaction contractuelle ou l'accompagnement juridique de votre entreprise.</p>
+            <dl class="rdv-info reveal">
+                <div><dt>Cabinet</dt><dd>14 rue de la Charité, 69002 Lyon</dd></div>
+                <div><dt>Email</dt><dd><a href="mailto:sarah.mostfa@avocat.fr">sarah.mostfa@avocat.fr</a></dd></div>
+            </dl>
+        </div>
+
+        <div class="reveal" style="--d:150ms">
+            <form class="form" id="rdvForm" novalidate>
+                <div class="form-row">
+                    <div class="field"><input type="text" id="nom" name="nom" placeholder=" " autocomplete="family-name" required><label for="nom">Nom</label></div>
+                    <div class="field"><input type="text" id="prenom" name="prenom" placeholder=" " autocomplete="given-name" required><label for="prenom">Prénom</label></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><input type="email" id="email" name="email" placeholder=" " autocomplete="email" required><label for="email">Email</label></div>
+                    <div class="field"><input type="tel" id="telephone" name="telephone" placeholder=" " autocomplete="tel"><label for="telephone">Téléphone (facultatif)</label></div>
+                </div>
+                <div class="field select">
+                    <select id="domaine" name="domaine">
+                        <option>Contentieux commercial</option>
+                        <option>Contentieux civil</option>
+                        <option>Rédaction contractuelle</option>
+                        <option>Conseil et accompagnement des entreprises</option>
+                        <option>Autre demande</option>
+                    </select>
+                    <label for="domaine">Votre demande concerne</label>
+                </div>
+                <div class="field"><textarea id="message" name="message" placeholder=" " required></textarea><label for="message">Votre message</label></div>
+                <label class="consent" for="consent"><input type="checkbox" id="consent" name="consent" required><span>J'accepte que les informations saisies soient utilisées pour me recontacter au sujet de ma demande.</span></label>
+                <div class="form-foot">
+                    <button type="submit" class="submit"><span>Envoyer ma demande</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg></button>
+                    <span class="form-note" id="formNote">Les champs sans mention sont obligatoires.</span>
+                </div>
+            </form>
+            <div class="form-done" role="status">
+                <p>Merci, <em>à très vite</em>.</p>
+                <p>Maquette : ce formulaire n'envoie pas encore de message. L'envoi réel sera branché au moment de la mise en ligne.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer class="footer">
-    <span class="logo">S<em>M</em></span>
-    <span>Sarah Mostfa — Avocate au Barreau de Lyon · 14 rue de la Charité, 69002 Lyon</span>
+    <div class="footer-inner">
+        <div>
+            <a href="#top" class="logo">S<em>M</em></a>
+            <p>Sarah Mostfa<br>Avocate au Barreau de Lyon</p>
+        </div>
+        <div>
+            <h4>Cabinet</h4>
+            <p>14 rue de la Charité<br>69002 Lyon<br><a href="mailto:sarah.mostfa@avocat.fr">sarah.mostfa@avocat.fr</a></p>
+        </div>
+        <div>
+            <h4>Informations</h4>
+            <p>SIRET 938 764 537 00016<br>TVA FR85938764537</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Sarah Mostfa</span>
+        <nav aria-label="Informations légales">
+            <a href="#top">Mentions légales</a>
+            <a href="#top">Politique de confidentialité</a>
+            <a href="#top">Haut de page ↑</a>
+        </nav>
+    </div>
 </footer>
 
-<div class="rail" id="rail" aria-label="Concepts de page d'accueil">
-    <span class="rail-label">Accueil</span>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
@@ -872,147 +680,29 @@
         });
     });
 
-    // Poussières (concept B)
-    var dust = document.getElementById('dust');
-    for (var i = 0; i < 26; i++) {
-        var d = document.createElement('i');
-        var sz = (Math.random() * 2.2 + 0.8).toFixed(1);
-        d.style.cssText = 'left:' + (Math.random() * 100).toFixed(1) + '%;top:' + (Math.random() * 100).toFixed(1) + '%;width:' + sz + 'px;height:' + sz + 'px;opacity:' + (Math.random() * 0.6 + 0.2).toFixed(2);
-        dust.appendChild(d);
-    }
-
-    // Sélecteur de concepts
-    var HEROES = [
-        ['a', 'Aquarelle', 'Lavis rose et vert aux bords irréguliers'],
-        ['b', 'Lumière argentique', 'Fuite de lumière rosée, grain et vignettage de pellicule'],
-        ['c', 'Ombres de feuillage', 'Lumière de fin de journée filtrée par des feuilles'],
-        ['d', 'Portrait flou', 'Ta photo, très floutée et voilée, en toile de fond'],
-        ['e', 'Soie nacrée', 'Drapé de tissu satiné, lumière douce'],
-        ['f', 'Actuel (V1)', 'Le dégradé nacré/rosé actuel, pour comparer'],
-        ['g', 'Livres (V2)', 'La bibliothèque floutée de la V2, image fixe'],
-        ['h', 'Livres — mise au point', 'Zoom lent, la netteté va et vient comme une caméra'],
-        ['i', 'Livres — lumière', 'Rayon de lumière et poussière qui flotte'],
-        ['j', 'Livres — profondeur', "L'image suit la souris et le défilement"],
-        ['k', 'Vidéo — livre ouvert', 'Pages en gros plan, étalonnées dans tes tons, avec profondeur'],
-        ['l', 'Vidéo — amphithéâtre', 'Coupole et hémicycle, étalonnés nacré, avec profondeur']
-    ];
-    var rail = document.getElementById('rail');
-    var buttons = {};
-    HEROES.forEach(function (h) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.innerHTML = h[0].toUpperCase() + '<span class="tip">' + h[0].toUpperCase() + ' — ' + h[1] + '<small>' + h[2] + '</small></span>';
-        b.setAttribute('aria-label', 'Concept ' + h[0].toUpperCase() + ' : ' + h[1]);
-        b.addEventListener('click', function () { setHero(h[0], true); });
-        rail.appendChild(b);
-        buttons[h[0]] = b;
-    });
-    var sep = document.createElement('span'); sep.className = 'sep'; rail.appendChild(sep);
-    var replay = document.createElement('button');
-    replay.type = 'button';
-    replay.innerHTML = '↺<span class="tip">Rejouer l\'ouverture</span>';
-    replay.setAttribute('aria-label', "Rejouer l'ouverture");
-    replay.addEventListener('click', function () { if (!reduce) runIntro(); });
-    rail.appendChild(replay);
-
-    var current = null;
-    // Texte épais
-    var bold = document.createElement('button');
-    bold.type = 'button';
-    bold.innerHTML = '<b style="font-family:var(--serif);font-size:0.95rem">Aa</b><span class="tip">Texte fin / épais</span>';
-    bold.setAttribute('aria-label', 'Basculer texte fin ou épais');
-    function setBold(on) { document.body.classList.toggle('bold-text', on); bold.classList.toggle('active', on); try { localStorage.setItem('v3-bold', on ? '1' : ''); } catch (e) {} }
-    bold.addEventListener('click', function () { setBold(!document.body.classList.contains('bold-text')); });
-    rail.appendChild(bold);
-    try { if (localStorage.getItem('v3-bold')) setBold(true); } catch (e) {}
-
-    // Poussière dans la lumière (concept I)
-    var dc = document.getElementById('dustCanvas');
-    var dctx = dc.getContext('2d');
-    var motes = [];
-    function sizeDust() {
-        var r = dc.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
-        dc.width = Math.max(1, r.width * dpr); dc.height = Math.max(1, r.height * dpr);
-        dctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    for (var m = 0; m < 70; m++) motes.push({ x: Math.random(), y: Math.random(), r: Math.random() * 1.8 + 0.5, vx: (Math.random() * 0.4 + 0.1) / 1000, vy: -(Math.random() * 0.5 + 0.15) / 1000, ph: Math.random() * 6.28 });
-    function drawDust(t) {
-        requestAnimationFrame(drawDust);
-        if (current !== 'i' || reduce || window.scrollY > window.innerHeight) return;
-        var w = dc.clientWidth, h = dc.clientHeight;
-        if (dc.width < 2) sizeDust();
-        dctx.clearRect(0, 0, w, h);
-        motes.forEach(function (p) {
-            p.x += p.vx; p.y += p.vy;
-            if (p.y < -0.02) { p.y = 1.02; p.x = Math.random(); }
-            if (p.x > 1.02) p.x = -0.02;
-            var inBeam = Math.max(0, 1 - Math.abs((p.x - 0.45) - (0.5 - p.y) * 0.4) / 0.18);
-            var a = (0.18 + 0.55 * inBeam) * (0.6 + 0.4 * Math.sin(t / 900 + p.ph));
-            dctx.beginPath();
-            dctx.fillStyle = 'rgba(255, 246, 228,' + a.toFixed(3) + ')';
-            dctx.arc(p.x * w, p.y * h, p.r, 0, 6.283);
-            dctx.fill();
-        });
-    }
-    window.addEventListener('resize', sizeDust);
-    requestAnimationFrame(drawDust);
-
-    // Profondeur (concepts J, K, L) et lecture des vidéos
-    var DEPTH = { j: 1, k: 1, l: 1 };
+    // Haut de page : vidéo et profondeur
+    var current = 'l';
+    var heroEl = document.querySelector('.hv-l');
+    var video = heroEl.querySelector('video');
+    var depthEl = heroEl.querySelector('.depth'), heroCenter = heroEl.querySelector('.center');
+    function restart(el) { el.classList.remove('is-active'); void el.offsetWidth; el.classList.add('is-active'); }
     var mx = 0, my = 0;
     function applyDepth() {
-        if (!DEPTH[current] || reduce) return;
-        var hv = document.querySelector('.hv[data-hero="' + current + '"]');
-        var el = hv.querySelector('.depth'), c = hv.querySelector('.center');
-        el.style.transform = 'scale(1.06) translate(' + (mx * -2.4).toFixed(2) + '%,' + (my * -2.4 + window.scrollY / window.innerHeight * 6).toFixed(2) + '%)';
-        c.style.transform = 'translate(' + (mx * 10).toFixed(1) + 'px,' + (my * 8).toFixed(1) + 'px)';
+        if (reduce) return;
+        depthEl.style.transform = 'scale(1.06) translate(' + (mx * -2.4).toFixed(2) + '%,' + (my * -2.4 + window.scrollY / window.innerHeight * 6).toFixed(2) + '%)';
+        heroCenter.style.transform = 'translate(' + (mx * 10).toFixed(1) + 'px,' + (my * 8).toFixed(1) + 'px)';
     }
     window.addEventListener('mousemove', function (e) { mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5; applyDepth(); });
     window.addEventListener('scroll', applyDepth, { passive: true });
-    function syncVideos() {
-        document.querySelectorAll('.hv video').forEach(function (v) {
-            var on = v.closest('.hv').dataset.hero === current && !reduce;
-            if (on) { if (v.preload === 'none') v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
-            else v.pause();
-        });
+    if (reduce) { video.removeAttribute('autoplay'); video.pause(); }
+    else {
+        new IntersectionObserver(function (en) {
+            if (en[0].isIntersecting) { var pr = video.play(); if (pr && pr.catch) pr.catch(function () {}); } else video.pause();
+        }).observe(heroEl);
     }
-
-    function restart(el) { el.classList.remove('is-active'); void el.offsetWidth; el.classList.add('is-active'); }
-    function setHero(id, fromUser) {
-        if (fromUser) root.style.setProperty('--intro-delay', '0ms');
-        document.querySelectorAll('.hv').forEach(function (h) {
-            if (h.dataset.hero === id) restart(h); else h.classList.remove('is-active');
-        });
-        Object.keys(buttons).forEach(function (k) { buttons[k].classList.toggle('active', k === id); });
-        current = id;
-        if (typeof syncVideos === 'function') syncVideos();
-        try { localStorage.setItem('v3-hero-l', id); } catch (e) {}
-        if (fromUser) {
-            var b = buttons[id];
-            b.classList.add('flash');
-            clearTimeout(b._t);
-            b._t = setTimeout(function () { b.classList.remove('flash'); }, 2600);
-            if (window.scrollY > window.innerHeight * 0.3) scrollToEl(0);
-        }
-    }
-    var saved = 'l';
-    try { saved = localStorage.getItem('v3-hero-l') || 'l'; } catch (e) {}
-    if (!buttons[saved]) saved = 'l';
-    setHero(saved, false);
 
     // Ouverture
     var intro = document.querySelector('.intro');
-    function runIntro() {
-        root.classList.remove('no-intro');
-        root.style.setProperty('--intro-delay', '1500ms');
-        intro.classList.remove('done', 'out');
-        void intro.offsetWidth;
-        restart(document.querySelector('.hv[data-hero="' + current + '"]'));
-        if (lenis) { lenis.scrollTo(0, { immediate: true }); lenis.stop(); } else window.scrollTo(0, 0);
-        setTimeout(function () { intro.classList.add('out'); if (lenis) lenis.start(); }, 1400);
-        setTimeout(function () { intro.classList.add('done'); }, 2300);
-        try { sessionStorage.setItem('v3-intro', '1'); } catch (e) {}
-    }
     if (!root.classList.contains('no-intro')) {
         if (lenis) lenis.stop();
         setTimeout(function () { intro.classList.add('out'); if (lenis) lenis.start(); }, 1400);
@@ -1116,6 +806,16 @@
     }
     var startRot = function () { document.querySelectorAll('.rot').forEach(Rotator); };
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(startRot); else startRot();
+
+    // Formulaire de rendez-vous (maquette, aucun envoi)
+    var form = document.getElementById('rdvForm');
+    var note = document.getElementById('formNote');
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var bad = Array.prototype.slice.call(form.querySelectorAll('[required]')).filter(function (f) { return f.type === 'checkbox' ? !f.checked : !f.value.trim() || !f.checkValidity(); });
+        if (bad.length) { note.textContent = 'Merci de compléter : ' + bad.map(function (f) { return (form.querySelector('label[for="' + f.id + '"]') || {}).textContent || f.name; }).join(', ').replace(/J'accepte.*$/, 'votre accord'); note.style.color = '#d4aa9f'; bad[0].focus(); return; }
+        form.classList.add('sent');
+    });
 
     // Nav, frise et photo au défilement
     var nav = document.getElementById('nav');
