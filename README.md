@@ -1,6 +1,10 @@
 # Site internet — Sarah Mostfa, Avocate au Barreau de Lyon
 
-## Le site
+## Le site en développement
+- `index.html` — **version de travail du site** (base : maquette V3, vidéo amphithéâtre). C'est ce fichier qu'on fait évoluer désormais.
+- Aperçu en ligne : activer GitHub Pages (Settings → Pages → Deploy from a branch → `claude/wonderful-lovelace-oohxox`, dossier `/ (root)`), puis ouvrir https://sarahm99-bit.github.io/site-internet/
+
+## Les maquettes
 - `maquette site internet.html` — version 1 (fond dégradé nacré/rosé)
 - `maquette site internet v2.html` — version 2 (fond photo bibliothèque floutée)
 - `maquette site internet v3.html` — version 3 haut de gamme (vidéo amphithéâtre, présentation, domaines, publications, rendez-vous)
