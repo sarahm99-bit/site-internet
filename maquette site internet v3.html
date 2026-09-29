@@ -838,7 +838,12 @@
         var current = document.createElement('span'); current.className = 'rw'; current.textContent = words[0]; el.appendChild(current);
         function widthOf(w) { measure.textContent = w; return measure.getBoundingClientRect().width; }
         el.style.width = widthOf(words[0]) + 'px';
-        setInterval(function () {
+        var timer = null;
+        new IntersectionObserver(function (en) {
+            if (en[0].isIntersecting) { if (!timer) timer = setInterval(next, 2400); }
+            else { clearInterval(timer); timer = null; }
+        }, { threshold: 0.6 }).observe(el);
+        function next() {
             i = (i + 1) % words.length;
             el.style.width = widthOf(words[i]) + 'px';
             if (reduce) { current.textContent = words[i]; return; }
@@ -849,7 +854,7 @@
             requestAnimationFrame(function () { requestAnimationFrame(function () { neu.classList.remove('enter'); }); });
             setTimeout(function () { old.remove(); }, 800);
             current = neu;
-        }, 2400);
+        }
         window.addEventListener('resize', function () { el.style.width = widthOf(words[i]) + 'px'; });
     }
     var startRot = function () { document.querySelectorAll('.rot').forEach(Rotator); };
