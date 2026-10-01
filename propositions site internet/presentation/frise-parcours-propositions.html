@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frise du parcours — propositions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --vert: #72785f;
+        --vert-dark: #5a6049;
+        --beige: #d6cdb8;
+        --nacre: #f0ebe2;
+        --noir: #1a1a1a;
+        --blanc: #fdfcfa;
+        --serif: 'Cormorant Garamond', serif;
+        --display: 'Instrument Serif', serif;
+        --sans: 'Inter', sans-serif;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body { font-family: var(--sans); background: var(--blanc); color: var(--noir); -webkit-font-smoothing: antialiased; }
+
+    .intro { padding: 90px 6vw 40px; max-width: 1100px; }
+    .intro h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.05; margin-bottom: 14px; }
+    .intro p { color: #666; font-weight: 400; line-height: 1.7; max-width: 46em; }
+
+    .label { padding: 70px 6vw 0; display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; border-top: 1px solid rgba(26, 26, 26, 0.1); margin-top: 60px; }
+    .label strong { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert-dark); font-weight: 500; }
+    .label span { font-size: 0.85rem; color: #888; }
+    .demo { padding: 50px 6vw 80px; }
+    .demo-title { font-family: var(--display); font-weight: 400; font-size: 2.1rem; margin-bottom: 36px; display: flex; justify-content: space-between; align-items: baseline; max-width: 900px; padding-bottom: 14px; border-bottom: 1px solid rgba(26, 26, 26, 0.1); }
+    .demo-title small { font-family: var(--sans); font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert); }
+
+    /* Typo commune des étapes */
+    .s-name { font-weight: 500; font-size: 0.98rem; line-height: 1.5; }
+    .s-detail { font-size: 0.9rem; line-height: 1.65; color: #777; margin-top: 3px; }
+
+    /* ═════════ A — FRISE ACTUELLE ═════════ */
+    .ta { position: relative; list-style: none; max-width: 760px; }
+    .ta-track { position: absolute; left: 88px; top: 10px; bottom: 30px; width: 1px; background: rgba(114, 120, 95, 0.18); }
+    .ta-fill { position: absolute; inset: 0; background: var(--vert); transform-origin: top; transform: scaleY(0); }
+    .ta li { position: relative; display: grid; grid-template-columns: 88px 1fr; padding-bottom: 40px; opacity: 0.35; transition: opacity 0.8s var(--ease); }
+    .ta li::before { content: ''; position: absolute; left: 84px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.45); transition: background 0.5s, border-color 0.5s; }
+    .ta li.on { opacity: 1; }
+    .ta li.on::before { background: var(--vert); border-color: var(--vert); }
+    .ta .yr { font-family: var(--serif); font-size: 1.7rem; line-height: 1; color: #b3aa96; transition: color 0.6s; }
+    .ta li.on .yr { color: var(--vert); }
+    .ta .bd { padding-left: 34px; }
+
+    /* ═════════ B — ANNÉE ÉPINGLÉE ═════════ */
+    .tb { display: grid; grid-template-columns: 5fr 7fr; gap: 6vw; max-width: 1100px; }
+    .tb-left { position: sticky; top: 18vh; height: 50vh; display: flex; flex-direction: column; justify-content: center; }
+    .tb-year { position: relative; height: 1em; overflow: hidden; font-family: var(--serif); font-weight: 300; font-size: clamp(6rem, 12vw, 10rem); line-height: 1; color: var(--vert); letter-spacing: -0.04em; }
+    .tb-year span { position: absolute; left: 0; top: 0; transition: transform 0.8s var(--ease), opacity 0.8s var(--ease); }
+    .tb-year span.out { transform: translateY(-100%); opacity: 0; }
+    .tb-year span.in { transform: translateY(100%); opacity: 0; }
+    .tb-count { margin-top: 18px; font-size: 0.7rem; letter-spacing: 0.22em; color: #999; font-variant-numeric: tabular-nums; }
+    .tb-bar { margin-top: 12px; width: 140px; height: 1px; background: rgba(114, 120, 95, 0.2); position: relative; }
+    .tb-bar i { position: absolute; inset: 0; background: var(--vert); transform-origin: left; transform: scaleX(0.2); transition: transform 0.8s var(--ease); }
+    .tb-steps { padding: 20vh 0; }
+    .tb-step { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; opacity: 0.25; transition: opacity 0.7s var(--ease); }
+    .tb-step.on { opacity: 1; }
+    .tb-step .s-name { font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.15; }
+    .tb-step .s-detail { font-size: 0.95rem; margin-top: 10px; max-width: 30em; }
+
+    /* ═════════ C — FRISE HORIZONTALE ═════════ */
+    .tc-wrap { height: 320vh; margin: 0 -6vw; }
+    .tc-pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; background: var(--nacre); }
+    .tc-head { padding: 0 6vw; margin-bottom: 7vh; font-family: var(--display); font-size: 2.1rem; display: flex; justify-content: space-between; align-items: baseline; }
+    .tc-head small { font-family: var(--sans); font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert); }
+    .tc-track { display: flex; gap: 0; padding-left: 6vw; will-change: transform; }
+    .tc-step { flex: 0 0 34vw; max-width: 460px; padding-right: 4vw; position: relative; }
+    .tc-line { position: absolute; left: 0; right: 0; top: 3.15rem; height: 1px; background: rgba(114, 120, 95, 0.25); }
+    .tc-step::before { content: ''; position: absolute; left: 0; top: calc(3.15rem - 5px); width: 11px; height: 11px; border-radius: 50%; background: var(--nacre); border: 1px solid var(--vert); z-index: 1; transition: background 0.5s; }
+    .tc-step.on::before { background: var(--vert); }
+    .tc-step .yr { font-family: var(--serif); font-weight: 300; font-size: 2.6rem; line-height: 1; color: var(--vert); margin-bottom: 44px; display: block; }
+    .tc-step .s-name { font-family: var(--display); font-weight: 400; font-size: 1.55rem; line-height: 1.2; }
+    .tc-progress { margin: 7vh 6vw 0; height: 1px; background: rgba(114, 120, 95, 0.2); position: relative; }
+    .tc-progress i { position: absolute; inset: 0; background: var(--vert); transform-origin: left; transform: scaleX(0); }
+
+    /* ═════════ D — CARTES EMPILÉES ═════════ */
+    .td { max-width: 900px; padding-bottom: 30vh; }
+    .td-card {
+        position: sticky; top: calc(110px + var(--i) * 18px); margin-bottom: 26vh;
+        display: grid; grid-template-columns: 150px 1fr; gap: 30px; align-items: start;
+        background: var(--nacre); border: 1px solid rgba(114, 120, 95, 0.18); padding: 38px 40px;
+        box-shadow: 0 -10px 40px -24px rgba(26, 26, 26, 0.25);
+    }
+    .td-card:last-child { margin-bottom: 0; }
+    .td-card .yr { font-family: var(--serif); font-weight: 300; font-size: 3.4rem; line-height: 0.9; color: var(--vert); }
+    .td-card .s-name { font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.2; }
+
+    /* ═════════ E — LISTE ÉDITORIALE ═════════ */
+    .te { max-width: 1000px; list-style: none; }
+    .te li { position: relative; display: grid; grid-template-columns: 140px 1fr; gap: 30px; padding: 30px 0; }
+    .te li::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(26, 26, 26, 0.14); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease); }
+    .te li.on::before { transform: scaleX(1); }
+    .te li > * { opacity: 0; transform: translateX(-24px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+    .te li.on > * { opacity: 1; transform: none; }
+    .te li.on .te-body { transition-delay: 120ms; }
+    .te .yr { font-size: 0.72rem; letter-spacing: 0.22em; color: var(--vert); padding-top: 12px; font-variant-numeric: tabular-nums; }
+    .te .s-name { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 2.4vw, 2.1rem); line-height: 1.15; }
+    .te .s-detail { margin-top: 8px; }
+
+    @media (max-width: 800px) {
+        .tb { grid-template-columns: 1fr; }
+        .tb-left { position: relative; top: 0; height: auto; }
+        .tc-step { flex-basis: 74vw; }
+        .td-card { grid-template-columns: 1fr; gap: 14px; padding: 28px; }
+        .te li { grid-template-columns: 1fr; gap: 6px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+</style>
+</head>
+<body>
+
+<header class="intro">
+    <h1>La frise du parcours</h1>
+    <p>Cinq façons de raconter ta formation au défilement. Le contenu intègre déjà tes corrections : le parcours Propriété littéraire et artistique au même niveau que le Master I, l'université en troisième ligne, et « Université de Montréal, Canada ».</p>
+</header>
+
+<div class="label"><strong>A — Actuelle</strong><span>La ligne verticale se remplit et chaque date s'allume au passage.</span></div>
+<section class="demo"><div class="demo-title">Parcours <small>2021 — 2024</small></div><ol class="ta" id="ta"><div class="ta-track"><div class="ta-fill" id="taFill"></div></div></ol></section>
+
+<div class="label"><strong>B — Année épinglée</strong><span>Une grande année reste fixe à gauche et change au fil des étapes, qui défilent à droite.</span></div>
+<section class="demo"><div class="tb"><div class="tb-left"><div class="tb-year" id="tbYear"><span>2021</span></div><div class="tb-count" id="tbCount">01 / 05</div><div class="tb-bar"><i id="tbBar"></i></div></div><div class="tb-steps" id="tb"></div></div></section>
+
+<div class="label"><strong>C — Frise horizontale</strong><span>La section se fige, et le défilement fait glisser la frise de gauche à droite.</span></div>
+<section class="demo" style="padding-bottom:0"><div class="tc-wrap" id="tcWrap"><div class="tc-pin"><div class="tc-head">Parcours <small>2021 — 2024</small></div><div class="tc-track" id="tc"></div><div class="tc-progress"><i id="tcBar"></i></div></div></div></section>
+
+<div class="label"><strong>D — Cartes empilées</strong><span>Chaque étape est une carte qui vient se poser sur la précédente.</span></div>
+<section class="demo"><div class="td" id="td"></div></section>
+
+<div class="label"><strong>E — Liste éditoriale</strong><span>Grandes lignes sobres : chaque étape glisse en place et son filet se dessine.</span></div>
+<section class="demo"><ol class="te" id="te"></ol></section>
+
+<div style="height:30vh"></div>
+
+<script>
+(function () {
+    var S = [
+        { y: '2021', n: ['Master I Droit des affaires', 'Parcours Propriété littéraire et artistique'], d: 'Université Lumière Lyon II' },
+        { y: '2022', n: ['Master II Droit des affaires comparé'], d: 'Université Lumière Lyon II' },
+        { y: '2022', n: ['LL.M Business Law'], d: 'Université de Montréal, Canada' },
+        { y: '2022', n: ['CRFPA'], d: "Examen d'entrée au Centre Régional de Formation Professionnelle des Avocats, spécialité droit pénal et procédure pénale" },
+        { y: '2024', n: ['CAPA — Prestation de serment'], d: "Certificat d'Aptitude à la Profession d'Avocat, Cour d'appel de Lyon" }
+    ];
+    function names(s) { return s.n.map(function (x) { return '<p class="s-name">' + x + '</p>'; }).join(''); }
+    function body(s) { return names(s) + '<p class="s-detail">' + s.d + '</p>'; }
+
+    // Construction
+    var ta = document.getElementById('ta');
+    S.forEach(function (s) { var li = document.createElement('li'); li.innerHTML = '<span class="yr">' + s.y + '</span><div class="bd">' + body(s) + '</div>'; ta.appendChild(li); });
+    var tb = document.getElementById('tb');
+    S.forEach(function (s) { var d = document.createElement('div'); d.className = 'tb-step'; d.innerHTML = body(s); tb.appendChild(d); });
+    var tc = document.getElementById('tc');
+    tc.innerHTML = '<div class="tc-line" style="width:' + (S.length * 34) + 'vw"></div>';
+    tc.style.position = 'relative';
+    S.forEach(function (s) { var d = document.createElement('div'); d.className = 'tc-step'; d.innerHTML = '<span class="yr">' + s.y + '</span>' + body(s); tc.appendChild(d); });
+    var td = document.getElementById('td');
+    S.forEach(function (s, i) { var d = document.createElement('div'); d.className = 'td-card'; d.style.setProperty('--i', i); d.innerHTML = '<span class="yr">' + s.y + '</span><div>' + body(s) + '</div>'; td.appendChild(d); });
+    var te = document.getElementById('te');
+    S.forEach(function (s) { var li = document.createElement('li'); li.innerHTML = '<span class="yr">' + s.y + '</span><div class="te-body">' + body(s) + '</div>'; te.appendChild(li); });
+
+    // A
+    var taFill = document.getElementById('taFill'), taItems = ta.querySelectorAll('li');
+    // B
+    var tbYear = document.getElementById('tbYear'), tbCount = document.getElementById('tbCount'), tbBar = document.getElementById('tbBar'), tbSteps = tb.querySelectorAll('.tb-step'), tbCur = 0;
+    function setYear(i) {
+        if (i === tbCur) return;
+        var old = tbYear.querySelector('span:not(.out)');
+        var txt = S[i].y;
+        if (!old || old.textContent !== txt) {
+            var neu = document.createElement('span'); neu.className = 'in'; neu.textContent = txt; tbYear.appendChild(neu);
+            if (old) { old.classList.add('out'); setTimeout(function () { old.remove(); }, 900); }
+            requestAnimationFrame(function () { requestAnimationFrame(function () { neu.classList.remove('in'); }); });
+        }
+        tbCur = i;
+        tbCount.textContent = '0' + (i + 1) + ' / 0' + S.length;
+        tbBar.style.transform = 'scaleX(' + ((i + 1) / S.length) + ')';
+    }
+    // C
+    var tcWrap = document.getElementById('tcWrap'), tcBar = document.getElementById('tcBar'), tcSteps = tc.querySelectorAll('.tc-step');
+    // E
+    var teItems = te.querySelectorAll('li');
+
+    function update() {
+        var vh = window.innerHeight;
+        // A
+        var r = ta.getBoundingClientRect();
+        taFill.style.transform = 'scaleY(' + Math.max(0, Math.min(1, (vh * 0.62 - r.top) / r.height)) + ')';
+        taItems.forEach(function (li) { li.classList.toggle('on', li.getBoundingClientRect().top < vh * 0.62); });
+        // B
+        var active = 0;
+        tbSteps.forEach(function (st, i) { var b = st.getBoundingClientRect(); if (b.top < vh * 0.55) active = i; st.classList.toggle('on', b.top < vh * 0.62 && b.bottom > vh * 0.35); });
+        setYear(active);
+        // C
+        var w = tcWrap.getBoundingClientRect();
+        var p = Math.max(0, Math.min(1, -w.top / (w.height - vh)));
+        var maxShift = Math.max(0, tc.scrollWidth - window.innerWidth + window.innerWidth * 0.12);
+        tc.style.transform = 'translateX(' + (-p * maxShift).toFixed(1) + 'px)';
+        tcBar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+        tcSteps.forEach(function (st) { st.classList.toggle('on', st.getBoundingClientRect().left < window.innerWidth * 0.55); });
+        // E
+        teItems.forEach(function (li) { if (li.getBoundingClientRect().top < vh * 0.82) li.classList.add('on'); });
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+</script>
+</body>
+</html>
