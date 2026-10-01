@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frise du parcours — variantes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --vert: #72785f; --vert-dark: #5a6049; --beige: #d6cdb8; --nacre: #f0ebe2; --noir: #1a1a1a; --blanc: #fdfcfa;
+        --serif: 'Cormorant Garamond', serif; --display: 'Instrument Serif', serif; --sans: 'Inter', sans-serif;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body { font-family: var(--sans); background: var(--blanc); color: var(--noir); -webkit-font-smoothing: antialiased; }
+    .intro { padding: 90px 6vw 30px; max-width: 1000px; }
+    .intro h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.05; margin-bottom: 14px; }
+    .intro p { color: #666; line-height: 1.7; max-width: 46em; }
+
+    .block { padding: 70px 6vw 90px; border-top: 1px solid rgba(26, 26, 26, 0.1); margin-top: 50px; }
+    .block-head { display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; margin-bottom: 40px; }
+    .block-head strong { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert-dark); font-weight: 500; }
+    .block-head span { font-size: 0.85rem; color: #888; }
+    .replay { margin-left: auto; font: 400 0.7rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--vert-dark); background: none; border: 1px solid rgba(114, 120, 95, 0.35); border-radius: 100px; padding: 8px 16px; cursor: pointer; }
+    .replay:hover { background: var(--vert); color: var(--blanc); border-color: var(--vert); }
+    .col { max-width: 660px; margin-left: auto; margin-right: 8vw; }
+    .tl-title { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 38px; padding-bottom: 14px; border-bottom: 1px solid rgba(26, 26, 26, 0.1); }
+    .tl-title h3 { font-family: var(--display); font-weight: 400; font-size: 2.1rem; }
+    .tl-title span { font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert); }
+
+    .s-name { font-weight: 500; font-size: 0.98rem; line-height: 1.5; }
+    .s-detail { font-size: 0.9rem; line-height: 1.65; color: #777; margin-top: 3px; }
+
+    /* Base commune : frise verticale, tout visible */
+    .tl { position: relative; list-style: none; }
+    .tl li { position: relative; display: grid; padding-bottom: 34px; opacity: 0.45; transition: opacity 0.7s var(--ease); transition-delay: calc(var(--i) * 260ms + 200ms); }
+    .tl li:last-child { padding-bottom: 0; }
+    .tl.play li { opacity: 1; }
+    .track { position: absolute; top: 10px; bottom: 12px; width: 1px; background: rgba(114, 120, 95, 0.18); }
+    .track i { position: absolute; inset: 0; background: var(--vert); transform-origin: top; transform: scaleY(0); transition: transform 1.6s var(--ease) 0.2s; }
+    .tl.play .track i { transform: scaleY(1); }
+
+    /* ═════════ 1 — GRANDES ANNÉES ═════════ */
+    .v1 li { grid-template-columns: 130px 1fr; }
+    .v1 .track { left: 130px; }
+    .v1 li::before { content: ''; position: absolute; left: 126px; top: 14px; width: 9px; height: 9px; border-radius: 50%; background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.45); transition: background 0.5s, border-color 0.5s; transition-delay: inherit; }
+    .v1.play li::before { background: var(--vert); border-color: var(--vert); }
+    .v1 .yr { font-family: var(--serif); font-weight: 300; font-size: 2.7rem; line-height: 0.85; letter-spacing: -0.03em; color: var(--beige); transition: color 0.7s; transition-delay: inherit; }
+    .v1.play .yr { color: var(--vert-dark); }
+    .v1 .bd { padding-left: 38px; }
+
+    /* ═════════ 2 — ANNÉE EN FILIGRANE ═════════ */
+    .v2wrap { position: relative; }
+    .v2-mark { position: absolute; right: -2vw; top: 40%; transform: translateY(-50%); font-family: var(--serif); font-weight: 300; font-size: clamp(8rem, 16vw, 13rem); line-height: 1; letter-spacing: -0.05em; color: rgba(114, 120, 95, 0.09); pointer-events: none; font-variant-numeric: tabular-nums; transition: opacity 0.4s; }
+    .v2 li { grid-template-columns: 88px 1fr; }
+    .v2 .track { left: 88px; }
+    .v2 li::before { content: ''; position: absolute; left: 84px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.45); transition: background 0.5s; transition-delay: inherit; }
+    .v2.play li::before { background: var(--vert); border-color: var(--vert); }
+    .v2 .yr { font-family: var(--serif); font-size: 1.7rem; line-height: 1; color: var(--vert); }
+    .v2 .bd { padding-left: 34px; position: relative; }
+
+    /* ═════════ 3 — COMPTEUR LATÉRAL ═════════ */
+    .v3wrap { display: grid; grid-template-columns: 190px 1fr; gap: 40px; align-items: start; }
+    .v3-side { padding-top: 4px; }
+    .v3-year { position: relative; height: 1em; overflow: hidden; font-family: var(--serif); font-weight: 300; font-size: 4.6rem; line-height: 1; letter-spacing: -0.04em; color: var(--vert); }
+    .v3-year span { position: absolute; left: 0; top: 0; transition: transform 0.6s var(--ease), opacity 0.6s var(--ease); }
+    .v3-year span.out { transform: translateY(-100%); opacity: 0; }
+    .v3-year span.in { transform: translateY(100%); opacity: 0; }
+    .v3-count { margin-top: 14px; font-size: 0.68rem; letter-spacing: 0.22em; color: #999; font-variant-numeric: tabular-nums; }
+    .v3-bar { margin-top: 10px; width: 120px; height: 1px; background: rgba(114, 120, 95, 0.2); position: relative; }
+    .v3-bar i { position: absolute; inset: 0; background: var(--vert); transform-origin: left; transform: scaleX(0); transition: transform 0.6s var(--ease); }
+    .v3 li { grid-template-columns: 1fr; padding-left: 30px; cursor: default; }
+    .v3 .track { left: 0; }
+    .v3 li::before { content: ''; position: absolute; left: -4px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.45); transition: background 0.4s, transform 0.4s var(--ease); }
+    .v3 li.lit::before { background: var(--vert); border-color: var(--vert); }
+    .v3 li.focus::before { transform: scale(1.5); }
+    .v3 li.focus .s-name { color: var(--vert-dark); }
+    .v3 .yr-s { font-size: 0.66rem; letter-spacing: 0.2em; color: #a49d8e; margin-bottom: 4px; display: block; }
+
+    /* ═════════ 4 — PASTILLES NUMÉROTÉES ═════════ */
+    .v4 li { grid-template-columns: 1fr; padding-left: 64px; }
+    .v4 .track { left: 15px; top: 16px; }
+    .v4 .num { position: absolute; left: 0; top: 0; width: 31px; height: 31px; border-radius: 50%; display: grid; place-items: center; font-size: 0.62rem; letter-spacing: 0.05em; background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.45); color: var(--vert-dark); transition: background 0.5s, color 0.5s, border-color 0.5s; transition-delay: inherit; z-index: 1; font-variant-numeric: tabular-nums; }
+    .v4.play .num { background: var(--vert); color: var(--blanc); border-color: var(--vert); }
+    .v4 .yr { font-size: 0.66rem; letter-spacing: 0.22em; color: var(--vert); display: block; margin-bottom: 6px; padding-top: 2px; }
+    .v4 .s-name { font-family: var(--display); font-weight: 400; font-size: 1.4rem; line-height: 1.2; }
+    .v4 .s-detail { margin-top: 6px; }
+
+    /* ═════════ 5 — POINT D'ORGUE ═════════ */
+    .v5 li { grid-template-columns: 88px 1fr; }
+    .v5 .track { left: 88px; bottom: 60px; }
+    .v5 li::before { content: ''; position: absolute; left: 84px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--blanc); border: 1px solid rgba(114, 120, 95, 0.45); transition: background 0.5s; transition-delay: inherit; }
+    .v5.play li::before { background: var(--vert); border-color: var(--vert); }
+    .v5 .yr { font-family: var(--serif); font-size: 1.7rem; line-height: 1; color: var(--vert); }
+    .v5 .bd { padding-left: 34px; }
+    .v5 li.final { margin-top: 6px; }
+    .v5 li.final::before { width: 15px; height: 15px; left: 81px; top: 30px; }
+    .v5 li.final .yr { padding-top: 22px; }
+    .v5 li.final .bd { margin-left: 22px; padding: 22px 26px; background: var(--nacre); border-left: 2px solid var(--vert); transform: translateX(-12px); opacity: 0; transition: transform 0.9s var(--ease), opacity 0.9s var(--ease); transition-delay: calc(var(--i) * 260ms + 300ms); }
+    .v5.play li.final .bd { transform: none; opacity: 1; }
+    .v5 li.final .s-name { font-family: var(--display); font-weight: 400; font-size: 1.5rem; color: var(--vert-dark); }
+    .v5 .badge { display: inline-block; margin-top: 12px; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert-dark); }
+
+    @media (max-width: 800px) {
+        .col { margin-right: 0; }
+        .v3wrap { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0ms !important; } }
+</style>
+</head>
+<body>
+
+<header class="intro">
+    <h1>La frise du parcours, en variantes</h1>
+    <p>Toutes les étapes restent visibles d'un coup d'œil. L'animation se joue quand la frise apparaît à l'écran : la ligne se dessine et les étapes s'allument une à une. Le bouton « Rejouer » relance l'animation.</p>
+</header>
+
+<section class="block"><div class="block-head"><strong>1 — Grandes années</strong><span>Les années deviennent le repère visuel, en grand, et passent du beige au vert.</span><button class="replay" type="button">Rejouer</button></div>
+    <div class="col"><div class="tl-title"><h3>Parcours</h3><span>2021 — 2024</span></div><ol class="tl v1" data-v="1"></ol></div></section>
+
+<section class="block"><div class="block-head"><strong>2 — Année en filigrane</strong><span>Une très grande année en filigrane défile 2021 → 2024 pendant l'animation, puis reste sur 2024.</span><button class="replay" type="button">Rejouer</button></div>
+    <div class="col v2wrap"><div class="v2-mark" aria-hidden="true">2021</div><div class="tl-title"><h3>Parcours</h3><span>2021 — 2024</span></div><ol class="tl v2" data-v="2"></ol></div></section>
+
+<section class="block"><div class="block-head"><strong>3 — Compteur latéral</strong><span>La touche de la 2 : une grande année et un compteur à gauche. Au survol d'une étape, l'année change.</span><button class="replay" type="button">Rejouer</button></div>
+    <div class="col" style="max-width:860px"><div class="tl-title"><h3>Parcours</h3><span>2021 — 2024</span></div><div class="v3wrap"><div class="v3-side"><div class="v3-year"><span>2021</span></div><div class="v3-count">01 / 05</div><div class="v3-bar"><i></i></div></div><ol class="tl v3" data-v="3"></ol></div></div></section>
+
+<section class="block"><div class="block-head"><strong>4 — Pastilles numérotées</strong><span>Chaque étape porte son numéro dans une pastille qui se remplit ; titres en plus grand.</span><button class="replay" type="button">Rejouer</button></div>
+    <div class="col"><div class="tl-title"><h3>Parcours</h3><span>2021 — 2024</span></div><ol class="tl v4" data-v="4"></ol></div></section>
+
+<section class="block"><div class="block-head"><strong>5 — Point d'orgue</strong><span>Même frise, mais l'aboutissement — le CAPA et le serment — est mis en valeur dans un encart.</span><button class="replay" type="button">Rejouer</button></div>
+    <div class="col"><div class="tl-title"><h3>Parcours</h3><span>2021 — 2024</span></div><ol class="tl v5" data-v="5"></ol></div></section>
+
+<div style="height:20vh"></div>
+
+<script>
+(function () {
+    var S = [
+        { y: '2021', n: ['Master I Droit des affaires', 'Parcours Propriété littéraire et artistique'], d: 'Université Lumière Lyon II' },
+        { y: '2022', n: ['Master II Droit des affaires comparé'], d: 'Université Lumière Lyon II' },
+        { y: '2022', n: ['LL.M. Business Law — Master of Laws (Common Law)'], d: 'Université de Montréal, Canada' },
+        { y: '2022', n: ['CRFPA'], d: "Examen d'entrée au Centre Régional de Formation Professionnelle des Avocats, spécialité droit pénal et procédure pénale" },
+        { y: '2024', n: ['CAPA — Prestation de serment'], d: "Certificat d'Aptitude à la Profession d'Avocat, Cour d'appel de Lyon" }
+    ];
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function body(s) { return s.n.map(function (x) { return '<p class="s-name">' + x + '</p>'; }).join('') + '<p class="s-detail">' + s.d + '</p>'; }
+
+    document.querySelectorAll('.tl').forEach(function (ol) {
+        var v = ol.dataset.v;
+        ol.innerHTML = '<div class="track"><i></i></div>';
+        S.forEach(function (s, i) {
+            var li = document.createElement('li');
+            li.style.setProperty('--i', i);
+            if (v === '1' || v === '2' || v === '5') li.innerHTML = '<span class="yr">' + s.y + '</span><div class="bd">' + body(s) + (v === '5' && i === S.length - 1 ? '<span class="badge">Avocate au Barreau de Lyon</span>' : '') + '</div>';
+            if (v === '3') li.innerHTML = '<span class="yr-s">' + s.y + '</span>' + body(s);
+            if (v === '4') li.innerHTML = '<span class="num">0' + (i + 1) + '</span><span class="yr">' + s.y + '</span>' + body(s);
+            if (v === '5' && i === S.length - 1) li.classList.add('final');
+            ol.appendChild(li);
+        });
+    });
+
+    // Année changeante (variantes 2 et 3)
+    function swapYear(box, txt) {
+        var old = box.querySelector('span:not(.out)');
+        if (old && old.textContent === txt) return;
+        var neu = document.createElement('span'); neu.className = 'in'; neu.textContent = txt; box.appendChild(neu);
+        if (old) { old.classList.add('out'); setTimeout(function () { old.remove(); }, 700); }
+        requestAnimationFrame(function () { requestAnimationFrame(function () { neu.classList.remove('in'); }); });
+    }
+    var v3 = document.querySelector('.v3'), v3Year = document.querySelector('.v3-year'), v3Count = document.querySelector('.v3-count'), v3Bar = document.querySelector('.v3-bar i');
+    function v3Focus(i) {
+        swapYear(v3Year, S[i].y);
+        v3Count.textContent = '0' + (i + 1) + ' / 0' + S.length;
+        v3Bar.style.transform = 'scaleX(' + ((i + 1) / S.length) + ')';
+        v3.querySelectorAll('li').forEach(function (li, k) { li.classList.toggle('focus', k === i); });
+    }
+    v3.querySelectorAll('li').forEach(function (li, i) {
+        li.addEventListener('mouseenter', function () { v3Focus(i); });
+    });
+    v3.addEventListener('mouseleave', function () { v3Focus(S.length - 1); });
+
+    var timers = [];
+    function play(ol) {
+        var v = ol.dataset.v;
+        ol.classList.remove('play'); void ol.offsetWidth; ol.classList.add('play');
+        if (v === '2') {
+            var mark = ol.parentElement.querySelector('.v2-mark');
+            S.forEach(function (s, i) { setTimeout(function () { mark.textContent = s.y; }, reduce ? 0 : i * 260 + 200); });
+        }
+        if (v === '3') {
+            var lis = ol.querySelectorAll('li');
+            lis.forEach(function (li) { li.classList.remove('lit'); });
+            S.forEach(function (s, i) { setTimeout(function () { lis[i].classList.add('lit'); v3Focus(i); }, reduce ? 0 : i * 320 + 200); });
+        }
+    }
+    var io = new IntersectionObserver(function (en) {
+        en.forEach(function (e) { if (e.isIntersecting) { play(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.tl').forEach(function (ol) { io.observe(ol); });
+    document.querySelectorAll('.replay').forEach(function (b) {
+        b.addEventListener('click', function () { play(b.closest('.block').querySelector('.tl')); });
+    });
+})();
+</script>
+</body>
+</html>
