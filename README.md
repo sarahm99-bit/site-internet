@@ -27,6 +27,6 @@
 - `archives/domaines/` — prototypes de mise en page des domaines
 
 ## Idées en attente
-- **Moyens d'action** (future section ou page, distincte des domaines) : pré-contentieux (mises en demeure, négociations amiables), référés et procédures d'urgence.
+- **Moyens d'action** (future section ou page, distincte des domaines) : pré-contentieux (mises en demeure, négociations amiables), référés et procédures d'urgence, procédures d'exécution, saisies-contrefaçon.
 - **SM = « Sur Mesure »** : jouer sur les initiales (mot qui se déplie dans la présentation, signature « SM — sur mesure »).
 - **Section domaines** : tout fermer à l'arrivée, phrase de clôture vers le rendez-vous, lien vers les futures pages dédiées.
