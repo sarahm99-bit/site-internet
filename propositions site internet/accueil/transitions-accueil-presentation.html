@@ -332,8 +332,12 @@
     .pres { z-index: 2; margin-top: calc(-1 * var(--curtain, 0px)); transform-origin: 50% 0; }
     .shade { position: absolute; inset: 0; z-index: 5; background: #1a1a1a; opacity: 0; pointer-events: none; }
     .hairline { position: absolute; z-index: 4; border: 1px solid rgba(114, 120, 95, 0); pointer-events: none; }
-    .t-a, .t-e, .t-f { --curtain: 100vh; }
-    .t-a .pres, .t-e .pres, .t-f .pres { box-shadow: 0 -40px 90px -30px rgba(26, 26, 26, 0.35); }
+    .t-a, .t-a1 { --curtain: 140vh; }
+    .t-a .pres, .t-a1 .pres { box-shadow: 0 -30px 70px -30px rgba(26, 26, 26, 0.22); }
+    .t-a1 .nav.scrolled { background: var(--navbg, rgba(253, 252, 250, 0.97)); box-shadow: none; transition: background-color 0.7s ease, padding 0.4s; }
+    .t-a1 .nav-tabs { background: #d9cfbc; border-color: transparent; }
+    .t-a1 .nav-tab { color: var(--noir); }
+    .t-a1 .nav-tab.lit { color: var(--blanc); }
     .t-b { --pin: 60vh; }
     .t-c { --pin: 150vh; }
     .t-e { --pin: 120vh; }
@@ -435,7 +439,7 @@
 </header>
 
 <!-- ═════════════════ PRÉSENTATION ═════════════════ -->
-<section class="pres" id="presentation">
+<section class="pres" id="presentation" data-navbg="rgba(253, 252, 250, 0.97)">
     <svg class="bend" id="bend" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path class="fill" d="M0 10 Q50 10 100 10 Z"/><path class="edge" d="M0 10 Q50 10 100 10"/></svg>
     <div class="pres-head">
         <p class="kicker reveal">01 — Présentation</p>
@@ -507,7 +511,7 @@
     </div>
 </section>
 
-<section class="dom" id="domaines">
+<section class="dom" id="domaines" data-navbg="rgba(240, 235, 226, 0.97)">
     <div class="dom-inner">
         <p class="kicker reveal">02 — Domaines d'intervention</p>
         <h2 class="dom-phrase reveal">Vous êtes <span class="rot" data-words="une entreprise|un particulier|un dirigeant|un créateur|un associé|un artiste"></span>.</h2>
@@ -603,7 +607,7 @@
     </div>
 </section>
 
-<section class="pubs" id="publications">
+<section class="pubs" id="publications" data-navbg="rgba(253, 252, 250, 0.97)">
     <div class="pubs-inner">
         <div class="pubs-head">
             <div>
@@ -632,7 +636,7 @@
     </div>
 </section>
 
-<section class="rdv" id="contact">
+<section class="rdv" id="contact" data-navbg="rgba(240, 235, 226, 0.97)">
     <div class="rdv-inner">
         <div>
             <p class="kicker reveal">04 — Rendez-vous</p>
@@ -911,12 +915,8 @@
     // ═════ Propositions de transition ═════
     (function () {
         var T = [
-            ['a', 'Rideau', 'La présentation monte par-dessus la vidéo, qui recule et s\'assombrit', { curtain: 1 }],
-            ['b', 'Cadre fin', 'La vidéo se resserre légèrement, angles nets et filet vert', { pin: 0.6, frame: 1 }],
-            ['c', 'Signature', 'Ton nom reste, puis rejoint lentement le menu où il devient SM', { pin: 1.5, sign: 1 }],
-            ['d', 'Ligne qui s\'arrondit', 'La jonction part droite, se courbe comme la coupole, puis se redresse', { bend: 1 }],
-            ['e', 'Signature + rideau', 'Ton nom rejoint le menu, puis la présentation monte en rideau', { pin: 1.2, sign: 1, curtain: 1 }],
-            ['f', 'Cadre + rideau', 'La vidéo se resserre en cadre fin, puis le rideau monte', { pin: 0.5, frame: 1, curtain: 1 }]
+            ['a', 'Rideau', 'Plus lent et plus doux, sans blanc sur les côtés', { curtain: 1 }],
+            ['a1', 'Rideau + barre assortie', 'La barre du menu prend la couleur de la section, onglets beige foncé', { curtain: 1, navMatch: 1 }]
         ];
         var hv = document.querySelector('.hv-l'), pin = document.querySelector('.hero-pin');
         var center = hv.querySelector('.center'), name = hv.querySelector('.name-c');
@@ -961,14 +961,22 @@
                 navEl.classList.toggle('e-hold', q > 0.01 && q < 1);
             }
             if (cfg.curtain) {
-                var c = clamp((y - P) / vh), ce = ease(c);
-                pres.style.scale = (0.9 + 0.1 * ce).toFixed(4);
-                var r = (1 - ce) * 48;
+                var c = clamp((y - P) / (vh * 1.4)), ce = ease(c);
+                pres.style.scale = (0.965 + 0.035 * ce).toFixed(4);
+                var r = (1 - ce) * 28;
                 pres.style.borderRadius = r.toFixed(1) + 'px ' + r.toFixed(1) + 'px 0 0';
-                pin.style.scale = (1 - 0.08 * ce).toFixed(4);
-                shade.style.opacity = (0.4 * ce).toFixed(3);
-                if (!cfg.sign) { center.style.translate = '0 ' + (-ce * 70).toFixed(1) + 'px'; }
+                shade.style.opacity = (0.22 * ce).toFixed(3);
+                center.style.translate = '0 ' + (-ce * 50).toFixed(1) + 'px';
+                center.style.opacity = (1 - 0.7 * ce).toFixed(3);
             }
+            if (cfg.navMatch) {
+                var probe = 72, bg = '';
+                document.querySelectorAll('[data-navbg]').forEach(function (sec) {
+                    var r2 = sec.getBoundingClientRect();
+                    if (r2.top <= probe && r2.bottom > probe) bg = sec.dataset.navbg;
+                });
+                navEl.style.setProperty('--navbg', bg || 'rgba(240, 235, 226, 0.92)');
+            } else { navEl.style.removeProperty('--navbg'); }
             if (cfg.bend) {
                 var t = clamp((vh - pres.getBoundingClientRect().top) / vh);
                 var h = Math.sin(Math.PI * t) * 9;
@@ -987,7 +995,7 @@
             T.forEach(function (t) { if (t[0] === id) cfg = t[3]; });
             document.body.classList.add('t-' + id);
             Object.keys(btns).forEach(function (k) { btns[k].classList.toggle('active', k === id); });
-            try { localStorage.setItem('transition-prop-2', id); } catch (e) {}
+            try { localStorage.setItem('transition-prop-3', id); } catch (e) {}
             if (user) {
                 var b = btns[id]; b.classList.add('flash'); clearTimeout(b._t); b._t = setTimeout(function () { b.classList.remove('flash'); }, 2600);
                 if (lenis) lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0);
@@ -1002,7 +1010,7 @@
             rail.appendChild(b); btns[t[0]] = b;
         });
         var saved = 'a';
-        try { saved = localStorage.getItem('transition-prop-2') || 'a'; } catch (e) {}
+        try { saved = localStorage.getItem('transition-prop-3') || 'a'; } catch (e) {}
         set(btns[saved] ? saved : 'a', false);
     })();
 
