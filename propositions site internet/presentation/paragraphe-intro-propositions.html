@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paragraphe d'introduction — propositions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --vert: #72785f; --vert-dark: #5a6049; --noir: #1a1a1a; --blanc: #fdfcfa; --nacre: #f0ebe2;
+        --serif: 'Cormorant Garamond', serif; --display: 'Instrument Serif', serif; --sans: 'Inter', sans-serif; }
+    body { font-family: var(--sans); background: var(--blanc); color: var(--noir); -webkit-font-smoothing: antialiased; padding: 70px 6vw 100px; }
+    h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 3.6vw, 3rem); margin-bottom: 10px; }
+    .note { color: #777; max-width: 46em; line-height: 1.7; margin-bottom: 50px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 6vw; }
+    .prop { padding: 34px 0 44px; border-top: 1px solid rgba(26, 26, 26, 0.12); max-width: 620px; }
+    .label { font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert-dark); margin-bottom: 6px; font-weight: 500; }
+    .spec { font-size: 0.78rem; color: #999; margin-bottom: 22px; }
+    .body { font-size: 1rem; line-height: 1.95; color: #555; max-width: 34em; margin-top: 24px; }
+
+    .pA { font-family: var(--serif); font-size: 1.8rem; line-height: 1.45; font-weight: 400; }
+    .pB { font-family: var(--serif); font-size: 1.62rem; line-height: 1.4; font-weight: 500; letter-spacing: -0.012em; word-spacing: -0.04em; }
+    .pC { font-family: var(--display); font-size: 1.58rem; line-height: 1.38; letter-spacing: -0.008em; }
+    .pD { font-family: var(--sans); font-size: 1.18rem; line-height: 1.75; font-weight: 400; letter-spacing: -0.006em; color: #2a2a2a; }
+    .pE { font-family: var(--sans); font-size: 1.18rem; line-height: 1.75; font-weight: 400; letter-spacing: -0.006em; color: #2a2a2a; }
+    .pE em { font-family: var(--display); font-style: italic; font-size: 1.32em; letter-spacing: -0.01em; color: var(--vert-dark); }
+    .pF { font-family: var(--serif); font-size: 1.7rem; line-height: 1.38; font-weight: 500; font-style: italic; letter-spacing: -0.015em; }
+
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<h1>Le paragraphe d'introduction</h1>
+<p class="note">Six traitements du même paragraphe, suivis à chaque fois de la phrase « Son approche allie… » telle qu'elle est sur le site.</p>
+
+<div class="grid">
+    <section class="prop">
+        <p class="label">A — Actuel</p>
+        <p class="spec">Cormorant Garamond, normal, grand</p>
+        <p class="pA">Formée en droit des affaires en France et au Canada, Maître Sarah Mostfa a prêté serment en tant qu'avocate le 16 décembre 2024 devant la Cour d'appel de Lyon.</p>
+        <p class="body">Son approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.</p>
+    </section>
+    <section class="prop">
+        <p class="label">B — Cormorant resserrée</p>
+        <p class="spec">Même police, un peu plus grasse, lettres et mots rapprochés</p>
+        <p class="pB">Formée en droit des affaires en France et au Canada, Maître Sarah Mostfa a prêté serment en tant qu'avocate le 16 décembre 2024 devant la Cour d'appel de Lyon.</p>
+        <p class="body">Son approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.</p>
+    </section>
+    <section class="prop">
+        <p class="label">C — Police des titres</p>
+        <p class="spec">Instrument Serif, plus dense, comme « Des stratégies sur mesure »</p>
+        <p class="pC">Formée en droit des affaires en France et au Canada, Maître Sarah Mostfa a prêté serment en tant qu'avocate le 16 décembre 2024 devant la Cour d'appel de Lyon.</p>
+        <p class="body">Son approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.</p>
+    </section>
+    <section class="prop">
+        <p class="label">D — Sobre et moderne</p>
+        <p class="spec">Inter, la police des textes, simplement plus grande</p>
+        <p class="pD">Formée en droit des affaires en France et au Canada, Maître Sarah Mostfa a prêté serment en tant qu'avocate le 16 décembre 2024 devant la Cour d'appel de Lyon.</p>
+        <p class="body">Son approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.</p>
+    </section>
+    <section class="prop">
+        <p class="label">E — Sobre, nom en relief</p>
+        <p class="spec">Inter, avec ton nom en Instrument Serif italique vert</p>
+        <p class="pE">Formée en droit des affaires en France et au Canada, <em>Maître Sarah Mostfa</em> a prêté serment en tant qu'avocate le 16 décembre 2024 devant la Cour d'appel de Lyon.</p>
+        <p class="body">Son approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.</p>
+    </section>
+    <section class="prop">
+        <p class="label">F — Cormorant italique</p>
+        <p class="spec">Même police en italique, plus serrée et plus liée</p>
+        <p class="pF">Formée en droit des affaires en France et au Canada, Maître Sarah Mostfa a prêté serment en tant qu'avocate le 16 décembre 2024 devant la Cour d'appel de Lyon.</p>
+        <p class="body">Son approche allie rigueur juridique et écoute attentive pour construire des stratégies sur mesure, adaptées aux enjeux de chaque situation.</p>
+    </section>
+</div>
+</body>
+</html>
