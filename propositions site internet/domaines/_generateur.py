@@ -1,23 +1,24 @@
 import os
-OUT='/home/user/site-internet/propositions site internet/domaines/'
+import os
+OUT=os.path.dirname(os.path.abspath(__file__))+'/'
 V='../../assets/videos/domaines/'
 IDX='../../index.html'
 
 PAGES={
  'contentieux-civil': dict(
-   num='01', title='Contentieux civil', design=2, design_name='Bandeau',
+   num='01', title='Contentieux civil', design=1, h2='Faire valoir vos droits.',
    catch="Vous êtes une société ou un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits.",
    intro="Un différend avec un bailleur, une assurance, un professionnel ou un voisin peut vite devenir lourd à porter. J'analyse votre situation, je recherche une issue amiable lorsqu'elle est possible et, à défaut, je défends vos intérêts devant les juridictions civiles.",
-   video='civil-faculte',
+   video='civil-echecs-noir-blanc',
    items=["Actions en responsabilité civile","Cautionnements","Baux d'habitation et loyers impayés","Indemnisation par les assurances","Contentieux de la consommation","Litiges de la construction et malfaçons"]),
  'contentieux-commercial': dict(
-   num='02', title='Contentieux commercial', design=3, design_name='Fenêtre',
+   num='02', title='Contentieux commercial', design=1, h2='Défendre votre activité.',
    catch="Vous faites face à un différend dans le cadre de vos relations d'affaires.",
    intro="Un litige avec un partenaire, un concurrent ou un associé peut fragiliser votre activité. J'évalue les enjeux et les risques avec vous, puis je défends vos intérêts, par la négociation comme devant les juridictions commerciales.",
-   video='commercial-audience',
+   video='commercial-echecs-bronze',
    items=["Inexécution, retard ou mauvaise exécution contractuelle","Responsabilité civile délictuelle","Concurrence déloyale et parasitisme","Rupture brutale de relations commerciales","Conflits entre associés","Contrefaçon","Recouvrement de créances"]),
  'conseil-juridique': dict(
-   num='03', title='Conseil juridique', design=1, design_name='Partage',
+   num='03', title='Conseil juridique', design=1, h2='Anticiper plutôt que subir.',
    catch="Vous souhaitez sécuriser vos relations d'affaires, protéger vos créations ou bénéficier d'un appui juridique régulier.",
    intro="Bien rédiger un contrat, protéger une création, disposer d'un appui juridique au quotidien : le conseil permet d'anticiper les difficultés plutôt que de les subir, et de prendre vos décisions en connaissance de cause.",
    video='conseil-echecs',
@@ -90,10 +91,6 @@ HEAD='''<!DOCTYPE html>
     .others a small {{ font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--vert); }}
     .footer {{ background: var(--noir); color: rgba(255, 255, 255, 0.55); padding: 34px 5vw; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 0.75rem; }}
     .footer .logo {{ color: var(--blanc); font-size: 1.3rem; }}
-    .designbar {{ position: fixed; right: 16px; bottom: 16px; z-index: 200; display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 100px; background: rgba(26, 26, 26, 0.88); color: rgba(255, 255, 255, 0.6); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }}
-    .designbar span {{ padding: 0 10px; }}
-    .designbar a {{ padding: 8px 12px; border-radius: 100px; color: rgba(255, 255, 255, 0.8); }}
-    .designbar a.on {{ background: var(--nacre); color: var(--noir); }}
 {css}
     @media (max-width: 900px) {{
         .tabs {{ display: none; }}
@@ -127,11 +124,10 @@ def crumb(p):
 def items_html(p):
     if 'groups' in p:
         return '<div class="groups">'+''.join(f'<div class="group reveal" style="--d:{i*120}ms"><h3>{g}</h3><ul class="list">'+''.join(f'<li>{x}</li>' for x in xs)+'</ul></div>' for i,(g,xs) in enumerate(p['groups']))+'</div>'
-    return '<ul class="list">'+''.join(f'<li>{x}</li>' for x in p['items'])+'</ul>'
+    return '<ul class="list cols reveal">'+''.join(f'<li>{x}</li>' for x in p['items'])+'</ul>'
 def tail(key):
     p=PAGES[key]
     others=''.join(f'<a href="{k}.html">{PAGES[k]["title"]}<small>{PAGES[k]["num"]} →</small></a>' for k in ORDER if k!=key)
-    bar=''.join(f'<a href="{k}.html" class="{"on" if k==key else ""}">{PAGES[k]["design"]} · {PAGES[k]["design_name"]}</a>' for k in sorted(ORDER,key=lambda k:PAGES[k]['design']))
     return f'''
 <section class="callout">
     <p class="big reveal">Votre situation appelle <em>une stratégie sur mesure</em>.</p>
@@ -142,7 +138,7 @@ def tail(key):
     <div class="others-grid">{others}</div>
 </section>
 <footer class="footer"><a href="{IDX}" class="logo">S<em>M</em></a><span>Sarah Mostfa — Avocate au Barreau de Lyon · 14 rue de la Charité, 69002 Lyon</span></footer>
-<div class="designbar" aria-label="Designs proposés"><span>Design</span>{bar}</div>
+
 <script>
 (function () {{
     var nav = document.getElementById('nav');
@@ -176,6 +172,8 @@ CSS1='''    .h1wrap { display: grid; grid-template-columns: 1fr 1fr; min-height:
     .body1 .lead { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6vw; margin-bottom: 80px; align-items: start; }
     .body1 .lead h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.1; }
     .groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw; }
+    .body1 .list.cols { columns: 2; column-gap: 5vw; border-top: 1px solid rgba(114, 120, 95, 0.3); padding-top: 14px; }
+    .body1 .list.cols li { break-inside: avoid; }
     .group h3 { font-family: var(--display); font-weight: 400; font-size: 1.7rem; padding-bottom: 16px; margin-bottom: 6px; border-bottom: 1px solid rgba(114, 120, 95, 0.3); }
 '''
 CSS1M='''        .h1wrap { grid-template-columns: 1fr; }
@@ -183,6 +181,7 @@ CSS1M='''        .h1wrap { grid-template-columns: 1fr; }
         .h1-text { padding: 50px 20px; }
         .body1 { padding: 80px 20px; }
         .body1 .lead, .groups { grid-template-columns: 1fr; }
+        .body1 .list.cols { columns: 1; }
 '''
 def page1(key):
     p=PAGES[key]
@@ -197,7 +196,7 @@ def page1(key):
 </header>
 <main class="body1">
     <div class="lead">
-        <h2 class="reveal">Anticiper plutôt que subir.</h2>
+        <h2 class="reveal">{p["h2"]}</h2>
         <p class="intro reveal" style="--d:120ms">{p["intro"]}</p>
     </div>
     {items_html(p)}
