@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prise de rendez-vous en ligne — maquette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --vert: #72785f; --vert-dark: #5a6049; --beige: #d6cdb8; --nacre: #f0ebe2; --noir: #1a1a1a; --blanc: #fdfcfa; --rose: #d4aa9f;
+        --serif: 'Cormorant Garamond', serif; --display: 'Instrument Serif', serif; --sans: 'Inter', sans-serif;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body { font-family: var(--sans); background: var(--noir); color: var(--blanc); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    [hidden] { display: none !important; }
+    .kicker { display: flex; align-items: center; gap: 14px; font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 30px; }
+    .kicker::before { content: ''; width: 38px; height: 1px; background: currentColor; opacity: 0.5; }
+    .note-maquette { background: var(--nacre); color: var(--vert-dark); text-align: center; font-size: 0.72rem; letter-spacing: 0.06em; padding: 12px 20px; }
+    /* ═════════ RENDEZ-VOUS ═════════ */
+    .rdv { background: var(--noir); color: var(--blanc); padding: 150px 5vw 120px; }
+    .rdv-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 5fr 6fr; gap: 7vw; align-items: start; }
+    .rdv .kicker { color: var(--beige); }
+    .rdv h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 5.4vw, 4.8rem); line-height: 1.02; letter-spacing: -0.015em; margin-bottom: 28px; }
+    .rdv h2 em { color: #d4aa9f; }
+    .rdv-intro { font-size: 1rem; line-height: 1.85; font-weight: 400; color: rgba(255, 255, 255, 0.6); max-width: 30em; margin-bottom: 48px; }
+    .rdv-info { display: grid; gap: 22px; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 28px; }
+    .rdv-info dt { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--beige); margin-bottom: 6px; }
+    .rdv-info dd { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--blanc); }
+    .rdv-info a { border-bottom: 1px solid rgba(255, 255, 255, 0.25); transition: border-color 0.3s; }
+    .rdv-info a:hover { border-color: #d4aa9f; }
+
+    .form { display: grid; gap: 8px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; }
+    .field { position: relative; }
+    .field input, .field textarea, .field select {
+        width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); border-radius: 0;
+        color: var(--blanc); font: 300 1rem var(--sans); padding: 28px 0 10px; outline: none; transition: border-color 0.3s;
+        -webkit-appearance: none; appearance: none;
+    }
+    .field textarea { min-height: 130px; resize: vertical; line-height: 1.6; }
+    .field select { cursor: pointer; }
+    .field select option { color: var(--noir); }
+    .field.select::after { content: ''; position: absolute; right: 4px; top: 36px; width: 7px; height: 7px; border-right: 1px solid rgba(255, 255, 255, 0.6); border-bottom: 1px solid rgba(255, 255, 255, 0.6); transform: rotate(45deg); pointer-events: none; }
+    .field label { position: absolute; left: 0; top: 28px; font-size: 1rem; font-weight: 400; color: rgba(255, 255, 255, 0.45); pointer-events: none; transform-origin: left top; transition: transform 0.35s var(--ease), color 0.3s; }
+    .field input:focus, .field textarea:focus, .field select:focus { border-bottom-color: #d4aa9f; }
+    .field input:focus + label, .field input:not(:placeholder-shown) + label,
+    .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label,
+    .field.select label { transform: translateY(-22px) scale(0.72); color: #d4aa9f; }
+    .consent { display: flex; gap: 14px; align-items: flex-start; margin-top: 22px; font-size: 0.8rem; line-height: 1.6; color: rgba(255, 255, 255, 0.55); font-weight: 400; cursor: pointer; }
+    .consent input { width: 16px; height: 16px; margin-top: 3px; accent-color: #d4aa9f; flex-shrink: 0; }
+    .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 26px; }
+    .submit {
+        position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 16px; cursor: pointer;
+        padding: 17px 32px; border: 0; border-radius: 100px; background: var(--nacre); color: var(--noir);
+        font: 400 0.74rem var(--sans); letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .submit::before { content: ''; position: absolute; inset: 0; background: #d4aa9f; transform: scaleX(0); transform-origin: right; transition: transform 0.6s var(--ease); }
+    .submit:hover::before { transform: scaleX(1); transform-origin: left; }
+    .submit span, .submit svg { position: relative; z-index: 1; }
+    .submit svg { transition: transform 0.5s var(--ease); }
+    .submit:hover svg { transform: translateX(5px); }
+    .submit:focus-visible, .field input:focus-visible, .consent input:focus-visible { outline: 2px solid #d4aa9f; outline-offset: 3px; }
+    .form-note { font-size: 0.72rem; color: rgba(255, 255, 255, 0.4); font-weight: 400; }
+    .form-done { display: none; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 34px; }
+    .form-done p:first-child { font-family: var(--display); font-size: 2rem; margin-bottom: 12px; }
+    .form-done p:first-child em { color: #d4aa9f; }
+    .form-done p:last-child { font-size: 0.9rem; line-height: 1.7; color: rgba(255, 255, 255, 0.55); font-weight: 400; }
+    .form.sent { display: none; }
+    .form.sent + .form-done { display: block; }
+
+
+    /* ═════════ ONGLETS ═════════ */
+    .tabs { display: inline-flex; padding: 4px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 100px; margin-bottom: 34px; position: relative; }
+    .tab { position: relative; z-index: 1; padding: 11px 22px; border: 0; background: none; color: rgba(255, 255, 255, 0.7); font: 400 0.72rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 100px; transition: color 0.3s; }
+    .tab[aria-selected="true"] { color: var(--noir); }
+    .tab-cursor { position: absolute; top: 4px; bottom: 4px; left: 4px; border-radius: 100px; background: var(--nacre); transition: left 0.45s var(--ease), width 0.45s var(--ease); }
+    .pane[hidden] { display: none; }
+
+    /* ═════════ MODULE DE RÉSERVATION (style Cal.com) ═════════ */
+    .cal { border: 1px solid rgba(255, 255, 255, 0.12); background: #212121; border-radius: 6px; overflow: hidden; }
+    .cal-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); flex-wrap: wrap; }
+    .cal-who { display: flex; align-items: center; gap: 14px; }
+    .cal-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--nacre); color: var(--noir); font-family: var(--serif); font-weight: 600; font-size: 0.95rem; letter-spacing: -0.04em; }
+    .cal-avatar em { color: var(--vert); font-weight: 400; }
+    .cal-who strong { display: block; font-weight: 500; font-size: 0.9rem; }
+    .cal-who span { font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); }
+    .cal-meta { display: flex; gap: 18px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.6); }
+    .cal-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .cal-body { padding: 22px 24px 26px; }
+    .step-title { font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--beige); margin-bottom: 14px; }
+    .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 26px; }
+    .mode { text-align: left; padding: 14px 16px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.16); background: transparent; color: var(--blanc); cursor: pointer; font: inherit; transition: border-color 0.3s, background 0.3s; }
+    .mode strong { display: block; font-weight: 500; font-size: 0.88rem; margin-bottom: 3px; }
+    .mode span { font-size: 0.74rem; color: rgba(255, 255, 255, 0.5); line-height: 1.45; }
+    .mode:hover { border-color: rgba(255, 255, 255, 0.4); }
+    .mode[aria-pressed="true"] { border-color: var(--rose); background: rgba(212, 170, 159, 0.08); }
+    .picker { display: grid; grid-template-columns: 1.25fr 1fr; gap: 26px; }
+    .month { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .month strong { font-family: var(--display); font-weight: 400; font-size: 1.35rem; text-transform: capitalize; }
+    .month button { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.18); background: none; color: var(--blanc); cursor: pointer; font-size: 0.9rem; }
+    .month button:disabled { opacity: 0.25; cursor: default; }
+    .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+    .days .dow { font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.4); padding: 4px 0 8px; }
+    .day { aspect-ratio: 1; border-radius: 4px; border: 0; background: none; color: rgba(255, 255, 255, 0.28); font: 400 0.82rem var(--sans); font-variant-numeric: tabular-nums; cursor: default; }
+    .day.free { color: var(--blanc); background: rgba(255, 255, 255, 0.06); cursor: pointer; transition: background 0.25s; }
+    .day.free:hover { background: rgba(255, 255, 255, 0.14); }
+    .day.sel { background: var(--rose) !important; color: var(--noir); }
+    .day.today { box-shadow: inset 0 -2px 0 rgba(212, 170, 159, 0.6); }
+    .slots-title { font-size: 0.82rem; margin-bottom: 12px; color: rgba(255, 255, 255, 0.75); min-height: 1.4em; text-transform: capitalize; }
+    .slots { display: grid; gap: 8px; max-height: 300px; overflow-y: auto; padding-right: 2px; }
+    .slot { padding: 11px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.18); background: none; color: var(--blanc); font: 400 0.85rem var(--sans); font-variant-numeric: tabular-nums; cursor: pointer; transition: border-color 0.25s, background 0.25s; }
+    .slot:hover { border-color: var(--rose); }
+    .slots-empty { font-size: 0.8rem; color: rgba(255, 255, 255, 0.45); line-height: 1.6; }
+    .tz { margin-top: 18px; font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); }
+    .recap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 16px; border-radius: 4px; background: rgba(212, 170, 159, 0.1); border: 1px solid rgba(212, 170, 159, 0.35); margin-bottom: 18px; font-size: 0.86rem; }
+    .recap button { background: none; border: 0; color: var(--rose); font: 400 0.74rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+    .warn { font-size: 0.76rem; line-height: 1.6; color: rgba(255, 255, 255, 0.5); margin-top: 16px; }
+    .cal-foot { padding: 12px 24px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.66rem; color: rgba(255, 255, 255, 0.35); text-align: right; }
+    .done-cal { text-align: left; }
+    .done-cal p.big { font-family: var(--display); font-size: 2rem; margin-bottom: 10px; }
+    .done-cal p.big em { color: var(--rose); }
+    .done-cal p { font-size: 0.9rem; line-height: 1.7; color: rgba(255, 255, 255, 0.6); }
+    .mode:focus-visible, .day:focus-visible, .slot:focus-visible, .tab:focus-visible, .month button:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+
+    @media (max-width: 900px) {
+        .rdv { padding: 90px 20px; }
+        .rdv-inner { grid-template-columns: 1fr; gap: 50px; }
+        .picker, .modes, .form-row { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+<p class="note-maquette">Maquette — le module « Choisir un créneau » imite Cal.com ; aucune réservation n'est envoyée.</p>
+
+<section class="rdv" id="contact">
+    <div class="rdv-inner">
+        <div>
+            <p class="kicker" style="color:var(--beige)">04 — Rendez-vous</p>
+            <h2>Prendre <em>rendez-vous</em>.</h2>
+            <p class="rdv-intro">Choisissez directement un créneau dans l'agenda, ou écrivez-moi pour toute question relative à un litige civil ou commercial, un besoin en rédaction contractuelle, la protection de vos créations ou l'accompagnement juridique de votre entreprise.</p>
+            <dl class="rdv-info">
+                <div><dt>Cabinet</dt><dd>14 rue de la Charité, 69002 Lyon</dd></div>
+                <div><dt>Email</dt><dd><a href="mailto:sarah.mostfa@avocat.fr">sarah.mostfa@avocat.fr</a></dd></div>
+            </dl>
+        </div>
+
+        <div>
+            <div class="tabs" role="tablist" aria-label="Mode de contact">
+                <span class="tab-cursor" id="tabCursor"></span>
+                <button class="tab" role="tab" id="t-cal" aria-selected="true" aria-controls="p-cal">Choisir un créneau</button>
+                <button class="tab" role="tab" id="t-msg" aria-selected="false" aria-controls="p-msg">Écrire un message</button>
+            </div>
+
+            <!-- Onglet 1 : réservation -->
+            <div class="pane" id="p-cal" role="tabpanel" aria-labelledby="t-cal">
+                <div class="cal">
+                    <div class="cal-head">
+                        <div class="cal-who">
+                            <span class="cal-avatar">S<em>M</em></span>
+                            <div><strong>Premier rendez-vous</strong><span>Maître Sarah Mostfa</span></div>
+                        </div>
+                        <div class="cal-meta"><span>◷ 45 min</span><span>✓ Confirmation par le cabinet</span></div>
+                    </div>
+                    <div class="cal-body" id="calBody">
+                        <div id="stepPick">
+                            <p class="step-title">1 · Où souhaitez-vous échanger ?</p>
+                            <div class="modes">
+                                <button class="mode" type="button" data-mode="Au cabinet" aria-pressed="true"><strong>Au cabinet</strong><span>14 rue de la Charité, Lyon 2<sup>e</sup></span></button>
+                                <button class="mode" type="button" data-mode="En visioconférence" aria-pressed="false"><strong>En visioconférence</strong><span>Lien envoyé avec la confirmation</span></button>
+                            </div>
+                            <p class="step-title">2 · Choisissez une date et un horaire</p>
+                            <div class="picker">
+                                <div>
+                                    <div class="month"><button type="button" id="prevM" aria-label="Mois précédent">‹</button><strong id="monthLabel"></strong><button type="button" id="nextM" aria-label="Mois suivant">›</button></div>
+                                    <div class="days" id="days"></div>
+                                </div>
+                                <div>
+                                    <p class="slots-title" id="slotsTitle">Sélectionnez une date</p>
+                                    <div class="slots" id="slots"><p class="slots-empty">Les créneaux disponibles s'affichent ici.</p></div>
+                                </div>
+                            </div>
+                            <p class="tz">Fuseau horaire : Europe/Paris</p>
+                        </div>
+
+                        <form class="form" id="stepForm" hidden novalidate>
+                            <div class="recap"><span id="recapText"></span><button type="button" id="back">Modifier</button></div>
+                            <div class="form-row">
+                                <div class="field"><input type="text" id="c-nom" placeholder=" " autocomplete="family-name" required><label for="c-nom">Nom</label></div>
+                                <div class="field"><input type="text" id="c-prenom" placeholder=" " autocomplete="given-name" required><label for="c-prenom">Prénom</label></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="field"><input type="email" id="c-email" placeholder=" " autocomplete="email" required><label for="c-email">Email</label></div>
+                                <div class="field"><input type="tel" id="c-tel" placeholder=" " autocomplete="tel"><label for="c-tel">Téléphone (facultatif)</label></div>
+                            </div>
+                            <div class="field select">
+                                <select id="c-dom"><option>Contentieux civil</option><option>Contentieux commercial</option><option>Conseil juridique</option><option>Autre demande</option></select>
+                                <label for="c-dom">Votre demande concerne</label>
+                            </div>
+                            <label class="consent" for="c-ok"><input type="checkbox" id="c-ok" required><span>J'accepte que ces informations soient utilisées pour organiser ce rendez-vous.</span></label>
+                            <p class="warn">Merci de ne pas détailler votre dossier ici. Le rendez-vous est confirmé par le cabinet après vérification de l'absence de conflit d'intérêts.</p>
+                            <div class="form-foot">
+                                <button type="submit" class="submit"><span>Demander ce créneau</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg></button>
+                                <span class="form-note" id="calNote">Les champs sans mention sont obligatoires.</span>
+                            </div>
+                        </form>
+
+                        <div class="done-cal" id="stepDone" hidden>
+                            <p class="big">Demande <em>envoyée</em>.</p>
+                            <p id="doneText"></p>
+                            <p style="margin-top:12px">Maquette : aucune réservation n'a été transmise.</p>
+                        </div>
+                    </div>
+                    <div class="cal-foot">Réservation propulsée par Cal.com</div>
+                </div>
+            </div>
+
+            <!-- Onglet 2 : message (formulaire actuel) -->
+            <div class="pane" id="p-msg" role="tabpanel" aria-labelledby="t-msg" hidden>
+                <form class="form" novalidate onsubmit="event.preventDefault()">
+                    <div class="form-row">
+                        <div class="field"><input type="text" id="nom" placeholder=" " required><label for="nom">Nom</label></div>
+                        <div class="field"><input type="text" id="prenom" placeholder=" " required><label for="prenom">Prénom</label></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="field"><input type="email" id="email" placeholder=" " required><label for="email">Email</label></div>
+                        <div class="field"><input type="tel" id="telephone" placeholder=" "><label for="telephone">Téléphone (facultatif)</label></div>
+                    </div>
+                    <div class="field select"><select id="domaine"><option>Contentieux civil</option><option>Contentieux commercial</option><option>Conseil juridique</option><option>Autre demande</option></select><label for="domaine">Votre demande concerne</label></div>
+                    <div class="field"><textarea id="message" placeholder=" " required></textarea><label for="message">Votre message</label></div>
+                    <div class="form-foot"><button type="submit" class="submit"><span>Envoyer ma demande</span></button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+    // Onglets
+    var tabs = [document.getElementById('t-cal'), document.getElementById('t-msg')], cursor = document.getElementById('tabCursor');
+    function selectTab(t) {
+        tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
+        cursor.style.left = t.offsetLeft + 'px'; cursor.style.width = t.offsetWidth + 'px';
+    }
+    tabs.forEach(function (t) { t.addEventListener('click', function () { selectTab(t); }); });
+    window.addEventListener('load', function () { selectTab(tabs[0]); }); selectTab(tabs[0]);
+
+    // Mode
+    var mode = 'Au cabinet';
+    document.querySelectorAll('.mode').forEach(function (b) {
+        b.addEventListener('click', function () {
+            document.querySelectorAll('.mode').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+            mode = b.dataset.mode;
+        });
+    });
+
+    // Calendrier (créneaux fictifs : jours ouvrés, de demain à +6 semaines)
+    var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    var JOURS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var maxD = new Date(today); maxD.setDate(maxD.getDate() + 42);
+    var view = new Date(today.getFullYear(), today.getMonth(), 1);
+    var selected = null, slot = null;
+    var BASE = ['09:30', '10:30', '11:30', '14:00', '15:00', '16:30', '17:30'];
+    function slotsFor(d) { var k = d.getDate() % 4; return BASE.filter(function (_, i) { return (i + k) % 3 !== 0; }); }
+    function isFree(d) { var w = d.getDay(); return d > today && d <= maxD && w !== 0 && w !== 6 && d.getDate() % 7 !== 3; }
+    var daysEl = document.getElementById('days'), label = document.getElementById('monthLabel');
+    function render() {
+        label.textContent = MOIS[view.getMonth()] + ' ' + view.getFullYear();
+        daysEl.innerHTML = ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(function (x) { return '<span class="dow">' + x + '</span>'; }).join('');
+        var first = (view.getDay() + 6) % 7, n = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+        for (var i = 0; i < first; i++) daysEl.appendChild(document.createElement('span'));
+        for (var d = 1; d <= n; d++) {
+            var dt = new Date(view.getFullYear(), view.getMonth(), d), b = document.createElement('button');
+            b.type = 'button'; b.className = 'day'; b.textContent = d;
+            if (dt.getTime() === today.getTime()) b.classList.add('today');
+            if (isFree(dt)) { b.classList.add('free'); b.setAttribute('aria-label', JOURS[dt.getDay()] + ' ' + d + ' ' + MOIS[dt.getMonth()]); (function (dt, b) { b.addEventListener('click', function () { pick(dt, b); }); })(dt, b); }
+            else b.disabled = true;
+            if (selected && dt.getTime() === selected.getTime()) b.classList.add('sel');
+            daysEl.appendChild(b);
+        }
+        document.getElementById('prevM').disabled = view <= new Date(today.getFullYear(), today.getMonth(), 1);
+        document.getElementById('nextM').disabled = new Date(view.getFullYear(), view.getMonth() + 1, 1) > maxD;
+    }
+    function pick(dt, b) {
+        selected = dt;
+        daysEl.querySelectorAll('.sel').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel');
+        document.getElementById('slotsTitle').textContent = JOURS[dt.getDay()] + ' ' + dt.getDate() + ' ' + MOIS[dt.getMonth()];
+        var box = document.getElementById('slots'); box.innerHTML = '';
+        slotsFor(dt).forEach(function (h) {
+            var s = document.createElement('button'); s.type = 'button'; s.className = 'slot'; s.textContent = h;
+            s.addEventListener('click', function () { slot = h; toForm(); });
+            box.appendChild(s);
+        });
+    }
+    document.getElementById('prevM').addEventListener('click', function () { view.setMonth(view.getMonth() - 1); render(); });
+    document.getElementById('nextM').addEventListener('click', function () { view.setMonth(view.getMonth() + 1); render(); });
+    render();
+
+    var pickStep = document.getElementById('stepPick'), formStep = document.getElementById('stepForm'), doneStep = document.getElementById('stepDone');
+    function summary() { return mode + ' · ' + JOURS[selected.getDay()] + ' ' + selected.getDate() + ' ' + MOIS[selected.getMonth()] + ' à ' + slot.replace(':', ' h '); }
+    function toForm() { document.getElementById('recapText').textContent = summary(); pickStep.hidden = true; formStep.hidden = false; document.getElementById('c-nom').focus(); }
+    document.getElementById('back').addEventListener('click', function () { formStep.hidden = true; pickStep.hidden = false; });
+    formStep.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var bad = Array.prototype.slice.call(formStep.querySelectorAll('[required]')).filter(function (f) { return f.type === 'checkbox' ? !f.checked : !f.value.trim() || !f.checkValidity(); });
+        var note = document.getElementById('calNote');
+        if (bad.length) { note.textContent = 'Merci de compléter les champs obligatoires et de cocher votre accord.'; note.style.color = 'var(--rose)'; bad[0].focus(); return; }
+        document.getElementById('doneText').textContent = summary() + '. Vous recevrez un email dès que le cabinet aura confirmé ce rendez-vous.';
+        formStep.hidden = true; doneStep.hidden = false;
+    });
+})();
+</script>
+</body>
+</html>
