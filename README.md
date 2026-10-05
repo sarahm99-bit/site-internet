@@ -30,3 +30,4 @@
 - **Moyens d'action** (future section ou page, distincte des domaines) : pré-contentieux (mises en demeure, négociations amiables), référés et procédures d'urgence, procédures d'exécution, saisies-contrefaçon.
 - **SM = « Sur Mesure »** : jouer sur les initiales (mot qui se déplie dans la présentation, signature « SM — sur mesure »).
 - **Section domaines** : tout fermer à l'arrivée, phrase de clôture vers le rendez-vous, lien vers les futures pages dédiées.
+- **Prise de rendez-vous en ligne (Cal.com)** : maquette dans `propositions site internet/contact/rendez-vous-calcom.html` ; à brancher une fois le compte Cal.com créé (type « Premier rendez-vous », confirmation requise).

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Domaines — propositions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --vert: #72785f; --vert-dark: #5a6049; --beige: #d6cdb8; --pill: #d9cfbc; --nacre: #f0ebe2; --noir: #1a1a1a; --blanc: #fdfcfa;
+        --serif: 'Cormorant Garamond', serif; --display: 'Instrument Serif', serif; --sans: 'Inter', sans-serif;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body { font-family: var(--sans); background: var(--blanc); color: var(--noir); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .page-head { padding: 70px 6vw 30px; max-width: 1000px; }
+    .page-head h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 12px; }
+    .page-head p { color: #666; line-height: 1.7; }
+
+    .label { padding: 40px 6vw 14px; display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+    .label strong { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--vert-dark); font-weight: 500; }
+    .label span { font-size: 0.85rem; color: #888; }
+
+    /* Cadre de démonstration : haut de page avec la vidéo, puis section blanche */
+    .demo { position: relative; height: 470px; margin: 0 6vw; overflow: hidden; border: 1px solid rgba(26, 26, 26, 0.08); }
+    .demo .bg { position: absolute; inset: 0; background: url('../../assets/videos/amphitheatre.jpg') center 35% / cover; }
+    .demo .bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 55% at 50% 60%, rgba(241, 236, 228, 0.85), rgba(241, 236, 228, 0.45)); }
+    .demo .name { position: absolute; left: 0; right: 0; top: 54%; text-align: center; font-family: var(--serif); font-weight: 500; font-size: clamp(2.6rem, 6vw, 4.6rem); letter-spacing: -0.03em; }
+    .demo .name em { font-style: italic; font-weight: 600; color: var(--vert-dark); }
+
+    /* Barre du site */
+    .nav { position: relative; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 22px 3vw; }
+    .logo { font-family: var(--serif); font-size: 1.55rem; font-weight: 600; letter-spacing: -0.04em; }
+    .logo em { font-style: italic; font-weight: 400; color: var(--vert); }
+    .tabs { position: relative; display: flex; align-items: center; padding: 4px; background: var(--pill); border-radius: 100px; }
+    .tab { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 100px; border: 0; background: none; color: var(--noir); font: 400 0.72rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, color 0.3s; }
+    .tab:hover, .tab.on, .dd.open > .tab { background: var(--noir); color: var(--blanc); }
+    .chev { width: 7px; height: 7px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.4s var(--ease); }
+    .dd.open .chev { transform: translateY(1px) rotate(-135deg); }
+    .cta { justify-self: end; padding: 13px 22px; border-radius: 100px; background: var(--vert); color: var(--blanc); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .dd { position: relative; }
+    .tab:focus-visible, .panel a:focus-visible { outline: 2px solid var(--vert); outline-offset: 2px; }
+
+    /* ═════ A — Pilule déroulante ═════ */
+    .va .panel { position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; min-width: 270px; padding: 6px; background: var(--pill); border-radius: 22px; display: grid; gap: 2px;
+        opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity 0.35s var(--ease), transform 0.45s var(--ease); }
+    .va .dd.open .panel { opacity: 1; transform: none; pointer-events: auto; }
+    .va .panel a { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-radius: 100px; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+    .va .panel a small { font-size: 0.62rem; color: var(--vert-dark); transition: color 0.3s; }
+    .va .panel a:hover { background: var(--noir); color: var(--blanc); }
+    .va .panel a:hover small { color: var(--beige); }
+
+    /* ═════ B — Carte éditoriale ═════ */
+    .vb .panel { position: absolute; top: calc(100% + 12px); left: 50%; translate: -50% 0; width: min(760px, 86vw); background: var(--blanc); border-radius: 18px; padding: 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+        box-shadow: 0 24px 60px -24px rgba(26, 26, 26, 0.35); opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity 0.35s var(--ease), transform 0.5s var(--ease); }
+    .vb .dd.open .panel { opacity: 1; transform: none; pointer-events: auto; }
+    .vb .panel a { display: flex; flex-direction: column; gap: 8px; padding: 6px 22px 8px; border-left: 1px solid rgba(26, 26, 26, 0.1); }
+    .vb .panel a:first-child { border-left: 0; padding-left: 4px; }
+    .vb .panel small { font-family: var(--serif); font-size: 1.1rem; color: var(--vert); }
+    .vb .panel strong { font-family: var(--display); font-weight: 400; font-size: 1.5rem; line-height: 1.1; transition: color 0.3s; }
+    .vb .panel span { font-size: 0.8rem; line-height: 1.55; color: #777; }
+    .vb .panel em { font-style: normal; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--vert-dark); margin-top: 4px; transition: letter-spacing 0.4s var(--ease); }
+    .vb .panel a:hover strong { color: var(--vert-dark); }
+    .vb .panel a:hover em { letter-spacing: 0.24em; }
+
+    /* ═════ C — Vignettes des pages ═════ */
+    .vc .panel { position: absolute; top: calc(100% + 12px); left: 50%; translate: -50% 0; width: min(780px, 88vw); background: var(--blanc); border-radius: 18px; padding: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+        box-shadow: 0 24px 60px -24px rgba(26, 26, 26, 0.35); opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity 0.35s var(--ease), transform 0.5s var(--ease); }
+    .vc .dd.open .panel { opacity: 1; transform: none; pointer-events: auto; }
+    .vc .panel a { display: block; }
+    .vc .thumb { height: 130px; border-radius: 10px; overflow: hidden; background: var(--nacre); }
+    .vc .thumb i { display: block; width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.8s var(--ease); }
+    .vc .panel a:hover .thumb i { transform: scale(1.06); }
+    .vc .panel strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.3rem; margin: 12px 4px 4px; }
+    .vc .panel span { display: block; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--vert-dark); margin: 0 4px 6px; }
+
+    /* ═════ D — La pilule s'agrandit ═════ */
+    .vd .tabs { transition: border-radius 0.5s var(--ease); }
+    .vd .tabs.grow { border-radius: 24px 24px 24px 24px; }
+    .vd .drawer { position: absolute; left: 0; right: 0; top: 100%; margin-top: -24px; padding: 30px 4px 4px; background: var(--pill); border-radius: 0 0 24px 24px; z-index: -1;
+        clip-path: inset(0 0 100% 0 round 0 0 24px 24px); transition: clip-path 0.55s var(--ease); }
+    .vd .tabs.grow .drawer { clip-path: inset(0 0 0 0 round 0 0 24px 24px); }
+    .vd .drawer a { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-radius: 100px; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0; transform: translateY(-6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), background 0.3s, color 0.3s; }
+    .vd .tabs.grow .drawer a { opacity: 1; transform: none; }
+    .vd .tabs.grow .drawer a:nth-child(2) { transition-delay: 60ms, 60ms, 0s, 0s; }
+    .vd .tabs.grow .drawer a:nth-child(3) { transition-delay: 120ms, 120ms, 0s, 0s; }
+    .vd .drawer a small { font-family: var(--serif); font-size: 0.95rem; color: var(--vert-dark); text-transform: none; letter-spacing: 0; }
+    .vd .drawer a:hover { background: var(--noir); color: var(--blanc); }
+    .vd .drawer a:hover small { color: var(--beige); }
+
+    /* ═════ E — Sous-barre ═════ */
+    .ve .panel { position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; display: flex; gap: 4px; padding: 4px; background: rgba(253, 252, 250, 0.92); border: 1px solid rgba(114, 120, 95, 0.2); border-radius: 100px; white-space: nowrap;
+        opacity: 0; transform: translateY(-6px) scale(0.98); pointer-events: none; transition: opacity 0.35s var(--ease), transform 0.45s var(--ease); }
+    .ve .dd.open .panel { opacity: 1; transform: none; pointer-events: auto; }
+    .ve .panel a { padding: 10px 18px; border-radius: 100px; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+    .ve .panel a:hover { background: var(--vert); color: var(--blanc); }
+
+    @media (max-width: 900px) { .tabs .tab:not(.keep) { display: none; } .vb .panel, .vc .panel { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+    <h1>Le menu « Domaines »</h1>
+    <p>Cinq façons d'ouvrir les pages de domaine depuis la barre du site. Survole « Domaines » (ou clique dessus) dans chaque exemple. Les liens mènent vers les pages de domaine.</p>
+</header>
+
+<div class="label"><strong>A — Pilule déroulante</strong><span>Une petite pilule beige s'ouvre sous l'onglet, dans la matière exacte de la barre.</span></div>
+<div class="demo va"><div class="bg"></div><p class="name">Sarah <em>Mostfa</em>.</p><nav class="nav" data-nav></nav></div>
+
+<div class="label"><strong>B — Carte éditoriale</strong><span>Une carte claire avec les trois domaines et leur accroche, comme un sommaire.</span></div>
+<div class="demo vb"><div class="bg"></div><p class="name">Sarah <em>Mostfa</em>.</p><nav class="nav" data-nav></nav></div>
+
+<div class="label"><strong>C — Vignettes des pages</strong><span>Chaque domaine est annoncé par l'image de sa page (les échecs).</span></div>
+<div class="demo vc"><div class="bg"></div><p class="name">Sarah <em>Mostfa</em>.</p><nav class="nav" data-nav></nav></div>
+
+<div class="label"><strong>D — La pilule s'agrandit</strong><span>La barre elle-même s'étire vers le bas pour révéler les domaines, d'un seul tenant.</span></div>
+<div class="demo vd"><div class="bg"></div><p class="name">Sarah <em>Mostfa</em>.</p><nav class="nav" data-nav></nav></div>
+
+<div class="label"><strong>E — Sous-barre</strong><span>Une seconde barre fine apparaît sous la première, avec les trois domaines côte à côte.</span></div>
+<div class="demo ve"><div class="bg"></div><p class="name">Sarah <em>Mostfa</em>.</p><nav class="nav" data-nav></nav></div>
+<div style="height:120px"></div>
+
+<script>
+(function () {
+    var D = [
+        { href: '../domaines/contentieux-civil.html', n: '01', t: 'Contentieux civil', c: 'Faire valoir vos droits dans un litige civil.', img: '../../assets/videos/domaines/civil-echecs-noir-blanc.jpg' },
+        { href: '../domaines/contentieux-commercial.html', n: '02', t: 'Contentieux commercial', c: 'Défendre votre activité dans vos relations d\'affaires.', img: '../../assets/videos/domaines/commercial-echecs-bronze.jpg' },
+        { href: '../domaines/conseil-juridique.html', n: '03', t: 'Conseil juridique', c: 'Sécuriser vos contrats, protéger vos créations.', img: '../../assets/videos/domaines/conseil-echecs.jpg' }
+    ];
+    function panel(v) {
+        if (v === 'va') return '<div class="panel" role="menu">' + D.map(function (d) { return '<a role="menuitem" href="' + d.href + '">' + d.t + '<small>' + d.n + '</small></a>'; }).join('') + '</div>';
+        if (v === 'vb') return '<div class="panel" role="menu">' + D.map(function (d) { return '<a role="menuitem" href="' + d.href + '"><small>' + d.n + '</small><strong>' + d.t + '</strong><span>' + d.c + '</span><em>Découvrir →</em></a>'; }).join('') + '</div>';
+        if (v === 'vc') return '<div class="panel" role="menu">' + D.map(function (d) { return '<a role="menuitem" href="' + d.href + '"><div class="thumb"><i style="background-image:url(\'' + d.img + '\')"></i></div><strong>' + d.t + '</strong><span>Découvrir →</span></a>'; }).join('') + '</div>';
+        if (v === 've') return '<div class="panel" role="menu">' + D.map(function (d) { return '<a role="menuitem" href="' + d.href + '">' + d.t + '</a>'; }).join('') + '</div>';
+        return '';
+    }
+    document.querySelectorAll('[data-nav]').forEach(function (nav) {
+        var v = nav.parentElement.className.split(' ')[1];
+        var drawer = v === 'vd' ? '<div class="drawer" role="menu">' + D.map(function (d) { return '<a role="menuitem" href="' + d.href + '">' + d.t + '<small>' + d.n + '</small></a>'; }).join('') + '</div>' : '';
+        nav.innerHTML =
+            '<a href="#" class="logo">S<em>M</em></a>' +
+            '<div class="tabs">' +
+                '<a class="tab" href="#">Présentation</a>' +
+                '<div class="dd"><button class="tab keep" type="button" aria-haspopup="true" aria-expanded="false">Domaines <i class="chev"></i></button>' + panel(v) + '</div>' +
+                '<a class="tab" href="#">Publications</a>' +
+                '<a class="tab" href="#">Contact</a>' + drawer +
+            '</div>' +
+            '<a href="#" class="cta">Rendez-vous</a>';
+        var dd = nav.querySelector('.dd'), btn = dd.querySelector('button'), tabs = nav.querySelector('.tabs'), timer;
+        function setOpen(on) {
+            dd.classList.toggle('open', on); btn.setAttribute('aria-expanded', on);
+            if (v === 'vd') tabs.classList.toggle('grow', on);
+        }
+        var zone = v === 'vd' ? tabs : dd;
+        zone.addEventListener('mouseenter', function () { clearTimeout(timer); setOpen(true); });
+        zone.addEventListener('mouseleave', function () { timer = setTimeout(function () { setOpen(false); }, 220); });
+        btn.addEventListener('click', function () { setOpen(!dd.classList.contains('open')); });
+        nav.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setOpen(false); btn.focus(); } });
+        document.addEventListener('click', function (e) { if (!nav.contains(e.target)) setOpen(false); });
+    });
+})();
+</script>
+</body>
+</html>
