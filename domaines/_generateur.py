@@ -1,8 +1,8 @@
 import os
 import os
 OUT=os.path.dirname(os.path.abspath(__file__))+'/'
-V='../../assets/videos/domaines/'
-IDX='../../index.html'
+V='../assets/videos/domaines/'
+IDX='../index.html'
 
 PAGES={
  'contentieux-civil': dict(
@@ -55,6 +55,16 @@ HEAD='''<!DOCTYPE html>
     .tabs {{ display: flex; padding: 4px; background: #d9cfbc; border-radius: 100px; }}
     .tabs a {{ padding: 10px 22px; border-radius: 100px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }}
     .tabs a:hover, .tabs a.on {{ background: var(--noir); color: var(--blanc); }}
+    .dd {{ position: relative; display: flex; }}
+    .chev {{ display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.4s var(--ease); }}
+    .dd.open .chev {{ transform: translateY(1px) rotate(-135deg); }}
+    .dd-panel {{ position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; min-width: 270px; padding: 6px; background: #d9cfbc; border-radius: 22px; display: grid; gap: 2px; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity 0.35s var(--ease), transform 0.45s var(--ease); }}
+    .dd-panel::before {{ content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }}
+    .dd.open .dd-panel {{ opacity: 1; transform: none; pointer-events: auto; }}
+    .tabs .dd-panel a {{ display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-radius: 100px; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; background: none; color: var(--noir); }}
+    .tabs .dd-panel a small {{ font-size: 0.62rem; color: var(--vert-dark); }}
+    .tabs .dd-panel a:hover, .tabs .dd-panel a.cur {{ background: var(--noir); color: var(--blanc); }}
+    .tabs .dd-panel a:hover small, .tabs .dd-panel a.cur small {{ color: var(--beige); }}
     .cta-nav {{ justify-self: end; padding: 13px 24px; border-radius: 100px; background: var(--vert); color: var(--blanc); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }}
 
     .crumb {{ font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert-dark); display: flex; gap: 10px; flex-wrap: wrap; }}
@@ -106,7 +116,8 @@ HEAD='''<!DOCTYPE html>
     <a href="{idx}" class="logo">S<em>M</em></a>
     <div class="tabs">
         <a href="{idx}#presentation">Présentation</a>
-        <a href="{idx}#domaines" class="on">Domaines</a>
+        <div class="dd"><a href="{idx}#domaines" class="on" aria-haspopup="true" aria-expanded="false">Domaines<i class="chev"></i></a>
+            <div class="dd-panel" role="menu">{ddlinks}</div></div>
         <a href="{idx}#publications">Publications</a>
         <a href="{idx}#contact">Contact</a>
     </div>
@@ -145,6 +156,15 @@ def tail(key):
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function onScroll() {{ nav.classList.toggle('scrolled', window.scrollY > 40); }}
     window.addEventListener('scroll', onScroll, {{ passive: true }}); onScroll();
+    document.querySelectorAll('.dd').forEach(function (dd) {{
+        var a = dd.querySelector('a'), t;
+        function set(on) {{ dd.classList.toggle('open', on); a.setAttribute('aria-expanded', on); }}
+        dd.addEventListener('mouseenter', function () {{ clearTimeout(t); set(true); }});
+        dd.addEventListener('mouseleave', function () {{ t = setTimeout(function () {{ set(false); }}, 220); }});
+        dd.addEventListener('focusin', function () {{ set(true); }});
+        dd.addEventListener('focusout', function (e) {{ if (!dd.contains(e.relatedTarget)) set(false); }});
+        dd.addEventListener('keydown', function (e) {{ if (e.key === 'Escape') {{ set(false); a.focus(); }} }});
+    }});
     var io = new IntersectionObserver(function (en) {{ en.forEach(function (e) {{ if (e.isIntersecting) {{ e.target.classList.add('in'); io.unobserve(e.target); }} }}); }}, {{ threshold: 0.15 }});
     document.querySelectorAll('.reveal').forEach(function (el) {{ io.observe(el); }});
     document.querySelectorAll('video').forEach(function (v) {{
@@ -288,7 +308,7 @@ def page3(key):
 GEN={1:(CSS1,CSS1M,page1),2:(CSS2,CSS2M,page2),3:(CSS3,CSS3M,page3)}
 for key,p in PAGES.items():
     css,cssm,fn=GEN[p['design']]
-    html=HEAD.format(title=p['title'],catch=p['catch'],css=css,css_m=cssm,idx=IDX)+fn(key)+tail(key).replace('{extra_js}','')
+    html=HEAD.format(title=p['title'],catch=p['catch'],css=css,css_m=cssm,idx=IDX,ddlinks=''.join(f'<a role="menuitem" href="{k}.html"'+(' class="cur"' if k==key else '')+f'>{PAGES[k]["title"]}<small>{PAGES[k]["num"]}</small></a>' for k in ORDER))+fn(key)+tail(key).replace('{extra_js}','')
     html=html.replace('{extra_js}','')
     open(OUT+key+'.html','w',encoding='utf-8').write(html)
     print(key, len(html))

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contentieux civil — Sarah Mostfa, Avocate au Barreau de Lyon</title>
-<meta name="description" content="Vous êtes une société ou un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits.">
+<title>Contentieux commercial — Sarah Mostfa, Avocate au Barreau de Lyon</title>
+<meta name="description" content="Vous faites face à un différend dans le cadre de vos relations d'affaires.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -25,6 +25,16 @@
     .tabs { display: flex; padding: 4px; background: #d9cfbc; border-radius: 100px; }
     .tabs a { padding: 10px 22px; border-radius: 100px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
     .tabs a:hover, .tabs a.on { background: var(--noir); color: var(--blanc); }
+    .dd { position: relative; display: flex; }
+    .chev { display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.4s var(--ease); }
+    .dd.open .chev { transform: translateY(1px) rotate(-135deg); }
+    .dd-panel { position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; min-width: 270px; padding: 6px; background: #d9cfbc; border-radius: 22px; display: grid; gap: 2px; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity 0.35s var(--ease), transform 0.45s var(--ease); }
+    .dd-panel::before { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+    .dd.open .dd-panel { opacity: 1; transform: none; pointer-events: auto; }
+    .tabs .dd-panel a { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-radius: 100px; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; background: none; color: var(--noir); }
+    .tabs .dd-panel a small { font-size: 0.62rem; color: var(--vert-dark); }
+    .tabs .dd-panel a:hover, .tabs .dd-panel a.cur { background: var(--noir); color: var(--blanc); }
+    .tabs .dd-panel a:hover small, .tabs .dd-panel a.cur small { color: var(--beige); }
     .cta-nav { justify-self: end; padding: 13px 24px; border-radius: 100px; background: var(--vert); color: var(--blanc); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
     .crumb { font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vert-dark); display: flex; gap: 10px; flex-wrap: wrap; }
@@ -92,43 +102,44 @@
 </head>
 <body>
 <nav class="nav" id="nav">
-    <a href="../../index.html" class="logo">S<em>M</em></a>
+    <a href="../index.html" class="logo">S<em>M</em></a>
     <div class="tabs">
-        <a href="../../index.html#presentation">Présentation</a>
-        <a href="../../index.html#domaines" class="on">Domaines</a>
-        <a href="../../index.html#publications">Publications</a>
-        <a href="../../index.html#contact">Contact</a>
+        <a href="../index.html#presentation">Présentation</a>
+        <div class="dd"><a href="../index.html#domaines" class="on" aria-haspopup="true" aria-expanded="false">Domaines<i class="chev"></i></a>
+            <div class="dd-panel" role="menu"><a role="menuitem" href="contentieux-civil.html">Contentieux civil<small>01</small></a><a role="menuitem" href="contentieux-commercial.html" class="cur">Contentieux commercial<small>02</small></a><a role="menuitem" href="conseil-juridique.html">Conseil juridique<small>03</small></a></div></div>
+        <a href="../index.html#publications">Publications</a>
+        <a href="../index.html#contact">Contact</a>
     </div>
-    <a href="../../index.html#contact" class="cta-nav">Rendez-vous</a>
+    <a href="../index.html#contact" class="cta-nav">Rendez-vous</a>
 </nav>
 <header class="h1wrap">
     <div class="h1-text">
-        <p class="crumb"><a href="../../index.html">Accueil</a><span>/</span><a href="../../index.html#domaines">Domaines</a><span>/</span>Contentieux civil</p>
-        <h1><span class="rise"><span>Contentieux civil</span></span></h1>
-        <p class="catch reveal" style="--d:300ms">Vous êtes une société ou un particulier impliqué dans un litige civil et souhaitez faire valoir vos droits.</p>
-        <div class="reveal" style="--d:450ms"><a href="../../index.html#contact" class="btn"><span>Prendre rendez-vous</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a></div>
+        <p class="crumb"><a href="../index.html">Accueil</a><span>/</span><a href="../index.html#domaines">Domaines</a><span>/</span>Contentieux commercial</p>
+        <h1><span class="rise"><span>Contentieux commercial</span></span></h1>
+        <p class="catch reveal" style="--d:300ms">Vous faites face à un différend dans le cadre de vos relations d'affaires.</p>
+        <div class="reveal" style="--d:450ms"><a href="../index.html#contact" class="btn"><span>Prendre rendez-vous</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a></div>
     </div>
-    <div class="h1-media"><video muted loop playsinline autoplay preload="auto" poster="../../assets/videos/domaines/civil-echecs-noir-blanc.jpg" aria-hidden="true">
-            <source src="../../assets/videos/domaines/civil-echecs-noir-blanc.mp4" type="video/mp4">
-            <source src="../../assets/videos/domaines/civil-echecs-noir-blanc.webm" type="video/webm">
+    <div class="h1-media"><video muted loop playsinline autoplay preload="auto" poster="../assets/videos/domaines/commercial-echecs-bronze.jpg" aria-hidden="true">
+            <source src="../assets/videos/domaines/commercial-echecs-bronze.mp4" type="video/mp4">
+            <source src="../assets/videos/domaines/commercial-echecs-bronze.webm" type="video/webm">
         </video></div>
 </header>
 <main class="body1">
     <div class="lead">
-        <h2 class="reveal">Faire valoir vos droits.</h2>
-        <p class="intro reveal" style="--d:120ms">Un différend avec un bailleur, une assurance, un professionnel ou un voisin peut vite devenir lourd à porter. J'analyse votre situation, je recherche une issue amiable lorsqu'elle est possible et, à défaut, je défends vos intérêts devant les juridictions civiles.</p>
+        <h2 class="reveal">Défendre votre activité.</h2>
+        <p class="intro reveal" style="--d:120ms">Un litige avec un partenaire, un concurrent ou un associé peut fragiliser votre activité. J'évalue les enjeux et les risques avec vous, puis je défends vos intérêts, par la négociation comme devant les juridictions commerciales.</p>
     </div>
-    <ul class="list cols reveal"><li>Actions en responsabilité civile</li><li>Cautionnements</li><li>Baux d'habitation et loyers impayés</li><li>Indemnisation par les assurances</li><li>Contentieux de la consommation</li><li>Litiges de la construction et malfaçons</li></ul>
+    <ul class="list cols reveal"><li>Inexécution, retard ou mauvaise exécution contractuelle</li><li>Responsabilité civile délictuelle</li><li>Concurrence déloyale et parasitisme</li><li>Rupture brutale de relations commerciales</li><li>Conflits entre associés</li><li>Contrefaçon</li><li>Recouvrement de créances</li></ul>
 </main>
 <section class="callout">
     <p class="big reveal">Votre situation appelle <em>une stratégie sur mesure</em>.</p>
-    <a href="../../index.html#contact" class="btn reveal" style="--d:120ms"><span>Prendre rendez-vous</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+    <a href="../index.html#contact" class="btn reveal" style="--d:120ms"><span>Prendre rendez-vous</span><svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
 </section>
 <section class="others">
     <h2>Autres domaines d'intervention</h2>
-    <div class="others-grid"><a href="contentieux-commercial.html">Contentieux commercial<small>02 →</small></a><a href="conseil-juridique.html">Conseil juridique<small>03 →</small></a></div>
+    <div class="others-grid"><a href="contentieux-civil.html">Contentieux civil<small>01 →</small></a><a href="conseil-juridique.html">Conseil juridique<small>03 →</small></a></div>
 </section>
-<footer class="footer"><a href="../../index.html" class="logo">S<em>M</em></a><span>Sarah Mostfa — Avocate au Barreau de Lyon · 14 rue de la Charité, 69002 Lyon</span></footer>
+<footer class="footer"><a href="../index.html" class="logo">S<em>M</em></a><span>Sarah Mostfa — Avocate au Barreau de Lyon · 14 rue de la Charité, 69002 Lyon</span></footer>
 
 <script>
 (function () {
@@ -136,6 +147,15 @@
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 40); }
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    document.querySelectorAll('.dd').forEach(function (dd) {
+        var a = dd.querySelector('a'), t;
+        function set(on) { dd.classList.toggle('open', on); a.setAttribute('aria-expanded', on); }
+        dd.addEventListener('mouseenter', function () { clearTimeout(t); set(true); });
+        dd.addEventListener('mouseleave', function () { t = setTimeout(function () { set(false); }, 220); });
+        dd.addEventListener('focusin', function () { set(true); });
+        dd.addEventListener('focusout', function (e) { if (!dd.contains(e.relatedTarget)) set(false); });
+        dd.addEventListener('keydown', function (e) { if (e.key === 'Escape') { set(false); a.focus(); } });
+    });
     var io = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
     document.querySelectorAll('video').forEach(function (v) {

@@ -128,9 +128,9 @@
 <script>
 (function () {
     var D = [
-        { href: '../domaines/contentieux-civil.html', n: '01', t: 'Contentieux civil', c: 'Faire valoir vos droits dans un litige civil.', img: '../../assets/videos/domaines/civil-echecs-noir-blanc.jpg' },
-        { href: '../domaines/contentieux-commercial.html', n: '02', t: 'Contentieux commercial', c: 'Défendre votre activité dans vos relations d\'affaires.', img: '../../assets/videos/domaines/commercial-echecs-bronze.jpg' },
-        { href: '../domaines/conseil-juridique.html', n: '03', t: 'Conseil juridique', c: 'Sécuriser vos contrats, protéger vos créations.', img: '../../assets/videos/domaines/conseil-echecs.jpg' }
+        { href: '../../domaines/contentieux-civil.html', n: '01', t: 'Contentieux civil', c: 'Faire valoir vos droits dans un litige civil.', img: '../../assets/videos/domaines/civil-echecs-noir-blanc.jpg' },
+        { href: '../../domaines/contentieux-commercial.html', n: '02', t: 'Contentieux commercial', c: 'Défendre votre activité dans vos relations d\'affaires.', img: '../../assets/videos/domaines/commercial-echecs-bronze.jpg' },
+        { href: '../../domaines/conseil-juridique.html', n: '03', t: 'Conseil juridique', c: 'Sécuriser vos contrats, protéger vos créations.', img: '../../assets/videos/domaines/conseil-echecs.jpg' }
     ];
     function panel(v) {
         if (v === 'va') return '<div class="panel" role="menu">' + D.map(function (d) { return '<a role="menuitem" href="' + d.href + '">' + d.t + '<small>' + d.n + '</small></a>'; }).join('') + '</div>';

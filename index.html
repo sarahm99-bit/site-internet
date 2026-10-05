@@ -102,6 +102,16 @@
         transition: color 0.3s;
     }
     .nav-tab.lit { color: var(--blanc); }
+    .dd { position: relative; display: flex; z-index: 2; }
+    .chev { display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.4s var(--ease); }
+    .dd.open .chev { transform: translateY(1px) rotate(-135deg); }
+    .dd-panel { position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; min-width: 270px; padding: 6px; background: #d9cfbc; border-radius: 22px; display: grid; gap: 2px; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity 0.35s var(--ease), transform 0.45s var(--ease); }
+    .dd-panel::before { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+    .dd.open .dd-panel { opacity: 1; transform: none; pointer-events: auto; }
+    .dd-panel a { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 12px 18px; border-radius: 100px; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; color: var(--noir); transition: background 0.3s, color 0.3s; }
+    .dd-panel a small { font-size: 0.62rem; color: var(--vert-dark); transition: color 0.3s; }
+    .dd-panel a:hover, .dd-panel a:focus-visible { background: var(--noir); color: var(--blanc); outline: none; }
+    .dd-panel a:hover small, .dd-panel a:focus-visible small { color: var(--beige); }
     .nav-cursor {
         position: absolute; top: 4px; left: 0; height: calc(100% - 8px); width: 0; z-index: 1;
         border-radius: 100px; background: var(--noir); opacity: 0;
@@ -373,7 +383,14 @@
     <a href="#top" class="logo">S<em>M</em></a>
     <div class="nav-tabs" id="navTabs">
         <a href="#presentation" class="nav-tab" data-spy="presentation">Présentation</a>
-        <a href="#domaines" class="nav-tab" data-spy="domaines">Domaines</a>
+        <div class="dd" id="ddDom">
+            <a href="#domaines" class="nav-tab" data-spy="domaines" aria-haspopup="true" aria-expanded="false">Domaines<i class="chev"></i></a>
+            <div class="dd-panel" role="menu">
+                <a role="menuitem" href="domaines/contentieux-civil.html">Contentieux civil<small>01</small></a>
+                <a role="menuitem" href="domaines/contentieux-commercial.html">Contentieux commercial<small>02</small></a>
+                <a role="menuitem" href="domaines/conseil-juridique.html">Conseil juridique<small>03</small></a>
+            </div>
+        </div>
         <a href="#publications" class="nav-tab" data-spy="publications">Publications</a>
         <a href="#contact" class="nav-tab" data-spy="contact">Contact</a>
         <div class="nav-cursor" id="navCursor"></div>
@@ -804,12 +821,24 @@
     function showCursor(i) {
         tabs.forEach(function (t, k) { t.classList.toggle('lit', k === i); });
         if (i < 0) { cursor.classList.remove('on'); return; }
-        cursor.style.left = tabs[i].offsetLeft + 'px';
-        cursor.style.width = tabs[i].offsetWidth + 'px';
+        var tr = tabs[i].getBoundingClientRect(), pr = navTabs.getBoundingClientRect();
+        cursor.style.left = (tr.left - pr.left - navTabs.clientLeft) + 'px';
+        cursor.style.width = tr.width + 'px';
         cursor.classList.add('on');
     }
     tabs.forEach(function (t, i) { t.addEventListener('mouseenter', function () { showCursor(i); }); });
     navTabs.addEventListener('mouseleave', function () { showCursor(activeTab); });
+    // Menu déroulant « Domaines »
+    (function () {
+        var dd = document.getElementById('ddDom'), a = dd.querySelector('.nav-tab'), t;
+        function set(on) { dd.classList.toggle('open', on); a.setAttribute('aria-expanded', on); }
+        dd.addEventListener('mouseenter', function () { clearTimeout(t); set(true); });
+        dd.addEventListener('mouseleave', function () { t = setTimeout(function () { set(false); }, 220); });
+        dd.addEventListener('focusin', function () { set(true); });
+        dd.addEventListener('focusout', function (e) { if (!dd.contains(e.relatedTarget)) set(false); });
+        dd.addEventListener('keydown', function (e) { if (e.key === 'Escape') { set(false); a.focus(); } });
+        dd.querySelectorAll('.dd-panel a').forEach(function (l) { l.addEventListener('click', function () { set(false); }); });
+    })();
     var spyTargets = tabs.map(function (t) { return t.dataset.spy ? document.getElementById(t.dataset.spy) : null; });
     function spy() {
         var found = -1;

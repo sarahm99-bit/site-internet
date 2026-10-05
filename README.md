@@ -2,6 +2,7 @@
 
 ## Le site en développement
 - `index.html` — **version de travail du site** (base : maquette V3, vidéo amphithéâtre). C'est ce fichier qu'on fait évoluer désormais.
+- `domaines/` — pages de chaque domaine (contentieux civil, contentieux commercial, conseil juridique), générées par `domaines/_generateur.py`, vidéos dans `assets/videos/domaines/`
 - Aperçu en ligne : activer GitHub Pages (Settings → Pages → Deploy from a branch → `claude/wonderful-lovelace-oohxox`, dossier `/ (root)`), puis ouvrir https://sarahm99-bit.github.io/site-internet/
 
 ## Les maquettes
