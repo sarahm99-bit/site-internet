@@ -4,6 +4,7 @@
 - `index.html` — **version de travail du site** (base : maquette V3, vidéo amphithéâtre). C'est ce fichier qu'on fait évoluer désormais.
 - `domaines/` — pages de chaque domaine (contentieux civil, contentieux commercial, conseil juridique), générées par `domaines/_generateur.py`, vidéos dans `assets/videos/domaines/`
 - `version-graphique/` — **copie d'essai en DA mid-century / graphisme industriel** (même contenu, palette d'origine + orange brûlé et bordeaux). Générée depuis `index.html` par `version-graphique/_generateur.py` (styles dans `_style.css`) : relancer le script après chaque changement de `index.html`. En ligne : https://sarahm99-bit.github.io/site-internet/version-graphique/
+  - `version-graphique/essai-1-affiche.html` — premier essai (plus affiche : orange, bordeaux, couvertures « Pantone »), gardé pour comparaison
 - Aperçu en ligne : activer GitHub Pages (Settings → Pages → Deploy from a branch → `claude/wonderful-lovelace-oohxox`, dossier `/ (root)`), puis ouvrir https://sarahm99-bit.github.io/site-internet/
 
 ## Les maquettes
@@ -33,3 +34,4 @@
 - **SM = « Sur Mesure »** : jouer sur les initiales (mot qui se déplie dans la présentation, signature « SM — sur mesure »).
 - **Section domaines** : tout fermer à l'arrivée, phrase de clôture vers le rendez-vous, lien vers les futures pages dédiées.
 - **Prise de rendez-vous en ligne (Cal.com)** : maquette dans `propositions site internet/contact/rendez-vous-calcom.html` ; à brancher une fois le compte Cal.com créé (type « Premier rendez-vous », confirmation requise).
+- **Page dédiée à la propriété intellectuelle** (public d'artistes, créateurs, photographes) : reprendre l'idée des couvertures colorées façon nuancier « Pantone » de `version-graphique/essai-1-affiche.html` (section Publications), avec une touche orange/bordeaux plus assumée.
